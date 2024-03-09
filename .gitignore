@@ -6,11 +6,6 @@ build/
 !**/src/test/**/build/
 
 
-## yml 파일
-src/main/resources/application.yml
-applicaion.yml
-
-
 
 ### STS ###
 .apt_generated

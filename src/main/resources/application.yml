@@ -1,0 +1,50 @@
+server:
+  port: 80
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+  error:
+    include-exception: true
+    include-stacktrace: always
+    whitelabel:
+      enabled: false
+
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+    dispatch-options-request: false
+    view:
+      prefix: /WEB-INF/view/ # jsp ?? ??
+      suffix: .jsp # ???
+    hiddenmethod:
+      filter:
+        enabled: true # update, delete put???? ??? ?? ??
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+    datasource:
+      url: jdbc:mysql://54.180.81.23:3306/cyberuni?serverTimeZone=Asia/Seoul
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: cyberuni
+      password: Asd123456789!
+#  sql:
+#    init: # ?? sql ?? ??
+#      schema-locations: # ??? (??? ?? ?)
+#        - classpath:db/table.sql
+#      data-locations: # ?? ???
+#        - classpath:db/data.sql
+#  h2:
+#    console:
+#      enabled: true
+#  output:
+#    ansi:
+#      enabled: always
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/**.xml
+  configuration:
+    map-underscore-to-camel-case: true # DB? underscore(snake case) ??? Java? camel case ??? ??
+

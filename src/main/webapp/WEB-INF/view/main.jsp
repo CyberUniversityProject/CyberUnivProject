@@ -3,88 +3,78 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Mentor Bootstrap Template - Index</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="/img/favicon.png" rel="icon">
-  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Mentor
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
       <h1>오늘을 배우고,<br>내일을 선도합니다.</h1>
       <h2>Cyber University 학사관리시스템에 오신것을 환영합니다.</h2>
+      <c:choose>
+            <c:when test="${principal == null}">
       <a href="courses.html" class="btn-get-started">로그인하기</a>
+        </c:when>
+        </c:choose>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <!-- <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
+  <!-- ======= User Information Section ======= -->
+  <div class="container">
+  <section id="user-info" class="user-info">
+    <div class="container" data-aos="fade-up">
 
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            </p>
+      <div class="section-title">
+        <h2>User Information</h2>
+        <p>${principal.name}님,&nbsp환영합니다.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="info-box">
+
+            <h3>
+            <i class="bx bx-map"></i> 소속</h3>
+            <p>교직원</p>
+
 
           </div>
         </div>
+        <div class="col-lg-3">
+                  <div class="info-box">
+
+                    <h3>
+
+                    <i class="bx bx-envelope"></i> 이메일</h3>
+                    <p>교직원</p>
+
+
+                  </div>
+                </div>
 
       </div>
-    </section> -->
-    <!-- End About Section -->
+
+        <div class="row">
+            <div class="col-lg-3">
+            <div class="info-box">
+
+                <h3>
+
+                <i class="bx bx-bell"></i> 알림</h3>
+
+                <p>1개의 업무사항이 있습니다.</p>
+                </div>
+                </div>
+                </div>
+
+
+    </div>
+  </section>
+  </div>
+  <!-- End User Information Section -->
+
+
 
     <!-- ======= Counts Section ======= -->
     <!-- <section id="counts" class="counts section-bg">

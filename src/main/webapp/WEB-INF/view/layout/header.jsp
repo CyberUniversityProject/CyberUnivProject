@@ -59,7 +59,7 @@ prefix="c"%>
       <c:choose>
       <c:when test="${principal.userRole.equals(\"student\")}">
       <ul>
-        <li><a class="active" href="index.html">Home</a></li>
+        <li><a class="active" href="">Home</a></li>
 
         <li class="dropdown">
           <a href="#"
@@ -117,7 +117,7 @@ prefix="c"%>
 
       <!-- role == staff 일 경우 -->
             <ul>
-              <li><a class="active" href="index.html">Home</a></li>
+              <li><a class="active" href="">Home</a></li>
 
               <li class="dropdown">
                 <a href="#"
@@ -171,7 +171,7 @@ prefix="c"%>
              <c:when test="${principal.userRole.equals(\"professor\")}">
               <!-- role == professor 일 경우 -->
                                      <ul>
-                                       <li><a class="active" href="index.html">Home</a></li>
+                                       <li><a class="active" href="">Home</a></li>
 
                                        <li class="dropdown">
                                          <a href="#"

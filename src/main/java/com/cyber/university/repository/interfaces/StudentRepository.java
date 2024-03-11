@@ -1,10 +1,11 @@
 package com.cyber.university.repository.interfaces;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cyber.university.dto.StudentInfoDto;
 import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.repository.model.Student;
 
@@ -78,22 +79,8 @@ public interface StudentRepository {
 	 * @Method 설명 :페이지별 학생 조회
 	 */
 	public List<Student> selectStudentList(StudentListForm studentListForm);
-
-=======
-import org.apache.ibatis.annotations.Mapper;
-
-import com.cyber.university.dto.StudentInfoDto;
-
-/**
-  * @FileName : StudentRepository.java
-  * @Project : CyberUniversity
-  * @Date : 2024. 3. 11. 
-  * @작성자 : 박경진
-  * @변경이력 :
-  * @프로그램 설명 : 학생 Repository
-  */
-@Mapper
-public interface StudentRepository {
+	
+	
 	
 	/**
 	  * @Method Name : findStudentById
@@ -104,5 +91,5 @@ public interface StudentRepository {
 	  */
 	public StudentInfoDto findStudentById(Integer userId);
 	
->>>>>>> kyeongjin
+
 }

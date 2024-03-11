@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-<<<<<<< HEAD
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
@@ -12,54 +11,56 @@
 		resultType="com.cyber.university.repository.model.Student">
 		SELECT * FROM cu_student WHERE id = #{studentId}
 	</select>
-	
-	
-	
+
+
+
 	<select id="selectIdList" resultType="Integer">
 		SELECT id FROM cu_student;
 	</select>
-	
-	
-	<select id="selectByDepartmentId" resultType="com.cyber.university.repository.model.Student">
+
+
+	<select id="selectByDepartmentId"
+		resultType="com.cyber.university.repository.model.Student">
 		SELECT * FROM cu_student
 		WHERE dept_id = #{deptId}
-		LIMIT #{page}, 20
+		LIMIT
+		#{page}, 20
 	</select>
-	
-	
+
+
 	<select id="selectStudentAmountByDeptId" resultType="Integer">
-		SELECT count(id) FROM cu_student
+		SELECT
+		count(id) FROM cu_student
 		WHERE dept_id = #{deptId}
 	</select>
-	
-	
+
+
 	<select id="selectStudentAmount" resultType="Integer">
-		SELECT count(id) FROM cu_student
+		SELECT count(id)
+		FROM cu_student
 	</select>
-	
-		<!-- 페이지로부터 학생 전체 조회 -->
-	<select id="selectStudentList" resultType="com.cyber.university.repository.model.Student">
+
+	<!-- 페이지로부터 학생 전체 조회 -->
+	<select id="selectStudentList"
+		resultType="com.cyber.university.repository.model.Student">
 		SELECT * FROM cu_student
 		LIMIT #{page}, 20
 	</select>
 
-
-=======
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.cyber.university.repository.interfaces.StudentRepository">
-	<select id="findStudentById" resultType="com.cyber.university.dto.StudentInfoDto">
-		SELECT 
-			s.* , 
-			d.name AS deptName, 
-		    c.name AS collegeName
+	<select id="findStudentById"
+		resultType="com.cyber.university.dto.StudentInfoDto">
+		SELECT
+		s.* ,
+		d.name AS deptName,
+		c.name AS collegeName
 		FROM cu_student AS s
 		LEFT JOIN cu_department AS d
-		ON s.dept_id = d.id
+		ON
+		s.dept_id = d.id
 		LEFT JOIN cu_college AS c
 		ON d.college_id = c.id
-		WHERE s.id = #{userId};
+		WHERE
+		s.id = #{userId};
 	</select>
->>>>>>> kyeongjin
 
 </mapper>

@@ -31,6 +31,7 @@ import com.cyber.university.utils.Define;
  * 2024/03/10          이준혁       최초 생성
  */
 @Configuration
+
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -61,6 +62,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/uploads/**")
                 .addResourceLocations("file:///C:\\spring_upload\\universityManagement\\upload/");
+        
+        
     }
 
     @Bean

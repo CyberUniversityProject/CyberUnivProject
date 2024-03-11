@@ -29,6 +29,7 @@ public class MyPageExceptionHandler implements ErrorController {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         // status = 404
         if(status != null && Integer.parseInt(status.toString()) == HttpStatus.NOT_FOUND.value()) {
+        	
             return "/error/errorPage";
         }
         return "/";

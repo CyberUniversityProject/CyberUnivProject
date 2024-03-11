@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyber.university.repository.interfaces.StudentRepository">
+	<select id="findStudentById" resultType="com.cyber.university.dto.StudentInfoDto">
+		SELECT 
+			s.* , 
+			d.name AS deptName, 
+		    c.name AS collegeName
+		FROM cu_student AS s
+		LEFT JOIN cu_department AS d
+		ON s.dept_id = d.id
+		LEFT JOIN cu_college AS c
+		ON d.college_id = c.id
+		WHERE s.id = #{userId};
+	</select>
+
+</mapper>

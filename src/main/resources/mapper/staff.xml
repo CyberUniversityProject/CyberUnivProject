@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.cyber.university.repository.interfaces.StaffRepository">
+
+	<insert id="insertToStaff">
+		INSERT INTO cu_staff (name, birth_date, gender,
+		address, tel, email)
+		VALUES (#{name}, #{birthDate}, #{gender},
+		#{address}, #{tel}, #{email})
+	</insert>
+
+	<select id="selectIdByCreateStaffDto" resultType="integer">
+		SELECT id FROM
+		cu_staff
+		WHERE name = #{name}
+		AND birth_date = #{birthDate}
+		AND gender =
+		#{gender}
+		AND address =#{address}
+		AND tel = #{tel}
+		AND email
+		= #{email}
+
+	</select>
+
+
+
+</mapper>

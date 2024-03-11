@@ -35,6 +35,18 @@ prefix="c"%>
   <link href="/css/style.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- 구글 웹폰트 Noto Sans KR 추가 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif; /* 웹폰트 적용 */
+    }
+
+  
+  </style>
+ 
 
   <!-- =======================================================
   * Template Name: Mentor
@@ -59,7 +71,7 @@ prefix="c"%>
       <c:choose>
       <c:when test="${principal.userRole.equals(\"student\")}">
       <ul>
-        <li><a class="active" href="index.html">Home</a></li>
+        <li><a class="active" href="">Home</a></li>
 
         <li class="dropdown">
           <a href="#"
@@ -117,7 +129,7 @@ prefix="c"%>
 
       <!-- role == staff 일 경우 -->
             <ul>
-              <li><a class="active" href="index.html">Home</a></li>
+              <li><a class="active" href="">Home</a></li>
 
               <li class="dropdown">
                 <a href="#"
@@ -131,8 +143,8 @@ prefix="c"%>
               <li class="dropdown">
                 <a href="#"><span>학사관리</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                  <li><a href="#">학생 명단 조회</a></li>
-                  <li><a href="#">교수 명단 조회</a></li>
+                  <li><a href="/user/studentList">학생 명단 조회</a></li>
+                  <li><a href="/user/professorList">교수 명단 조회</a></li>
                   <li><a href="#">학생등록</a></li>
                   <li><a href="#">교수등록</a></li>
                   <li><a href="/user/staff">직원등록</a></li>
@@ -171,7 +183,7 @@ prefix="c"%>
              <c:when test="${principal.userRole.equals(\"professor\")}">
               <!-- role == professor 일 경우 -->
                                      <ul>
-                                       <li><a class="active" href="index.html">Home</a></li>
+                                       <li><a class="active" href="">Home</a></li>
 
                                        <li class="dropdown">
                                          <a href="#"

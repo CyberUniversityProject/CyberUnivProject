@@ -1,20 +1,27 @@
 package com.cyber.university.controller;
 
+import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.StudentListForm;
+import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Professor;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.UserService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -51,6 +58,31 @@ public class UserController {
 
         return "/user/createStaff";
     }
+    
+    /**
+	 * staff 생성 post 처리
+	 * 
+	 * @param createStaffDto
+	 * @return "redirect:/user/staff"
+	 */
+	@PostMapping("/staff")
+	public String createStaffProc(@Valid CreateStaffDto createStaffDto, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n");
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+		userService.createStaffToStaffAndUser(createStaffDto);
+
+		return "redirect:/user/staff";
+	}
+	
+	
+	
+    
     
     /**
      * 

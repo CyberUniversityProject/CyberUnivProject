@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="#" class="text-dark d-flex align-items-center">
+        <a href="/user/staff" class="text-dark d-flex align-items-center">
           <i class="bi bi-person-plus-fill mr-2"></i> 직원 등록
         </a>
       </li>

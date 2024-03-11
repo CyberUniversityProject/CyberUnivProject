@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>직원 등록</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- jQuery 추가 -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 
@@ -77,5 +79,15 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('form').submit(function() {
+      alert("등록되었습니다.");
+    });
+  });
+</script>
+  
+ 
+  
 </body>
 </html>

@@ -28,6 +28,7 @@
 
     <div class="col-md-10">
       <h1 class="mt-5 mb-4">직원 등록</h1>
+      <hr/>
       <div class="row justify-content-center">
         <div class="col-md-7">
           <div class="card">

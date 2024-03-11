@@ -29,7 +29,9 @@ input[type=number] {
 <body>
 
 	<div class="login--div">
+	<img src="/img/logo-removebg-preview.png"/>
 	<div>
+	
 	<h3>CyberUniversity 학사관리시스템</h3>
 
 	</div>

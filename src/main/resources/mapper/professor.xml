@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.cyber.university.repository.interfaces.ProfessorRepository">
+
+
+	<select id="selectByProfessorId" resultType="com.cyber.university.repository.model.Professor">
+		SELECT * FROM cu_professor WHERE id = #{professorId}
+	</select>
+	
+	
+	
+	<select id="selectByDepartmentId" resultType="com.cyber.university.repository.model.Professor">
+		SELECT * FROM cu_professor
+		WHERE dept_id = #{deptId}
+		LIMIT #{page}, 20
+	</select>
+	
+	
+	<select id="selectProfessorList" resultType="com.cyber.university.repository.model.Professor">
+		SELECT * FROM cu_professor
+		LIMIT #{page}, 20
+	</select>
+	
+	
+	<select id="selectProfessorAmountByDeptId" resultType="integer">
+		SELECT count(id) FROM cu_professor
+		WHERE dept_id = #{deptId}
+	</select>
+	
+	<select id="selectProfessorAmount" resultType="integer">
+		SELECT count(id) FROM cu_professor
+	</select>
+
+
+
+</mapper>

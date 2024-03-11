@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>학생 명단 조회</title>
+  <title>교수 명단 조회</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
  
 <style>
@@ -24,20 +24,20 @@
  <!-- ======= 상단 제목부분 ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>학생 명단 조회</h2>
+        <h2>교수 명단 조회</h2>
 
       </div>
     </div>
     <!-- 상단 제목부분 끝 -->
 <div class="container mb-5"> <!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
   <div class="row">
-     <%@ include file="/WEB-INF/view/layout/sidebar.jsp"%>
+   <%@ include file="/WEB-INF/view/layout/sidebar.jsp"%>
 
     <div class="col-md-10">
       
       <!-- 메인 div -->
 	<div class="container mt-5">
-    <h1>학생 명단 조회</h1>
+    <h1>교수 명단 조회</h1>
     <div class="row">
         <div class="col-md-12">
             <hr>
@@ -46,55 +46,51 @@
     <!-- 필터 및 검색 -->
     <div class="row mb-3">
         <div class="col-md-7">
-            <form action="/user/studentList" method="get" class="form-inline">
+            <form action="/user/professorList" method="get" class="form-inline">
                 <div class="form-group mr-2">
                     <label for="deptId">학과 번호 </label>&nbsp;&nbsp;&nbsp;
                     <input type="text" name="deptId" id="deptId" class="form-control">&nbsp;&nbsp;&nbsp;
-                    <label for="studentId">학번 </label>&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="studentId" id="studentId" class="form-control">
+                    <label for="professorId">사번 </label>&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="professorId" id="professorId" class="form-control">
                      &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">조회하기</button>
-                <button type="button" onclick="location.href='/user/student/update'" class="btn btn-success ml-3">새학기 적용</button>
+               
                 </div>
                
             </form>
         </div>
     </div>
     <c:choose>
-        <c:when test="${!studentList.isEmpty()}">
+        <c:when test="${!professorList.isEmpty()}">
             <h4>
-                <span style="font-weight: 600;">학생 목록</span>
+                <span style="font-weight: 600;">교수 목록</span>
             </h4>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
-                            <th>학번</th>
-                            <th>이름</th>
-                            <th>생년월일</th>
-                            <th>성별</th>
-                            <th>주소</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                            <th>학과번호</th>
-                            <th>학년</th>
-                            <th>입학일</th>
-                            <th>졸업일(졸업예정일)</th>
+                            <th>사번</th>
+							<th>이름</th>
+							<th>생년월일</th>
+							<th>성별</th>
+							<th>주소</th>
+							<th>전화번호</th>
+							<th>이메일</th>
+							<th>학과번호</th>
+							<th>고용일</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="student" items="${studentList}">
+                        <c:forEach var="professor" items="${professorList}">
                             <tr>
-                                <td>${student.id}</td>
-                                <td>${student.name}</td>
-                                <td>${student.birthDate}</td>
-                                <td>${student.gender}</td>
-                                <td>${student.address}</td>
-                                <td>${student.tel}</td>
-                                <td>${student.email}</td>
-                                <td>${student.deptId}</td>
-                                <td>${student.grade}</td>
-                                <td>${student.entranceDate}</td>
-                                <td>${student.graduationDate}</td>
+                              <td>${professor.id}</td>
+								<td>${professor.name}</td>
+								<td>${professor.birthDate}</td>
+								<td>${professor.gender}</td>
+								<td>${professor.address}</td>
+								<td>${professor.tel}</td>
+								<td>${professor.email}</td>
+								<td>${professor.deptId}</td>
+								<td>${professor.hireDate}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -105,16 +101,16 @@
                     <li class="page-item">
                         <c:choose>
                             <c:when test="${deptId != null && index != page}">
-                                <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}?deptId=${deptId}">${index}</a>
                             </c:when>
                             <c:when test="${deptId != null && index == page}">
-                                <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}?deptId=${deptId}">${index}</a>
                             </c:when>
                             <c:when test="${deptId == null && index == page}">
-                                <a class="page-link" href="/user/studentList/${index}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}">${index}</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="page-link" href="/user/studentList/${index}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}">${index}</a>
                             </c:otherwise>
                         </c:choose>
                     </li>

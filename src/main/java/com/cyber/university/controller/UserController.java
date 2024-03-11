@@ -1,9 +1,10 @@
 package com.cyber.university.controller;
 
+import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.StudentListForm;
-
-
+import com.cyber.university.repository.model.Professor;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.service.ProfessorService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.UserService;
 
@@ -38,6 +39,9 @@ public class UserController {
     
     @Autowired
     private StudentService studentService;
+    
+    @Autowired
+    private ProfessorService professorService;
 
     /**
      * @return staff 입력 페이지
@@ -110,6 +114,66 @@ public class UserController {
 		model.addAttribute("page", page);
 
 		return "/user/studentList";
+	}
+    
+    
+    /**
+	 * 교수 조회
+	 * 
+	 * @param model
+	 * @return 교수 조회 페이지
+	 */
+	@GetMapping("/professorList")
+	public String showProfessorList(Model model, @RequestParam(name = "professorId", required = false) Integer professorId,
+			@RequestParam(name = "deptId", required = false) Integer deptId) {
+
+		ProfessorListForm professorListForm = new ProfessorListForm();
+		professorListForm.setPage(0);
+		if (professorId != null) {
+			professorListForm.setProfessorId(professorId);
+		} else if (deptId != null) {
+			professorListForm.setDeptId(deptId);
+		}
+		Integer amount = professorService.readProfessorAmount(professorListForm);
+		if (professorId != null) {
+			amount = 1;
+		}
+		List<Professor> list = professorService.readProfessorList(professorListForm);
+
+		model.addAttribute("listCount", Math.ceil(amount / 20.0));
+		model.addAttribute("professorList", list);
+		model.addAttribute("deptId", deptId);
+		/**
+		 * @author 서영 1페이지가 선택되어 있음을 보여주기 위함
+		 */
+		model.addAttribute("page", 1);
+
+		return "/user/professorList";
+	}
+
+	/**
+	 * 교수 조회
+	 * 
+	 * @param model
+	 * @return 교수 조회 페이지
+	 */
+	@GetMapping("/professorList/{page}")
+	public String showProfessorListByPage(Model model, @PathVariable(name = "page", required = false) Integer page,
+			@RequestParam(name= "deptId" ,required = false) Integer deptId) {
+
+		ProfessorListForm professorListForm = new ProfessorListForm();
+		if (deptId != null) {
+			professorListForm.setDeptId(deptId);
+		}
+		professorListForm.setPage((page - 1) * 20);
+		Integer amount = professorService.readProfessorAmount(professorListForm);
+		List<Professor> list = professorService.readProfessorList(professorListForm);
+
+		model.addAttribute("listCount", Math.ceil(amount / 20.0));
+		model.addAttribute("professorList", list);
+		model.addAttribute("page", page);
+
+		return "/user/professorList";
 	}
 
 

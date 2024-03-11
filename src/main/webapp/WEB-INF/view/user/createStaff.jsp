@@ -10,7 +10,7 @@
 </head>
 
 
-<body
+<body>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
  <!-- ======= 상단 제목부분 ======= -->
     <div class="breadcrumbs" data-aos="fade-in">

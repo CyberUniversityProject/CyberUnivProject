@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.cyber.university.repository.interfaces.StudentRepository">
+
+
+	<select id="selectByStudentId"
+		resultType="com.cyber.university.repository.model.Student">
+		SELECT * FROM cu_student WHERE id = #{studentId}
+	</select>
+	
+	
+	
+	<select id="selectIdList" resultType="Integer">
+		SELECT id FROM cu_student;
+	</select>
+	
+	
+	<select id="selectByDepartmentId" resultType="com.cyber.university.repository.model.Student">
+		SELECT * FROM cu_student
+		WHERE dept_id = #{deptId}
+		LIMIT #{page}, 20
+	</select>
+	
+	
+	<select id="selectStudentAmountByDeptId" resultType="Integer">
+		SELECT count(id) FROM cu_student
+		WHERE dept_id = #{deptId}
+	</select>
+	
+	
+	<select id="selectStudentAmount" resultType="Integer">
+		SELECT count(id) FROM cu_student
+	</select>
+	
+		<!-- 페이지로부터 학생 전체 조회 -->
+	<select id="selectStudentList" resultType="com.cyber.university.repository.model.Student">
+		SELECT * FROM cu_student
+		LIMIT #{page}, 20
+	</select>
+
+
+
+</mapper>

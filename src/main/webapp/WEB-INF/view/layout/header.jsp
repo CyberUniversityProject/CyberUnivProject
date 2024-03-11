@@ -131,7 +131,7 @@ prefix="c"%>
               <li class="dropdown">
                 <a href="#"><span>학사관리</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                  <li><a href="#">학생 명단 조회</a></li>
+                  <li><a href="/user/studentList">학생 명단 조회</a></li>
                   <li><a href="#">교수 명단 조회</a></li>
                   <li><a href="#">학생등록</a></li>
                   <li><a href="#">교수등록</a></li>

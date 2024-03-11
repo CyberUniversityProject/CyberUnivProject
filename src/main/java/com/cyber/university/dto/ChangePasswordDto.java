@@ -1,4 +1,4 @@
-package com.cyber.university.repository.model;
+package com.cyber.university.dto;
 
 import jakarta.validation.constraints.Size;
 import lombok.Data;

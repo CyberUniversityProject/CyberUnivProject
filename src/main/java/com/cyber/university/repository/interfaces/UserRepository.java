@@ -1,7 +1,7 @@
 package com.cyber.university.repository.interfaces;
 
+import com.cyber.university.dto.ChangePasswordDto;
 import com.cyber.university.dto.response.PrincipalDto;
-import com.cyber.university.repository.model.ChangePasswordDto;
 import com.cyber.university.repository.model.User;
 import org.apache.ibatis.annotations.Mapper;
 

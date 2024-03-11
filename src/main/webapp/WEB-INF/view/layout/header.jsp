@@ -190,7 +190,7 @@ prefix="c"%>
                                            ><span>마이페이지</span> <i class="bi bi-chevron-down"></i
                                          ></a>
                                          <ul>
-                                           <li><a href="#">내 정보 조회</a></li>
+                                           <li><a href="/professor/info">내 정보 조회</a></li>
                                            <li><a href="#">비밀번호 변경</a></li>
                                          </ul>
                                        </li>

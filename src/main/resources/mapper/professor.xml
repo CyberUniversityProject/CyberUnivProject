@@ -32,6 +32,7 @@
 		select password from cu_user where id = #{id}
 	</select>
 	
+<<<<<<< HEAD
 		<select id="selectByProfessorId" resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor WHERE id = #{professorId}
 	</select>
@@ -60,5 +61,7 @@
 		SELECT count(id) FROM cu_professor
 	</select>
 	
+=======
+>>>>>>> myounggeun
 	
 </mapper>        

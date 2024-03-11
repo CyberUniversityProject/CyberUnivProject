@@ -2,6 +2,7 @@ package com.cyber.university.repository.interfaces;
 
 import org.apache.ibatis.annotations.Mapper;
 
+
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import java.util.List;

@@ -35,6 +35,18 @@ prefix="c"%>
   <link href="/css/style.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- 구글 웹폰트 Noto Sans KR 추가 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif; /* 웹폰트 적용 */
+    }
+
+  
+  </style>
+ 
 
   <!-- =======================================================
   * Template Name: Mentor

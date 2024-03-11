@@ -2,6 +2,8 @@ package com.cyber.university.repository.model;
 
 import java.awt.TextArea;
 
+import lombok.Data;
+
 /**
   * @FileName : Evaluation.java
   * @Project : CyberUniversity
@@ -10,6 +12,7 @@ import java.awt.TextArea;
   * @변경이력 :
   * @프로그램 설명 : 강의 평가
   */
+@Data
 public class Evaluation {
 	
 	private Integer evaluationId;

@@ -48,7 +48,7 @@
 	</select>
 
 	<select id="findStudentById"
-		resultType="com.cyber.university.dto.StudentInfoDto">
+		resultType="com.cyber.university.dto.response.StudentInfoDto">
 		SELECT
 		s.* ,
 		d.name AS deptName,
@@ -62,16 +62,8 @@
 		cu_college AS c
 		ON d.college_id = c.id
 		WHERE
-		s.id = #{userId}
+		s.id = #{userId};
 	</select>
-	
-	<update id="updateStudentInfo">
-		UPDATE cu_student
-		SET address = #{address},
-		tel = #{tel},
-		email = #{email}
-		WHERE id = #{userId}
-	</update>
 
 
 	<insert id="insertToStudent">

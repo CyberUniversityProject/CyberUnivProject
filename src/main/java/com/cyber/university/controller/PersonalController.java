@@ -1,12 +1,13 @@
 package com.cyber.university.controller;
 
 import com.cyber.university.dto.ChangePasswordDto;
+
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.LoginDto;
-import com.cyber.university.dto.StudentInfoDto;
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Staff;
 import com.cyber.university.repository.model.StuStat;

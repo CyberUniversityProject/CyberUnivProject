@@ -8,10 +8,9 @@ import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.LoginDto;
-import com.cyber.university.dto.UserInfoDto;
-import com.cyber.university.dto.StudentInfoDto;
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
 import com.cyber.university.repository.interfaces.StaffRepository;
@@ -42,7 +41,22 @@ import org.springframework.transaction.annotation.Transactional;
  * -----------------------------------------------------------
  * 2024/03/10          이준혁       최초 생성
  */
-
+/**
+  * @FileName : UserService.java
+  * @Project : CyberUniversity
+  * @Date : 2024. 3. 12. 
+  * @작성자 : 이준혁
+  * @변경이력 :
+  * @프로그램 설명 :
+  */
+/**
+  * @FileName : UserService.java
+  * @Project : CyberUniversity
+  * @Date : 2024. 3. 12. 
+  * @작성자 : 이준혁
+  * @변경이력 :
+  * @프로그램 설명 :
+  */
 @Service
 @Slf4j
 public class UserService {
@@ -307,21 +321,5 @@ public class UserService {
 	}
 
 
-
-
-	/**
-	  * @Method Name : findById
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 박경진
-	  * @변경이력 : 
-	  * @Method 설명 : userId로 user 정보 조회
-	  */
-	// TODO: SELECT BY ID 준혁한테 물어보기
-	public UserInfoDto findById(Integer userId) {
-		
-		UserInfoDto userInfoDto = userRepository.findById(userId);
-		
-		return userInfoDto;
-	}
 
 }

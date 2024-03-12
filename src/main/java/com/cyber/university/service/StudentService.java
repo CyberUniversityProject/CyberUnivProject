@@ -1,6 +1,9 @@
 package com.cyber.university.service;
 
 import java.util.HashMap;
+
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cyber.university.dto.StudentInfoDto;
+
 import com.cyber.university.dto.StudentListForm;
+import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.Student;
@@ -95,28 +99,5 @@ public class StudentService {
 		return studentInfo;
 	}
 
-	/**
-	  * @Method Name : updateStudentInfo
-	  * @작성일 : 2024. 3. 11.
-	  * @작성자 : 박경진
-	  * @변경이력 : 
-	  * @Method 설명 : student info 수정(주소, 전화번호, 이메일)
-	  */
-	// TODO : 학과 전과 한다면 관리자 쪽에서, 학기도 자동으로 관리자 쪽 UPDATE 확인하기,
-	// TODO : 로그인 풀렸을 시 
-	@Transactional
-	public int updateStudentInfo(Integer userId,StudentInfoDto studentInfoDto) {
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("userId", userId);
-		map.put("address", studentInfoDto.getAddress());
-		map.put("tel", studentInfoDto.getTel());
-		map.put("email", studentInfoDto.getEmail());
-		
-		int result = studentRepository.updateStudentInfo(map); 
-		
-		return result;
-		
-	}
+	
 }

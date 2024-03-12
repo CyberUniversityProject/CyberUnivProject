@@ -2,7 +2,7 @@ package com.cyber.university.repository.interfaces;
 
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -99,7 +99,16 @@ public interface StudentRepository {
 	  */
 	public StudentInfoDto findStudentById(Integer userId);
 	
+	/**
+	  * @Method Name : updateStudentInfo
+	  * @작성일 : 2024. 3. 11.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 정보 수정
+	  */
+	public int updateStudentInfo(Map<String, Object> params);
 	
+
 	
 	/**
 	 * 

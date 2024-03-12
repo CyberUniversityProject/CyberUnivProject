@@ -23,6 +23,8 @@ public class Define {
     public final static String NOT_FOUND_ID = "아이디를 찾을 수 없습니다.";
 
     public final static String WRONG_PASSWORD = "비밀번호가 틀렸습니다.";
+    
+    public final static String WRONG_CHECK_PASSWORD = "비밀번호가 일치하지 않습니다.";
 
     // Integer로 했더니 ==로 비교하려면 .intValue()를 붙여줘야해서 int로 변경함
     public final static int CURRENT_YEAR = 2024;

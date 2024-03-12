@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cyber.university.dto.NoticeDto;
+import com.cyber.university.dto.NoticeFormDto;
+import com.cyber.university.dto.NoticePageFormDto;
 import com.cyber.university.repository.model.Notice;
 
 /**
@@ -18,6 +19,6 @@ import com.cyber.university.repository.model.Notice;
 
 @Mapper
 public interface NoticeRepository {
-	public int insert(NoticeDto noticeDto);
-	public List<Notice> selectByNoticeDto(NoticeDto noticeDto);
+	public int insert(NoticeFormDto noticeFormDto);
+	public List<Notice> selectByNoticeDto(NoticePageFormDto noticePageFormDto);
 }

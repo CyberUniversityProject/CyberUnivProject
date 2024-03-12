@@ -45,18 +45,40 @@
 
 					<div class="row mb-3">
 						<div class="col-md-7">
-							<form class="form-signin">
+							<form action="#">
 								<label for="inputEmail" class="sr-only"><font
 									style="vertical-align: inherit;"><font
-										style="vertical-align: inherit;"></font></font></label> <input
-									type="email" id="inputEmail" class="form-control"
-									placeholder="이메일 주소" value="${userInfo.id }" disabled> <label
-									for="inputPassword" class="sr-only"><font
+										style="vertical-align: inherit;"></font></font></label> <input type="email"
+									id="inputEmail" class="form-control" placeholder="이메일 주소"
+									value="${userInfo.id }" disabled>
+									 
+									<label
+									for="originPassword" class="sr-only"><font
 									style="vertical-align: inherit;"><font
-										style="vertical-align: inherit;">비밀번호</font></font></label> <input
-									type="password" id="inputPassword" class="form-control"
-									placeholder="비밀번호" value="${userInfo.password }">
-								<button class="btn btn-lg btn-primary btn-block" type="submit">
+										style="vertical-align: inherit;">비밀번호</font></font></label> 
+										<input
+									type="password" id="originPassword" class="form-control"
+									placeholder="비밀번호를 입력해주세요" value="">
+									
+									<label
+									for="afterPassword" class="sr-only"><font
+									style="vertical-align: inherit;"><font
+										style="vertical-align: inherit;">새로운 비밀번호</font></font></label> 
+										<input
+									type="password" id="afterPassword" class="form-control"
+									placeholder="수정할 비밀번호를 입력해주세요" value="">
+									
+											<label
+									for="checkPassword" class="sr-only"><font
+									style="vertical-align: inherit;"><font
+										style="vertical-align: inherit;">비밀번호 확인</font></font></label> 
+										<input
+									type="password" id="passwordCheck" class="form-control"
+									placeholder="비밀번호 확인" value="">
+									
+									<input type="text" id="beforePassword" class="form-control" value="${userInfo.password }">
+								<button type="button" class="btn btn-primary btn-block"
+									id="student-pass-update-btn">
 									<font style="vertical-align: inherit;"><font
 										style="vertical-align: inherit;">비밀번호 변경</font></font>
 								</button>
@@ -67,10 +89,7 @@
 					<!-- 비밀번호 변경 폼 end -->
 				</div>
 
-
 			</div>
-
-
 
 		</div>
 	</div>
@@ -88,22 +107,33 @@
 
 	<script>
 	document.addEventListener("DOMContentLoaded", function(){
-	    const updateBtn = document.getElementById("update-student-btn");
-	    
-	    updateBtn.addEventListener("click", function(event){
-	        event.preventDefault();
+	    const updatePassBtn = document.getElementById("student-pass-update-btn");
+
+
+        
+	    updatePassBtn.addEventListener("click", function(event){
+	    	
+	        if (!confirm("비밀번호를 수정 하시겠습니까?")) {
+	            event.preventDefault();
+	            return;
+	        }
 	        
-	        let address = document.getElementById("address").value;
-	        let tel = document.getElementById("tel").value;
-	        let email = document.getElementById("email").value;
+	        let beforePassword = document.getElementById("originPassword").value;
+	        let afterPassword = document.getElementById("afterPassword").value;
+	        let passwordCheck = document.getElementById("passwordCheck").value;
+	        
+
+	        console.log("beforePassword" + beforePassword);
+	        console.log("afterPassword" + afterPassword);
+	        console.log("passwordCheck" + passwordCheck);
 	        
 	        let formData = {
-	            "address": address,
-	            "tel": tel,
-	            "email": email
+	            "beforePassword": beforePassword,
+	            "afterPassword": afterPassword,
+	            "passwordCheck": passwordCheck
 	        };
 	        
-	        fetch("/student/updateInfo", {
+	        fetch("/student/updatePass", {
 	            method: "POST",
 	            headers: {
 	                "Content-Type": "application/json; charset=UTF-8"
@@ -114,7 +144,8 @@
 	            if (!response.ok) {
 	                throw new Error("오류 발생");
 	            }
-	            console.log("업데이트 성공");
+	            alert("비밀번호가 수정되었습니다.");
+	            window.location.reload();
 	        })
 	        .catch(error => {
 	            console.error(error);

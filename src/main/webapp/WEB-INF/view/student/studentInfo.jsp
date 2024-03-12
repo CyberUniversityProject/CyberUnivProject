@@ -129,7 +129,10 @@
 	    const updateBtn = document.getElementById("update-student-btn");
 	    
 	    updateBtn.addEventListener("click", function(event){
-	        event.preventDefault();
+	        if (!confirm("회원 정보를 수정 하시겠습니까?")) {
+	            event.preventDefault();
+	            return;
+	        }
 	        
 	        let address = document.getElementById("address").value;
 	        let tel = document.getElementById("tel").value;
@@ -152,14 +155,14 @@
 	            if (!response.ok) {
 	                throw new Error("오류 발생");
 	            }
-	            console.log("업데이트 성공");
+	            alert("정보가 성공적으로 수정되었습니다.");
+	            window.location.reload();
 	        })
 	        .catch(error => {
 	            console.error(error);
 	        });
 	    });
 	});
-	
 	</script>
 		
 		

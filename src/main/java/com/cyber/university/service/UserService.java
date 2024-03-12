@@ -1,5 +1,6 @@
 package com.cyber.university.service;
 
+import com.cyber.university.dto.ChangePasswordDto;
 import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.LoginDto;
 import com.cyber.university.dto.UserInfoDto;
@@ -9,6 +10,9 @@ import com.cyber.university.repository.interfaces.StaffRepository;
 import com.cyber.university.repository.interfaces.UserRepository;
 import com.cyber.university.repository.model.User;
 import com.cyber.university.utils.Define;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 2024/03/10          이준혁       최초 생성
  */
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -96,6 +101,20 @@ public class UserService {
 		UserInfoDto userInfoDto = userRepository.findById(userId);
 		
 		return userInfoDto;
+	}
+
+
+	/**
+	  * @Method Name : updatePassword
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 패스워드 encoding 된 상태로 update
+	  */
+	public int updatePassword(ChangePasswordDto changePasswordDto) {
+		int result = userRepository.updatePassword(changePasswordDto);
+		
+		return result;
 	}
 
 }

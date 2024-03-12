@@ -116,6 +116,6 @@ public class StudentController {
 		
 		return"/user/studentPassword";
 	}
-	
+	 
 	
 }

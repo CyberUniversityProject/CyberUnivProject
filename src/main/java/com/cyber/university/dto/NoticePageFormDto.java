@@ -15,12 +15,9 @@ import lombok.Data;
   */
 
 @Data
-public class NoticeDto {
+public class NoticePageFormDto {
 
-	private Integer id;
-	private String category;
-	private String title;
-	private String content;
-	private Integer views;
-	private Timestamp createdTime;
+	private Integer page;
+	private String keyword;
+	private String type;
 }

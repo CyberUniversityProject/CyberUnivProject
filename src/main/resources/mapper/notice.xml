@@ -7,8 +7,8 @@
 		values(#{title}, #{category}, #{content}, now())
 	</insert>
 
-	<select id="selectByNoticeDto" resultType="com.cyber.university.dto.NoticeDto">
-		select * from cu_notice 
+	<select id="selectByNoticeDto" resultType="com.cyber.university.dto.NoticeFormDto">
+		select * from cu_notice order by id DESC
 	</select>
 
 </mapper>

@@ -68,7 +68,7 @@ main {
 				<td>조회수</td>
 			</tr>
 			<c:forEach var="notice" items="${noticeList}">
-				<tr class="second--tr" onclick="location.href='/notice/read?id=${notice.id}';">
+				<tr>
 					<td>${notice.id}</td>
 					<td>${notice.category}</td>
 					<td>${notice.title}</td>

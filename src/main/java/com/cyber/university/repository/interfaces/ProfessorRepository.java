@@ -21,16 +21,40 @@ import com.cyber.university.repository.model.Professor;
 @Mapper
 public interface ProfessorRepository {
 
-	// 24.03.11 교수 내 정보 조회
+	/**
+	  * @Method Name : selectProfessorInfoWithCollegeAndDepartment
+	  * @작성일 : 2024. 3. 11.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 내 정보 조회
+	  */
 	public ProfessorInfoDto selectProfessorInfoWithCollegeAndDepartment(Integer id);
 
-	// 24.03.11 교수 개인 정보 조회
+	/**
+	  * @Method Name : selectProfessorInfo
+	  * @작성일 : 2024. 3. 11.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 개인 정보 조회
+	  */
 	public UpdateProfessorInfoDto selectProfessorInfo(Integer id);
 
-	// 24.03.11 교수 정보 수정
+	/**
+	  * @Method Name : updateProfessorInfo
+	  * @작성일 : 2024. 3. 11.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 정보 수정
+	  */
 	public UpdateProfessorInfoDto updateProfessorInfo(UpdateProfessorInfoDto updateDto);
 
-	// 24.03.11 비밀번호 찾기
+	/**
+	  * @Method Name : selectPassword
+	  * @작성일 : 2024. 3. 11.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 비밀번호 찾기
+	  */
 	public String selectPassword(Integer id);
 
 	/**

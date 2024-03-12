@@ -11,7 +11,9 @@ import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 
 import com.cyber.university.dto.StudentListForm;
+import com.cyber.university.dto.UserUpdateDto;
 import com.cyber.university.dto.response.StudentInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.Student;
 
 /**
@@ -153,5 +155,29 @@ public interface StudentRepository {
 	  * @Method 설명 : 학생정보 단건 조회
 	 */
 	public StudentInfoDto selectStudentInfoById(Integer id);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectByUserId
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생정보 가져오기
+	 */
+	public UserInfoForUpdateDto selectByUserId(Integer userId);
+	
+	
+	/**
+	 * 
+	  * @Method Name : updateStudent
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생정보 업데이트
+	 */
+	public int updateStudent(UserUpdateDto userUpdateDto);
+
+
 
 }

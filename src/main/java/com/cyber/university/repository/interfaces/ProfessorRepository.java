@@ -4,12 +4,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
+
 import java.util.List;
 
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
+import com.cyber.university.dto.UserUpdateDto;
 import com.cyber.university.repository.model.Professor;
 
 /**
@@ -135,5 +138,27 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 교수 단건 조회
 	 */
 	public ProfessorInfoDto selectProfessorInfoById(Integer id);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectByUserId
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 정보 가져오기
+	 */
+	public UserInfoForUpdateDto selectByUserId(Integer userId);
+	
+	
+	/**
+	 * 
+	  * @Method Name : updateProfessor
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 정보 업데이트
+	 */
+	public int updateProfessor(UserUpdateDto userUpdateDto);
 
 }

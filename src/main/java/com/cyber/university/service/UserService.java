@@ -8,9 +8,11 @@ import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.LoginDto;
+import com.cyber.university.dto.UserUpdateDto;
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
 import com.cyber.university.repository.interfaces.StaffRepository;
@@ -32,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * packageName    : com.cyber.university.service
+
  * fileName       : UserService
  * author         : 이준혁
  * date           : 2024/03/10
@@ -42,64 +45,54 @@ import org.springframework.transaction.annotation.Transactional;
  * 2024/03/10          이준혁       최초 생성
  */
 /**
-  * @FileName : UserService.java
-  * @Project : CyberUniversity
-  * @Date : 2024. 3. 12. 
-  * @작성자 : 이준혁
-  * @변경이력 :
-  * @프로그램 설명 :
-  */
-/**
-  * @FileName : UserService.java
-  * @Project : CyberUniversity
-  * @Date : 2024. 3. 12. 
-  * @작성자 : 이준혁
-  * @변경이력 :
-  * @프로그램 설명 :
-  */
+ * @FileName : UserService.java
+ * @Project : CyberUniversity
+ * @Date : 2024. 3. 12.
+ * @작성자 : 이준혁
+ * @변경이력 :
+ * @프로그램 설명 :
+ */
 @Service
 @Slf4j
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    
-    @Autowired
-    private StaffRepository staffRepository;
-    
-    @Autowired
-    private ProfessorRepository professorRepository;
-    
-    @Autowired
-    private StudentRepository studentRepository;
-    
-    @Autowired
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private StaffRepository staffRepository;
+
+	@Autowired
+	private ProfessorRepository professorRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
+	@Autowired
 	private StuStatService stuStatService;
 	@Autowired
 	private StuStatRepository stuStatRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
+	@Transactional
+	public PrincipalDto login(LoginDto loginDto) {
+		PrincipalDto userEntity = userRepository.selectById(loginDto.getId());
 
-    @Transactional
-    public PrincipalDto login(LoginDto loginDto) {
-        PrincipalDto userEntity = userRepository.selectById(loginDto.getId());
+		if (userEntity == null) {
+			System.out.println("유저 null");
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
-        if (userEntity == null) {
-            System.out.println("유저 null");
-            throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		if (!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
+			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
+		}
 
-        if (!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
-            throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
-        }
+		return userEntity;
+	}
 
-        return userEntity;
-    }
-    
-    
-    /**
+	/**
 	 * 직원 생성 서비스로 먼저 cu_staff에 insert한 후 cu_staff에 생긴 id를 끌고와 cu_user에 생성함
 	 * 
 	 * @param createStaffDto
@@ -124,14 +117,14 @@ public class UserService {
 		}
 
 	}
-	
+
 	/**
 	 * 
-	  * @Method Name : createProfessorToProfessorAndUser
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 교수 등록 처리
+	 * @Method Name : createProfessorToProfessorAndUser
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 교수 등록 처리
 	 */
 	@Transactional
 	public void createProfessorToProfessorAndUser(CreateProfessorDto createProfessorDto) {
@@ -154,14 +147,14 @@ public class UserService {
 		}
 
 	}
-	
+
 	/**
 	 * 
-	  * @Method Name : createStudentToStudentAndUser
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 학생 등록처리
+	 * @Method Name : createStudentToStudentAndUser
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 학생 등록처리
 	 */
 	@Transactional
 	public void createStudentToStudentAndUser(CreateStudentDto createStudentDto) {
@@ -189,26 +182,25 @@ public class UserService {
 
 	/**
 	 * 
-	  * @Method Name : readStaff
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 직원조회
+	 * @Method Name : readStaff
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 직원조회
 	 */
 	@Transactional
 	public Staff readStaff(Integer id) {
 		Staff staffEntity = staffRepository.selectStaffById(id);
 		return staffEntity;
 	}
-	
-	
+
 	/**
 	 * 
-	  * @Method Name : updatePassword
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 비번변경
+	 * @Method Name : updatePassword
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 비번변경
 	 */
 	@Transactional
 	public void updatePassword(ChangePasswordDto changePasswordDto) {
@@ -217,15 +209,14 @@ public class UserService {
 			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+
 	/**
-	  * 
-	  * @Method Name : readIdByNameAndEmail
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 아이디 찾기
+	 * 
+	 * @Method Name : readIdByNameAndEmail
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 아이디 찾기
 	 */
 	@Transactional
 	public Integer readIdByNameAndEmail(FindIdFormDto findIdFormDto) {
@@ -246,80 +237,184 @@ public class UserService {
 		return findId;
 
 	}
-	
-	
+
 	/**
 	 * 
-	  * @Method Name : updateTempPassword
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 비번찾기
+	 * @Method Name : updateTempPassword
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 비번찾기
 	 */
 	@Transactional
 	public String updateTempPassword(FindPasswordFormDto findPasswordFormDto) {
-	    String password = null;
-	    Integer findId = 0;
+		String password = null;
+		Integer findId = 0;
 
-	    switch (findPasswordFormDto.getUserRole()) {
-	        case "student":
-	            findId = studentRepository.selectStudentByIdAndNameAndEmail(findPasswordFormDto);
-	            break;
-	        case "professor":
-	            findId = professorRepository.selectProfessorByIdAndNameAndEmail(findPasswordFormDto);
-	            break;
-	        case "staff":
-	            findId = staffRepository.selectStaffByIdAndNameAndEmail(findPasswordFormDto);
-	            break;
-	        default:
-	            throw new CustomRestfullException("잘못된 접근입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		switch (findPasswordFormDto.getUserRole()) {
+		case "student":
+			findId = studentRepository.selectStudentByIdAndNameAndEmail(findPasswordFormDto);
+			break;
+		case "professor":
+			findId = professorRepository.selectProfessorByIdAndNameAndEmail(findPasswordFormDto);
+			break;
+		case "staff":
+			findId = staffRepository.selectStaffByIdAndNameAndEmail(findPasswordFormDto);
+			break;
+		default:
+			throw new CustomRestfullException("잘못된 접근입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
-	    if (findId == null) {
-	        throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		if (findId == null) {
+			throw new CustomRestfullException("회원정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
-	    password = new TempPassword().returnTempPassword();
-	    System.out.println("임시 비밀번호: " + password);
+		password = new TempPassword().returnTempPassword();
+		System.out.println("임시 비밀번호: " + password);
 
-	    ChangePasswordDto changePasswordDto = new ChangePasswordDto();
-	    changePasswordDto.setAfterPassword(passwordEncoder.encode(password));
-	    changePasswordDto.setId(findPasswordFormDto.getId());
-	    userRepository.updatePassword(changePasswordDto);
+		ChangePasswordDto changePasswordDto = new ChangePasswordDto();
+		changePasswordDto.setAfterPassword(passwordEncoder.encode(password));
+		changePasswordDto.setId(findPasswordFormDto.getId());
+		userRepository.updatePassword(changePasswordDto);
 
-	    return password;
+		return password;
 	}
-	
-	
+
 	/**
 	 * 
-	  * @Method Name : readStudentInfo
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 학생정보조회
+	 * @Method Name : readStudentInfo
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 학생정보조회
 	 */
 	@Transactional
 	public StudentInfoDto readStudentInfo(Integer id) {
 		StudentInfoDto studentEntity = studentRepository.selectStudentInfoById(id);
 		return studentEntity;
 	}
-	
-	
+
 	/**
 	 * 
-	  * @Method Name : readProfessorInfo
-	  * @작성일 : 2024. 3. 12.
-	  * @작성자 : 이준혁
-	  * @변경이력 : 
-	  * @Method 설명 : 교수 정보 조회
+	 * @Method Name : readProfessorInfo
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 교수 정보 조회
 	 */
 	@Transactional
 	public ProfessorInfoDto readProfessorInfo(Integer id) {
 		ProfessorInfoDto professorEntity = professorRepository.selectProfessorInfoById(id);
 		return professorEntity;
 	}
+	
+	
+	
+	/**
+	 * 
+	  * @Method Name : readStaffInfoForUpdate
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 직원 회원정보 업데이트
+	 */
+	public UserInfoForUpdateDto readStaffInfoForUpdate(Integer userId) {
 
+		UserInfoForUpdateDto userInfoForUpdateDto = staffRepository.selectByUserId(userId);
+
+		return userInfoForUpdateDto;
+	}
+	
+	
+	/**
+	 * 
+	  * @Method Name : readStudentInfoForUpdate
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 회원정보 업데이트
+	 */
+	public UserInfoForUpdateDto readStudentInfoForUpdate(Integer userId) {
+
+		UserInfoForUpdateDto userInfoForUpdateDto = studentRepository.selectByUserId(userId);
+
+		return userInfoForUpdateDto;
+	}
+	
+	
+	/**
+	 * 
+	  * @Method Name : readProfessorInfoForUpdate
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 정보 업데이트
+	 */
+	public UserInfoForUpdateDto readProfessorInfoForUpdate(Integer userId) {
+
+		UserInfoForUpdateDto userInfoForUpdateDto = professorRepository.selectByUserId(userId);
+
+		return userInfoForUpdateDto;
+	}
+	
+	
+	/**
+	 * 
+	  * @Method Name : updateStaff
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 직원 회원정보 수정
+	 */
+	@Transactional
+	public void updateStaff(UserUpdateDto updateDto) {
+
+		int resultCountRaw = staffRepository.updateStaff(updateDto);
+		if (resultCountRaw != 1) {
+			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	
+	/**
+	 * 
+	  * @Method Name : updateStudent
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생정보 수정
+	 */
+	@Transactional
+	public void updateStudent(UserUpdateDto updateDto) {
+
+		int resultCountRaw = studentRepository.updateStudent(updateDto);
+		if (resultCountRaw != 1) {
+			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	  * @Method Name : updateProfessor
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 교수정보 업데이트
+	 */
+	@Transactional
+	public void updateProfessor(UserUpdateDto updateDto) {
+
+		int resultCountRaw = professorRepository.updateProfessor(updateDto);
+		if (resultCountRaw != 1) {
+			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
 
 
 }

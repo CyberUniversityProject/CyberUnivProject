@@ -128,6 +128,22 @@
 		ON d.college_id = c.id
 		WHERE p.id = #{id};
 	</select>
+	
+	
+	
+	<select id="selectByUserId" resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM cu_professor
+		WHERE id = #{userId}
+	</select>
+	
+	
+	
+	<update id="updateProfessor">
+		UPDATE cu_professor SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
 
 
 

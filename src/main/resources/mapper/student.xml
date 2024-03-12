@@ -126,5 +126,20 @@
 		ON d.college_id = c.id
 		WHERE s.id = #{id};
 	</select>
+	
+	
+	
+	<select id="selectByUserId" resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM cu_student
+		WHERE id = #{userId}
+	</select>
+	
+	
+	<update id="updateStudent">
+		UPDATE cu_student SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
 
 </mapper>

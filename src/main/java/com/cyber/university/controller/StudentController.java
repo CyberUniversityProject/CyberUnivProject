@@ -92,8 +92,10 @@ public class StudentController {
 	  * @Method 설명 : 내 정보 업데이트
 	  */
 	@PostMapping("/updateInfo")
-	public String updateInfo(@CookieValue(name="id", required = false)Integer userId, @RequestBody StudentInfoDto studentInfoDto) {
+	public String updateInfo(@RequestBody StudentInfoDto studentInfoDto) {
 		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
 		log.info("controller in!");
 		
 		if (userId == null) {

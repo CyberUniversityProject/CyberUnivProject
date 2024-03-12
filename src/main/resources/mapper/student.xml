@@ -126,5 +126,14 @@
 		ON d.college_id = c.id
 		WHERE s.id = #{id};
 	</select>
+	
+	
+	<update id="updateStudentInfo">
+		UPDATE cu_student
+		SET address = #{address},
+		tel = #{tel},
+		email = #{email}
+		WHERE id = #{userId}
+	</update>
 
 </mapper>

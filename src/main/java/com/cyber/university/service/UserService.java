@@ -2,7 +2,7 @@ package com.cyber.university.service;
 
 import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.LoginDto;
-
+import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.StaffRepository;
@@ -80,6 +80,22 @@ public class UserService {
 			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+	}
+
+
+	/**
+	  * @Method Name : findById
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : userId로 user 정보 조회
+	  */
+	// TODO: SELECT BY ID 준혁한테 물어보기
+	public UserInfoDto findById(Integer userId) {
+		
+		UserInfoDto userInfoDto = userRepository.findById(userId);
+		
+		return userInfoDto;
 	}
 
 }

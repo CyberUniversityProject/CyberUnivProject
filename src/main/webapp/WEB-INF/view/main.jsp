@@ -51,22 +51,27 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 							<div class="section-title">
 								<h2>User Information</h2>
-								${userInfo}
-								${principal}
-								<p>${userInfo.name}님,&nbsp;환영합니다.</p>
+
+								<p>
+									<i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님,
+									환영합니다.
+								</p>
 							</div>
 
 							<div class="row">
 
 								<div class="col-lg-3">
 									<div class="info-box">
-
 										<h3>
 											<i class="bx bx-map"></i> 소속
 										</h3>
-										<p>${principal.userRole}</p>
-
-
+										<p>
+											<c:choose>
+												<c:when test="${principal.userRole eq 'staff'}">교직원</c:when>
+												<c:when test="${principal.userRole eq 'student'}">학생</c:when>
+												<c:when test="${principal.userRole eq 'professor'}">교수</c:when>
+											</c:choose>
+										</p>
 									</div>
 								</div>
 								<div class="col-lg-3">
@@ -76,7 +81,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 											<i class="bx bx-envelope"></i> 이메일
 										</h3>
-										<p>교직원</p>
+										<p>${userInfo.email}</p>
 
 
 									</div>

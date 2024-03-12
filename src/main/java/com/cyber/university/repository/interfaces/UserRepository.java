@@ -1,6 +1,7 @@
 package com.cyber.university.repository.interfaces;
 
 import com.cyber.university.dto.ChangePasswordDto;
+import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,5 +28,16 @@ public interface UserRepository {
 
     // id 이용해서 user_tb에 insert
     public int insertToUser(User user);
+    
+
+	/**
+	  * @Method Name : findById
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : id로 user 정보 조회
+	  */
+	public UserInfoDto findById(Integer userId);
+
 
 }

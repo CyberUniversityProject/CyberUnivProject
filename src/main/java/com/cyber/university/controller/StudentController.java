@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cyber.university.dto.ChangePasswordDto;
-import com.cyber.university.dto.StudentInfoDto;
 import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
@@ -93,12 +92,7 @@ public class StudentController {
 	  * @Method 설명 : 내 정보 업데이트
 	  */
 	@PostMapping("/updateInfo")
-	public String updateInfo(@RequestBody StudentInfoDto studentInfoDto) {
-		
-		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-		Integer userId = principal.getId();
-		log.info(userId + "userId");
+	public String updateInfo(@CookieValue(name="id", required = false)Integer userId, @RequestBody StudentInfoDto studentInfoDto) {
 		
 		log.info("controller in!");
 		
@@ -112,7 +106,7 @@ public class StudentController {
 			studentService.updateStudentInfo(userId,studentInfoDto);
 
 			log.info("controller service after!");
-		return "/student/studentInfo";
+		return "redirect:/student/studentInfo";
 	}
 	
 	/**
@@ -125,20 +119,20 @@ public class StudentController {
 	@GetMapping("/password")
 	private String studentPasswordPage(Model model ) {
 		
-//		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-//		Integer userId = principal.getId();
-//		log.info(userId + "userId");
-//		
-//		if(userId == null) {
-//			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//		
-//		UserInfoDto userInfoDto = userService.findById(userId);
-//		
-//		log.info("student controller password : " + userInfoDto);
-//		
-//		model.addAttribute("userInfo",userInfoDto);
-//		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		UserInfoDto userInfoDto = userService.findById(userId);
+		
+		log.info("student controller password : " + userInfoDto);
+		
+		model.addAttribute("userInfo",userInfoDto);
+		
 		
 		return"/student/studentPassword";
 	}

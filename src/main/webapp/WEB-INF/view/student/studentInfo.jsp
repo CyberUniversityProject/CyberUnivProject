@@ -53,7 +53,7 @@
 					<div class="col-md-7">
 						<div class="card">
 							<div class="card-body">
-								<form action="/student/modifyMyInfo" method="post">
+								<form action="#" method="">
 									<div class="form-group">
 										<label for="name">이름</label> <input type="text" name="name"
 											id="name" class="form-control" value="${studentInfo.name }"
@@ -121,7 +121,7 @@
 											name="entranceDate" id="entranceDate" class="form-control"
 											value="${studentInfo.entranceDate}" disabled>
 									</div>
-									<button type="submit" class="btn btn-primary">등록하기</button>
+									<button type="button" class="btn btn-primary" id="update-student-btn">등록하기</button>
 								</form>
 							</div>
 						</div>
@@ -138,7 +138,6 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/view/student/studentInfo.jsp
 	
 	<script>
 	document.addEventListener("DOMContentLoaded", function(){
@@ -182,8 +181,5 @@
 	</script>
 		
 		
-		
-=======
->>>>>>> dev:src/main/webapp/WEB-INF/view/user/studentInfo.jsp
 </body>
 </html>

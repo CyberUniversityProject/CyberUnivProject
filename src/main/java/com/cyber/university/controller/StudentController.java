@@ -12,25 +12,20 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-=======
->>>>>>> dev
 import org.springframework.web.bind.annotation.RequestMapping;
 
-<<<<<<< HEAD
 import com.cyber.university.dto.ChangePasswordDto;
 import com.cyber.university.dto.StudentInfoDto;
 import com.cyber.university.dto.UserInfoDto;
-=======
->>>>>>> dev
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.service.StudentService;
+import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
@@ -52,15 +47,13 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
-<<<<<<< HEAD
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder; 
-=======
->>>>>>> dev
+
 	
 	/**
 	  * @Method Name : myInfo
@@ -70,15 +63,12 @@ public class StudentController {
 	  * @Method 설명 : 학생 내 정보 조회 페이지
 	  */
 	@GetMapping("/myInfo")
-<<<<<<< HEAD
+
 	public String myInfo(Model model ) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-=======
-	public String myInfo(@CookieValue(name="id", required = false)Integer userId, Model model ) {
-		
->>>>>>> dev
+
 		log.info(userId + "userId");
 		
 		if(userId == null) {
@@ -94,7 +84,7 @@ public class StudentController {
 		return "/student/studentInfo";
 	}
 	
-<<<<<<< HEAD
+
 	/**
 	  * @Method Name : updateInfo
 	  * @작성일 : 2024. 3. 11.
@@ -103,7 +93,6 @@ public class StudentController {
 	  * @Method 설명 : 내 정보 업데이트
 	  */
 	@PostMapping("/updateInfo")
-	@ResponseBody
 	public String updateInfo(@RequestBody StudentInfoDto studentInfoDto) {
 		
 		
@@ -136,22 +125,21 @@ public class StudentController {
 	@GetMapping("/password")
 	private String studentPasswordPage(Model model ) {
 		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-		Integer userId = principal.getId();
-		log.info(userId + "userId");
+//		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+//		Integer userId = principal.getId();
+//		log.info(userId + "userId");
+//		
+//		if(userId == null) {
+//			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//		
+//		UserInfoDto userInfoDto = userService.findById(userId);
+//		
+//		log.info("student controller password : " + userInfoDto);
+//		
+//		model.addAttribute("userInfo",userInfoDto);
+//		
 		
-		if(userId == null) {
-			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		UserInfoDto userInfoDto = userService.findById(userId);
-		
-		log.info("student controller password : " + userInfoDto);
-		
-		model.addAttribute("userInfo",userInfoDto);
-		
-		
-		// TODO: 복호화 X 암호화해서 다시 저장하는거만!
 		return"/student/studentPassword";
 	}
 	
@@ -237,8 +225,5 @@ public class StudentController {
 		
 		return "/student/leaveOfAbsenceRegister";
 	}
-	 
-=======
->>>>>>> dev
 	
 }

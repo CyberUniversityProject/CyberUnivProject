@@ -35,23 +35,13 @@
 	</update>
 
 	<!-- 24.03.11 비밀번호 찾기 -->
-<<<<<<< HEAD
 	<select id="selectPassword" resultType="java.lang.String">
 		select * from cu_user where id = #{id}
 	</select>
 	
 	<select id="selectByProfessorId" resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor WHERE id = #{id}
-=======
-	<select id="selectPassword"
-		resultType="com.cyber.university.repository.model.User">
-		select password from cu_user where id = #{id}
-	</select>
 
-	<select id="selectByProfessorId"
-		resultType="com.cyber.university.repository.model.Professor">
-		SELECT * FROM cu_professor WHERE id = #{professorId}
->>>>>>> junyeoke
 	</select>
 
 

@@ -1,18 +1,16 @@
 package com.cyber.university.service;
 
 import com.cyber.university.dto.ChangePasswordDto;
+
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.LoginDto;
-<<<<<<< HEAD
 import com.cyber.university.dto.UserInfoDto;
-=======
 import com.cyber.university.dto.StudentInfoDto;
 import com.cyber.university.dto.professor.ProfessorInfoDto;
->>>>>>> junyeoke
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
@@ -44,22 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
  * -----------------------------------------------------------
  * 2024/03/10          이준혁       최초 생성
  */
-/**
-  * @FileName : UserService.java
-  * @Project : CyberUniversity
-  * @Date : 2024. 3. 12. 
-  * @작성자 : 이준혁
-  * @변경이력 :
-  * @프로그램 설명 :
-  */
-/**
-  * @FileName : UserService.java
-  * @Project : CyberUniversity
-  * @Date : 2024. 3. 12. 
-  * @작성자 : 이준혁
-  * @변경이력 :
-  * @프로그램 설명 :
-  */
+
 @Service
 @Slf4j
 public class UserService {

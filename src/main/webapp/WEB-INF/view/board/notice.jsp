@@ -49,7 +49,8 @@ main {
 		<h1>공지사항</h1>
 		<div class="split--div"></div>
 		
-		<!-- 공지 검색 -->
+		<!-- 공지 조회 -->
+		<c:if test="${crud.equals(\"select\")}">
 		<form>
 			<select class="input--box" name="type">
 				<option value="title">제목</option>
@@ -80,6 +81,36 @@ main {
 		<div class="paging--container">
 		<!-- 페이징 버튼 들어갈 자리 -->
 		</div>
+		</c:if>
+		
+		<!-- 공지 등록 -->
+		<c:if test="${crud.equals(\"write\")}">
+			<div class="write--div">
+				<form action="/notice/write" method="post" enctype="multipart/form-data">
+					<div class="title--container">
+						<div class="category">
+							<select name="category" class="input--box">
+								<option value="[일반]">[일반]</option>
+								<option value="[학사]">[학사]</option>
+								<option value="[장학]">[장학]</option>
+							</select>
+						</div>
+						<div class="title">
+							<input type="text" class="form-control form-control-sm" name="title" placeholder="제목을 입력하세요" required="required" style="width: 900px;">
+						</div>
+					</div>
+					<div class="content--container">
+						<textarea name="content" class="form-control" cols="100" rows="20" placeholder="내용을 입력하세요"></textarea>
+					</div>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile">Choose file</label>
+					</div>
+					<a href="/notice" class="button">목록</a> 
+					<input type="submit" class="button" value="등록">
+				</form>
+				
+			</div>
+		</c:if>
 	
 </div>
 

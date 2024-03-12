@@ -1,17 +1,16 @@
 package com.cyber.university.service;
 
 import com.cyber.university.dto.ChangePasswordDto;
+
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.LoginDto;
-<<<<<<< HEAD
-import com.cyber.university.dto.UserUpdateDto;
-=======
 import com.cyber.university.dto.UserInfoDto;
->>>>>>> dev
+import com.cyber.university.dto.UserUpdateDto;
+
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
@@ -312,7 +311,6 @@ public class UserService {
 		return professorEntity;
 	}
 	
-<<<<<<< HEAD
 	
 	
 	/**
@@ -418,8 +416,8 @@ public class UserService {
 		if (resultCountRaw != 1) {
 			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
 
-=======
 
 	/**
 	  * @Method Name : findById
@@ -434,7 +432,7 @@ public class UserService {
 		UserInfoDto userInfoDto = userRepository.findById(userId);
 		
 		return userInfoDto;
->>>>>>> dev
+
 	}
 
 

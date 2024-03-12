@@ -128,7 +128,6 @@
 	</select>
 	
 	
-<<<<<<< HEAD
 	
 	<select id="selectByUserId" resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
 		SELECT address, tel, email
@@ -140,13 +139,15 @@
 	<update id="updateStudent">
 		UPDATE cu_student SET
 		address = #{address}, tel = #{tel}, email = #{email}
-=======
+		
+		
+	</update>
+	
 	<update id="updateStudentInfo">
 		UPDATE cu_student
 		SET address = #{address},
 		tel = #{tel},
 		email = #{email}
->>>>>>> dev
 		WHERE id = #{userId}
 	</update>
 

@@ -23,14 +23,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class AuthIntercepterForMainPage implements HandlerInterceptor {
 
-//    @Override
-//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-//            throws Exception {
-//        HttpSession session = request.getSession();
-//        if (session.getAttribute(Define.PRINCIPAL) == null) {
-//            throw new UnAuthorizedExceptionForMainPage(HttpStatus.UNAUTHORIZED, "/login");
-//            // return false;
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        HttpSession session = request.getSession();
+        if (session.getAttribute(Define.PRINCIPAL) == null) {
+            throw new UnAuthorizedExceptionForMainPage(HttpStatus.UNAUTHORIZED, "/login");
+            // return false;
+        }
+        return true;
+    }
 }

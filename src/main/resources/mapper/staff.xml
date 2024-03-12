@@ -27,6 +27,31 @@
 
 	</select>
 
+	<select id="selectStaffById"
+		resultType="com.cyber.university.repository.model.Staff">
+		SELECT *
+		FROM cu_staff
+		WHERE id = #{id}
+	</select>
+
+
+	<select id="selectIdByNameAndEmail" resultType="integer">
+		SELECT id
+		FROM
+		cu_staff
+		WHERE name = #{name}
+		AND email = #{email}
+	</select>
+
+
+	<select id="selectStaffByIdAndNameAndEmail" resultType="integer">
+		SELECT id
+		FROM cu_staff
+		WHERE id = #{id}
+		AND name = #{name}
+		AND email = #{email}
+	</select>
+
 
 
 </mapper>

@@ -71,7 +71,7 @@ prefix="c"%>
       <c:choose>
       <c:when test="${principal.userRole.equals(\"student\")}">
       <ul>
-        <li><a class="active" href="">Home</a></li>
+        <li><a class="active" href="/">Home</a></li>
 
         <li class="dropdown">
           <a href="#"
@@ -129,15 +129,15 @@ prefix="c"%>
 
       <!-- role == staff 일 경우 -->
             <ul>
-              <li><a class="active" href="">Home</a></li>
+              <li><a class="active" href="/">Home</a></li>
 
               <li class="dropdown">
                 <a href="#"
                   ><span>마이페이지</span> <i class="bi bi-chevron-down"></i
                 ></a>
                 <ul>
-                  <li><a href="#">내 정보 조회</a></li>
-                  <li><a href="#">비밀번호 변경</a></li>
+                  <li><a href="/info/staff">내 정보 조회</a></li>
+                  <li><a href="/password">비밀번호 변경</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -145,8 +145,8 @@ prefix="c"%>
                 <ul>
                   <li><a href="/user/studentList">학생 명단 조회</a></li>
                   <li><a href="/user/professorList">교수 명단 조회</a></li>
-                  <li><a href="#">학생등록</a></li>
-                  <li><a href="#">교수등록</a></li>
+                  <li><a href="/user/student">학생등록</a></li>
+                  <li><a href="/user/professor">교수등록</a></li>
                   <li><a href="/user/staff">직원등록</a></li>
                   <li><a href="#">등록금 고지서 발송</a></li>
                   <li><a href="#">휴학 처리</a></li>
@@ -183,7 +183,7 @@ prefix="c"%>
              <c:when test="${principal.userRole.equals(\"professor\")}">
               <!-- role == professor 일 경우 -->
                                      <ul>
-                                       <li><a class="active" href="">Home</a></li>
+                                       <li><a class="active" href="/">Home</a></li>
 
                                        <li class="dropdown">
                                          <a href="#"

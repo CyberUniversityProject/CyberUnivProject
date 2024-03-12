@@ -87,9 +87,9 @@ public class ProfessorController {
 	@PostMapping("/update")
 	public String updateUserProc(@CookieValue(name = "id", required = false)Integer userId, User user) {
 	    
-		if (userId != null) {
-			professorService.updateProfessorInfo(userId, user);			
-		}
+		
+		professorService.updateProfessorInfo(userId, user);			
+		
 	    
 		return "redirect:/professor/Info";
 	}

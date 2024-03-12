@@ -81,8 +81,5 @@ public interface ProfessorRepository {
 	 * @Method 설명 : 전체 교수 조회
 	 */
 	public Integer selectProfessorAmount();
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> main

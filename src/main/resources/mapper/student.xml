@@ -60,7 +60,15 @@
 		LEFT JOIN cu_college AS c
 		ON d.college_id = c.id
 		WHERE
-		s.id = #{userId};
+		s.id = #{userId}
 	</select>
+	
+	<update id="updateStudentInfo">
+		UPDATE cu_student
+		SET address = #{address},
+		tel = #{tel},
+		email = #{email}
+		WHERE id = #{userId}
+	</update>
 
 </mapper>

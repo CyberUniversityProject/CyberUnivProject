@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>직원 등록</title>
+  <title>교수 등록</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery 추가 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -17,7 +17,7 @@
  <!-- ======= 상단 제목부분 ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>교직원 추가페이지</h2>
+        <h2>교수 추가페이지</h2>
 
       </div>
     </div>
@@ -27,13 +27,13 @@
    <%@ include file="/WEB-INF/view/layout/sidebarStaff.jsp"%>
 
     <div class="col-md-10">
-      <h1 class="mt-5 mb-4">직원 등록</h1>
+      <h1 class="mt-5 mb-4">교수 등록</h1>
       <hr/>
       <div class="row justify-content-center">
         <div class="col-md-7">
           <div class="card">
             <div class="card-body">
-              <form action="/user/staff" method="post">
+              <form action="/user/professor" method="post">
                 <div class="form-group">
                   <label for="name">이름</label>
                   <input type="text" name="name" id="name" class="form-control">
@@ -64,6 +64,10 @@
                 <div class="form-group">
                   <label for="email">이메일</label>
                   <input type="text" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="deptId">과 ID</label>
+                  <input type="text" name="deptId" id="deptId" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">등록하기</button>
               </form>

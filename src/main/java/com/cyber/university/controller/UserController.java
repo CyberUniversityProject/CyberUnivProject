@@ -1,6 +1,8 @@
 package com.cyber.university.controller;
 
+import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.CreateStaffDto;
+import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.handler.exception.CustomRestfullException;
@@ -207,6 +209,71 @@ public class UserController {
 
 		return "/user/professorList";
 	}
+	
+	/**
+	 * @return 교수 입력 페이지
+	 */
+	@GetMapping("/professor")
+	public String createProfessor() {
+
+		return "/user/createProfessor";
+	}
+
+	/**
+	 * 교수등록처리
+	 * 
+	 * @param createProfessorDto
+	 * @return "redirect:/user/professor"
+	 */
+	@PostMapping("/professor")
+	public String createProfessorProc(@Valid CreateProfessorDto createProfessorDto, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n");
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+
+		userService.createProfessorToProfessorAndUser(createProfessorDto);
+
+		return "redirect:/user/professor";
+	}
+	
+	
+	
+	/**
+	 * @return student 입력 페이지
+	 */
+	@GetMapping("/student")
+	public String createStudent() {
+
+		return "/user/createStudent";
+	}
+
+	/**
+	 * 학생 입력 post 처리
+	 * 
+	 * @param createStudentDto
+	 * @return "redirect:/user/student"
+	 */
+	@PostMapping("/student")
+	public String createStudentProc(@Valid CreateStudentDto createStudentDto, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n");
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+
+		userService.createStudentToStudentAndUser(createStudentDto);
+
+		return "redirect:/user/student";
+	}
+	
 
 
 }

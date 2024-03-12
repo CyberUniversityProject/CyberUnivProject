@@ -2,11 +2,13 @@ package com.cyber.university.repository.interfaces;
 
 import org.apache.ibatis.annotations.Mapper;
 
-
 import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import java.util.List;
 
+import com.cyber.university.dto.CreateProfessorDto;
+import com.cyber.university.dto.FindIdFormDto;
+import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.repository.model.Professor;
 
@@ -106,4 +108,60 @@ public interface ProfessorRepository {
 	 */
 	public Integer selectProfessorAmount();
 
+<<<<<<< HEAD
 }
+=======
+	/**
+	 * 
+	 * @Method Name : insertToProfessor
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : cu_professor에 insert
+	 */
+	public int insertToProfessor(CreateProfessorDto createProfessorDto);
+
+	/**
+	 * 
+	 * @Method Name : selectIdByCreateProfessorDto
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : cu_professor에서 생성된 id값 받아오기
+	 */
+	public Integer selectIdByCreateProfessorDto(CreateProfessorDto createProfessorDto);
+
+	/**
+	 * 
+	 * @Method Name : selectIdByNameAndEmail
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 아이디 찾기
+	 */
+	public Integer selectIdByNameAndEmail(FindIdFormDto findIdFormDto);
+
+	/**
+	 * 
+	 * @Method Name : selectProfessorByIdAndNameAndEmail
+	 * @작성일 : 2024. 3. 12.
+	 * @작성자 : 이준혁
+	 * @변경이력 :
+	 * @Method 설명 : 비밀번호 발급용 model
+	 */
+	public Integer selectProfessorByIdAndNameAndEmail(FindPasswordFormDto findPasswordFormDto);
+	
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectProfessorInfoById
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 단건 조회
+	 */
+	public ProfessorInfoDto selectProfessorInfoById(Integer id);
+
+}
+>>>>>>> junyeoke

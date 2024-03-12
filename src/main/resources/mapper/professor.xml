@@ -1,64 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.university.repository.interfaces.ProfessorRepository">
+<mapper
+	namespace="com.cyber.university.repository.interfaces.ProfessorRepository">
 	<!-- 24.03.11 교수 내 정보 조회 -->
-	<select id="selectProfessorInfoWithCollegeAndDepartment" resultType="com.cyber.university.dto.professor.ProfessorInfoDto">
+	<select id="selectProfessorInfoWithCollegeAndDepartment"
+		resultType="com.cyber.university.dto.professor.ProfessorInfoDto">
 		select p.*, c.name as collegeName, d.name as deptName
-		from cu_professor p
+		from
+		cu_professor p
 		join cu_department d on p.dept_id = d.id
-		join cu_college c on d.college_id = c.id
+		join cu_college
+		c on d.college_id = c.id
 		where p.id = #{id}
 	</select>
-	
+
 	<!-- 24.03.11 교수 개인 정보 조회 -->
-	<select id="selectProfessorInfo" resultType="com.cyber.university.dto.professor.UpdateProfessorInfoDto">
+	<select id="selectProfessorInfo"
+		resultType="com.cyber.university.dto.professor.UpdateProfessorInfoDto">
 		select p.id, p.address, p.tel, p.email, u.password
-		from cu_professor p
+		from
+		cu_professor p
 		join cu_user u on p.id = u.id
 		where p.id = #{id}
 	</select>
-	
-	
+
+
 	<!-- 24.03.11 교수 정보 수정 -->
 	<update id="updateProfessorInfo">
 		UPDATE cu_professor SET
-		address = #{address}, tel = #{tel}, email = #{email}
+		address = #{address}, tel =
+		#{tel}, email = #{email}
 		WHERE id = #{id}
 	</update>
-	
+
 	<!-- 24.03.11 비밀번호 찾기 -->
+<<<<<<< HEAD
 	<select id="selectPassword" resultType="java.lang.String">
 		select * from cu_user where id = #{id}
 	</select>
 	
 	<select id="selectByProfessorId" resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor WHERE id = #{id}
+=======
+	<select id="selectPassword"
+		resultType="com.cyber.university.repository.model.User">
+		select password from cu_user where id = #{id}
 	</select>
-	
-	
-	
-	<select id="selectByDepartmentId" resultType="com.cyber.university.repository.model.Professor">
+
+	<select id="selectByProfessorId"
+		resultType="com.cyber.university.repository.model.Professor">
+		SELECT * FROM cu_professor WHERE id = #{professorId}
+>>>>>>> junyeoke
+	</select>
+
+
+
+	<select id="selectByDepartmentId"
+		resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor
 		WHERE dept_id = #{deptId}
-		LIMIT #{page}, 20
+		LIMIT
+		#{page}, 20
 	</select>
-	
-	
-	<select id="selectProfessorList" resultType="com.cyber.university.repository.model.Professor">
+
+
+	<select id="selectProfessorList"
+		resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor
 		LIMIT #{page}, 20
 	</select>
-	
-	
+
+
 	<select id="selectProfessorAmountByDeptId" resultType="integer">
-		SELECT count(id) FROM cu_professor
+		SELECT
+		count(id) FROM cu_professor
 		WHERE dept_id = #{deptId}
 	</select>
-	
+
 	<select id="selectProfessorAmount" resultType="integer">
-		SELECT count(id) FROM cu_professor
+		SELECT count(id)
+		FROM cu_professor
+	</select>
+
+
+	<insert id="insertToProfessor">
+		INSERT INTO cu_professor (name, birth_date, gender,
+		address, tel, dept_id, email)
+		VALUES (#{name}, #{birthDate}, #{gender},
+		#{address}, #{tel}, #{deptId}, #{email})
+	</insert>
+
+
+	<select id="selectIdByCreateProfessorDto" resultType="integer">
+		SELECT id
+		FROM cu_professor
+		WHERE name = #{name}
+		AND birth_date = #{birthDate}
+		AND
+		gender = #{gender}
+		AND address =#{address}
+		AND tel = #{tel}
+		AND dept_id =
+		#{deptId}
+		AND email = #{email}
+
+	</select>
+
+
+	<select id="selectIdByNameAndEmail" resultType="integer">
+		SELECT id
+		FROM
+		cu_professor
+		WHERE name = #{name}
+		AND email = #{email}
 	</select>
 	
 	
+	<select id="selectProfessorByIdAndNameAndEmail" resultType="integer">
+		SELECT id
+		FROM cu_professor
+		WHERE id = #{id}
+		AND name = #{name}
+		AND email = #{email}
+	</select>
+	
+	
+	
+	<select id="selectProfessorInfoById" resultType="com.cyber.university.dto.response.ProfessorInfoDto">
+		SELECT p.id, p.name, p.birth_date, p.gender, p.address, p.tel, p.email, d.name AS dept_name, c.name AS college_name
+		FROM cu_professor AS p
+		LEFT
+		JOIN cu_department AS d
+		ON p.dept_id = d.id
+		LEFT JOIN cu_college AS c
+		ON d.college_id = c.id
+		WHERE p.id = #{id};
+	</select>
+
+
+
+
 </mapper>        

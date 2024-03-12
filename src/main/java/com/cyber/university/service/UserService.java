@@ -1,8 +1,11 @@
 package com.cyber.university.service;
 
 import com.cyber.university.dto.ChangePasswordDto;
+<<<<<<< HEAD
+=======
 
 import com.cyber.university.dto.CreateProfessorDto;
+>>>>>>> dev
 import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.FindIdFormDto;
@@ -20,7 +23,10 @@ import com.cyber.university.repository.interfaces.UserRepository;
 import com.cyber.university.repository.model.Staff;
 import com.cyber.university.repository.model.User;
 import com.cyber.university.utils.Define;
+<<<<<<< HEAD
+=======
 import com.cyber.university.utils.TempPassword;
+>>>>>>> dev
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -187,6 +193,22 @@ public class UserService {
 
 	}
 
+<<<<<<< HEAD
+
+	/**
+	  * @Method Name : updatePassword
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 패스워드 encoding 된 상태로 update
+	  */
+	public int updatePassword(ChangePasswordDto changePasswordDto) {
+		int result = userRepository.updatePassword(changePasswordDto);
+		
+		return result;
+	}
+
+=======
 	/**
 	 * 
 	  * @Method Name : readStaff
@@ -322,4 +344,5 @@ public class UserService {
 
 
 
+>>>>>>> dev
 }

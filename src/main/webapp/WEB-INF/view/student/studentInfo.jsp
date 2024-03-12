@@ -138,5 +138,52 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/view/student/studentInfo.jsp
+	
+	<script>
+	document.addEventListener("DOMContentLoaded", function(){
+	    const updateBtn = document.getElementById("update-student-btn");
+	    
+	    updateBtn.addEventListener("click", function(event){
+	        if (!confirm("회원 정보를 수정 하시겠습니까?")) {
+	            event.preventDefault();
+	            return;
+	        }
+	        
+	        let address = document.getElementById("address").value;
+	        let tel = document.getElementById("tel").value;
+	        let email = document.getElementById("email").value;
+	        
+	        let formData = {
+	            "address": address,
+	            "tel": tel,
+	            "email": email
+	        };
+	        
+	        fetch("/student/updateInfo", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json; charset=UTF-8"
+	            },
+	            body: JSON.stringify(formData)
+	        })
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error("오류 발생");
+	            }
+	            alert("정보가 성공적으로 수정되었습니다.");
+	            window.location.reload();
+	        })
+	        .catch(error => {
+	            console.error(error);
+	        });
+	    });
+	});
+	</script>
+		
+		
+		
+=======
+>>>>>>> dev:src/main/webapp/WEB-INF/view/user/studentInfo.jsp
 </body>
 </html>

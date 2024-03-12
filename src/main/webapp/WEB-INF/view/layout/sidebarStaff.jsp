@@ -19,12 +19,12 @@ pageEncoding="UTF-8"%>
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="#" class="text-dark d-flex align-items-center">
+        <a href="/user/student" class="text-dark d-flex align-items-center">
           <i class="bi bi-person-plus-fill mr-2"></i> 학생 등록
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="#" class="text-dark d-flex align-items-center">
+        <a href="/user/professor" class="text-dark d-flex align-items-center">
           <i class="bi bi-person-plus-fill mr-2"></i> 교수 등록
         </a>
       </li>

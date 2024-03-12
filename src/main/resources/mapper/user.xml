@@ -29,7 +29,4 @@
         VALUES (#{id}, #{password}, #{userRole})
     </insert>
 
-	<select id="findById" resultType="com.cyber.university.dto.UserInfoDto">
-		SELECT * FROM cu_user WHERE id = #{userId}	
-	</select>
 </mapper>

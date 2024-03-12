@@ -26,8 +26,26 @@
 	<div class="container mb-5">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
-			
-	<%@ include file="/WEB-INF/view/layout/studentAsidebar.jsp"%>
+			<!-- 사이드바 메뉴 -->
+			<aside class="sidebar col-md-2 mt-5">
+				<div class="card">
+					<div class="card-header">메뉴</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item p-3"><a style="color: black;"
+							href="/student/myInfo">내 정보 조회</a></li>
+						<li class="list-group-item p-3"><a style="color: black;"
+							href="#">비밀번호 변경</a></li>
+						<li class="list-group-item p-3"><a style="color: black;"
+							href="#">휴학 신청</a></li>
+						<li class="list-group-item p-3"><a style="color: black;"
+							href="#">휴학 내역 조회</a></li>
+						<li class="list-group-item p-3"><a style="color: black;"
+							href="#">등록금 내역 조회</a></li>
+						<li class="list-group-item p-3"><a style="color: black;"
+							href="#">등록금 납부 고지서</a></li>
+					</ul>
+				</div>
+			</aside>
 
 			<div class="col-md-10">
 				<h1 class="mt-5 mb-4">내 정보 조회</h1>
@@ -35,7 +53,7 @@
 					<div class="col-md-7">
 						<div class="card">
 							<div class="card-body">
-								<form action="#" method="">
+								<form action="/student/modifyMyInfo" method="post">
 									<div class="form-group">
 										<label for="name">이름</label> <input type="text" name="name"
 											id="name" class="form-control" value="${studentInfo.name }"
@@ -44,7 +62,7 @@
 									<div class="form-group">
 										<label for="birthDate">생년월일</label> <input type="date"
 											name="birthDate" id="birthDate" class="form-control"
-											value="${studentInfo.birthDate }" disabled>
+											value="${studentInfo.birthDate }">
 									</div>
 
 
@@ -103,7 +121,7 @@
 											name="entranceDate" id="entranceDate" class="form-control"
 											value="${studentInfo.entranceDate}" disabled>
 									</div>
-									<button type="button" class="btn btn-primary" id="update-student-btn">등록하기</button>
+									<button type="submit" class="btn btn-primary">등록하기</button>
 								</form>
 							</div>
 						</div>
@@ -114,15 +132,13 @@
 	</div>
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-	
-
-
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/view/student/studentInfo.jsp
 	
 	<script>
 	document.addEventListener("DOMContentLoaded", function(){
@@ -167,5 +183,7 @@
 		
 		
 		
+=======
+>>>>>>> dev:src/main/webapp/WEB-INF/view/user/studentInfo.jsp
 </body>
 </html>

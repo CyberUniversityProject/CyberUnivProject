@@ -48,27 +48,83 @@
 	</select>
 
 	<select id="findStudentById"
-		resultType="com.cyber.university.dto.StudentInfoDto">
+		resultType="com.cyber.university.dto.response.StudentInfoDto">
 		SELECT
 		s.* ,
 		d.name AS deptName,
 		c.name AS collegeName
-		FROM cu_student AS s
+		FROM
+		cu_student AS s
 		LEFT JOIN cu_department AS d
 		ON
 		s.dept_id = d.id
-		LEFT JOIN cu_college AS c
+		LEFT JOIN
+		cu_college AS c
 		ON d.college_id = c.id
 		WHERE
-		s.id = #{userId}
+		s.id = #{userId};
+	</select>
+
+
+	<insert id="insertToStudent">
+		INSERT INTO cu_student (name, birth_date, gender,
+		address, tel, dept_id, entrance_date, email)
+		VALUES (#{name},
+		#{birthDate}, #{gender}, #{address}, #{tel}, #{deptId},
+		#{entranceDate}, #{email})
+	</insert>
+
+
+	<select id="selectIdByCreateStudentDto" resultType="integer">
+		SELECT id
+		FROM cu_student
+		WHERE name = #{name}
+		AND birth_date = #{birthDate}
+		AND
+		gender = #{gender}
+		AND address =#{address}
+		AND tel = #{tel}
+		AND
+		dept_id =
+		#{deptId}
+		AND entrance_date = #{entranceDate}
+		AND email = #{email}
+
+	</select>
+
+
+
+	<select id="selectIdByNameAndEmail" resultType="integer">
+		SELECT id
+		FROM
+		cu_student
+		WHERE name = #{name}
+		AND email = #{email}
+	</select>
+
+
+
+	<select id="selectStudentByIdAndNameAndEmail"
+		resultType="integer">
+		SELECT id
+		FROM cu_student
+		WHERE id = #{id}
+		AND name = #{name}
+		AND email = #{email}
 	</select>
 	
-	<update id="updateStudentInfo">
-		UPDATE cu_student
-		SET address = #{address},
-		tel = #{tel},
-		email = #{email}
-		WHERE id = #{userId}
-	</update>
+	
+	
+	
+	<select id="selectStudentInfoById" resultType="com.cyber.university.dto.response.StudentInfoDto">
+		SELECT s.id, s.name, s.birth_date, s.gender, s.address, s.tel, s.email, s.grade, s.semester, s.entrance_date, s.graduation_date, d.name AS
+		dept_name, c.name AS college_name
+		FROM cu_student AS s
+		LEFT JOIN cu_department AS d
+		ON s.dept_id = d.id
+		LEFT JOIN cu_college AS c
+		ON d.college_id = c.id
+		WHERE s.id = #{id};
+	</select>
 
 </mapper>

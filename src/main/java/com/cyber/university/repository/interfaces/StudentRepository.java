@@ -2,12 +2,16 @@ package com.cyber.university.repository.interfaces;
 
 
 import java.util.List;
-import java.util.Map;
+
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cyber.university.dto.StudentInfoDto;
+import com.cyber.university.dto.CreateStudentDto;
+import com.cyber.university.dto.FindIdFormDto;
+import com.cyber.university.dto.FindPasswordFormDto;
+
 import com.cyber.university.dto.StudentListForm;
+import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.repository.model.Student;
 
 /**
@@ -18,6 +22,7 @@ import com.cyber.university.repository.model.Student;
  * @변경이력 :
  * @프로그램 설명 :학생 레파지토리
  */
+
 @Mapper
 public interface StudentRepository {
 
@@ -91,15 +96,62 @@ public interface StudentRepository {
 	  * @Method 설명 : id로 student 조회 
 	  */
 	public StudentInfoDto findStudentById(Integer userId);
-
-	/**
-	  * @Method Name : updateStudentInfo
-	  * @작성일 : 2024. 3. 11.
-	  * @작성자 : 박경진
-	  * @변경이력 : 
-	  * @Method 설명 : 학생 정보 수정
-	  */
-	public int updateStudentInfo(Map<String, Object> params);
 	
+	
+	
+	/**
+	 * 
+	  * @Method Name : insertToStudent
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : cu_student insert
+	 */
+	public int insertToStudent(CreateStudentDto createStudentDto);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectIdByCreateStudentDto
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : cu_student에서 id 값 받아오기
+	 */
+	public Integer selectIdByCreateStudentDto(CreateStudentDto createStudentDto);
+	
+	/**
+	 * 
+	  * @Method Name : selectIdByNameAndEmail
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : id 찾기
+	 */
+	public Integer selectIdByNameAndEmail(FindIdFormDto findIdFormDto);
+	
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectStudentByIdAndNameAndEmail
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 비밀번호 발급 Model
+	 */
+	public Integer selectStudentByIdAndNameAndEmail(FindPasswordFormDto findPasswordFormDto);
+	
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectStudentInfoById
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생정보 단건 조회
+	 */
+	public StudentInfoDto selectStudentInfoById(Integer id);
 
 }

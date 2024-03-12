@@ -2,6 +2,7 @@ package com.cyber.university.repository.model;
 
 import java.sql.Date;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**

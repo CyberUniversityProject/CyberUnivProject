@@ -12,6 +12,8 @@ import com.cyber.university.repository.interfaces.StuStatRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.StuStat;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @FileName : stuStatService.java
  * @Project : CyberUniversity
@@ -21,6 +23,7 @@ import com.cyber.university.repository.model.StuStat;
  * @프로그램 설명 : 학적 상태변경 서비스
  */
 @Service
+@Slf4j
 public class StuStatService {
 
 	@Autowired
@@ -84,19 +87,28 @@ public class StuStatService {
 	 */
 
 	public void updateStatus(Integer studentId, String newStatus, String newToDate, Integer breakAppId) {
+		
+		System.out.println("학생 id? " + studentId);
+		System.out.println("새로운 상태값?" + newStatus);
+		System.out.println("새로운 날짜값?" + newToDate);
+		System.out.println("휴학신청id? " + breakAppId);
 
 		// 가장 최근의 기존 학적 상태 데이터의 id
 		Integer targetId = stuStatRepository.selectByStudentIdOrderbyIdDesc(studentId).get(0).getId();
+		
+		System.out.println("타겟 id ?" + targetId);
 
 		// 기존 학적 상태의 to_date를 now()로 변경
 		int updateRowCount = stuStatRepository.updateOldStatus(targetId);
-
+		
+		
 		// 새로운 학적 상태 추가
 		int insertRowCount = stuStatRepository.insert(studentId, newStatus, newToDate, breakAppId);
+		
+		
 
 		if (updateRowCount != 1 || insertRowCount != 1) {
 			throw new CustomRestfullException("학적 상태 변경에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 }

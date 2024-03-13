@@ -28,51 +28,63 @@ import lombok.extern.slf4j.Slf4j;
 public class BreakService {
 
 	@Autowired
-	private BreakRepository breakRepository;
+	private BreakRepository breakAppRepository;
 
 	@Autowired
 	private StuStatService stuStatService;
 
-	// 교직원용 _ 처리되지 않은 휴학 신청 내역 조회
+	
+
+	
+
+	/**
+	 * @param status 처리하지 않은 휴학 신청 내역 조회 (교직원용)
+	 */
 	@Transactional
 	public List<Break> readByStatus(String status) {
-		List<Break> breakList = breakRepository.selectByStatus(status);
 
-		return breakList;
+		List<Break> breakAppEntityList = breakAppRepository.selectByStatus(status);
+
+		return breakAppEntityList;
 	}
 
-	// 특정 휴학 신청서 조회
+	/**
+	 * @param id 특정 휴학 신청서 조회
+	 */
 	@Transactional
 	public Break readById(Integer id) {
-		Break breakEntity = breakRepository.selectById(id);
 
-		return breakEntity;
+		Break breakAppEntity = breakAppRepository.selectById(id);
+
+		return breakAppEntity;
 	}
 
-	// 교직원용 - 휴학 신청 처리
+
+	/**
+	 * 휴학 신청 처리 (교직원)
+	 */
 	@Transactional
 	public void updateById(Integer id, String status) {
-
-		int resultRowCount = breakRepository.updateById(id, status);
 		
-		System.out.println("------------" + resultRowCount);
+		System.out.println("id값 : " + id);
+		System.out.println("status값 : " + status);
+
+		int resultRowCount = breakAppRepository.updateById(id, status);
+		
+		
+		System.out.println("resultRowCount ?" + resultRowCount);
 
 		// 승인 시 학적 상태를 휴학으로 변경하기
 		if (status.equals("승인")) {
-			Break breakAppEntity = breakRepository.selectById(id);
-			
-			System.out.println("------------" + breakAppEntity);
-
+			Break breakAppEntity = breakAppRepository.selectById(id);
 
 			String newToDate = null;
 			if (breakAppEntity.getToSemester() == 1) {
 				newToDate = breakAppEntity.getToYear() + "-08-31";
-				System.out.println("------------" + newToDate);
 			} else {
 				newToDate = (breakAppEntity.getToYear() + 1) + "-02-28";
-				System.out.println("------------" + newToDate);
 			}
-			System.out.println("------------" + breakAppEntity.getStudentId() + "date" + newToDate);
+
 			stuStatService.updateStatus(breakAppEntity.getStudentId(), "휴학", newToDate, id);
 		}
 
@@ -81,6 +93,7 @@ public class BreakService {
 		}
 
 	}
+
 
 
 }

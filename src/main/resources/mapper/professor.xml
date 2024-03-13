@@ -144,8 +144,15 @@
 		address = #{address}, tel = #{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
+	
+	<!-- 24.03.13 강의 등록 -->
+	<insert id="insertApplySubject">
+		insert into cu_apply_sub(pro_id, sub_name, pro_name, sub_time, type, sub_grade, capacity)
+		values(#{proId}, #{subName}, #{proName}, #{time}, #{type}, #{subGrade} , #{capacity})
+	</insert>
 
-
-
-
+	<!-- 강의 이름 찾기 -->
+	<select id="selectSubName" resultType="com.cyber.university.dto.professor.ApplySubjectDto">
+		select * from cu_apply_sub where sub_name = #{subName}
+	</select>
 </mapper>        

@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
   * @Project : CyberUniversity
   * @Date : 2024. 3. 11. 
   * @작성자 : 조유빈
-  * @변경이력 : 
-  * @프로그램 설명 : notice 관련 서비스(목록 출력)
+  * @변경이력 : 3.11 기본 CRUD 완료
+  * @프로그램 설명 : 공지사항 Service
   */
 @Slf4j
 @Service
@@ -28,10 +28,9 @@ public class NoticeService {
 	@Autowired
 	private NoticeRepository noticeRepository;
 	
-	
 	/**
 	 * 
-	  * @Method Name : readNotice
+	  * @Method Name : insertNotice
 	  * @작성일 : 2024. 3. 11.
 	  * @작성자 : 조유빈
 	  * @변경이력 : 
@@ -62,4 +61,45 @@ public class NoticeService {
 		return noticeList;
 	}
 
+	/**
+	 * 
+	  * @Method Name : readByIdNotice
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 조유빈
+	  * @변경이력 : 
+	  * @Method 설명 : 공지사항 상세페이지
+	  * @param id
+	  * @return
+	 */
+	
+	/**
+	 * 공지사항 상세페이지 
+	 */
+
+	public Notice readByIdNotice(Integer id) {
+		Notice notice = noticeRepository.selectById(id);
+		// Integer view = noticeRepository.updateView(id);
+		// notice.setViews(view);
+		return notice;
+	}
+	
+	/**
+	 * 공지사항 수정 
+	 */
+	public int updateNotice(NoticeFormDto noticeFormDto) {
+		int resultRowCount = noticeRepository.updateByNoticeDto(noticeFormDto);
+		if (resultRowCount != 1) {
+			System.out.println("공지 수정 서비스 오류");
+		}
+		return resultRowCount;
+	}
+
+	/**
+	 * 공지사항 삭제
+	 */
+	public int deleteNotice(Integer id) {
+		int resultRowCount = noticeRepository.deleteById(id);
+		return resultRowCount;
+	}
+	
 }

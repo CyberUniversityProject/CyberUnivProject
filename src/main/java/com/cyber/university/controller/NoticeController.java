@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +18,7 @@ import com.cyber.university.dto.NoticePageFormDto;
 import com.cyber.university.repository.model.Notice;
 import com.cyber.university.service.NoticeService;
 
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -24,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
   * @Project : CyberUniversity
   * @Date : 2024. 3. 11. 
   * @작성자 : 조유빈
-  * @변경이력 : 
-  * @프로그램 설명 : 공지사항 목록 출력
+  * @변경이력 : 3.11 기본 CRUD 완료
+  * @프로그램 설명 : 공지사항 Controller
   */
 @Slf4j
 @Controller
@@ -40,8 +42,7 @@ public class NoticeController {
 	 * @return 공지사항 페이지
 	 */
 	@GetMapping("")
-	public String notice(Model model, @RequestParam(defaultValue = "select") String crud)  {
-		model.addAttribute("crud", crud);
+	public String notice(Model model)  {
 		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
 		log.info("dto1 : " + noticePageFormDto);
@@ -51,16 +52,86 @@ public class NoticeController {
 			model.addAttribute("noticeList", noticeList);
 		}
 		
-		return "/board/notice";
+		return "/notice/noticeList";
 	}
 	
 	/**
 	 * 
 	 * @return 공지사항 입력 기능
 	 */
+	
+	@GetMapping("/write")
+	public String insertNoticeForm () {
+		return "/notice/noticeWrite";
+	}
 	@PostMapping("/write")
 	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
 		noticeService.insertNotice(noticeFormDto);
+		return "redirect:/notice";
+	}
+
+/**
+  * @Method Name : update
+  * @작성일 : 2024. 3. 13.
+  * @작성자 : 조유빈
+  * @변경이력 : 
+  * @Method 설명 : 공지사항 상세 페이지, 수정 기능
+  * @param noticeFormDto
+  * @return
+  */
+	
+	/**
+	 * 
+	 * @return 공지사항 상세페이지
+	 */
+	@GetMapping("/read")
+	public String selectByIdNotice(Model model, @RequestParam("id") Integer id) {
+		model.addAttribute("id", id);
+		log.info("id:" + id);
+		log.info("Model:" + model);
+		Notice notice = noticeService.readByIdNotice(id);
+		log.info("Notice" + notice);
+		if (notice == null) {
+			model.addAttribute("notice", null);
+		} else {
+			model.addAttribute("notice", notice);
+		}
+		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
+		
+		return "/notice/noticeDetail";
+	}
+	/**
+	 * 
+	 * @return 공지사항 수정 페이지
+	 */
+	@GetMapping("/update")
+	public String update(Model model, @RequestParam("id") Integer id) {
+		model.addAttribute("id", id);
+		
+		Notice notice = noticeService.readByIdNotice(id);
+		model.addAttribute("notice", notice);
+		return "/notice/noticeUpdate";
+	}
+	
+	/**
+	 * 
+	 * @return 공지사항 수정 기능
+	 */
+	@PutMapping("/update")
+	public String update(@Validated NoticeFormDto noticeFormDto) {
+		noticeService.updateNotice(noticeFormDto);
+		log.info("noticeFormDto" + noticeFormDto);
+		return "redirect:/notice";
+	}
+	
+	/**
+	 * 
+	 * @return 공지사항 삭제 기능
+	 */
+	@GetMapping("/delete")
+	public String delete(Model model,  @RequestParam("id") Integer id) {
+		model.addAttribute("id", id);
+		noticeService.deleteNotice(id);
 		return "redirect:/notice";
 	}
 }

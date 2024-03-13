@@ -38,6 +38,19 @@
 	justify-content: center;
 	margin-top: 20px; /* 버튼과 위의 내용 사이 여백 설정 */
 }
+
+ .btn--confirm {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
 </style>
 
 </head>
@@ -63,7 +76,7 @@
 				<!-- 메인 div -->
 				<div class="container mt-5">
 					<h1>휴학신청내역조회</h1>
-					${breakApp }
+					
 					<div class="row">
 						<div class="col-md-12">
 							<hr>
@@ -73,7 +86,7 @@
 
 					<div class=" flex-column align-items-center" style="width: 100%">
 						<div class="document--layout">
-							<h3>휴학 신청서</h3>
+							
 							<table class="application-form mb-3">
 								<tr>
 									<th>단 과 대</th>
@@ -108,71 +121,37 @@
 									<td colspan="3">${breakApp.type}</td>
 								</tr>
 								<tr>
-									<td colspan="4">
+									<td colspan="4" style="text-align: center; height: 200px">
 										<p>위와 같이 휴학하고자 하오니 허가하여 주시기 바랍니다.</p>
 										<p>${breakApp.appDateFormat()}</p>
 									</td>
 								</tr>
 							</table>
 						</div>
-<!-- 
+
 						<c:if test="${breakApp.status.equals(\"처리중\")}">
-							<c:choose>
-								<c:when test="${principal.userRole.equals(\"student\")}">
-									<form action="/break/delete/${breakApp.id}" method="post"
-										class="d-flex flex-column align-items-center">
-										<button type="submit" class="btn btn-dark"
-											onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
-									</form>
-								</c:when>
-								<c:when test="${principal.userRole.equals(\"staff\")}">
-									<!-- 수정된 부분: 버튼 가운데 정렬 --><!-- 
-                                <div class="button-container">
-                                    <form action="/break/update/${breakApp.id}" method="post"
-                                          class="d-flex flex-column align-items-center">
-                                        <input type="hidden" name="status" value="승인">
-                                        <button type="submit" class="btn btn-dark me-3"
-                                                onclick="return confirm('해당 신청을 승인하시겠습니까?')">승인하기</button>
-                                    </form>
-                                    <form action="/break/update/${breakApp.id}" method="post"
-                                          class="d-flex flex-column align-items-center">
-                                        <input type="hidden" name="status" value="반려">
-                                        <button type="submit" class="btn btn-dark"
-                                                onclick="return confirm('해당 신청을 반려하시겠습니까?')">반려하기</button>
-                                    </form>
-                                </div>
-								</c:when>
-							</c:choose>
-						</c:if>
- --><c:if test="${breakApp.status.equals(\"처리중\")}">
-    <c:choose>
-        <c:when test="${principal.userRole.equals(\"student\")}">
-            <form id="cancelForm" action="/break/delete/${breakApp.id}" method="post"
-                  class="d-flex flex-column align-items-center">
-                <button type="submit" class="btn btn-dark"
-                        onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
-            </form>
-        </c:when>
-        <c:when test="${principal.userRole.equals(\"staff\")}">
-            <div class="button-container">
-                <form id="approveForm" action="/break/update/${breakApp.id}" method="post"
-                      class="d-flex flex-column align-items-center">
-                    <input type="hidden" name="status" value="승인">
-                    <button id="approveButton" type="button" class="btn btn-dark me-3">
-                        승인하기
-                    </button>
-                </form>
-                <form id="rejectForm" action="/break/update/${breakApp.id}" method="post"
-                      class="d-flex flex-column align-items-center">
-                    <input type="hidden" name="status" value="반려">
-                    <button id="rejectButton" type="button" class="btn btn-dark">
-                        반려하기
-                    </button>
-                </form>
-            </div>
-        </c:when>
-    </c:choose>
-</c:if>
+				<c:choose>
+					<c:when test="${principal.userRole.equals(\"student\")}">
+						<form action="/break/delete/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+							<button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
+						</form>
+					</c:when>
+					<c:when test="${principal.userRole.equals(\"staff\")}">
+						<div class="button-container d-flex justify-content-center">
+							<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+								<input type="hidden" name="status" value="승인">
+								<button type="submit" class="btn--confirm" onclick="return confirm('해당 신청을 승인하시겠습니까?')">승인하기</button>
+							</form>
+							&nbsp; &nbsp; &nbsp;
+							<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+								<input type="hidden" name="status" value="반려">
+								<button type="submit" class="btn--confirm" onclick="return confirm('해당 신청을 반려하시겠습니까?')">반려하기</button>
+							</form>
+						</div>
+					</c:when>
+				</c:choose>
+			</c:if>
+
 					</div>
 
 				</div>
@@ -189,36 +168,5 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
-		
-		<script type="text/javascript">
-
-		document.addEventListener("DOMContentLoaded", function(){
-		 // 취소하기 버튼 클릭 이벤트 처리
-	    document.getElementById('cancelForm').addEventListener('submit', function (event) {
-	        event.preventDefault(); // 기본 동작 방지
-	        if (confirm('신청을 취소하시겠습니까?')) {
-	            this.submit(); // 폼 제출
-	        }
-	    });
-
-	    // 승인하기 버튼 클릭 이벤트 처리
-	    let approveBtn = document.getElementById('approveButton')
-	    
-	    approveBtn.addEventListener('click', function () {
-	        if (confirm('해당 신청을 승인하시겠습니까?')) {
-	            document.getElementById('approveForm').submit(); // 폼 제출
-	        }
-	    });
-
-	    // 반려하기 버튼 클릭 이벤트 처리
-	    document.getElementById('rejectButton').addEventListener('click', function () {
-	        if (confirm('해당 신청을 반려하시겠습니까?')) {
-	            document.getElementById('rejectForm').submit(); // 폼 제출
-	        }
-	    });
-		});
-		
-		</script>
 </body>
 </html>

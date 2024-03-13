@@ -10,5 +10,23 @@
 	<select id="selectByNoticeDto" resultType="com.cyber.university.dto.NoticeFormDto">
 		select * from cu_notice order by id DESC
 	</select>
+	
+	<update id="updateByNoticeDto">
+		update cu_notice 
+		set title = #{title}, content = #{content}
+		where id= #{id}
+	</update>
+	
+	<select id="selectById" resultType="com.cyber.university.repository.model.Notice">
+		SELECT n.*, f.uuid_filename, f.origin_filename
+		FROM cu_notice AS n
+		LEFT JOIN cu_notice_file AS f
+		ON n.id = f.notice_id
+		WHERE n.id = #{id}
+	</select>
+	<delete id="deleteById">
+		delete from cu_notice where id = #{id}
+	</delete>
+	
 
 </mapper>

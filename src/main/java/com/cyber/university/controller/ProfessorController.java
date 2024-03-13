@@ -1,6 +1,7 @@
 package com.cyber.university.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -8,10 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cyber.university.dto.professor.ProfessorInfoDto;
+import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.handler.exception.CustomPageException;
+import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.User;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
@@ -91,4 +96,84 @@ public class ProfessorController {
 	    
 		return "redirect:/professor/professorInfo";
 	}
+	
+	/**
+	  * @Method Name : applySubjectPage
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 등록 페이지 요청
+	  */
+	@GetMapping("/apply")
+	public String applySubjectPage() {
+		
+		return "/professor/applysubject";
+	}
+	
+	/**
+	  * @Method Name : applySubjectProc
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 신청
+	  */
+	@PostMapping("/apply")
+	public String applySubjectProc(ApplySubjectDto dto, @RequestParam("type") String type) {
+		
+		Object principalObject = session.getAttribute(Define.PRINCIPAL);
+
+	    if (!(principalObject instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+	    
+	    PrincipalDto principal = (PrincipalDto) principalObject;
+	    int userId = principal.getId();
+		
+		dto.setProId(userId);
+
+		if (dto.getSubName() == null || dto.getSubName().isEmpty()) {
+			throw new CustomRestfullException("강의 명을 입력하세요.", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getProName() == null || dto.getProName().isEmpty()) {
+			throw new CustomRestfullException("교수 명을 입력하세요.", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getTime() == null || dto.getTime() < 0) {
+			throw new CustomRestfullException("잘못된 강의 시간입니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getSubName() == null || dto.getSubName().isEmpty()) {
+			throw new CustomRestfullException("강의 명을 입력하세요.", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getType() == null || dto.getType().isEmpty()) {
+			throw new CustomRestfullException("전공 또는 교양을 선택하세요.", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (!"전공".equals(type) && !"교양".equals(type)) {
+	        throw new CustomRestfullException("전공 또는 교양을 선택하세요.", HttpStatus.BAD_REQUEST);
+	    }
+		
+		if (dto.getSubGrade() == null || dto.getSubGrade() < 0) {
+			throw new CustomRestfullException("잘못된 이수 학점입니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getCapacity() == null || dto.getCapacity() < 0) {
+			throw new CustomRestfullException("잘못된 인원 수 입니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		professorService.insertApplySubject(dto, userId);
+		
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

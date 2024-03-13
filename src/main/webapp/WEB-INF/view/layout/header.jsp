@@ -80,7 +80,7 @@ prefix="c"%>
           <ul>
             <li><a href="/student/myInfo">내 정보 조회</a></li>
             <li><a href="/student/password">비밀번호 변경</a></li>
-            <li><a href="#">휴학 신청</a></li>
+            <li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
             <li><a href="#">휴학 내역 조회</a></li>
             <li><a href="#">등록금 내역 조회</a></li>
             <li><a href="#">등록금 납부 고지서</a></li>
@@ -149,7 +149,7 @@ prefix="c"%>
                   <li><a href="/user/professor">교수등록</a></li>
                   <li><a href="/user/staff">직원등록</a></li>
                   <li><a href="#">등록금 고지서 발송</a></li>
-                  <li><a href="#">휴학 처리</a></li>
+                  <li><a href="/break/list/staff">휴학 처리</a></li>
                   <li><a href="#">수강 신청기간 설정</a></li>
                 </ul>
               </li>
@@ -170,7 +170,7 @@ prefix="c"%>
               <li class="dropdown">
                 <a href="#"><span>학사정보</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                  <li><a href="#">공지사항</a></li>
+                  <li><a href="/notice">공지사항</a></li>
                   <li><a href="#">학사일정</a></li>
                   <li><a href="#">학사일정 등록</a></li>
                 </ul>
@@ -200,6 +200,7 @@ prefix="c"%>
                                            <li><a href="#">전체 강의 조회</a></li>
                                            <li><a href="#">내 강의 조회</a></li>
                                            <li><a href="#">내 강의 평가</a></li>
+                                           <li><a href="/professor/apply">강의 등록</a></li>
                                          </ul>
                                        </li>
 
@@ -208,7 +209,7 @@ prefix="c"%>
                                        <li class="dropdown">
                                          <a href="#"><span>학사정보</span> <i class="bi bi-chevron-down"></i></a>
                                          <ul>
-                                           <li><a href="#">공지사항</a></li>
+                                           <li><a href="/notice">공지사항</a></li>
                                            <li><a href="#">학사일정</a></li>
                                          </ul>
                                        </li>

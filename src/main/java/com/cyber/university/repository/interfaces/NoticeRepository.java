@@ -13,7 +13,7 @@ import com.cyber.university.repository.model.Notice;
   * @Project : CyberUniversity
   * @Date : 2024. 3. 11. 
   * @작성자 : 조유빈
-  * @변경이력 : 
+  * @변경이력 : 3.11 기본 CRUD 완료
   * @프로그램 설명 : 공지사항 repository
   */
 
@@ -21,4 +21,7 @@ import com.cyber.university.repository.model.Notice;
 public interface NoticeRepository {
 	public int insert(NoticeFormDto noticeFormDto);
 	public List<Notice> selectByNoticeDto(NoticePageFormDto noticePageFormDto);
+	public Notice selectById(Integer id);
+	public int updateByNoticeDto(NoticeFormDto noticeFormDto);
+	public int deleteById(Integer id);
 }

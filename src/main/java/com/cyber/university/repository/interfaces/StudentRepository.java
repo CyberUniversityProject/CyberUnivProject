@@ -9,9 +9,12 @@ import org.apache.ibatis.annotations.Mapper;
 import com.cyber.university.dto.CreateStudentDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
-
+import com.cyber.university.dto.LeaveAppDto;
+import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.dto.StudentListForm;
+import com.cyber.university.dto.UserUpdateDto;
 import com.cyber.university.dto.response.StudentInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.Student;
 
 /**
@@ -162,5 +165,58 @@ public interface StudentRepository {
 	  * @Method 설명 : 학생정보 단건 조회
 	 */
 	public StudentInfoDto selectStudentInfoById(Integer id);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectByUserId
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생정보 가져오기
+	 */
+	public UserInfoForUpdateDto selectByUserId(Integer userId);
+	
+	
+	/**
+	 * 
+	  * @Method Name : updateStudent
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생정보 업데이트
+	 */
+	public int updateStudent(UserUpdateDto userUpdateDto);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectByStudentId
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 특정학생 정보 가져오기
+	 */
+	public Student selectByStudentId(Integer studentId);
+
+
+
+	/**
+	  * @Method Name : findLeaveStudentById
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학신청 할 학생 정보 조회
+	  */
+	public LeaveStudentInfoDto findLeaveStudentById(Integer userId);
+
+	/**
+	  * @Method Name : createLeaveApp
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학신청 정보 등록
+	  */
+	public Integer createLeaveApp(LeaveAppDto leaveAppDto);
 
 }

@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+=======
+>>>>>>> dev
 import com.cyber.university.dto.CollegeFormDto;
 import com.cyber.university.repository.model.College;
 
@@ -25,6 +28,7 @@ public interface CollegeRepository {
 
 	public int selectCollegeDtoByName(String name);
 	public College selectCollegeDtoById(Integer id);
+<<<<<<< HEAD
 	
 	/**
 	 * 
@@ -35,6 +39,8 @@ public interface CollegeRepository {
 	  * @변경이력 : 이름 중복 conflict 해결 후 병합
 	  * @프로그램 설명 : 단과대 레파지토리
 	 */
+=======
+>>>>>>> dev
 	//단과대학 등록
 	public int insertById(College college);
 	// 단과대학 등록 리스트

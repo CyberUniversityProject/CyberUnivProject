@@ -217,6 +217,6 @@ public interface StudentRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 휴학신청 정보 등록
 	  */
-	public Integer createLeaveApp(LeaveAppDto leaveAppDto);
+	public Integer createLeaveApp(Map<String, Object> params);
 
 }

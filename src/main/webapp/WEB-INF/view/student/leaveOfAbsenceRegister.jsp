@@ -157,49 +157,48 @@
 												<label for="lastName" class="form-label">휴학기간</label>
 
 												<div class="col-md-6">
-													<label for="state" class="form-label">휴학 시작일</label> <input
-														id="fromYear" name="paymentMethod" type="month"
-														class="form-control" required=""> <label
+													<label for="state" class="form-label">휴학시작 년도</label>
+													<select id="startYearBox" class="form-select" >
+														<option value = "" selected>년도 선택</option>
+													</select><label
 														class="form-label" for="paypal"></label>
 												</div>
 
 												<div class="col-md-6">
-													<label for="state" class="form-label">학기</label> <select
-														class="form-select" id="state fromSemester" required="">
-														<option value="">1학기</option>
-														<option>2학기</option>
+													<label for="state" class="form-label">학기</label> 
+													
+													<select id="fromSemester" class="form-select">
+														<option value="" selected>학기 선택</option>
+													</select>
+													
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+													<div class="invalid-feedback">Please provide a valid
+														state.</div>
+												</div>
+
+
+
+												<div class="col-md-6">
+													<label for="state" class="form-label">휴학 종료 년도</label>
+													<select id="endYearBox" class="form-select">
+														
+														<option value = "" selected>년도 선택</option>
+													</select>
+													
+													<label
+														class="form-label" for="paypal"></label>
+												</div>
+
+												<div class="col-md-6">
+													<label for="state" class="form-label">학기</label> 
+													
+													<select class="form-select" id="toSemester">
+														<option value="" selected>학기 선택</option>
 													</select>
 													<div class="invalid-feedback">Please provide a valid
 														state.</div>
 												</div>
 
-
-
-
-												<div class="col-md-6">
-													<label for="state" class="form-label">휴학 종료일</label> <input
-														id="toYear" name="paymentMethod" type="month"
-														class="form-control" required=""> <label
-														class="form-label" for="paypal"></label>
-												</div>
-
-												<div class="col-md-6">
-													<label for="state" class="form-label">학기</label> <select
-														class="form-select" id="toSemester" required="">
-														<option value="">1학기</option>
-														<option>2학기</option>
-													</select>
-													<div class="invalid-feedback">Please provide a valid
-														state.</div>
-												</div>
-
-												<div class="col-md-12">
-													<label for="state" class="form-label">총</label> <label
-														for="state" class="form-label">3(변경값)</label> <label
-														for="state" class="form-label">학기</label> </select>
-													<div class="invalid-feedback">Please provide a valid
-														state.</div>
-												</div>
 											</div>
 
 										</div>
@@ -282,37 +281,190 @@
 		
 	<script>
 	document.addEventListener("DOMContentLoaded", function(){
-		let department = document.getElementById("department").value;
-		let grade = document.getElementById("studentGrade").value;
-		let studentId = document.getElementById("studentId").value;
-		let name = document.getElementById("name").value;
-		let birthDate = document.getElementById("birthDate").value;
-		let email = document.getElementById("email").value;
-		let address = document.getElementById("address").value;
-		let tel = document.getElementById("tel").value;
-		let appDate = document.getElementById("appDate").value;
+
 		let type = document.getElementById("type").value;
 		
-
 		/* 라디오 버튼 클릭시 휴학 type value 값 변경  */
 		const radioButtons = document.querySelectorAll('input[type="radio"]');
-		const inputType = document.getElementById('type');
 
 		// 라디오 버튼에 대한 이벤트 리스너 등록
 		radioButtons.forEach(function(radioButton) {
 		    radioButton.addEventListener('change', function() {
 		        if (this.checked) {
 		            selectedType = this.nextElementSibling.textContent.trim(); // 선택된 타입을 전역 변수에 할당
-		            inputType.value = selectedType; // value 값을 선택된 라디오 버튼의 라벨로 변경
+		            type = selectedType; // value 값을 선택된 라디오 버튼의 라벨로 변경
 		            console.log("선택된 타입:", selectedType);
-		            console.log('원래 type은 변경이 됐을까?', type.value); // 변경된 value 값 출력
+		            console.log('원래 type은 변경이 됐을까?', type); // 변경된 value 값 출력
 		        }
 		    });
 		});
 		
 		
-
+		/* 휴학 기간 설정 */
+		let startYearValue = ''; // 휴학 시작 년도 값 저장 변수
+		let endYearValue = '';   // 휴학 종료 년도 값 저장 변수
 		
+		// 휴학 학기 기간 저장 변수
+		let fromSemesterValue ='';
+		let toSemesterValue ='';
+		
+		let date = new Date();
+		let selYear = date.getFullYear();
+
+		// 현재년도 기준으로 호출
+		getYears(selYear);
+
+		// 현재 년도를 select
+		//document.getElementById('startYearBox').value = selYear;
+		document.getElementById('startYearBox').value = '';
+		document.getElementById('startYearBox').addEventListener('change', function(){
+			startYearValue = this.value;
+		});
+		document.getElementById('endYearBox').addEventListener('change', function(){
+			endYearValue = this.value;
+		});
+
+		function getYears(getY){
+		    // 기존 option을 삭제함
+		    let yearBox = document.getElementById('startYearBox');
+		    yearBox.innerHTML = '';
+		    let endYearBox = document.getElementById('endYearBox');
+		    endYearBox.innerHTML = '';
+
+		    // 올해 기준으로시작, +3년 까지보여줌
+		    let stY = Number(getY);
+		    let enY = Number(getY) + 3;
+		    
+		    let defaultOption = document.createElement('option');
+		    defaultOption.value = '';
+		    defaultOption.textContent = '년도 선택';
+		    yearBox.appendChild(defaultOption.cloneNode(true));
+		    endYearBox.appendChild(defaultOption.cloneNode(true));
+
+
+		    for(let y = stY; y <= enY; y++){
+		        let option = document.createElement('option');
+		        option.value = y;
+		        option.textContent = y + '년';
+		        yearBox.appendChild(option);
+		        
+
+		        endYearBox.appendChild(option.cloneNode(true));
+		    }
+		    
+		    yearBox.addEventListener('change', function() {
+		    	startYearValue = this.value;
+		        console.log(startYearValue);
+		    	// 휴학 종료일 시작을 휴학시작년도 이후로 불러오는 함수
+		    	startSemester();
+		    });
+		}
+		
+		
+		function chageYear(){
+			// endYearsBox 년도를 startYearsBox 년도로 select
+			getYears2(document.getElementById('startYearBox').value);
+			
+			function getYears2(startYear) {
+			    // 기존 option을 삭제함
+			    let yearBox = document.getElementById('endYearBox');
+			    yearBox.innerHTML = '';
+
+			    // startYear를 기준으로 시작, +3년 까지 보여줌
+			    let stY = Number(startYear);
+			    let enY = Number(startYear) + 3;
+
+			    for(let y = stY; y <= enY; y++) {
+			        let option = document.createElement('option');
+			        option.value = y;
+			        option.textContent = y +"년";
+			        yearBox.appendChild(option);
+			    }
+			    
+			    yearBox.addEventListener('change', function() {
+			    	endYearValue = this.value;
+			        console.log(endYearValue);
+			        
+			    	// 휴학 종료일 시작을 휴학시작년도 이후로 불러오는 함수
+			    	endSemester();
+			    });
+			}
+		}
+		
+
+
+ 
+		function startSemester() {
+		    let fromSemesterBox = document.getElementById('fromSemester');
+		    fromSemesterBox.innerHTML = ''; // 기존의 옵션을 삭제합니다.
+
+		    // "학기" 옵션을 생성합니다.
+		    let defaultOption = document.createElement('option');
+		    defaultOption.value = '';
+		    defaultOption.textContent = '휴학 신청 학기';
+		    fromSemesterBox.appendChild(defaultOption.cloneNode(true));
+
+		    // "1학기"와 "2학기"를 옵션으로 추가합니다.
+		    let option1 = document.createElement('option');
+		    option1.value = '1';
+		    option1.textContent = '1학기';
+		    fromSemesterBox.appendChild(option1);
+
+		    let option2 = document.createElement('option');
+		    option2.value = '2';
+		    option2.textContent = '2학기';
+		    fromSemesterBox.appendChild(option2);
+
+		    // 학기가 선택될 때 값을 저장합니다.
+		    fromSemesterBox.addEventListener('change', function(){
+		    	fromSemesterValue = this.value;
+		        console.log(fromSemesterValue);
+		        
+		    	chageYear();
+		    });
+		}
+		
+
+		function endSemester() {
+		    let toSemesterBox = document.getElementById('toSemester');
+		    toSemesterBox.innerHTML = ''; // 기존의 옵션을 삭제합니다.
+
+		    // "학기" 옵션을 생성합니다.
+		    let defaultOption = document.createElement('option');
+		    defaultOption.value = '';
+		    defaultOption.textContent = '휴학 신청 학기';
+		    toSemesterBox.appendChild(defaultOption.cloneNode(true));
+
+
+		 // 시작년도와 종료년도가 같고 시작학기가 2학기인 경우
+		    if (startYearValue === endYearValue && fromSemesterValue === '2') {
+		        // "2학기" 옵션만 추가합니다.
+		        let option2 = document.createElement('option');
+		        option2.value = '2';
+		        option2.textContent = '2학기';
+		        toSemesterBox.appendChild(option2);
+		    } else {
+		        // 그 외의 경우에는 "1학기"와 "2학기" 옵션을 모두 추가합니다.
+		        let option1 = document.createElement('option');
+		        option1.value = '1';
+		        option1.textContent = '1학기';
+		        toSemesterBox.appendChild(option1);
+
+		        let option2 = document.createElement('option');
+		        option2.value = '2';
+		        option2.textContent = '2학기';
+		        toSemesterBox.appendChild(option2);
+		    }
+		 
+		    // 학기가 선택될 때 값을 저장합니다.
+		    toSemesterBox.addEventListener('change', function(){
+		    	
+		        toSemesterValue = this.value;
+		        console.log(toSemesterValue);
+		    });
+		}
+		
+		/* 휴학 정보 전송 */
 		const loaBtn = document.getElementById("loa-btn");
 		
 		loaBtn.addEventListener("click", async function(event){
@@ -320,32 +472,29 @@
 				event.preventDefault();
 				return;
 			}*/
-			
-			/* 휴학 정보 전송 */
-			
-			
-			console.log("department : " + department);
-			console.log("grade : " + grade);
+
+			let studentId = document.getElementById("studentId").value;
+			let studentGrade = document.getElementById("studentGrade").value;
+			let appDate = document.getElementById("appDate").value;
+
 			console.log("studentId : " + studentId);
-			console.log("name : " + name);
-			console.log("birthDate : " + birthDate);
-			console.log("email : " + email);
-			console.log("address : " + address);
-			console.log("tel : " + tel);
-			console.log("appDate : " + appDate);
+			console.log("studentGrade : " + studentGrade);
+			console.log("startYearValue" + startYearValue);
+			console.log("endYearValue" + endYearValue);
+			console.log("fromSemesterValue"+fromSemesterValue);
+			console.log("toSemesterValue"+toSemesterValue);
 			console.log("type : " + type);
+			console.log("appDate : " + appDate);
 			
 	        let formData = {
-	                "department": department,
-	                "grade": grade,
 	                "studentId": studentId,
-	                "name": name,
-	                "birthDate": birthDate,
-	                "email": email,
-	                "address": address,
-	                "tel": tel,
-	                "appDate": appDate,
-	                "type" : type
+	                "studentGrade": studentGrade,
+	                "fromYear" : startYearValue,
+	                "fromSemester" : fromSemesterValue,
+	                "toYear": endYearValue,
+	                "toSemester" : toSemesterValue,
+	                "type" : type,
+	                "appDate": appDate
 	            };
 	            
 			try {
@@ -369,6 +518,8 @@
 		
 			
 		});
+		
+		
 		
 	});
 	

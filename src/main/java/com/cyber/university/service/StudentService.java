@@ -12,7 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import com.cyber.university.dto.LeaveAppDto;
+import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
@@ -119,6 +120,41 @@ public class StudentService {
 		map.put("email", studentInfoDto.getEmail());
 		
 		int result = studentRepository.updateStudentInfo(map); 
+		
+		return result;
+		
+	}
+
+	/**
+	  * @Method Name : findLeaveStudentById
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학 할 학생 정보 조회
+	  */
+	public LeaveStudentInfoDto findLeaveStudentById(Integer userId) {
+		
+		LeaveStudentInfoDto leaveStudentInfoDto = studentRepository.findLeaveStudentById(userId);
+
+		log.info("student service student info:" + leaveStudentInfoDto);
+
+		return leaveStudentInfoDto;
+	}
+
+	/**
+	  * @Method Name : createLeaveApp
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학 신청 정보 등록
+	  */
+	public Integer createLeaveApp(LeaveAppDto leaveAppDto) {
+		
+		int result = studentRepository.createLeaveApp(leaveAppDto);
+		
+		if(result == 0) {
+			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.BAD_REQUEST);
+		}
 		
 		return result;
 		

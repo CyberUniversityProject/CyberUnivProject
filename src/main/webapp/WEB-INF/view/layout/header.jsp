@@ -80,7 +80,7 @@ prefix="c"%>
           <ul>
             <li><a href="/student/myInfo">내 정보 조회</a></li>
             <li><a href="/student/password">비밀번호 변경</a></li>
-            <li><a href="#">휴학 신청</a></li>
+            <li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
             <li><a href="#">휴학 내역 조회</a></li>
             <li><a href="#">등록금 내역 조회</a></li>
             <li><a href="#">등록금 납부 고지서</a></li>

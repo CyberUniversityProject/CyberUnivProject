@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyber.university.dto.ChangePasswordDto;
+import com.cyber.university.dto.LeaveAppDto;
+import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
@@ -207,8 +210,8 @@ public class StudentController {
 	  * @변경이력 : 
 	  * @Method 설명 : 휴학 신청 페이지
 	  */
-	@GetMapping("/leaveOfAbsenceRegister")
-	private String leaveOfAbsenceRegisterPage() {
+	@GetMapping("/leaveOfAbsence")
+	private String leaveOfAbsenceRegisterPage(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
@@ -218,8 +221,44 @@ public class StudentController {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+		LeaveStudentInfoDto leaveStudentInfoDto = studentService.findLeaveStudentById(userId);
 		
+		model.addAttribute("studentInfo", leaveStudentInfoDto);
+		log.info("controller leavestudentdto : " + leaveStudentInfoDto);
 		return "/student/leaveOfAbsenceRegister";
+	}
+	
+	/**
+	  * @Method Name : leaveOfAbsenceApplication
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학신청서 제출
+	  */
+	@PostMapping("/leaveApp")
+	@ResponseBody
+	private ResponseEntity<?> createleaveOfAbsence(@RequestBody LeaveAppDto leaveAppDto) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if(userId == leaveAppDto.getStudentId()) {
+			throw new CustomRestfullException(Define.SUBMIT_CHECK_ID, HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		int result = studentService.createLeaveApp(leaveAppDto);
+		
+		if(result != 1) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("휴학 신청 중 오류가 발생했습니다.");
+		}
+		
+		return ResponseEntity.ok("휴학 신청에 성공 했습니다.");
 	}
 	
 }

@@ -1,4 +1,11 @@
+package com.cyber.university.repository.interfaces;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.cyber.university.dto.DepartmentFormDto;
+import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Department;
 
 /**

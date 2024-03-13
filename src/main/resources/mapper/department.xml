@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.university.repository.interfaces.DepartmentRepository">
 	<insert id="insert">
@@ -14,13 +16,34 @@
 	<select id="selectByDepartmentDto" resultType="com.cyber.university.repository.model.Department">
 		SELECT * FROM cu_department
 	</select>
-	<delete id="deleteById">
-		delete from cu_department where id = #{id}
-	</delete>
+	
 	<update id="updateByDepartmentDto">
 		UPDATE cu_department
 		SET name = #{name}
 		WHERE id = #{id};
 	</update>
+
+  <insert id="insertById">
+        INSERT INTO cu_department (name,college_id)
+        VALUES (#{name},#{collegeId})
+    </insert>
+    
+    <select id="findAll" resultType="com.cyber.university.repository.model.Department">
+     SELECT * FROM cu_department order by id desc
+    </select>
+
+	<delete id="deleteById">
+		delete from cu_department where id = #{id}
+	</delete>
+	<!--학과 수정 -->
+	<update id="updateById">
+		update cu_department set name = #{name}, college_id = #{collegeId}
+		where id =#{id}
+	</update>
+	<!-- 학과 상세조회 -->
+	<select id="findById"
+		resultType="com.cyber.university.repository.model.Department" parameterType="int">
+		select * from cu_department where id=#{id}
+	</select>
 
 </mapper>

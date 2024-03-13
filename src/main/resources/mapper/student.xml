@@ -135,5 +135,28 @@
 		email = #{email}
 		WHERE id = #{userId}
 	</update>
+	
+	<select id ="findLeaveStudentById" resultType="com.cyber.university.dto.LeaveStudentInfoDto">
+		SELECT
+			d.name AS department,
+		    s.grade,
+		    s.id AS studentId,
+		    s.name,
+		    s.birth_date,
+		    s.email,
+		    s.address,
+		    s.tel,
+		    now() AS today
+		FROM cu_student AS s
+		JOIN cu_department AS d
+		ON s.dept_id = d.id
+		WHERE s.id = #{userId};
+	</select>
+	
+	<insert id="createLeaveApp">
+		INSERT INTO cu_break
+			(student_id, student_grade, from_year, from_semester, to_year, to_semester, type, app_date)
+		VALUES (#{userId}, #{studentGrade}, #{fromYear},#{fromSemester}, #{toYear},#{toSemester},#{type},#{appDate});
+	</insert>
 
 </mapper>

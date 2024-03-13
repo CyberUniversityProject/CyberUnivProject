@@ -1,26 +1,27 @@
-package com.cyber.university.repository.interfaces;
-
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import com.cyber.university.dto.DepartmentDto;
-import com.cyber.university.repository.model.College;
+import com.cyber.university.dto.DepartmentFormDto;
 import com.cyber.university.repository.model.Department;
 
 /**
-  * @FileName : CollegeRepository.java
-  * @Project : CyberUniversity
-  * @Date : 2024. 3. 13. 
-  * @작성자 : 김수현
-  * @변경이력 : 브랜치 shu로 변경 후 프로젝트 새로 setting
-  * @프로그램 설명 : 학과 등록 repository
-  */
+ * 
+ * @FileName : DepartmentRepository.java
+ * @Project : CyberUniversity
+ * @Date : 2024. 3. 13.
+ * @작성자 : 이준혁
+ * @변경이력 :
+ * @프로그램 설명 : 학과 레파지토리
+ */
+
 @Mapper
 public interface DepartmentRepository {
+	public int insert(DepartmentFormDto departmentFormDto);
 
-	// 단과대학 join 
+	public Department selectById(Integer id);
+
+	public List<Department> selectByDepartmentDto();
+
+	public int updateByDepartmentDto(DepartmentFormDto departmentFormDto);
+
+  // 단과대학 join 
 	public int joinWithCollege(College college);
 	// 학과 등록
 	public int insertById(Department department);
@@ -36,4 +37,5 @@ public interface DepartmentRepository {
 	public List<Department> findAllwithPasing(@Param ("offset") int offset, @Param ("limit") int limit, @Param("type") String type);
 	// 전체 게시물개수 계산
 	public int getAllPgCount();
+
 }

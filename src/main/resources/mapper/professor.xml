@@ -5,7 +5,7 @@
 	namespace="com.cyber.university.repository.interfaces.ProfessorRepository">
 	<!-- 24.03.11 교수 내 정보 조회 -->
 	<select id="selectProfessorInfoWithCollegeAndDepartment"
-		resultType="com.cyber.university.dto.professor.ProfessorInfoDto">
+		resultType="com.cyber.university.dto.response.ProfessorInfoDto">
 		select p.*, c.name as collegeName, d.name as deptName
 		from
 		cu_professor p
@@ -128,8 +128,31 @@
 		ON d.college_id = c.id
 		WHERE p.id = #{id};
 	</select>
+	
+	
+	
+	<select id="selectByUserId" resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM cu_professor
+		WHERE id = #{userId}
+	</select>
+	
+	
+	
+	<update id="updateProfessor">
+		UPDATE cu_professor SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
+	
+	<!-- 24.03.13 강의 등록 -->
+	<insert id="insertApplySubject">
+		insert into cu_apply_sub(pro_id, sub_name, pro_name, sub_time, type, sub_grade, capacity)
+		values(#{proId}, #{subName}, #{proName}, #{time}, #{type}, #{subGrade} , #{capacity})
+	</insert>
 
-
-
-
+	<!-- 강의 이름 찾기 -->
+	<select id="selectSubName" resultType="com.cyber.university.dto.professor.ApplySubjectDto">
+		select * from cu_apply_sub where sub_name = #{subName}
+	</select>
 </mapper>        

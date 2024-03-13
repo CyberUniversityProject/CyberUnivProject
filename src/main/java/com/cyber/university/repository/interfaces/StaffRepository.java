@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.cyber.university.dto.CreateStaffDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
+import com.cyber.university.dto.UserUpdateDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.Staff;
 
 
@@ -73,5 +75,26 @@ public interface StaffRepository {
 	  * @Method 설명 : 비밀번호 발급용 Model
 	 */
 	public Integer selectStaffByIdAndNameAndEmail(FindPasswordFormDto findPasswordFormDto);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectByUserId
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : id로 유저정보 가져오기
+	 */
+	public UserInfoForUpdateDto selectByUserId(Integer userId);
+	
+	/**
+	 * 
+	  * @Method Name : updateStaff
+	  * @작성일 : 2024. 3. 12.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 유저 업데이트
+	 */
+	public int updateStaff(UserUpdateDto userUpdateDto);
 
 }

@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
 				<li class="list-group-item p-3"><a style="color: black;"
 					href="/student/password">비밀번호 변경</a></li>
 				<li class="list-group-item p-3"><a style="color: black;"
-					href="/student/leaveOfAbsenceRegister">휴학 신청</a></li>
+					href="/student/leaveOfAbsence">휴학 신청</a></li>
 				<li class="list-group-item p-3"><a style="color: black;"
 					href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
 				<li class="list-group-item p-3"><a style="color: black;"

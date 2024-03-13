@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-
+import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
@@ -18,7 +18,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.ProfessorListForm;
-
+import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
 
 /**
@@ -67,27 +67,27 @@ public class ProfessorService {
 	 * @변경이력 :
 	 * @Method 설명 : 교수 정보 수정 서비스
 	 */
-//	public UpdateProfessorInfoDto updateProfessorInfo(Integer id, User user) {
-//
-//		String enteredPassword = user.getPassword();
-//
-//		String savedPassword = professorRepository.selectPassword(id);
-//
-//		if (savedPassword == null || !savedPassword.equals(enteredPassword)) {
-//			throw new CustomRestfullException("비밀번호를 확인해주세요.", HttpStatus.BAD_REQUEST);
-//		}
-//
-//		UpdateProfessorInfoDto updateDto = new UpdateProfessorInfoDto();
-//		updateDto.setAddress(updateDto.getAddress());
-//		updateDto.setTel(updateDto.getTel());
-//		updateDto.setEmail(updateDto.getEmail());
-//		updateDto.setId(updateDto.getId());
-//
-//		professorRepository.updateProfessorInfo(updateDto);
-//
-//		return updateDto;
-//
-//	}
+	public UpdateProfessorInfoDto updateProfessorInfo(Integer id, User user) {
+
+		String enteredPassword = user.getPassword();
+
+		String savedPassword = professorRepository.selectPassword(id);
+
+		if (savedPassword == null || !savedPassword.equals(enteredPassword)) {
+			throw new CustomRestfullException("비밀번호를 확인해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		UpdateProfessorInfoDto updateDto = new UpdateProfessorInfoDto();
+		updateDto.setAddress(updateDto.getAddress());
+		updateDto.setTel(updateDto.getTel());
+		updateDto.setEmail(updateDto.getEmail());
+		updateDto.setId(updateDto.getId());
+
+		professorRepository.updateProfessorInfo(updateDto);
+
+		return updateDto;
+
+	}
 
 	/**
 	 * @param professorListForm
@@ -123,6 +123,46 @@ public class ProfessorService {
 		}
 
 		return amount;
+	}
+	
+	/**
+	  * @Method Name : insertApplySubject
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 신청 
+	  */
+	@Transactional
+	public void insertApplySubject(ApplySubjectDto dto, Integer proId) {
+		
+		if (selectSubName(dto.getSubName()) != null) {
+			throw new CustomRestfullException("이미 존재하는 강의 입니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		ApplySubject subject = new ApplySubject();
+		subject.setProId(dto.getProId());
+		subject.setSubName(dto.getSubName());
+		subject.setProName(dto.getProName());
+		subject.setTime(dto.getTime());
+		subject.setType(dto.getType());
+		subject.setSubGrade(dto.getSubGrade());
+		subject.setCapacity(dto.getCapacity());
+		
+		int resultRowCount = professorRepository.insertApplySubject(subject);
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("강의 신청 실패하셨습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	  * @Method Name : selectSubName
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 이름 조회
+	  */
+	public ApplySubjectDto selectSubName(String subName) {
+		return professorRepository.selectSubName(subName);
 	}
 
 }

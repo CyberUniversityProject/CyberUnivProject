@@ -200,6 +200,7 @@ prefix="c"%>
                                            <li><a href="#">전체 강의 조회</a></li>
                                            <li><a href="#">내 강의 조회</a></li>
                                            <li><a href="#">내 강의 평가</a></li>
+                                           <li><a href="/professor/apply">강의 등록</a></li>
                                          </ul>
                                        </li>
 

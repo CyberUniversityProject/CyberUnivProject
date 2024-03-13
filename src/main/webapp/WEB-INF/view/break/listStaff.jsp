@@ -102,7 +102,7 @@
                 </thead>
                 <tbody>
                     <c:forEach var="breakApp" items="${breakAppList}">
-                    ${breakAppList}
+                  
                         <tr>
                             <td>${breakApp.appDate}</td>
                             <td>${breakApp.studentId}</td>

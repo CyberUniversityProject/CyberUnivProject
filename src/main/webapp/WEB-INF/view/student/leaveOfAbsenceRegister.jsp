@@ -58,16 +58,16 @@
 
 											<div class="col-sm-6">
 												<label for="firstName" class="form-label">학과(부)</label> <input
-													type="text" class="form-control" id="firstName"
-													placeholder="" value="" required="">
+													type="text" class="form-control" id="department"
+													placeholder="" value="${studentInfo.department }" disabled>
 												<div class="invalid-feedback">Valid first name is
 													required.</div>
 											</div>
 
 											<div class="col-sm-6">
 												<label for="lastName" class="form-label">학년</label> <input
-													type="text" class="form-control" id="lastName"
-													placeholder="" value="" required="">
+													type="text" class="form-control" id="studentGrade"
+													placeholder="" value="${studentInfo.grade }" disabled>
 												<div class="invalid-feedback">Valid last name is
 													required.</div>
 											</div>
@@ -76,24 +76,24 @@
 
 											<div class="col-sm-4">
 												<label for="firstName" class="form-label">학번</label> <input
-													type="text" class="form-control" id="firstName"
-													placeholder="" value="" required="">
+													type="text" class="form-control" id="studentId"
+													placeholder="" value="${studentInfo.studentId }" disabled>
 												<div class="invalid-feedback">Valid first name is
 													required.</div>
 											</div>
 
 											<div class="col-sm-4">
 												<label for="lastName" class="form-label">성명</label> <input
-													type="text" class="form-control" id="lastName"
-													placeholder="" value="" required="">
+													type="text" class="form-control" id="name"
+													placeholder="" value="${studentInfo.name }" disabled>
 												<div class="invalid-feedback">Valid last name is
 													required.</div>
 											</div>
 
 											<div class="col-sm-4">
 												<label for="lastName" class="form-label">생년월일</label> <input
-													type="text" class="form-control" id="lastName"
-													placeholder="" value="" required="">
+													type="text" class="form-control" id="birthDate"
+													placeholder="" value="${studentInfo.birthDate }" disabled>
 												<div class="invalid-feedback">Valid last name is
 													required.</div>
 											</div>
@@ -101,13 +101,14 @@
 
 											<div class="my-3 row">
 												<label for="lastName" class="form-label">휴학구분</label>
+												
+												<input type="text" id="type" value="일반휴학(개인사정,기타)"></input>
 
 												<div class="col-sm-6">
 													<div class="form-check">
 														<input id="credit" name="paymentMethod" type="radio"
 															class="form-check-input" checked="" required="">
-														<label class="form-check-label" for="credit">일반휴학(개인사정,
-															기타)</label>
+														<label class="form-check-label" for="credit">일반휴학(개인사정,기타)</label>
 													</div>
 													<div class="form-check">
 														<input id="debit" name="paymentMethod" type="radio"
@@ -157,14 +158,14 @@
 
 												<div class="col-md-6">
 													<label for="state" class="form-label">휴학 시작일</label> <input
-														id="paypal" name="paymentMethod" type="month"
+														id="fromYear" name="paymentMethod" type="month"
 														class="form-control" required=""> <label
 														class="form-label" for="paypal"></label>
 												</div>
 
 												<div class="col-md-6">
 													<label for="state" class="form-label">학기</label> <select
-														class="form-select" id="state" required="">
+														class="form-select" id="state fromSemester" required="">
 														<option value="">1학기</option>
 														<option>2학기</option>
 													</select>
@@ -177,14 +178,14 @@
 
 												<div class="col-md-6">
 													<label for="state" class="form-label">휴학 종료일</label> <input
-														id="paypal" name="paymentMethod" type="month"
+														id="toYear" name="paymentMethod" type="month"
 														class="form-control" required=""> <label
 														class="form-label" for="paypal"></label>
 												</div>
 
 												<div class="col-md-6">
 													<label for="state" class="form-label">학기</label> <select
-														class="form-select" id="state" required="">
+														class="form-select" id="toSemester" required="">
 														<option value="">1학기</option>
 														<option>2학기</option>
 													</select>
@@ -206,7 +207,7 @@
 										<div class="col-12">
 											<label for="email" class="form-label">이메일 </label> <input
 												type="email" class="form-control" id="email"
-												placeholder="you@example.com">
+												value="${studentInfo.email }" disabled>
 											<div class="invalid-feedback">Please enter a valid
 												email address for shipping updates.</div>
 										</div>
@@ -214,15 +215,15 @@
 										<div class="col-12">
 											<label for="address" class="form-label">주소</label> <input
 												type="text" class="form-control" id="address"
-												placeholder="1234 Main St" required="">
+												value="${studentInfo.address }" disabled>
 											<div class="invalid-feedback">Please enter your
 												shipping address.</div>
 										</div>
 
 										<div class="col-12">
 											<label for="address2" class="form-label">휴대폰</label> <input
-												type="text" class="form-control" id="address2"
-												placeholder="Apartment or suite">
+												type="text" class="form-control" id="tel"
+												value="${studentInfo.tel }" disabled>
 										</div>
 
 
@@ -244,21 +245,21 @@
 
 										<hr class="my-4">
 
+								
+
 										<div class="form-check">
+										
+														
+													
+										</div>
+		<div class="form-check">
+													<input type="text" id="appDate" value="${studentInfo.today }"></input>
 											<label
 												class="form-check-label" for="same-address">위와 같이 휴학하고자 하오니 허가하여 주시기 바랍니다. </label>
 										</div>
-
-										<div class="form-check">
-													<label for="state" class="form-label">휴학 시작일</label> <input
-														id="paypal" name="paymentMethod" type="month"
-														class="form-control" required=""> <label
-														class="form-label" for="paypal"></label>
-										</div>
-
 										<hr class="my-4">
 
-										<button class="w-100 btn btn-primary btn-lg" type="submit">휴학 신청</button>
+										<button class="w-100 btn btn-primary btn-lg" type="button" id="loa-btn">휴학 신청</button>
 									</form>
 								</div>
 							</div>
@@ -278,5 +279,99 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+	<script>
+	document.addEventListener("DOMContentLoaded", function(){
+		let department = document.getElementById("department").value;
+		let grade = document.getElementById("studentGrade").value;
+		let studentId = document.getElementById("studentId").value;
+		let name = document.getElementById("name").value;
+		let birthDate = document.getElementById("birthDate").value;
+		let email = document.getElementById("email").value;
+		let address = document.getElementById("address").value;
+		let tel = document.getElementById("tel").value;
+		let appDate = document.getElementById("appDate").value;
+		let type = document.getElementById("type").value;
+		
+
+		/* 라디오 버튼 클릭시 휴학 type value 값 변경  */
+		const radioButtons = document.querySelectorAll('input[type="radio"]');
+		const inputType = document.getElementById('type');
+
+		// 라디오 버튼에 대한 이벤트 리스너 등록
+		radioButtons.forEach(function(radioButton) {
+		    radioButton.addEventListener('change', function() {
+		        if (this.checked) {
+		            selectedType = this.nextElementSibling.textContent.trim(); // 선택된 타입을 전역 변수에 할당
+		            inputType.value = selectedType; // value 값을 선택된 라디오 버튼의 라벨로 변경
+		            console.log("선택된 타입:", selectedType);
+		            console.log('원래 type은 변경이 됐을까?', type.value); // 변경된 value 값 출력
+		        }
+		    });
+		});
+		
+		
+
+		
+		const loaBtn = document.getElementById("loa-btn");
+		
+		loaBtn.addEventListener("click", async function(event){
+			/*if(!confirm("휴학 신청을 하시겠습니까?")){
+				event.preventDefault();
+				return;
+			}*/
+			
+			/* 휴학 정보 전송 */
+			
+			
+			console.log("department : " + department);
+			console.log("grade : " + grade);
+			console.log("studentId : " + studentId);
+			console.log("name : " + name);
+			console.log("birthDate : " + birthDate);
+			console.log("email : " + email);
+			console.log("address : " + address);
+			console.log("tel : " + tel);
+			console.log("appDate : " + appDate);
+			console.log("type : " + type);
+			
+	        let formData = {
+	                "department": department,
+	                "grade": grade,
+	                "studentId": studentId,
+	                "name": name,
+	                "birthDate": birthDate,
+	                "email": email,
+	                "address": address,
+	                "tel": tel,
+	                "appDate": appDate,
+	                "type" : type
+	            };
+	            
+			try {
+	            const response = await fetch("/student/leaveApp", {
+	                method: "POST",
+	                headers: {
+	                    "Content-Type": "application/json; charset=UTF-8"
+	                },
+	                body: JSON.stringify(formData)
+	            });
+	            
+	            if (!response.ok) {
+	                throw new Error("휴학 신청 중 오류가 발생했습니다.");
+	            }
+	            
+	            alert("휴학 신청에 성공했습니다.;");
+			} catch (error){
+				alert(error)
+			}
+					
+		
+			
+		});
+		
+	});
+	
+	</script>
 </body>
 </html>

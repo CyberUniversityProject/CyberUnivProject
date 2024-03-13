@@ -2,8 +2,7 @@ package com.cyber.university.repository.interfaces;
 
 import org.apache.ibatis.annotations.Mapper;
 
-
-
+import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
@@ -15,6 +14,7 @@ import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.UserUpdateDto;
+import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
 
 /**
@@ -35,7 +35,7 @@ public interface ProfessorRepository {
 	public UpdateProfessorInfoDto selectProfessorInfo(Integer id);
 
 	// 24.03.11 교수 정보 수정
-	public UpdateProfessorInfoDto updateProfessorInfo(UpdateProfessorInfoDto updateDto);
+	public int updateProfessorInfo(UpdateProfessorInfoDto updateDto);
 
 	// 24.03.11 비밀번호 찾기
 	public String selectPassword(Integer id);
@@ -162,5 +162,24 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 교수 정보 업데이트
 	 */
 	public int updateProfessor(UserUpdateDto userUpdateDto);
-
+	
+	
+	/**
+	  * @Method Name : insertSubject
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 신청
+	  */
+	public int insertApplySubject(ApplySubject applySubject);
+	
+	
+	/**
+	  * @Method Name : selectSubName
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 이름 찾기
+	  */
+	public ApplySubjectDto selectSubName(String subName);
 }

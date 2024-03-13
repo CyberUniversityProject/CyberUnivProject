@@ -4,6 +4,8 @@ import com.cyber.university.handler.exception.CustomPathException;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.handler.exception.UnAuthorizedException;
 import com.cyber.university.handler.exception.UnAuthorizedExceptionForMainPage;
+
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;

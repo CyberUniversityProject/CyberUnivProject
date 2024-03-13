@@ -34,13 +34,11 @@ main {
 				<tr>
 					<td><a href="#">학사일정</a></td>				
 				</tr>
-				<!--  
 				<c:if test="${principal.userRole.equals(\"staff\") }">
 					<tr>
 						<td><a href="/schedule/list"> 학사일정 등록</a></td>
 					</tr>
 				</c:if>
-				-->
 			</table>
 		</div>
 	</div>
@@ -50,7 +48,6 @@ main {
 		<div class="split--div"></div>
 		
 		<!-- 공지 조회 -->
-		<c:if test="${crud.equals(\"select\")}">
 		<form>
 			<select class="input--box" name="type">
 				<option value="title">제목</option>
@@ -69,7 +66,7 @@ main {
 				<td>조회수</td>
 			</tr>
 			<c:forEach var="notice" items="${noticeList}">
-				<tr>
+				<tr class="second-tr" onclick="location.href='/notice/read?id=${notice.id}';">
 					<td>${notice.id}</td>
 					<td>${notice.category}</td>
 					<td>${notice.title}</td>
@@ -80,37 +77,11 @@ main {
 		</table>
 		<div class="paging--container">
 		<!-- 페이징 버튼 들어갈 자리 -->
+			<c:if test="${principal.userRole.equals(\"staff\")}">
+				<a href="/notice/write" class="button">등록</a>
+			</c:if>
 		</div>
-		</c:if>
-		
-		<!-- 공지 등록 -->
-		<c:if test="${crud.equals(\"write\")}">
-			<div class="write--div">
-				<form action="/notice/write" method="post" enctype="multipart/form-data">
-					<div class="title--container">
-						<div class="category">
-							<select name="category" class="input--box">
-								<option value="[일반]">[일반]</option>
-								<option value="[학사]">[학사]</option>
-								<option value="[장학]">[장학]</option>
-							</select>
-						</div>
-						<div class="title">
-							<input type="text" class="form-control form-control-sm" name="title" placeholder="제목을 입력하세요" required="required" style="width: 900px;">
-						</div>
-					</div>
-					<div class="content--container">
-						<textarea name="content" class="form-control" cols="100" rows="20" placeholder="내용을 입력하세요"></textarea>
-					</div>
-					<div class="custom-file">
-						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile">Choose file</label>
-					</div>
-					<a href="/notice" class="button">목록</a> 
-					<input type="submit" class="button" value="등록">
-				</form>
-				
-			</div>
-		</c:if>
+
 	
 </div>
 

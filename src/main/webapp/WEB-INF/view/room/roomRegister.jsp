@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>학과 리스트</title>
+<title>강의실 등록</title>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>학과 리스트 페이지</h2>
+			<h2>강의실 등록 페이지</h2>
 
 		</div>
 	</div>
@@ -48,35 +48,29 @@
 				</div>
 			</aside>
 
-			<div class="col-md-10" style="text-align: center;">
-				<h1 class="mt-5 mb-4">학과 리스트</h1>
+			<div class="col-md-10">
+				<h1 class="mt-5 mb-4">강의실 등록</h1>
 				<!-- main 넣는 시작 부분 -->
-				<div class="container">
-					<table class="table table hover">
-						<thead>
-							<tr>
-								<th scope="col">단과대학 번호</th>
-								<th scope="col">학과 번호</th>
-								<th scope="col">학과명</th>
-							</tr>
-						</thead>
-						
-						<tbody>
-						<c:forEach var="department" items="${departmentList}">
-							<tr>
-								<th>${department.collegeId}</th> 
-								<th>${department.id}</th> 
-								<th>${department.name}
-								<a href="/department/delete/${department.id}">삭제</a>
-								<a href="/department/departmentUpdate/${department.id}">수정</a>
-								</th>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<!-- main 끝 -->
+				<form action="/room/roomRegister" method="post">
+				<div class="col-lg-8 mt-5 mt-lg-0">
+					<div class="row">
+						<div class="col-md-6 form-group mt-3 mt-md-0">
+							<input type="text" class="form-control" name="id" id="id"
+								placeholder="강의실 id">
+						</div>
+						<div class="col-md-6 form-group mt-3 mt-md-0">
+							<input type="text" class="form-control" name="collegeId" id="collegeId"
+								placeholder="단과대학 번호">
+						</div>
+					</div>
 
+					<div class="text-center">
+						<button type="submit">등록하기</button>
+					</div>
+				</div>
+				</form>
+				<!-- main 끝 -->
+				
 			</div>
 		</div>
 	</div>

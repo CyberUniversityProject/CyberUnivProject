@@ -186,6 +186,17 @@ public interface StudentRepository {
 	  * @Method 설명 : 학생정보 업데이트
 	 */
 	public int updateStudent(UserUpdateDto userUpdateDto);
+	
+	
+	/**
+	 * 
+	  * @Method Name : selectByStudentId
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 특정학생 정보 가져오기
+	 */
+	public Student selectByStudentId(Integer studentId);
 
 
 

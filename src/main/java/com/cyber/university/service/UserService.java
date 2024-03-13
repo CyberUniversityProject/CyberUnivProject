@@ -23,6 +23,7 @@ import com.cyber.university.repository.interfaces.StuStatRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.interfaces.UserRepository;
 import com.cyber.university.repository.model.Staff;
+import com.cyber.university.repository.model.Student;
 import com.cyber.university.repository.model.User;
 import com.cyber.university.utils.Define;
 import com.cyber.university.utils.TempPassword;
@@ -434,6 +435,20 @@ public class UserService {
 		
 		return userInfoDto;
 
+	}
+	
+	/**
+	 * 
+	  * @Method Name : readStudent
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 이준혁
+	  * @변경이력 : 
+	  * @Method 설명 : 학생조회
+	 */
+	@Transactional
+	public Student readStudent(Integer studentId) {
+		Student studentEntity = studentRepository.selectByStudentId(studentId);
+		return studentEntity;
 	}
 
 

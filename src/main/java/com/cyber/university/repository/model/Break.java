@@ -2,6 +2,8 @@ package com.cyber.university.repository.model;
 
 import java.sql.Date;
 
+import com.cyber.university.utils.DateUtil;
+
 import lombok.Data;
 
 /**
@@ -25,5 +27,10 @@ public class Break {
 	private String type;
 	private Date appDate;
 	private String status;
+	
+	
+	public String appDateFormat() {
+		return DateUtil.dateFormat(appDate);
+	}
 
 }

@@ -149,7 +149,7 @@ prefix="c"%>
                   <li><a href="/user/professor">교수등록</a></li>
                   <li><a href="/user/staff">직원등록</a></li>
                   <li><a href="#">등록금 고지서 발송</a></li>
-                  <li><a href="#">휴학 처리</a></li>
+                  <li><a href="/break/list/staff">휴학 처리</a></li>
                   <li><a href="#">수강 신청기간 설정</a></li>
                 </ul>
               </li>

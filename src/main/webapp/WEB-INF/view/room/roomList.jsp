@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>학과 리스트</title>
+<title>강의실 리스트</title>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>학과 리스트 페이지</h2>
+			<h2>강의실 리스트 페이지</h2>
 
 		</div>
 	</div>
@@ -49,26 +49,24 @@
 			</aside>
 
 			<div class="col-md-10" style="text-align: center;">
-				<h1 class="mt-5 mb-4">학과 리스트</h1>
+				<h1 class="mt-5 mb-4">강의실 리스트</h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">
 					<table class="table table hover">
 						<thead>
 							<tr>
-								<th scope="col">단과대학 번호</th>
-								<th scope="col">학과 번호</th>
-								<th scope="col">학과명</th>
+								<th scope="col">강의실명</th>
+								<th scope="col">단과대학명</th>
 							</tr>
 						</thead>
 						
 						<tbody>
-						<c:forEach var="department" items="${departmentList}">
+						<c:forEach var="room" items="${roomList}">
 							<tr>
-								<th>${department.collegeId}</th> 
-								<th>${department.id}</th> 
-								<th>${department.name}
-								<a href="/department/delete/${department.id}">삭제</a>
-								<a href="/department/departmentUpdate/${department.id}">수정</a>
+								<th>${room.id}</th> 
+								<th>${room.collegeId}
+								<a href="/room/delete/${room.id}">삭제</a>
+								<a href="/room/roomUpdate/${room.id}">수정</a>
 								</th>
 							</tr>
 						</c:forEach>

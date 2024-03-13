@@ -66,7 +66,7 @@
 								<th>${college.id}</th> 
 								<th>${college.name}
 								<a href="/college/delete/${college.id}">삭제</a>
-								<button type="button" class="btn btn-link" onclick="location.href='/college/collegeUpdate/${college.id}'">수정</button>
+								<a href="/college/collegeUpdate/${college.id}">수정</a>
 								</th>
 							</tr>
 						</c:forEach>

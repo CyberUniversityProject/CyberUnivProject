@@ -4,99 +4,79 @@
     
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>정보 수정 페이지</title>
-</head>
-<body>
-<!-- 세부 메뉴 + 메인 -->
-<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
-	<!-- 세부 메뉴 div-->
-	<div class="sub--menu">
-		<div class="sub--menu--top">
-			<h2>MY</h2>
-		</div>
-		<!-- 메뉴 -->
-		<div class="sub--menu--mid">
-			<table class="sub--menu--table" border="1">
-				<c:choose>
-					<c:when test="${principal.userRole.equals(\"student\")}">
-						<tr>
-							<td><a href="/info/student">내 정보 조회</a></td>
-						</tr>
-					</c:when>
-					<c:when test="${principal.userRole.equals(\"professor\")}">
-						<tr>
-							<td><a href="/info/professor">내 정보 조회</a></td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td><a href="/info/staff">내 정보 조회</a></td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<c:if test="${principal.userRole.equals(\"student\")}">
-					<tr>
-						<td><a href="/break/application">휴학 신청</a></td>
-					</tr>
-					<tr>
-						<td><a href="/break/list">휴학 내역 조회</a></td>
-					</tr>
-					<tr>
-						<td><a href="/tuition/list">등록금 내역 조회</a></td>
-					</tr>
-					<tr>
-						<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
-					</tr>
-				</c:if>
-			</table>
-		</div>
-	</div>
-
-	<!-- 메인 div -->
-	<main>
-		<h1>개인 정보 수정</h1>
-		<div class="split--div" style="margin-bottom: 50px;"></div>
-		<form action="/professor/update" method="post" class="info--update--form">
-			<table class="update--table">
-				<tr>
-					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" class="input--box" value="${professorInfo.address}"></td>
-				</tr>
-				<tr>
-					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" class="input--box" value="${professorInfo.tel}"></td>
-				</tr>
-				<tr>
-					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" class="input--box" value="${professorInfo.email}"></td>
-				</tr>
-				<tr>
-					<td><label for="password">비밀번호 확인</label></td>
-					<td><input type="password" name="password" class="input--box" id="password"></td>
-				</tr>
-			</table>
-			<c:choose>
-				<c:when test="${principal.getUserRole().equals(\"staff\")}">
-					<div class="button--container">
-						<input type="submit" value="입력">
-					</div>
-				</c:when>
-				<c:otherwise>
-					<br>
-					<button type="submit" class="btn btn-dark update--button">수정하기</button>
-				</c:otherwise>
-			</c:choose>
-		</form>
-	</main>
+<!-- ======= 상단 제목부분 ======= -->
+<div class="breadcrumbs" data-aos="fade-in">
+  <div class="container">
+    <h2>마이페이지</h2>
+  </div>
 </div>
-</body>
-</html>
+<!-- 상단 제목부분 끝 -->
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <!-- 사이드바 -->
+    <aside class="sidebar col-lg-3">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">메뉴</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item p-3">
+            <a href="/professor/info" class="text-dark d-flex align-items-center">
+              <i class="bi bi-person-lines-fill mr-2"></i> 내 정보 조회
+            </a>
+          </li>
+          <li class="list-group-item p-3">
+            <a href="/user/professorList" class="text-dark d-flex align-items-center">
+              <i class="bi bi-person-lines-fill mr-2"></i> 비밀번호 변경
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <!-- 사이드 바 끝 -->
+    
+    <!-- 메인 div -->
+    <main class="col-lg-9">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">개인 정보 수정</h1>
+          <div class="split--div" style="margin-bottom: 30px;"></div>
+          <form action="/professor/update" method="post" class="info--update--form">
+            <div class="form-group row">
+              <label for="address" class="col-sm-3 col-form-label">주소</label>
+              <div class="col-sm-9">
+                <input type="text" name="address" id="address" class="form-control" value="${professorInfo.address}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="tel" class="col-sm-3 col-form-label">전화번호</label>
+              <div class="col-sm-9">
+                <input type="text" name="tel" id="tel" class="form-control" value="${professorInfo.tel}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-3 col-form-label">이메일</label>
+              <div class="col-sm-9">
+                <input type="text" name="email" id="email" class="form-control" value="${professorInfo.email}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-sm-3 col-form-label">비밀번호 확인</label>
+              <div class="col-sm-9">
+                <input type="password" name="password" class="form-control" id="password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10 offset-sm-3">
+                <button type="submit" class="btn btn-dark update--button">수정하기</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <!-- 메인 div 끝 -->
+  </div>
+</div>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

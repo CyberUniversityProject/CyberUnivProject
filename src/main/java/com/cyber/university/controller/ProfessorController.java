@@ -1,5 +1,7 @@
 package com.cyber.university.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
@@ -170,6 +173,27 @@ public class ProfessorController {
 	}
 	
 	
+	@GetMapping("/mysub")
+	public String mySubPage(Model model) {
+		Object principalObject = session.getAttribute(Define.PRINCIPAL);
+		System.out.println("principalObject" + principalObject);
+
+	    if (!(principalObject instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+	    
+	    PrincipalDto principal = (PrincipalDto) principalObject;
+		System.out.println("principal" + principal);
+	    int professorId = principal.getId();
+	    System.out.println("professorId" + professorId);
+	    List<SubInfoDto> subInfoList = professorService.selectMysub(professorId);
+	    System.out.println("모델 정보 : " + subInfoList);
+		model.addAttribute("subInfoList", subInfoList);
+		
+	    
+		return "/professor/mySubPage";
+	}
 	
 	
 	

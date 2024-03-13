@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyber.university.repository.interfaces.CollegeRepository">
+   <!--  단과대학 등록 -->
+    <insert id="insertById">
+        INSERT INTO cu_college (name)
+        VALUES (#{name})
+    </insert>
+	<!-- 단과대한 리스트 불러오기 -->
+	<select id="findAll" resultType="com.cyber.university.repository.model.College">
+		select * from cu_college order by id desc
+	</select>
+	<!-- 단과대학 삭제 -->
+	<delete id="deleteById">
+		delete from cu_college where id = #{id}
+	</delete>
+	<!--단과대학수정 -->
+	<update id="updateById">
+		update cu_college set name = #{name}
+		where id =#{id}
+	</update>
+	<!-- 글 상세조회 -->
+	<select id="findById"
+		resultType="com.cyber.university.repository.model.College" parameterType="int">
+		select * from cu_college where id=#{id}
+	</select>
+</mapper>

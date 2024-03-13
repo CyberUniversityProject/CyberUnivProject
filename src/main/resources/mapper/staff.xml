@@ -51,6 +51,22 @@
 		AND name = #{name}
 		AND email = #{email}
 	</select>
+	
+	
+	
+	<select id="selectByUserId" resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM cu_staff
+		WHERE id = #{userId}
+	</select>
+	
+	
+	
+	<update id="updateStaff">
+		UPDATE cu_staff SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
 
 
 

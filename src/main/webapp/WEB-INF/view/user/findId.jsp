@@ -77,20 +77,20 @@ body {
             <table class="search--table">
                 <tr>
                     <td><label for="name">이름</label></td>
-                    <td><input type="text" name="name" id="name"></td>
+                    <td><input type="text" name="name" id="name" value="<c:out value='${param.name}'/>"></td>
                 </tr>
                 <tr>
                     <td><label for="email">이메일</label></td>
-                    <td><input type="text" name="email" id="email"></td>
+                    <td><input type="text" name="email" id="email" value="<c:out value='${param.email}'/>"></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="center">
                         <label for="student">학생</label>
-                        <input type="radio" name="userRole" value="student" id="student">
+                        <input type="radio" name="userRole" value="student" id="student" <c:if test="${param.userRole == 'student'}">checked</c:if>>
                         <label for="professor">교수</label>
-                        <input type="radio" name="userRole" value="professor" id="professor">
+                        <input type="radio" name="userRole" value="professor" id="professor" <c:if test="${param.userRole == 'professor'}">checked</c:if>>
                         <label for="staff">직원</label>
-                        <input type="radio" name="userRole" value="staff" id="staff">
+                        <input type="radio" name="userRole" value="staff" id="staff" <c:if test="${param.userRole == 'staff'}">checked</c:if>>
                     </td>
                 </tr>
             </table>

@@ -143,7 +143,7 @@ public class ProfessorService {
 		subject.setProId(dto.getProId());
 		subject.setSubName(dto.getSubName());
 		subject.setProName(dto.getProName());
-		subject.setTime(dto.getTime());
+		subject.setSubTime(dto.getTime());
 		subject.setType(dto.getType());
 		subject.setSubGrade(dto.getSubGrade());
 		subject.setCapacity(dto.getCapacity());

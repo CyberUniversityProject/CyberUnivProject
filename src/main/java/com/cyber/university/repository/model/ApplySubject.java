@@ -16,7 +16,7 @@ public class ApplySubject {
 	private Integer proId; // 교수 아이디
 	private String subName; // 강의 이름
 	private String proName; // 교수 이름
-	private Integer time; // 총 강의 시간
+	private Integer subTime; // 총 강의 시간
 	private String type; // 전공/교양
 	private Integer subGrade; // 이수 학점
 	private Integer capacity; // 총 인원

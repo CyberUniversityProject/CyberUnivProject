@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.cyber.university.repository.interfaces.ApplySubjectRepository">
+
+	<select id="findAll"
+		resultType="com.cyber.university.repository.model.ApplySubject">
+		select * from cu_apply_sub where approval = 'N'
+	</select>
+
+
+	<select id="findById" parameterType="int"
+		resultType="com.cyber.university.repository.model.ApplySubject">
+		SELECT * FROM cu_apply_sub WHERE id = #{id}
+	</select>
+
+	<update id="updateApproval"
+		parameterType="com.cyber.university.repository.model.ApplySubject">
+		UPDATE cu_apply_sub
+		SET
+		approval = #{approval}
+		WHERE
+		id =
+		#{id}
+	</update>
+
+
+	<update id="updateReason"
+		parameterType="com.cyber.university.repository.model.ApplySubject">
+		update cu_apply_sub
+		set
+		reason = #{reason}
+		where id = #{id}
+
+	</update>
+
+
+
+</mapper>

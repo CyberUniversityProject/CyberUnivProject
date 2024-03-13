@@ -5,7 +5,7 @@
 	namespace="com.cyber.university.repository.interfaces.ProfessorRepository">
 	<!-- 24.03.11 교수 내 정보 조회 -->
 	<select id="selectProfessorInfoWithCollegeAndDepartment"
-		resultType="com.cyber.university.dto.professor.ProfessorInfoDto">
+		resultType="com.cyber.university.dto.response.ProfessorInfoDto">
 		select p.*, c.name as collegeName, d.name as deptName
 		from
 		cu_professor p

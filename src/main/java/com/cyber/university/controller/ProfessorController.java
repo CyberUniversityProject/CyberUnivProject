@@ -1,6 +1,7 @@
 package com.cyber.university.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cyber.university.dto.professor.ProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.repository.model.User;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
@@ -77,18 +78,18 @@ public class ProfessorController {
 		return "/professor/updateUser";
 	}
 	
-	/**
-	  * @Method Name : updateUserProc
-	  * @작성일 : 2024. 3. 11.
-	  * @작성자 : 장명근
-	  * @변경이력 : 
-	  * @Method 설명 : 정보 수정 처리
-	  */
-	@PostMapping("/update")
-	public String updateUserProc(@CookieValue(name = "id", required = false)Integer userId, User user) {
-	    
-		professorService.updateProfessorInfo(userId, user);
-	    
-		return "redirect:/professor/professorInfo";
-	}
+//	/**
+//	  * @Method Name : updateUserProc
+//	  * @작성일 : 2024. 3. 11.
+//	  * @작성자 : 장명근
+//	  * @변경이력 : 
+//	  * @Method 설명 : 정보 수정 처리
+//	  */
+//	@PostMapping("/update")
+//	public String updateUserProc(@CookieValue(name = "id", required = false)Integer userId, User user) {
+//	    
+//		professorService.updateProfessorInfo(userId, user);
+//	    
+//		return "redirect:/professor/professorInfo";
+//	}
 }

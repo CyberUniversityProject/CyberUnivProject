@@ -13,7 +13,7 @@ import lombok.Data;
   * @프로그램 설명 : 휴학신청
   */
 @Data
-public class BreakApp {
+public class Break {
 	
 	private Integer id;
 	private Integer studentId;

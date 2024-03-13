@@ -11,8 +11,9 @@ import com.cyber.university.dto.LoginDto;
 import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.UserUpdateDto;
 
-import com.cyber.university.dto.professor.ProfessorInfoDto;
+
 import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.handler.exception.CustomRestfullException;

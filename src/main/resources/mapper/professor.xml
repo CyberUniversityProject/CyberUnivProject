@@ -26,20 +26,6 @@
 	</select>
 
 
-	<!-- 24.03.11 교수 정보 수정 -->
-	<update id="updateProfessorInfo">
-		UPDATE cu_professor SET
-		address = #{address}, tel =
-		#{tel}, email = #{email}
-		WHERE id = #{id}
-	</update>
-
-	<!-- 24.03.11 비밀번호 찾기 -->
-	<select id="selectPassword"
-		resultType="com.cyber.university.repository.model.User">
-		select password from cu_user where id = #{id}
-	</select>
-
 	<select id="selectByProfessorId"
 		resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor WHERE id = #{professorId}
@@ -156,15 +142,14 @@
 		select * from cu_apply_sub where sub_name = #{subName}
 	</select>
 	
-	<!-- 24.03.13 내 강의 조회 -->
-	<select id="selectMysub"  resultType="com.cyber.university.dto.professor.SubInfoDto">
-		select s.name, s.professor_id as professorId, s.room_id as roomId, s.dept_id as departmentId, s.type, s.sub_year, s.semester, s.sub_day, s.start_time, s.end_time, s.grades, s.capacity, s.num_of_student, 
-		p.id, r.id, d.id
-		from cu_subject s
-		left join cu_professor p on s.professor_id = p.id
-		left join cu_room r on r.id = s.room_id
-		left join cu_department d on d.id = s.dept_id
-		where s.professor_id = #{professorId}
+	<!-- 24.03.13 교수 본인 강의 조회 -->
+	<select id="selectMySub"  resultType="com.cyber.university.repository.model.Subject">
+		select * from cu_subject where professor_id = #{professorId}
+	</select>
+	
+	<!-- 24.03.14 등록된 모든 강의 조회 -->
+	<select id="selectAllSub" resultType="com.cyber.university.repository.model.Subject">
+		select * from cu_subject
 	</select>
 	
 </mapper>        

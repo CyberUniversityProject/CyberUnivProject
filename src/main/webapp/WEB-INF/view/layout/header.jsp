@@ -192,7 +192,7 @@ prefix="c"%>
                                          ></a>
                                          <ul>
                                            <li><a href="/professor/info">내 정보 조회</a></li>
-                                           <li><a href="#">비밀번호 변경</a></li>
+                                           <li><a href="/professor/updatepw">비밀번호 변경</a></li>
                                          </ul>
                                        </li>
                                        <li class="dropdown">

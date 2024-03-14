@@ -6,18 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.handler.exception.CustomPageException;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.User;
@@ -25,6 +29,7 @@ import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -84,22 +89,7 @@ public class ProfessorController {
 		
 		return "/professor/updateUser";
 	}
-	
-	/**
-	  * @Method Name : updateUserProc
-	  * @작성일 : 2024. 3. 11.
-	  * @작성자 : 장명근
-	  * @변경이력 : 
-	  * @Method 설명 : 정보 수정 처리
-	  */
-	@PostMapping("/update")
-	public String updateUserProc(@CookieValue(name = "id", required = false)Integer userId, User user) {
-	    
-		professorService.updateProfessorInfo(userId, user);
-	    
-		return "redirect:/professor/professorInfo";
-	}
-	
+		
 	/**
 	  * @Method Name : applySubjectPage
 	  * @작성일 : 2024. 3. 13.
@@ -154,10 +144,7 @@ public class ProfessorController {
 		if (dto.getType() == null || dto.getType().isEmpty()) {
 			throw new CustomRestfullException("전공 또는 교양을 선택하세요.", HttpStatus.BAD_REQUEST);
 		}
-		
-		if (!"전공".equals(type) && !"교양".equals(type)) {
-	        throw new CustomRestfullException("전공 또는 교양을 선택하세요.", HttpStatus.BAD_REQUEST);
-	    }
+				
 		
 		if (dto.getSubGrade() == null || dto.getSubGrade() < 0) {
 			throw new CustomRestfullException("잘못된 이수 학점입니다.", HttpStatus.BAD_REQUEST);
@@ -175,28 +162,41 @@ public class ProfessorController {
 	
 	@GetMapping("/mysub")
 	public String mySubPage(Model model) {
-		Object principalObject = session.getAttribute(Define.PRINCIPAL);
-		System.out.println("principalObject" + principalObject);
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
-	    if (!(principalObject instanceof PrincipalDto)) {
+	    if (!(principal instanceof PrincipalDto)) {
 	    	
 	        return "redirect:/login";
 	    }
 	    
-	    PrincipalDto principal = (PrincipalDto) principalObject;
-		System.out.println("principal" + principal);
 	    int professorId = principal.getId();
-	    System.out.println("professorId" + professorId);
-	    List<SubInfoDto> subInfoList = professorService.selectMysub(professorId);
-	    System.out.println("모델 정보 : " + subInfoList);
-		model.addAttribute("subInfoList", subInfoList);
-		
+	    List<SubInfoDto> subInfoList = professorService.selectMySub(professorId);
+		model.addAttribute("subInfoList", subInfoList);		
 	    
 		return "/professor/mySubPage";
 	}
 	
+	@GetMapping("/allsub")
+	public String  allSubPage(Model model) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (!(principal instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+	    
+	    int professorId = principal.getId();
+	    List<SubInfoDto> subInfoList = professorService.selectAllSub(professorId);
+		model.addAttribute("subInfoList", subInfoList);
+		
+	    
+		return "/professor/allSubPage";
+	}
 	
-	
+	@GetMapping("/updatepw")
+	public String updatePwPage() {
+		return "/professor/updatePW";
+	}
 	
 	
 	

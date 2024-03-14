@@ -191,5 +191,14 @@ public interface ProfessorRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 교수 본인 강의 조회
 	  */
-	public List<SubInfoDto> selectMysub(Integer professorId);
+	public List<SubInfoDto> selectMySub(Integer professorId);
+	
+	/**
+	  * @Method Name : selectAllSub
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 개설 된 강의 모두 조회
+	  */
+	public List<SubInfoDto> selectAllSub(Integer professorId);
 }

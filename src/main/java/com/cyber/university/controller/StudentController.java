@@ -239,6 +239,10 @@ public class StudentController {
 	@ResponseBody
 	private ResponseEntity<?> createleaveOfAbsence(@RequestBody LeaveAppDto leaveAppDto) {
 		
+		log.info("controller in!!");
+		log.info("leaveAppDto : "+leaveAppDto);
+		log.info("leaveAppDto : "+leaveAppDto.toString());
+		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
 		log.info(userId + "userId");
@@ -246,13 +250,15 @@ public class StudentController {
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		log.info("user null 통과");
 		
 		if(userId == leaveAppDto.getStudentId()) {
 			throw new CustomRestfullException(Define.SUBMIT_CHECK_ID, HttpStatus.BAD_REQUEST);
 		}
+		log.info("leaveAppDto.getStudetnId?",leaveAppDto.getStudentId());
 		
 		
-		int result = studentService.createLeaveApp(leaveAppDto);
+		int result = studentService.createLeaveApp(userId,leaveAppDto);
 		
 		if(result != 1) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("휴학 신청 중 오류가 발생했습니다.");

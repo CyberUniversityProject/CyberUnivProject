@@ -148,9 +148,20 @@ public class StudentService {
 	  * @변경이력 : 
 	  * @Method 설명 : 휴학 신청 정보 등록
 	  */
-	public Integer createLeaveApp(LeaveAppDto leaveAppDto) {
+	@Transactional
+	public Integer createLeaveApp(Integer userId,LeaveAppDto leaveAppDto) {
 		
-		int result = studentRepository.createLeaveApp(leaveAppDto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("studentGrade", leaveAppDto.getStudentGrade());
+		map.put("fromYear", leaveAppDto.getFromYear());
+		map.put("fromSemester", leaveAppDto.getFromSemester());
+		map.put("toYear", leaveAppDto.getToYear());
+		map.put("toSemester", leaveAppDto.getToSemester());
+		map.put("type", leaveAppDto.getType());
+		map.put("appDate", leaveAppDto.getAppDate());
+		
+		int result = studentRepository.createLeaveApp(map);
 		
 		if(result == 0) {
 			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.BAD_REQUEST);

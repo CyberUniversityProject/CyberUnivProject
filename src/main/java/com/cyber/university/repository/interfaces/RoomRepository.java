@@ -24,7 +24,9 @@ public interface RoomRepository {
 	public int insertById(Room room);
 
 	// 강의실 등록 리스트
-	public List<RoomWithCollegeDto> findAll();
+	public List<RoomWithCollegeDto> findAllCol();
+	
+	public List<Room> findAll();
 
 	// 강의실 삭제
 	public String deleteById(String id);

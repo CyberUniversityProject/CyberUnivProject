@@ -10,7 +10,7 @@
 		VALUES
 		(#{id},#{collegeId})
 	</insert>
-<<<<<<< HEAD
+
 	<!-- 강의실 리스트 불러오기 -->
 	<select id="findAll" resultType="com.cyber.university.repository.model.Room">
 		select * from cu_room order by id desc
@@ -29,10 +29,8 @@
 		SET college_id = #{collegeId}
 		WHERE id = #{id}
 	</update>
-=======
-
-
-	<select id="findAll"
+	
+	<select id="findAllCol"
 		resultType="com.cyber.university.dto.RoomWithCollegeDto">
 
 		select r.id, c.name from cu_room as r
@@ -41,5 +39,4 @@
 
 	</select>
 
->>>>>>> dev
 </mapper>

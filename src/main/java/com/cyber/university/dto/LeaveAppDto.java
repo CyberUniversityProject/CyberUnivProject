@@ -3,6 +3,7 @@ package com.cyber.university.dto;
 import java.sql.Date;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
   * @FileName : LeaveStudentDto.java
@@ -13,6 +14,7 @@ import lombok.Data;
   * @프로그램 설명 : 휴학 신청 정보 DTO
   */
 @Data
+@ToString
 public class LeaveAppDto {
 	
 //	 학생 학번

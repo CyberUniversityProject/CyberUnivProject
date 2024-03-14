@@ -1,11 +1,13 @@
 package com.cyber.university.repository.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.cyber.university.dto.BreakFormDto;
+import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.repository.model.Break;
 
 /**
@@ -36,5 +38,14 @@ public interface BreakRepository {
 
 	// 휴학 신청 처리하기 (교직원용)
 	public int updateById(@Param("id") Integer id, @Param("status") String status);
+
+	/**
+	  * @Method Name : countByStatusAndUserId
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : id로 조회해서 status가 처리중인 것을 카운팅 
+	  */
+	public int countByStatusAndUserId(Integer userId);
 
 }

@@ -6,10 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cyber.university.dto.ScheduleDto;
+import com.cyber.university.dto.ScheduleFormDto;
+import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.Schedule;
 import com.cyber.university.service.ScheduleService;
+import com.cyber.university.utils.Define;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /**
   * @FileName : ScheduleController.java
@@ -20,14 +29,28 @@ import com.cyber.university.service.ScheduleService;
   * @프로그램 설명 : 학사일정 Controller
   */
 
+@Slf4j
 @Controller
 @RequestMapping("/schedule")
 public class ScheduleController {
 	
 	@Autowired
-	ScheduleService scheduleService;
+	private HttpSession session;
 	
-	@GetMapping("/")
+	@Autowired
+	private ScheduleService scheduleService;
+	
+/**
+  * @Method Name : schedule
+  * @작성일 : 2024. 3. 13.
+  * @작성자 : 조유빈
+  * @변경이력 : 3.13 생성
+  * @Method 설명 : 학사일정 페이지
+  * @param model
+  * @return
+  */
+	@GetMapping("")
+	
 	public String schedule(Model model) {
 		List<Schedule> schedule = scheduleService.readSchedule();
 		return "/schedule/schedule";
@@ -39,5 +62,37 @@ public class ScheduleController {
 		model.addAttribute("schedule", schedule);
 		return "/schedule/scheduleList";
 	}
+	
+/**
+  * @Method Name : insertNotice
+  * @작성일 : 2024. 3. 14.
+  * @작성자 : 조유빈
+  * @변경이력 : 3.14 생성
+  * @Method 설명 : 학사일정 등록
+  * @return
+  */
+	@GetMapping("/write")
+	public String insertSchedule() {
+		return "/schedule/scheduleWrite";
+	}
+	
+	
+	@PostMapping("/write")
+	// ScheduleProc -> insertNotice
+	public String insertSchedule(Model model, ScheduleFormDto scheduleFormDto) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		log.info("scheduleFormDto : " + scheduleFormDto);
+		scheduleService.createSchedule(principal.getId(), scheduleFormDto);
+		
+		return "redirect:/schedule/list";
+	}
+	
+	@GetMapping("/detail")
+	public String detailSchedule(Model model ,Integer id) {
+		ScheduleDto schedule = scheduleService.readScheduleById(id);
+		model.addAttribute("schedule", schedule);
+		return "/schedule/scheduleDetail";
+	}
+	
 
 }

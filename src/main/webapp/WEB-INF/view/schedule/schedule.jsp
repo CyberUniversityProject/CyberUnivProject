@@ -11,13 +11,16 @@ main {
 	height: 1000px;
 }
 
+
 </style>
 
-<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+<div class="container mb-5">
+<div class="row">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
 			<h2>학사정보</h2>
 		</div>
+		<!--  aside -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
@@ -27,32 +30,45 @@ main {
 					<td><a href="/schedule" class="selected--menu">학사일정</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"staff\") }">
-					<tr>
-						<td><a href="/schedule/list"> 학사일정 등록</a></td>
-					</tr>
+				<tr>
+					<td><a href="/schedule/list"> 학사일정 등록</a></td>
+				</tr>
 				</c:if>
 			</table>
 		</div>
+		<!--  aside -->
 	</div>
 
-	<main>
+	<div class="container mt-5">
 		<h1>학사일정</h1>
-		<div class="container">
-		<div></div>
-			
+		<!-- todo row -> aside랑 본문 부분을 가로(row) 배치하기 -->
+		<div class="row">
+			<div class="col-md-12">
+	            <hr>
+	        </div>
+		</div>	
+		<div>
 		<table  class="room--table">
 			<tbody>
-				<c:forEach var ="schedule" items ="${schedule}">
-					<tr>
-						<td class ="month" width ="100px;">${schedule.months}월</td>
-						 <td class = "line">${schedule.startDay}~${schedule.endDay}</td>
-						 <td class = "line" >${schedule.information}</td>
-					</tr>
-				</c:forEach>
+<%-- 			<c:forEach var ="schedule" items ="${schedule}"> --%>
+<!-- 				<tr> -->
+<%-- 					<td class ="month" width ="100px;">${schedule.months}월</td> --%>
+<%-- 					<td class = "line">${schedule.startDay}~${schedule.endDay}</td> --%>
+<%-- 					<td class = "line" >${schedule.information}</td> --%>
+<!-- 				</tr> -->
+<%-- 			</c:forEach> --%>
+
+				<tr>
+					<td class ="month" width ="100px;">1월</td>
+					<td class = "line">02-27~02-28</td>
+					<td class = "line" >2024 1학기 개강</td>
+				</tr>
 			</tbody>
 		</table>
 		</div>
-	</main>
+		</div>
+		</div>
+	</div>
 </div>
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

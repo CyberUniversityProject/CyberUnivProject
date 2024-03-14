@@ -3,7 +3,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.university.repository.interfaces.ScheduleRepository">
 	
+	<insert id="insertScheduleForm">
+		insert into cu_schedule
+		(staff_id, start_day, end_day, information)
+		values 
+		(#{staffId}, #{startDay}, #{endDay}, #{information})
+	</insert>
+	
 	<select id="selectSchedule">
 		select * from cu_schedule
+	</select>
+	
+	<select id="selectScheduleById" resultType="com.cyber.university.dto.ScheduleDto">
 	</select>
 </mapper>

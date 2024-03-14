@@ -1,11 +1,14 @@
 package com.cyber.university.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.RoomDto;
+import com.cyber.university.dto.RoomWithCollegeDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
@@ -35,6 +38,12 @@ public class RoomService {
 		if (result != 1) {
 			throw new CustomRestfullException("등록 생성 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@Transactional
+	public List<RoomWithCollegeDto> findAll(){
+		
+		return roomRepository.findAll();
 	}
 }
 

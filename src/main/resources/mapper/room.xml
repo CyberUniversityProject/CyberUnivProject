@@ -13,7 +13,7 @@
 
 
 	<select id="findAll"
-		resultType="com.cyber.university.repository.model.Room">
+		resultType="com.cyber.university.dto.RoomWithCollegeDto">
 
 		select r.id, c.name from cu_room as r
 		join cu_college as c

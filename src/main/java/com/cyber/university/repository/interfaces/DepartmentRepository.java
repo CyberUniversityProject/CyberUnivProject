@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.cyber.university.dto.DepartmentFormDto;
+import com.cyber.university.dto.DepartmentWithCollegeDto;
 import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Department;
 
@@ -44,5 +45,8 @@ public interface DepartmentRepository {
 	public List<Department> findAllwithPasing(@Param ("offset") int offset, @Param ("limit") int limit, @Param("type") String type);
 	// 전체 게시물개수 계산
 	public int getAllPgCount();
+	
+	
+	public List<DepartmentWithCollegeDto> findAlldeptWithCol ();
 
 }

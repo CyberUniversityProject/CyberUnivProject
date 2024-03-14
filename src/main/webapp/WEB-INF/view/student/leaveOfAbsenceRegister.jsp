@@ -47,6 +47,7 @@
 							<hr>
 						</div>
 					</div>
+					
 					<!-- 필터 및 검색 -->
 					<div class="col-md-7 col-lg-8 mx-auto">
 						<div class="card">
@@ -84,8 +85,8 @@
 
 											<div class="col-sm-4">
 												<label for="lastName" class="form-label">성명</label> <input
-													type="text" class="form-control" id="name"
-													placeholder="" value="${studentInfo.name }" disabled>
+													type="text" class="form-control" id="name" placeholder=""
+													value="${studentInfo.name }" disabled>
 												<div class="invalid-feedback">Valid last name is
 													required.</div>
 											</div>
@@ -100,9 +101,8 @@
 
 
 											<div class="my-3 row">
-												<label for="lastName" class="form-label">휴학구분</label>
-												
-												<input type="text" id="type" value="일반휴학(개인사정,기타)"></input>
+												<label for="lastName" class="form-label">휴학구분</label> <input
+													type="hidden" id="type" value="일반휴학(개인사정,기타)"></input>
 
 												<div class="col-sm-6">
 													<div class="form-check">
@@ -157,21 +157,19 @@
 												<label for="lastName" class="form-label">휴학기간</label>
 
 												<div class="col-md-6">
-													<label for="state" class="form-label">휴학시작 년도</label>
-													<select id="startYearBox" class="form-select" >
-														<option value = "" selected>년도 선택</option>
-													</select><label
-														class="form-label" for="paypal"></label>
+													<label for="state" class="form-label">휴학시작 년도</label> <select
+														id="startYearBox" class="form-select">
+														<option value="" selected>년도 선택</option>
+													</select><label class="form-label" for="paypal"></label>
 												</div>
 
 												<div class="col-md-6">
-													<label for="state" class="form-label">학기</label> 
-													
-													<select id="fromSemester" class="form-select">
+													<label for="state" class="form-label">학기</label> <select
+														id="fromSemester" class="form-select">
 														<option value="" selected>학기 선택</option>
 													</select>
-													
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
 													<div class="invalid-feedback">Please provide a valid
 														state.</div>
 												</div>
@@ -179,20 +177,16 @@
 
 
 												<div class="col-md-6">
-													<label for="state" class="form-label">휴학 종료 년도</label>
-													<select id="endYearBox" class="form-select">
-														
-														<option value = "" selected>년도 선택</option>
-													</select>
-													
-													<label
-														class="form-label" for="paypal"></label>
+													<label for="state" class="form-label">휴학 종료 년도</label> <select
+														id="endYearBox" class="form-select">
+
+														<option value="" selected>년도 선택</option>
+													</select> <label class="form-label" for="paypal"></label>
 												</div>
 
 												<div class="col-md-6">
-													<label for="state" class="form-label">학기</label> 
-													
-													<select class="form-select" id="toSemester">
+													<label for="state" class="form-label">학기</label> <select
+														class="form-select" id="toSemester">
 														<option value="" selected>학기 선택</option>
 													</select>
 													<div class="invalid-feedback">Please provide a valid
@@ -244,21 +238,19 @@
 
 										<hr class="my-4">
 
-								
 
+
+										<div class="form-check"></div>
 										<div class="form-check">
-										
-														
-													
-										</div>
-		<div class="form-check">
-													<input type="text" id="appDate" value="${studentInfo.today }"></input>
-											<label
-												class="form-check-label" for="same-address">위와 같이 휴학하고자 하오니 허가하여 주시기 바랍니다. </label>
+											<input type="hidden" id="appDate" value="${studentInfo.today }"></input>
+											<h3>${studentInfo.today }</h3>
+											<label class="form-check-label" for="same-address">위와
+												같이 휴학하고자 하오니 허가하여 주시기 바랍니다. </label>
 										</div>
 										<hr class="my-4">
 
-										<button class="w-100 btn btn-primary btn-lg" type="button" id="loa-btn">휴학 신청</button>
+										<button class="w-100 btn btn-primary btn-lg" type="button"
+											id="loa-btn">휴학 신청</button>
 									</form>
 								</div>
 							</div>
@@ -278,9 +270,35 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
+
 	<script>
 	document.addEventListener("DOMContentLoaded", function(){
+		
+	    function showAlertAndRedirect(overLeaveCount, pendingLeaveCount) {
+	        if (overLeaveCount >= 3) {
+	            alert("휴학 신청 횟수가 초과했습니다. 자세한 내용은 학과 사무실로 연락 부탁드립니다.");
+	            window.location.href = '/'; 
+	        } else if (pendingLeaveCount > 0) {
+	            alert("처리중인 휴학 신청이 존재합니다. 자세한 내용은 학과 사무실로 연락 부탁드립니다.");
+	            window.location.href = '/student/leaveOfAbsenceList';
+	        }
+	    }
+
+	    // 페이지 로드 시 실행되는 함수
+	    window.onload = function() {
+	        var overLeaveCount = ${overLeaveCount}; 
+	        var pendingLeaveCount = ${pendingLeaveCount};
+	        showAlertAndRedirect(overLeaveCount, pendingLeaveCount); 
+	    };
+		
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 
 		let type = document.getElementById("type").value;
 		
@@ -291,7 +309,7 @@
 		radioButtons.forEach(function(radioButton) {
 		    radioButton.addEventListener('change', function() {
 		        if (this.checked) {
-		            selectedType = this.nextElementSibling.textContent.trim(); // 선택된 타입을 전역 변수에 할당
+		            let selectedType = this.nextElementSibling.textContent.trim(); // 선택된 타입을 전역 변수에 할당
 		            type = selectedType; // value 값을 선택된 라디오 버튼의 라벨로 변경
 		            console.log("선택된 타입:", selectedType);
 		            console.log('원래 type은 변경이 됐을까?', type); // 변경된 value 값 출력
@@ -464,6 +482,10 @@
 		    });
 		}
 		
+		
+		
+		
+		
 		/* 휴학 정보 전송 */
 		const loaBtn = document.getElementById("loa-btn");
 		
@@ -496,33 +518,32 @@
 	                "type" : type,
 	                "appDate": appDate
 	            };
-	            
-			try {
-	            const response = await fetch("/student/leaveApp", {
-	                method: "POST",
+	        
+	        try {
+	            const response = await fetch('/student/leaveApp', {
+	                method: 'POST',
 	                headers: {
-	                    "Content-Type": "application/json; charset=UTF-8"
+	                    'Content-Type': 'application/json'
 	                },
 	                body: JSON.stringify(formData)
 	            });
-	            
+
 	            if (!response.ok) {
-	                throw new Error("휴학 신청 중 오류가 발생했습니다.");
+	            	const errorMessage = await response.text();
+	                throw new Error(errorMessage);
 	            }
-	            
-	            alert("휴학 신청에 성공했습니다.;");
-			} catch (error){
-				alert(error)
-			}
-					
-		
-			
-		});
-		
-		
-		
+
+	            // 서버 응답이 성공적으로 도착한 경우
+	            alert('휴학 신청이 완료되었습니다.');
+	            window.location.href = '/student/leaveOfAbsenceList';
+
+	        } catch (error) {
+	            // 오류가 발생한 경우
+	            alert(error.message);
+	        }
+		});	// loaBtn.addEventListener end
+
 	});
-	
 	</script>
 </body>
 </html>

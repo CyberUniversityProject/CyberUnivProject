@@ -168,10 +168,14 @@
 		WHERE s.id = #{userId};
 	</select>
 	
-	<insert id="createLeaveApp">
-		INSERT INTO cu_break
-			(student_id, student_grade, from_year, from_semester, to_year, to_semester, type, app_date)
-		VALUES (#{userId}, #{studentGrade}, #{fromYear},#{fromSemester}, #{toYear},#{toSemester},#{type},#{appDate});
-	</insert>
+<insert id="createLeaveApp">
+	INSERT INTO cu_break
+		(student_id, student_grade, from_year, from_semester, to_year, to_semester, type, app_date)
+	VALUES (#{userId}, #{studentGrade}, #{fromYear},#{fromSemester}, #{toYear},#{toSemester},#{type},#{appDate});
+</insert>
+
+<select id="getLeaveCount">
+	SELECT COUNT(*) FROM cu_break WHERE student_id = #{userId};
+</select>
 
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cyber.university.dto.RoomWithCollegeDto;
 import com.cyber.university.repository.model.Room;
 
 /**
@@ -23,7 +24,7 @@ public interface RoomRepository {
 	public int insertById(Room room);
 
 	// 강의실 등록 리스트
-	public List<Room> findAll();
+	public List<RoomWithCollegeDto> findAll();
 
 	// 강의실 삭제
 	public String deleteById(String id);

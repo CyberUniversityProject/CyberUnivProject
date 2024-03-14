@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
@@ -47,6 +48,11 @@ public class ProfessorService {
 	public ProfessorInfoDto selectProfessorInfoWithCollegeAndDepartment(Integer id) {
 
 		return professorRepository.selectProfessorInfoWithCollegeAndDepartment(id);
+	}
+	
+	
+	public List<ProfessorAndSubjectFormDto> findAllProfessor() {
+		return professorRepository.findProfessorAndDept();
 	}
 
 	/**

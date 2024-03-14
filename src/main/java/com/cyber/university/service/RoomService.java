@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cyber.university.dto.RoomDto;
+import com.cyber.university.dto.RoomWithCollegeDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
@@ -39,6 +40,7 @@ public class RoomService {
 			throw new CustomRestfullException("등록 생성 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+<<<<<<< HEAD
 	/**
 	  * @FileName : RoomService.java
 	  * @Project : CyberUniversity
@@ -68,5 +70,13 @@ public class RoomService {
 	}
 	
 	
+=======
+	
+	@Transactional
+	public List<RoomWithCollegeDto> findAll(){
+		
+		return roomRepository.findAll();
+	}
+>>>>>>> dev
 }
 

@@ -79,46 +79,24 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-<<<<<<< HEAD
-        <li class="dropdown">
-          <a href="#"
-            ><span>마이페이지</span> <i class="bi bi-chevron-down"></i
-          ></a>
-          <ul>
-            <li><a href="/student/myInfo">내 정보 조회</a></li>
-            <li><a href="/student/password">비밀번호 변경</a></li>
-            <li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
-            <li><a href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
-            <li><a href="#">등록금 내역 조회</a></li>
-            <li><a href="#">등록금 납부 고지서</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#"><span>수업</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-            <li><a href="#">전체 강의 조회</a></li>
-          </ul>
-        </li>
-=======
 						<li class="dropdown"><a href="#"><span>마이페이지</span>
 								<i class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/student/myInfo">내 정보 조회</a></li>
 								<li><a href="/student/password">비밀번호 변경</a></li>
 								<li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
-								<li><a href="#">휴학 내역 조회</a></li>
+								<li><a href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
 								<li><a href="#">등록금 내역 조회</a></li>
 								<li><a href="#">등록금 납부 고지서</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#"><span>수업</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="/subject/list/1">전체 강의 조회</a></li>
+								<li><a href="#">전체 강의 조회</a></li>
 							</ul></li>
->>>>>>> dev
 
-						<li class="dropdown"><a href="#"><span>수강신청</span>
-								<i class="bi bi-chevron-down"></i></a>
+						<li class="dropdown"><a href="#"><span>수강신청</span> <i
+								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="#">강의시간표 조회</a></li>
 								<li><a href="#">예비 수강 신청</a></li>
@@ -134,8 +112,8 @@ body {
 								<li><a href="#">누계 성적</a></li>
 							</ul></li>
 
-						<li class="dropdown"><a href="#"><span>학사정보</span>
-								<i class="bi bi-chevron-down"></i></a>
+						<li class="dropdown"><a href="#"><span>학사정보</span> <i
+								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
 								<li><a href="#">학사일정</a></li>
@@ -148,8 +126,8 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-						<li class="dropdown"><a href="#"><span>마이페이지</span>
-								<i class="bi bi-chevron-down"></i></a>
+						<li class="dropdown"><a href="#"><span>마이페이지</span> <i
+								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/info/staff">내 정보 조회</a></li>
 								<li><a href="/password">비밀번호 변경</a></li>
@@ -168,8 +146,8 @@ body {
 								<li><a href="#">수강 신청기간 설정</a></li>
 							</ul></li>
 
-						<li class="dropdown"><a href="#"><span>등록</span>
-								<i class="bi bi-chevron-down"></i></a>
+						<li class="dropdown"><a href="#"><span>등록</span> <i
+								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/college/collegeRegister">단과대학 등록</a></li>
 								<li><a href="/department/departmentRegister">학과 등록</a></li>
@@ -195,8 +173,8 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-						<li class="dropdown"><a href="#"><span>마이페이지</span>
-								<i class="bi bi-chevron-down"></i></a>
+						<li class="dropdown"><a href="#"><span>마이페이지</span> <i
+								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/professor/info">내 정보 조회</a></li>
 								<li><a href="#">비밀번호 변경</a></li>

@@ -3,6 +3,7 @@ package com.cyber.university.repository.interfaces;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
@@ -182,4 +183,13 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 강의 이름 찾기
 	  */
 	public ApplySubjectDto selectSubName(String subName);
+	
+	/**
+	  * @Method Name : selectMysub
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 본인 강의 조회
+	  */
+	public List<SubInfoDto> selectMysub(Integer professorId);
 }

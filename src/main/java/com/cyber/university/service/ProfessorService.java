@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
@@ -143,7 +144,7 @@ public class ProfessorService {
 		subject.setProId(dto.getProId());
 		subject.setSubName(dto.getSubName());
 		subject.setProName(dto.getProName());
-		subject.setTime(dto.getTime());
+		subject.setSubTime(dto.getTime());
 		subject.setType(dto.getType());
 		subject.setSubGrade(dto.getSubGrade());
 		subject.setCapacity(dto.getCapacity());
@@ -163,6 +164,21 @@ public class ProfessorService {
 	  */
 	public ApplySubjectDto selectSubName(String subName) {
 		return professorRepository.selectSubName(subName);
+	}
+	
+	/**
+	  * @Method Name : selectMysub
+	  * @작성일 : 2024. 3. 13.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 본인 강의 조회
+	  */
+	public List<SubInfoDto> selectMysub(Integer professorId) {
+		System.out.println("교수 id" + professorId);
+		
+		List<SubInfoDto> list =  professorRepository.selectMysub(professorId);
+		System.out.println("list???" + list);
+		return list;
 	}
 
 }

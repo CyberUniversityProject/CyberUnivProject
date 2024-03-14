@@ -17,6 +17,7 @@ import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.interfaces.BreakRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.utils.Define;
@@ -38,6 +39,8 @@ public class StudentService {
 
 	@Autowired
 	private StudentRepository studentRepository;
+	@Autowired
+	private BreakRepository breakRepository;
 
 	/**
 	 * 
@@ -108,7 +111,6 @@ public class StudentService {
 	  * @Method 설명 : student info 수정(주소, 전화번호, 이메일)
 	  */
 	// TODO : 학과 전과 한다면 관리자 쪽에서, 학기도 자동으로 관리자 쪽 UPDATE 확인하기,
-	// TODO : 로그인 풀렸을 시 
 	@Transactional
 	public int updateStudentInfo(Integer userId,StudentInfoDto studentInfoDto) {
 		
@@ -136,6 +138,7 @@ public class StudentService {
 		
 		LeaveStudentInfoDto leaveStudentInfoDto = studentRepository.findLeaveStudentById(userId);
 
+		
 		log.info("student service student info:" + leaveStudentInfoDto);
 
 		return leaveStudentInfoDto;
@@ -170,4 +173,27 @@ public class StudentService {
 		return result;
 		
 	}
+
+	/**
+	  * @Method Name : getLeaveCount
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : userId로 휴학 횟수 카운팅
+	  */
+	public int getLeaveCount(Integer userId) {
+		return studentRepository.getLeaveCount(userId);
+	}
+
+	/**
+	  * @Method Name : hasPendingLeave
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 처리중인 휴학신청 내역 확인
+	  */
+	public int hasPendingLeave(Integer userId) {
+		  return breakRepository.countByStatusAndUserId(userId);
+	}
+	
 }

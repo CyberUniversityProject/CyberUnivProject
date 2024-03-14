@@ -323,4 +323,27 @@ public class StudentController {
 		return "redirect:/student/leaveOfAbsenceList";
 	}
 	
+	
+	/**
+	  * @Method Name : tuitionPage
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 등록금 페이지
+	  */
+	@GetMapping("/tuition")
+	private String tuitionPage(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		LeaveStudentInfoDto studentInfoDto= studentService.findLeaveStudentById(userId);
+		model.addAttribute("student",studentInfoDto);
+		return "/student/tuitionList";
+	}
 }

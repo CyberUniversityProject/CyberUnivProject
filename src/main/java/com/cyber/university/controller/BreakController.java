@@ -3,20 +3,29 @@ package com.cyber.university.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cyber.university.dto.LeaveAppDto;
+import com.cyber.university.dto.LeaveStudentInfoDto;
+import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.StuStatService;
 import com.cyber.university.service.UserService;
+import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

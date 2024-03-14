@@ -3,6 +3,7 @@ package com.cyber.university.repository.interfaces;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
@@ -40,6 +41,9 @@ public interface ProfessorRepository {
 
 	// 24.03.11 비밀번호 찾기
 	public String selectPassword(Integer id);
+	
+	
+	public List<ProfessorAndSubjectFormDto> findProfessorAndDept();
 
 	/**
 	 * 

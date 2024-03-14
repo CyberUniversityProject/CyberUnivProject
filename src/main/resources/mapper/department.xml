@@ -3,47 +3,63 @@
 
 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.university.repository.interfaces.DepartmentRepository">
+<mapper
+	namespace="com.cyber.university.repository.interfaces.DepartmentRepository">
 	<insert id="insert">
 		insert into cu_department (name, college_id)
 		values(#{name}, #{collegeId})
 	</insert>
 
-	<select id="selectById" resultType="com.cyber.university.repository.model.Department">
+	<select id="selectById"
+		resultType="com.cyber.university.repository.model.Department">
 		SELECT * FROM cu_department WHERE id = #{id}
 	</select>
 
-	<select id="selectByDepartmentDto" resultType="com.cyber.university.repository.model.Department">
+	<select id="selectByDepartmentDto"
+		resultType="com.cyber.university.repository.model.Department">
 		SELECT * FROM cu_department
 	</select>
-	
+
 	<update id="updateByDepartmentDto">
 		UPDATE cu_department
 		SET name = #{name}
-		WHERE id = #{id};
+		WHERE id =
+		#{id};
 	</update>
 
-  <insert id="insertById">
-        INSERT INTO cu_department (name,college_id)
-        VALUES (#{name},#{collegeId})
-    </insert>
-    
-    <select id="findAll" resultType="com.cyber.university.repository.model.Department">
-     SELECT * FROM cu_department order by id desc
-    </select>
+	<insert id="insertById">
+		INSERT INTO cu_department (name,college_id)
+		VALUES (#{name},#{collegeId})
+	</insert>
+
+	<select id="findAll"
+		resultType="com.cyber.university.repository.model.Department">
+		SELECT * FROM cu_department order by id desc
+	</select>
 
 	<delete id="deleteById">
 		delete from cu_department where id = #{id}
 	</delete>
 	<!--학과 수정 -->
 	<update id="updateById">
-		update cu_department set name = #{name}, college_id = #{collegeId}
+		update cu_department set name = #{name}, college_id =
+		#{collegeId}
 		where id =#{id}
 	</update>
 	<!-- 학과 상세조회 -->
 	<select id="findById"
-		resultType="com.cyber.university.repository.model.Department" parameterType="int">
+		resultType="com.cyber.university.repository.model.Department"
+		parameterType="int">
 		select * from cu_department where id=#{id}
+	</select>
+
+
+	<select id="findAlldeptWithCol"
+		resultType="com.cyber.university.dto.DepartmentWithCollegeDto">
+		select d.id, d.name, c.name as 'college_name' from
+		cu_department as d
+		join cu_college as c
+		on c.id = d.college_id;
 	</select>
 
 </mapper>

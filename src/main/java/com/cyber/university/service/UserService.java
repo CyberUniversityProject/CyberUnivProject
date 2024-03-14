@@ -428,7 +428,6 @@ public class UserService {
 	  * @변경이력 : 
 	  * @Method 설명 : userId로 user 정보 조회
 	  */
-	// TODO: SELECT BY ID 준혁한테 물어보기
 	public UserInfoDto findById(Integer userId) {
 		
 		UserInfoDto userInfoDto = userRepository.findById(userId);

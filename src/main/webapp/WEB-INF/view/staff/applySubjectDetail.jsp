@@ -96,14 +96,9 @@
 									<div class="button-container d-flex justify-content-center">
 
 										<button type="button" class="btn btn-primary" id="approveBtn">승인하기</button>
-										</form>
+										
 										&nbsp; &nbsp; &nbsp;
-										<form action="" method="post"
-											class="d-flex flex-column align-items-center">
-											<input type="hidden" name="status" value="반려">
-											<button type="submit" class="btn btn-warning"
-												onclick="return confirm('해당 신청을 반려하시겠습니까?')">반려하기</button>
-										</form>
+										<button type="button" class="btn btn-primary" id="rejectBtn">반려하기</button>
 									</div>
 
 
@@ -136,6 +131,37 @@
                     success : function(response) {
                         // 성공 알림창 표시
                         alert('신청이 승인되었습니다.');
+                        // 페이지 이동
+                        window.location.href = '/applySubject/list';
+                    },
+                    error : function(xhr, status, error) {
+                        // 요청이 실패하면 콘솔에 오류를 출력합니다.
+                        console.error(error);
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // 반려하기 버튼 클릭 시
+        $('#rejectBtn').click(function(event) {
+            // 폼 전송 방지
+            event.preventDefault();
+            // 확인 알림창 표시
+            let confirmation = confirm('해당 신청을 반려하시겠습니까?');
+            if (confirmation) {
+                // AJAX 요청을 보냅니다.
+                $.ajax({
+                    type : 'PUT', // 업데이트를 위한 HTTP 메서드는 PUT을 사용합니다.
+                    url : '/api/applySub/updateReason/${subject.id}', // 해당 엔드포인트의 URL을 입력합니다.
+                    data: {
+                        reason: $('#reason').val() // 입력된 사유 값을 가져와 전송합니다.
+                    },
+                    success : function(response) {
+                        // 성공 알림창 표시
+                        alert('신청이 반려되었습니다.');
                         // 페이지 이동
                         window.location.href = '/applySubject/list';
                     },

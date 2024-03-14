@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>교직원 추가페이지</h2>
+			<h2>단과대학 등록 페이지</h2>
 
 		</div>
 	</div>

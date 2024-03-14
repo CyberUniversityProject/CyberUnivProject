@@ -28,4 +28,8 @@
 	UPDATE cu_break SET status = #{status} WHERE id = #{id}
 </update>
 
+<select id="countByStatusAndUserId">
+	select count(*) from cu_break where student_id =#{userId} and status = '처리중'
+</select>
+
 </mapper>

@@ -9,6 +9,24 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery 추가 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<style>
+   .btn--confirm {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn--confirm:hover {
+        background-color: #45a049;
+    }
+</style>
 </head>
 
 
@@ -73,7 +91,7 @@
                   <label for="entranceDate">입학일</label>
                   <input type="date" name="entranceDate" id="entranceDate" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary">등록하기</button>
+                <button type="submit" class="btn--confirm">등록하기</button>
               </form>
             </div>
           </div>

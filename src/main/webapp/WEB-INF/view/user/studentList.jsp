@@ -14,6 +14,23 @@
     overflow: hidden; /* 넘치는 내용 숨김 */
     text-overflow: ellipsis; /* 넘치는 내용을 줄임표로 표시 */
   }
+  
+     .btn--confirm {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn--confirm:hover {
+        background-color: #45a049;
+    }
 </style>
 
 
@@ -53,8 +70,8 @@
                     <input type="text" name="deptId" id="deptId" class="form-control">&nbsp;&nbsp;&nbsp;
                     <label for="studentId">학번 </label>&nbsp;&nbsp;&nbsp;
                     <input type="text" name="studentId" id="studentId" class="form-control">
-                     &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">조회하기</button>
-                <button type="button" onclick="location.href='/user/student/update'" class="btn btn-success ml-3">새학기로 적용하기</button>
+                     &nbsp;&nbsp;&nbsp;<button type="submit" class="btn--confirm">조회하기</button>
+                <button type="button" onclick="location.href='/user/student/update'" class="btn--confirm ml-3">새학기로 적용하기</button>
                 </div>
                
             </form>

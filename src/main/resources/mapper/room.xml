@@ -2,11 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.university.repository.interfaces.RoomRepository">
+<mapper
+	namespace="com.cyber.university.repository.interfaces.RoomRepository">
 	<!-- 강의실 등록 -->
 	<insert id="insertById">
 		INSERT INTO cu_room (id,college_id)
-		VALUES (#{id},#{collegeId})
+		VALUES
+		(#{id},#{collegeId})
 	</insert>
-	
+
+
+	<select id="findAll"
+		resultType="com.cyber.university.repository.model.Room">
+
+		select r.id, c.name from cu_room as r
+		join cu_college as c
+		on c.id = r.college_id;
+
+	</select>
+
 </mapper>

@@ -8,5 +8,22 @@
 		INSERT INTO cu_room (id,college_id)
 		VALUES (#{id},#{collegeId})
 	</insert>
-	
+	<!-- 강의실 리스트 불러오기 -->
+	<select id="findAll" resultType="com.cyber.university.repository.model.Room">
+		select * from cu_room order by id desc
+	</select>
+	<!-- 강의실 삭제 -->
+	<select id="deleteById" resultType="com.cyber.university.repository.model.Room">
+		delete from cu_room where id = #{id}
+	</select>
+	<!-- 강의실 상세 조회 -->
+	<select id="findById" resultType="com.cyber.university.repository.model.Room" parameterType="String">
+		select * from cu_room where id = #{id}
+	</select>
+	<!-- 강의실 수정하기 -->
+	<update id="updateById">
+		UPDATE cu_room 
+		SET college_id = #{collegeId}
+		WHERE id = #{id}
+	</update>
 </mapper>

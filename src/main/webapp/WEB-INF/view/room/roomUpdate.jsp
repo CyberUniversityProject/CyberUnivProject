@@ -55,13 +55,13 @@
 				<div class="col-lg-8 mt-5 mt-lg-0">
 					<div class="row">
 						<div class="col-md-6 form-group mt-3 mt-md-0">
-							<input type="text" class="form-control" name="id" id="name"
+							<input type="text" class="form-control" name="id" id="id"
 								value="${room.id}">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 form-group mt-3 mt-md-0">
-							<input type="text" class="form-control" name="collegeId" id="name"
+							<input type="text" class="form-control" name="collegeId" id="collegeId"
 								value="${room.collegeId}">
 						</div>
 					</div>

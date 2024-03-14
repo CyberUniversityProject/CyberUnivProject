@@ -26,13 +26,13 @@ public interface RoomRepository {
 	public List<Room> findAll();
 
 	// 강의실 삭제
-	public int deleteById(Integer id);
+	public String deleteById(String id);
 
 	// 강의실 수정
-	public int updateById(Room room);
+	public void updateById(Room room);
 
 	// 강의실 조회(글 상세보기와는 달리 수정을 위한 기능)
-	public Room findById(Integer id);
+	public Room findById(String id);
 
 	// 전체 페이지 불러오기
 	public List<Room> findAllwithPasing(@Param("offset") int offset, @Param("limit") int limit,

@@ -31,8 +31,10 @@ import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
+import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.StudentService;
+import com.cyber.university.service.TuitionService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 
@@ -63,7 +65,8 @@ public class StudentController {
 	private PasswordEncoder passwordEncoder; 
 	@Autowired
 	private BreakService breakService;
-
+	@Autowired
+	private TuitionService tuitionService;
 	
 	/**
 	  * @Method Name : myInfo
@@ -344,6 +347,23 @@ public class StudentController {
 		
 		LeaveStudentInfoDto studentInfoDto= studentService.findLeaveStudentById(userId);
 		model.addAttribute("student",studentInfoDto);
+		
+		List<Tuition> tuitionList = tuitionService.findAllTuitionByStudentId(userId);
+		model.addAttribute("tuitionList", tuitionList);
+		
 		return "/student/tuitionList";
+	}
+	
+	/**
+	  * @Method Name : tuitionBill
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 등록금 고지서 페이지
+	  */
+	@GetMapping("/tuitionBill")
+	private String tuitionBill() {
+
+		return "/student/tuitionBill";
 	}
 }

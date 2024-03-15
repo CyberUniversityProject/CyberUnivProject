@@ -274,6 +274,18 @@ public class UserController {
 		return "redirect:/user/student";
 	}
 	
+	
+	/**
+	 * 학생의 학년, 학기 업데이트
+	 * 
+	 * @return 학생 리스트 조회 페이지
+	 */
+	@GetMapping("/student/update")
+	public String updateStudentGradeAndSemester() {
+		studentService.updateStudentGradeAndSemester();
+		return "redirect:/user/studentList";
+	}
+	
 
 
 }

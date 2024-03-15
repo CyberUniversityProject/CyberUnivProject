@@ -196,4 +196,19 @@ public class StudentService {
 		  return breakRepository.countByStatusAndUserId(userId);
 	}
 	
+	
+	/**
+	 * 학생 학년과 학기 업데이트
+	 */
+	@Transactional
+	public void updateStudentGradeAndSemester() {
+		studentRepository.updateStudentGradeAndSemester1_2();
+		studentRepository.updateStudentGradeAndSemester2_1();
+		studentRepository.updateStudentGradeAndSemester2_2();
+		studentRepository.updateStudentGradeAndSemester3_1();
+		studentRepository.updateStudentGradeAndSemester3_2();
+		studentRepository.updateStudentGradeAndSemester4_1();
+		studentRepository.updateStudentGradeAndSemester4_2();
+	}
+	
 }

@@ -1,3 +1,4 @@
+<%@page import="com.cyber.university.controller.StuSubController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>등록금 고지서 전송</title>
+<title>수강 신청기간 설정</title>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -77,7 +78,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>등록금 고지서 전송</h2>
+			<h2>수강 신청기간 설정</h2>
 
 		</div>
 	</div>
@@ -91,9 +92,6 @@
 
 				<!-- 메인 div -->
 				<div class="container mt-5">
-					<h1
-						style="text-align: center; margin-top: 20px; font-weight: bold; color: #333;">등록금
-						고지서 전송</h1>
 
 					<div class="row">
 						<div class="col-md-12">
@@ -105,17 +103,37 @@
 						<!-- 강의 목록 -->
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<!-- text-center 클래스 추가 -->
+								
 								<div class="split--div"></div>
-								<a href="/tuition/create"> <img src="/img/tuition.png"
-									alt="등록금 고지서 발송">
-								</a>
-								<c:if test="${insertCount != null}">
-									<%
-									out.println(
-											"<script>alert('" + request.getAttribute("insertCount") + "개의 등록금 고지서가 생성되었습니다.'); history.back(); </script>");
-									%>
-								</c:if>
+								<%
+								if (StuSubController.SUGANG_PERIOD == 0) {
+								%>
+								<div class="alert alert-warning" role="alert">현재 예비 수강 신청
+									기간입니다.</div>
+
+								<br> <a href="/sugang/updatePeriod1"><button
+										type="submit" class="btn--confirm">수강 신청 기간 시작</button></a>
+
+								<%
+								} else if (StuSubController.SUGANG_PERIOD == 1) {
+								%>
+								<div class="alert alert-info" role="alert">현재 수강 신청 기간입니다.
+								</div>
+
+								<br> <a href="/sugang/updatePeriod2"><button
+										type="submit" class="btn--confirm">수강 신청 기간 종료</button></a>
+
+								<%
+								} else {
+								%>
+
+								<div class="alert alert-danger" role="alert">이번 학기 수강 신청
+									기간이 종료되었습니다.</div>
+
+
+								<%
+								}
+								%>
 							</div>
 						</div>
 					</div>

@@ -226,6 +226,17 @@ public interface StudentRepository {
 	  * @Method 설명 : userId로 휴학횟수 카운팅
 	  */
 	public int getLeaveCount(Integer userId);
+	
+	
+	// 학생 grade, semester 업데이트
+		public int updateStudentGradeAndSemester1_2();
+		public int updateStudentGradeAndSemester2_1();
+		public int updateStudentGradeAndSemester2_2();
+		public int updateStudentGradeAndSemester3_1();
+		public int updateStudentGradeAndSemester3_2();
+		public int updateStudentGradeAndSemester4_1();
+		public int updateStudentGradeAndSemester4_2();
+		
 
 
 }

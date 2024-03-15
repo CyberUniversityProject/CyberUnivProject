@@ -173,7 +173,7 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-<<<<<<< HEAD
+
                                        <li class="dropdown">
                                          <a href="#"
                                            ><span>마이페이지</span> <i class="bi bi-chevron-down"></i
@@ -186,28 +186,15 @@ body {
                                        <li class="dropdown">
                                          <a href="#"><span>수업</span> <i class="bi bi-chevron-down"></i></a>
                                          <ul>
-                                           <li><a href="/professor/allsub">전체 강의 조회</a></li>
+                                           <li><a href="/subject/list/1">전체 강의 조회</a></li>
                                            <li><a href="/professor/mysub">내 강의 조회</a></li>
                                            <li><a href="#">내 강의 평가</a></li>
                                            <li><a href="/professor/apply">강의 등록</a></li>
                                          </ul>
                                        </li>
-=======
-						<li class="dropdown"><a href="#"><span>마이페이지</span> <i
-								class="bi bi-chevron-down"></i></a>
-							<ul>
-								<li><a href="/professor/info">내 정보 조회</a></li>
-								<li><a href="#">비밀번호 변경</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#"><span>수업</span> <i
-								class="bi bi-chevron-down"></i></a>
-							<ul>
-								<li><a href="/subject/list/1">전체 강의 조회</a></li>
-								<li><a href="/professor/mysub">내 강의 조회</a></li>
-								<li><a href="#">내 강의 평가</a></li>
-								<li><a href="/professor/apply">강의 등록</a></li>
-							</ul></li>
->>>>>>> dev
+
+						
+
 
 
 

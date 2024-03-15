@@ -29,6 +29,38 @@ import lombok.extern.slf4j.Slf4j;
   * @프로그램 설명 : 학사일정 Controller
   */
 
+/**
+
+  * @FileName : ScheduleController.java
+
+  * @Project : CyberUniversity
+
+  * @Date : 2024. 3. 15. 
+
+  * @작성자 : 조유빈
+
+  * @변경이력 :
+
+  * @프로그램 설명 :
+
+  */
+
+/**
+
+  * @FileName : ScheduleController.java
+
+  * @Project : CyberUniversity
+
+  * @Date : 2024. 3. 15. 
+
+  * @작성자 : 조유빈
+
+  * @변경이력 :
+
+  * @프로그램 설명 :
+
+  */
+
 @Slf4j
 @Controller
 @RequestMapping("/schedule")
@@ -53,13 +85,18 @@ public class ScheduleController {
 	
 	public String schedule(Model model) {
 		List<Schedule> schedule = scheduleService.readSchedule();
+		model.addAttribute("schedule", schedule); 
+		log.info("schedule1" + schedule); // year=null, month=null
+		log.info("model1" + model); // year=null, month=null
 		return "/schedule/schedule";
 	}
 	
 	@GetMapping("/list")
 	public String scheduleList(Model model) {
-		List<Schedule> schedule = scheduleService.readSchedule();
+		List<Schedule> schedule = scheduleService.readSchedule(); 
 		model.addAttribute("schedule", schedule);
+		log.info("schedule2" + schedule); // year=null, month=null
+		log.info("model2" + model); // year=null, month=null
 		return "/schedule/scheduleList";
 	}
 	
@@ -87,12 +124,25 @@ public class ScheduleController {
 		return "redirect:/schedule/list";
 	}
 	
-	@GetMapping("/detail")
-	public String detailSchedule(Model model ,Integer id) {
-		ScheduleDto schedule = scheduleService.readScheduleById(id);
-		model.addAttribute("schedule", schedule);
-		return "/schedule/scheduleDetail";
+	
+/**
+  * @Method Name : updateSchedule
+  * @작성일 : 2024. 3. 15.
+  * @작성자 : 조유빈
+  * @변경이력 : 3.15 생성 
+  * @Method 설명 : 학사일정 수정, 삭제
+  * @return
+  */
+	// 수정
+	@PostMapping("/update")
+	public String updateSchedule(ScheduleFormDto scheduleFormDto) {
+		scheduleService.updateSchedule(scheduleFormDto);
+		
+		return "redirect:/schedule/list";
 	}
+	
+	// 삭제
+	
 	
 
 }

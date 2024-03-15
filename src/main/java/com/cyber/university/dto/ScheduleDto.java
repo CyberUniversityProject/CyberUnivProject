@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 public class ScheduleDto {
-	private Integer months;
+	private Integer month;
 	private Integer sum;
 	private Integer id;
 	private Integer staffId;

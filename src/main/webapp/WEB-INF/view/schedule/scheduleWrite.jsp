@@ -102,7 +102,7 @@ main {
 					</tr>
 				</tbody>
 			</table>
-		    <button class="button">등록</button>
+		   <input type="submit" class="button" value="등록">
 	    </form>
     </main>
 </div>

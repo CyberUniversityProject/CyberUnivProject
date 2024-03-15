@@ -8,8 +8,8 @@ import lombok.Data;
 public class ScheduleFormDto {
 	private Integer id;
 	private Integer staffId;
-	private Date startDay;
-	private Date endDay;
+	private String startDay;
+	private String endDay;
 	private String information;
 
 }

@@ -50,19 +50,14 @@ main {
 		<div>
 		<table  class="room--table">
 			<tbody>
-<%-- 			<c:forEach var ="schedule" items ="${schedule}"> --%>
-<!-- 				<tr> -->
-<%-- 					<td class ="month" width ="100px;">${schedule.months}월</td> --%>
-<%-- 					<td class = "line">${schedule.startDay}~${schedule.endDay}</td> --%>
-<%-- 					<td class = "line" >${schedule.information}</td> --%>
-<!-- 				</tr> -->
-<%-- 			</c:forEach> --%>
-
+			<c:forEach var ="schedule" items ="${schedule}">
 				<tr>
-					<td class ="month" width ="100px;">1월</td>
-					<td class = "line">02-27~02-28</td>
-					<td class = "line" >2024 1학기 개강</td>
+					<td class ="month" width ="100px;">${schedule.month}월</td>
+					<td class = "line">${schedule.startDay}~${schedule.endDay}</td>
+					<td class = "line" >${schedule.information}</td>
 				</tr>
+			</c:forEach>
+
 			</tbody>
 		</table>
 		</div>

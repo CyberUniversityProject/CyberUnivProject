@@ -4,17 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
+import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
 import com.cyber.university.repository.model.User;
+import com.cyber.university.utils.Define;
 
+import jakarta.servlet.http.HttpSession;
+
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +43,7 @@ public class ProfessorService {
 
 	@Autowired
 	private ProfessorRepository professorRepository;
+	
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment
@@ -66,35 +73,7 @@ public class ProfessorService {
 
 		return professorRepository.selectProfessorInfo(id);
 	}
-
-	/**
-	 * @Method Name : updateProfessorInfo
-	 * @작성일 : 2024. 3. 11.
-	 * @작성자 : 장명근
-	 * @변경이력 :
-	 * @Method 설명 : 교수 정보 수정 서비스
-	 */
-	public UpdateProfessorInfoDto updateProfessorInfo(Integer id, User user) {
-
-		String enteredPassword = user.getPassword();
-
-		String savedPassword = professorRepository.selectPassword(id);
-
-		if (savedPassword == null || !savedPassword.equals(enteredPassword)) {
-			throw new CustomRestfullException("비밀번호를 확인해주세요.", HttpStatus.BAD_REQUEST);
-		}
-
-		UpdateProfessorInfoDto updateDto = new UpdateProfessorInfoDto();
-		updateDto.setAddress(updateDto.getAddress());
-		updateDto.setTel(updateDto.getTel());
-		updateDto.setEmail(updateDto.getEmail());
-		updateDto.setId(updateDto.getId());
-
-		professorRepository.updateProfessorInfo(updateDto);
-
-		return updateDto;
-
-	}
+	
 
 	/**
 	 * @param professorListForm
@@ -179,12 +158,26 @@ public class ProfessorService {
 	  * @변경이력 : 
 	  * @Method 설명 : 교수 본인 강의 조회
 	  */
-	public List<SubInfoDto> selectMysub(Integer professorId) {
-		System.out.println("교수 id" + professorId);
+	public List<SubInfoDto> selectMySub(Integer professorId) {
 		
-		List<SubInfoDto> list =  professorRepository.selectMysub(professorId);
-		System.out.println("list???" + list);
-		return list;
+		List<SubInfoDto> list =  professorRepository.selectMySub(professorId);
+		
+		return list != null ? list : Collections.emptyList();
 	}
-
+	
+	
+	/**
+	  * @Method Name : selectAllSub
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 개설 된 강의 모두 조회
+	  */
+	public List<SubInfoDto> selectAllSub(Integer professorId) {
+		
+		List<SubInfoDto> list =  professorRepository.selectMySub(professorId);
+		
+		return list != null ? list : Collections.emptyList();
+	}
+	
 }

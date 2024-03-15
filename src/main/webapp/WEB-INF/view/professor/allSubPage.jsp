@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>학생 명단 조회</title>
+  <title>교수 명단 조회</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
  
 <style>
@@ -14,25 +14,7 @@
     overflow: hidden; /* 넘치는 내용 숨김 */
     text-overflow: ellipsis; /* 넘치는 내용을 줄임표로 표시 */
   }
-  
-     .btn--confirm {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    .btn--confirm:hover {
-        background-color: #45a049;
-    }
 </style>
-
 
 </head>
 
@@ -42,20 +24,20 @@
  <!-- ======= 상단 제목부분 ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>학생 명단 조회</h2>
+        <h2>전체 강의 조회</h2>
 
       </div>
     </div>
     <!-- 상단 제목부분 끝 -->
 <div class="container mb-5"> <!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
   <div class="row">
-     <%@ include file="/WEB-INF/view/layout/sidebarStaff.jsp"%>
+	 <%@ include file="/WEB-INF/view/layout/professorAsidebar.jsp"%>
 
     <div class="col-md-10">
       
       <!-- 메인 div -->
 	<div class="container mt-5">
-    <h1>학생 명단 조회</h1>
+    <h1>전체 강의 조회</h1>
     <div class="row">
         <div class="col-md-12">
             <hr>
@@ -64,55 +46,57 @@
     <!-- 필터 및 검색 -->
     <div class="row mb-3">
         <div class="col-md-7">
-            <form action="/user/studentList" method="get" class="form-inline">
+            <form action="" method="get" class="form-inline">
                 <div class="form-group mr-2">
                     <label for="deptId">학과 번호 </label>&nbsp;&nbsp;&nbsp;
                     <input type="text" name="deptId" id="deptId" class="form-control">&nbsp;&nbsp;&nbsp;
-                    <label for="studentId">학번 </label>&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="studentId" id="studentId" class="form-control">
-                     &nbsp;&nbsp;&nbsp;<button type="submit" class="btn--confirm">조회하기</button>
-                <button type="button" onclick="location.href='/user/student/update'" class="btn--confirm ml-3">새학기로 적용하기</button>
+                     &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">조회하기</button>
+               
                 </div>
                
             </form>
         </div>
     </div>
     <c:choose>
-        <c:when test="${!studentList.isEmpty()}">
+        <c:when test="${!professorList.isEmpty()}">
             <h4>
-                <span style="font-weight: 600;">학생 목록</span>
+                <span style="font-weight: 600;">강의 목록</span>
             </h4>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
-                            <th>학번</th>
-                            <th>이름</th>
-                            <th>생년월일</th>
-                            <th>성별</th>
-                            <th>주소</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                            <th>학과번호</th>
-                            <th>학년</th>
-                            <th>입학일</th>
-                            <th>졸업일(졸업예정일)</th>
+                            <th>강의명</th>
+							<th>교수 아이디</th>
+							<th>강의실</th>
+							<th>학과번호</th>
+							<th>타입</th>
+							<th>개강 년도</th>
+							<th>개강 학기</th>
+							<th>개강 요일</th>
+							<th>시작 시간</th>
+							<th>종료 시간</th>
+							<th>이수 학점</th>
+							<th>수강 정원</th>
+							<th>현재 신청 인원</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="student" items="${studentList}">
+                        <c:forEach var="subInfo" items="${subInfoList}">
                             <tr>
-                                <td>${student.id}</td>
-                                <td>${student.name}</td>
-                                <td>${student.birthDate}</td>
-                                <td>${student.gender}</td>
-                                <td>${student.address}</td>
-                                <td>${student.tel}</td>
-                                <td>${student.email}</td>
-                                <td>${student.deptId}</td>
-                                <td>${student.grade}</td>
-                                <td>${student.entranceDate}</td>
-                                <td>${student.graduationDate}</td>
+								<td>${subInfo.name}</td>
+								<td>${subInfo.professorId}</td>
+								<td>${subInfo.roomId}</td>
+								<td>${subInfo.departmentId}</td>
+								<td>${subInfo.type}</td>
+								<td>${subInfo.subYear}</td>
+								<td>${subInfo.semester}</td>
+								<td>${subInfo.subDay}</td>
+								<td>${subInfo.startTime}</td>
+								<td>${subInfo.endTime}</td>
+								<td>${subInfo.grades}</td>
+								<td>${subInfo.capacity}</td>
+								<td>${subInfo.numOfStudent}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -123,16 +107,16 @@
                     <li class="page-item">
                         <c:choose>
                             <c:when test="${deptId != null && index != page}">
-                                <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}?deptId=${deptId}">${index}</a>
                             </c:when>
                             <c:when test="${deptId != null && index == page}">
-                                <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}?deptId=${deptId}">${index}</a>
                             </c:when>
                             <c:when test="${deptId == null && index == page}">
-                                <a class="page-link" href="/user/studentList/${index}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}">${index}</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="page-link" href="/user/studentList/${index}">${index}</a>
+                                <a class="page-link" href="/user/professorList/${index}">${index}</a>
                             </c:otherwise>
                         </c:choose>
                     </li>
@@ -149,7 +133,6 @@
     </div>
   </div>
 </div>
-
   <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

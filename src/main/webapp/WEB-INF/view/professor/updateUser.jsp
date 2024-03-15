@@ -13,27 +13,7 @@
 <!-- 상단 제목부분 끝 -->
 <div class="container mt-5 mb-5">
   <div class="row">
-    <!-- 사이드바 -->
-    <aside class="sidebar col-lg-3">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="mb-0">메뉴</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item p-3">
-            <a href="/professor/info" class="text-dark d-flex align-items-center">
-              <i class="bi bi-person-lines-fill mr-2"></i> 내 정보 조회
-            </a>
-          </li>
-          <li class="list-group-item p-3">
-            <a href="/user/professorList" class="text-dark d-flex align-items-center">
-              <i class="bi bi-person-lines-fill mr-2"></i> 비밀번호 변경
-            </a>
-          </li>
-        </ul>
-      </div>
-    </aside>
-    <!-- 사이드 바 끝 -->
+    <%@ include file="/WEB-INF/view/layout/professorMypageAsidebar.jsp"%>
     
     <!-- 메인 div -->
     <main class="col-lg-9">
@@ -41,7 +21,8 @@
         <div class="card-body">
           <h1 class="card-title">개인 정보 수정</h1>
           <div class="split--div" style="margin-bottom: 30px;"></div>
-          <form action="/professor/update" method="post" class="info--update--form">
+          <form action="/update" method="post" class="info--update--form">
+          <input type="hidden" name="_method" value="put" />
             <div class="form-group row">
               <label for="address" class="col-sm-3 col-form-label">주소</label>
               <div class="col-sm-9">

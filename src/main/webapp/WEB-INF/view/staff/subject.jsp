@@ -78,14 +78,16 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="roomId">강의실</label> <input type="text"
-												class="form-control" id="roomId" name="roomId"
-												placeholder="강의실을 입력하세요">
+											<label for="roomId">강의실</label> <select
+												class="form-control" id="roomId" name="roomId">
+												<option value="">강의실을 선택하세요</option>
+											</select>
 										</div>
 										<div class="form-group">
-											<label for="deptId">학과ID</label> <input type="text"
-												class="form-control" id="deptId" name="deptId"
-												placeholder="학과ID를 입력하세요">
+											<label for="deptId">학과</label> <select
+												class="form-control" id="deptId" name="deptId">
+												<option value="">학과를 선택하세요</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -468,9 +470,58 @@
 							}
 						});
 					}
+					
+					// 강의실 목록을 가져오는 함수
+						function getRooms() {
+						$.ajax({
+							url : '/api/room/findAll',
+							type : 'GET',
+							dataType : 'json',
+							success : function(data) {
+								var select = $('#roomId');
+
+								$.each(data, function(index, room) {
+									select.append($('<option>', {
+										value : room.id,
+										text : room.id + ' ('
+												+ room.name + ')'
+									}));
+								});
+							},
+							error : function(xhr, status, error) {
+								console.error(xhr.responseText);
+							}
+						});
+					}
+					
+					// 학과 목록을 가져오는 함수
+					function getDepts() {
+						$.ajax({
+							url : '/api/department/findAll',
+							type : 'GET',
+							dataType : 'json',
+							success : function(data) {
+								var select = $('#deptId');
+								console.log(data);
+
+								$.each(data, function(index, dept) {
+									select.append($('<option>', {
+										value : dept.id,
+										text : dept.id + ' (' + dept.name + '/' + dept.collegeName + ')'
+									}));
+								});
+							},
+							error : function(xhr, status, error) {
+								console.error(xhr.responseText);
+							}
+						});
+					}
+					
 
 					// 페이지 로드 시 교수 목록 가져오기
 					getProfessors();
+					getRooms();
+					getDepts();
 				});
 	</script>
 

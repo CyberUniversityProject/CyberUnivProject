@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.DepartmentDto;
+import com.cyber.university.dto.DepartmentWithCollegeDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.DepartmentRepository;
 import com.cyber.university.repository.model.College;
@@ -63,6 +64,12 @@ public class DepartmentService {
 	@Transactional
 	public void updateById(Department department) {
 		int result = departmentRepository.updateById(department);
+	}
+	
+	
+	@Transactional
+	public List<DepartmentWithCollegeDto> findAll(){
+		return departmentRepository.findAlldeptWithCol();
 	}
 	
 	

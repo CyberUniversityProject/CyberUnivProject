@@ -49,8 +49,39 @@
 			</aside>
 
 			<div class="col-md-10">
-				<h1 class="mt-5 mb-4">강의실 등록</h1>
+				<h1 class="mt-5 mb-4"></h1>
 				<!-- main 넣는 시작 부분 -->
+				
+			 <section id="pricing" class="pricing">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <!-- <div class="box" style="width: 306px; height: 421.38px;"> -->
+            <div class="box">
+              <h3 style="text-align: center;">학과 등록</h3>
+              <ul>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="text" class="form-control" name="collegeId" id="collegeId"
+                    placeholder="단과대학 번호">
+                </div>
+                <br></br>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="text" class="form-control" name="collegeId" id="collegeId"
+                    placeholder="단과대학 번호">
+                </div>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">등록하기</a>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section><!-- End Pricing Section -->
+				<!-- test -->
+				
+				
 				<form action="/room/roomRegister" method="post">
 				<div class="col-lg-8 mt-5 mt-lg-0">
 					<div class="row">

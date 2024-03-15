@@ -403,7 +403,7 @@ public class PersonalController {
 	        case "professor":
 	            // 교수 정보를 업데이트합니다.
 	            userService.updateProfessor(updateDto);
-	            redirectPath = "/info/professor";
+	            redirectPath = "/professor/info";
 	            break;
 	        default:
 	            redirectPath = "/";

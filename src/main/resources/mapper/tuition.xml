@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyber.university.repository.interfaces.TuitionRepository">
+
+<select id="selectByStudentId" resultType="com.cyber.university.repository.model.Tuition">
+	SELECT * FROM cu_tuition WHERE student_id = #{studentId}
+</select>
+
+<select id="selectByStudentIdAndStatus" resultType="com.cyber.university.repository.model.Tuition">
+	SELECT * FROM cu_tuition WHERE student_id = #{studentId} AND status = #{status} ORDER BY tui_year DESC, semester DESC
+</select>
+
+<select id="selectTuiAmountByStudentId" resultType="com.cyber.university.repository.model.CollTuit">
+	SELECT amount FROM cu_coll_tuit
+	WHERE college_id = (SELECT d.college_id FROM cu_student AS s
+						JOIN cu_department AS d
+						ON s.dept_id = d.id
+						WHERE s.id = #{studentId});
+</select>
+
+<insert id="insert">
+	INSERT INTO cu_tuition (student_id, tui_year, semester, tui_amount, sch_type, sch_amount)
+	VALUES (#{studentId}, #{tuiYear}, #{semester}, #{tuiAmount}, #{schType}, #{schAmount})
+</insert>
+
+<select id="selectByStudentIdAndSemester" resultType="com.cyber.university.repository.model.Tuition">
+	SELECT * FROM cu_tuition
+	WHERE student_id = #{studentId} AND tui_year = #{tuiYear} AND semester = #{semester}
+</select>
+
+<update id="updateStatus">
+	UPDATE cu_tuition SET status = true
+	WHERE student_id = #{studentId} AND tui_year = #{tuiYear} AND semester = #{semester}
+</update>
+
+</mapper>

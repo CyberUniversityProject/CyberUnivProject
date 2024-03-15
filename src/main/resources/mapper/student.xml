@@ -178,4 +178,106 @@
 	SELECT COUNT(*) FROM cu_break WHERE student_id = #{userId};
 </select>
 
+
+
+<update id="updateStudentGradeAndSemester1_2">
+		UPDATE cu_student SET
+		grade = 1,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 2
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester2_1">
+		UPDATE cu_student SET
+		grade = 2,
+		semester = 1
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 3
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester2_2">
+		UPDATE cu_student SET
+		grade = 2,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 4
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester3_1">
+		UPDATE cu_student SET
+		grade = 3,
+		semester = 1
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 5
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester3_2">
+		UPDATE cu_student SET
+		grade = 3,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 6
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester4_1">
+		UPDATE cu_student SET
+		grade = 4,
+		semester = 1
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 7
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester4_2">
+		UPDATE cu_student SET
+		grade = 4,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM cu_tuition
+				GROUP BY student_id
+				) AS a
+			WHERE count = 8
+		)
+	</update>
+
+
 </mapper>

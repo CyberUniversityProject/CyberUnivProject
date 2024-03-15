@@ -85,6 +85,32 @@
 	</select>
 	
 	
+	<select id="selectDtoBySemester" resultType="com.cyber.university.dto.response.SubjectDto">
+		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+		FROM cu_subject AS sub
+		JOIN cu_department AS dept
+		ON sub.dept_id = dept.id
+		JOIN cu_college AS coll
+		ON dept.college_id = coll.id
+		JOIN cu_professor AS prof
+		ON sub.professor_id = prof.id
+		WHERE sub_year = #{subYear} AND semester = #{semester}
+	</select>
+	
+	<select id="selectDtoBySemesterLimit" resultType="com.cyber.university.dto.response.SubjectDto">
+		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+		FROM cu_subject AS sub
+		JOIN cu_department AS dept
+		ON sub.dept_id = dept.id
+		JOIN cu_college AS coll
+		ON dept.college_id = coll.id
+		JOIN cu_professor AS prof
+		ON sub.professor_id = prof.id
+		WHERE sub_year = #{subYear} AND semester = #{semester}
+		LIMIT #{page}, 20
+	</select>
+	
+	
 	
 	<select id="selectDtoBySemesterAndDeptAndName" resultType="com.cyber.university.dto.response.SubjectDto">
 

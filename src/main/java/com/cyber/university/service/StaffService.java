@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.cyber.university.dto.CollTuitFormDto;
 import com.cyber.university.dto.SubjectFormDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.interfaces.CollTuitRepository;
 import com.cyber.university.repository.interfaces.CollegeRepository;
 import com.cyber.university.repository.interfaces.DepartmentRepository;
+import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.interfaces.SubjectRepository;
 import com.cyber.university.repository.interfaces.SyllaBusRepository;
 import com.cyber.university.repository.model.College;
@@ -41,6 +44,11 @@ public class StaffService {
 	
 	@Autowired
 	private SyllaBusRepository syllaBusRepository;
+	
+	@Autowired
+	private CollTuitRepository collTuitRepository;
+	@Autowired
+	private RoomRepository roomRepository;
 	
 	
 	
@@ -114,6 +122,54 @@ public class StaffService {
 	public List<College> readCollege() {
 		List<College> collegeList = collegeRepository.selectCollegeDto();
 		return collegeList;
+	}
+	
+	
+	
+	/**
+	 * 단과대별 등록금 입력 서비스
+	 */
+	@Transactional
+	public void createCollTuit(@Validated CollTuitFormDto collTuitFormDto) {
+		// 등록금 중복 입력 검사
+		List<CollTuitFormDto> collTuitList = collTuitRepository.selectByCollTuitDto();
+		for (int i = 0; i < collTuitList.size(); i++) {
+			if (collTuitList.get(i).getCollegeId() == (collTuitFormDto.getCollegeId())) {
+				throw new CustomRestfullException("이미 등록금이 입력된 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+
+		int resultRowCount = collTuitRepository.insert(collTuitFormDto);
+		if (resultRowCount != 1) {
+			System.out.println("단과대 등록금 입력 서비스 오류");
+		}
+	}
+	
+	/**
+	 * 단과대 등록금 조회 서비스
+	 */
+	public List<CollTuitFormDto> readCollTuit() {
+		List<CollTuitFormDto> collTuitList = collTuitRepository.selectByCollTuitDto();
+		return collTuitList;
+	}
+
+	/**
+	 * 단과대 등록금 삭제 서비스
+	 */
+	public int deleteCollTuit(Integer collegeId) {
+		int resultRowCount = collTuitRepository.deleteById(collegeId);
+		return resultRowCount;
+	}
+
+	/**
+	 * 단과대 등록금 수정 서비스
+	 */
+	public int updateCollTuit(CollTuitFormDto collTuitFormDto) {
+		int resultRowCount = collTuitRepository.updateByCollTuitDto(collTuitFormDto);
+		if (resultRowCount != 1) {
+			System.out.println("단과대 등록금 수정 서비스 오류");
+		}
+		return resultRowCount;
 	}
 
 }

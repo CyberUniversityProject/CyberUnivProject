@@ -93,5 +93,8 @@ public interface SubjectRepository {
 	 */
 	public List<Integer> selectIdByLessNumOfStudent();
 	
+	
+	public List<Integer> selectIdByMoreNumOfStudent();
+	
 
 }

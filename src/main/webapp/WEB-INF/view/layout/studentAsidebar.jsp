@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
 				<li class="list-group-item p-3"><a style="color: black;"
 					href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
 				<li class="list-group-item p-3"><a style="color: black;"
-					href="#">등록금 내역 조회</a></li>
+					href="/student/tuition">등록금 내역 조회</a></li>
 				<li class="list-group-item p-3"><a style="color: black;"
 					href="#">등록금 납부 고지서</a></li>
 			</ul>

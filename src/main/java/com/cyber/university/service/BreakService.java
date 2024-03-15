@@ -137,7 +137,16 @@ public class BreakService {
 	}
 	
 	
-	
+	/**
+	 * @param studentId 해당 학생의 휴학 신청 내역 조회
+	 */
+	@Transactional
+	public List<Break> readByStudentId(Integer studentId) {
+
+		List<Break> breakAppEntityList = breakAppRepository.selectByStudentId(studentId);
+
+		return breakAppEntityList;
+	}
 
 	
 

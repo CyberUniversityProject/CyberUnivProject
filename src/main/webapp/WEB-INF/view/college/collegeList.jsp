@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>교직원 추가페이지</h2>
+			<h2>단과대학 리스트 페이지</h2>
 
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 			</aside>
 
 			<div class="col-md-10" style="text-align: center;">
-				<h1 class="mt-5 mb-4">단과대학등록</h1>
+				<h1 class="mt-5 mb-4">단과대학 리스트</h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">
 					<table class="table table hover">

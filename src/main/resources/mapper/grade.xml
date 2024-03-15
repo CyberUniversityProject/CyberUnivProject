@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyber.university.repository.interfaces.GradeRespository">
+
+<!-- 학생이 수강한 연도 조회  -->
+<select id="selectSubYearByStudentId" resultType="com.cyber.university.dto.response.GradeDto">
+select su.sub_year
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+WHERE st.student_id = #{studentId}
+group by su.sub_year
+ORDER BY su.sub_year DESC;
+</select>
+
+<!-- 취득점수 받았는지 조회 -->
+<select id="selectCompleteGradeByStudentId" resultType="com.cyber.university.dto.response.GradeDto">
+SELECT complete_grade FROM cu_stu_sub WHERE student_id = #{studentId};
+</select>
+
+<!-- 학생이 수강한 학기 조회 -->
+<select id="selectSemesterByStudentId" resultType="com.cyber.university.dto.response.GradeDto">
+select su.semester
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+WHERE st.student_id = #{studentId}
+GROUP BY su.semester;
+</select>
+
+<!-- 금학기 성적 조회 -->
+<select id="selectGradeDtoBySemester" resultType="com.cyber.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades, RANK() OVER(ORDER BY gr.grade_value DESC) 석차, ev.evaluation_id
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+INNER JOIN cu_professor AS pr
+ON su.professor_id = pr.id
+INNER JOIN cu_grade AS gr
+ON st.grade = gr.grade
+INNER JOIN cu_student AS stud
+on st.student_id = stud.id
+LEFT JOIN cu_evaluation AS ev
+ON st.subject_id = ev.subject_id
+WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_year = #{subYear}
+ORDER BY st.subject_id;
+</select>
+
+<!-- 전체성적 조회 -->
+<select id="selectGradeDtoByStudentId" resultType="com.cyber.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade,su.grades
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+INNER JOIN cu_professor AS pr
+ON su.professor_id = pr.id
+INNER JOIN cu_grade AS gr
+ON st.grade = gr.grade
+INNER JOIN cu_student AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId};
+</select>
+
+<!-- 전체 누계 성적 조회 -->
+<select id="selectMyGradeDtoByStudentId" resultType="com.cyber.university.dto.response.MyGradeDto">
+SELECT su.sub_year, su.semester, SUM(su.grades) AS sum_grades,SUM(st.complete_grade) AS my_grades, AVG(gr.grade_value) AS average
+FROM cu_stu_sub AS st
+LEFT JOIN cu_subject AS su
+ON st.subject_id = su.id
+LEFT JOIN cu_grade AS gr
+ON st.grade = gr.grade
+WHERE st.student_id = #{student_id}
+GROUP BY su.sub_year, su.semester;
+</select>
+
+<!-- 학기별 조회 (전체 조회) -->
+<select id="selectGradeDtoByStudentIdAndSubYear" resultType="com.cyber.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+INNER JOIN cu_professor AS pr
+ON su.professor_id = pr.id
+INNER JOIN cu_grade AS gr
+ON st.grade = gr.grade
+INNER JOIN cu_student AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester};
+</select>
+
+<!-- 학기별 조회 (선택 조회) -->
+<select id="selectGradeDtoBytype" resultType="com.cyber.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+INNER JOIN cu_professor AS pr
+ON su.professor_id = pr.id
+INNER JOIN cu_grade AS gr
+ON st.grade = gr.grade
+INNER JOIN cu_student AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester} AND su.type = #{type};
+</select>
+
+<!-- 금학기 누계 성적 조회 -->
+<select id="selectMyGradeDtoBySemester" resultType="com.cyber.university.dto.response.MyGradeDto">
+SELECT  st.student_id, su.sub_year, su.semester, SUM(su.grades) AS sum_grades, mg.my_grades, SUM(gr.grade_value)/COUNT(su.name) AS average
+FROM cu_stu_sub AS st
+INNER JOIN cu_subject AS su
+ON st.subject_id = su.id
+INNER JOIN cu_grade AS gr
+ON st.grade = gr.grade
+INNER JOIN (
+SELECT stu.student_id, SUM(sub.grades) AS my_grades
+FROM cu_stu_sub AS stu
+INNER JOIN cu_subject AS sub
+ON stu.subject_id = sub.id
+INNER JOIN cu_grade AS gra
+ON stu.grade = gra.grade
+WHERE stu.student_id = #{studentId} AND sub.sub_year = #{subYear} AND sub.semester = #{semester} AND gra.grade != 'F'
+) AS mg
+ON st.student_id = mg.student_id 
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester};
+</select>
+
+<!-- 장학금 -->
+<select id="findAvgGradeByStudentIdAndSemester" resultType="com.cyber.university.dto.response.GradeForScholarshipDto">
+	SELECT ss.student_id, sub_year, semester, AVG(grade_value) AS avg_grade FROM cu_stu_sub AS ss
+	JOIN cu_grade AS g
+	ON ss.grade = g.grade
+	JOIN cu_subject AS s
+	ON ss.subject_id = s.id
+	WHERE sub_year = #{subYear} AND semester = #{semester} AND ss.student_id = #{studentId}
+	GROUP BY student_id;
+</select>
+</mapper>

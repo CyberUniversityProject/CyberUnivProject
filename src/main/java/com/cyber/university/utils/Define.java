@@ -29,7 +29,15 @@ public class Define {
     public final static String SUBMIT_CHECK_ID = "본인만 신청할 수 있습니다.";
     
     public final static String NOT_FOUND_INFO = "입력되지 않은 정보가 있습니다.";
+    
+    public final static String GRADUATED_STATUS = "졸업";
+    
+    public final static String WITHDRAWN_STATUS = "자퇴";
+    
+    public final static String REGISTRATION_ERROR_MESSAGE = "등록금 납부 대상이 아닙니다.";
 
+    public final static  String ENROLLMENT_ERROR_MESSAGE = "수강 신청 대상이 아닙니다.";
+    
     // Integer로 했더니 ==로 비교하려면 .intValue()를 붙여줘야해서 int로 변경함
     public final static int CURRENT_YEAR = 2024;
 

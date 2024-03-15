@@ -221,5 +221,17 @@ public class TuitionService {
 		}
 	}
 
+	/**
+	  * @Method Name : findAllTuitionByStudentId
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : StudentId로 tuition 목록 출력
+	  */
+	public List<Tuition> findAllTuitionByStudentId(Integer userId) {
+		
+		return tuitionRepository.selectByStudentId(userId);
+	}
+
 
 }

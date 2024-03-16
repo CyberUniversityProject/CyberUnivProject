@@ -157,6 +157,8 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 		<!-- End Counts Section -->
 
 		<!-- ======= Why Us Section ======= -->
+		<c:choose>
+        										<c:when test="${principal.userRole eq 'student'}">
 		<section id="why-us" class="why-us">
 			<div class="container" data-aos="fade-up">
 
@@ -173,8 +175,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 						<div class="icon-boxes d-flex flex-column justify-content-center">
 							<div class="row">
 								<div class="col-xl-4 d-flex align-items-stretch">
-									<c:choose>
-										<c:when test="${principal.userRole eq 'student'}">
+
 											<div class="icon-box mt-4 mt-xl-0">
 												<i class="bx bx-book"></i>
 
@@ -277,8 +278,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								</div>
 							</div>
 						</div>
-						</c:when>
-						</c:choose>
+
 					</div>
 					<!-- End .content-->
 				</div>
@@ -286,6 +286,8 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 			</div>
 		</section>
+			</c:when>
+        						</c:choose>
 		<!-- End Why Us Section -->
 
 		<!-- ======= Features Section ======= -->

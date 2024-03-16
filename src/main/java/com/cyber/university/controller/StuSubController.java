@@ -97,6 +97,14 @@ public class StuSubController {
 			return "/stuSub/updatePeriod";
 		}
 
+	// 수강 신청 기간 -> 종료
+	@GetMapping("/updatePeriod0")
+	public String updatePeriodProc0() {
+		SUGANG_PERIOD = 0;
+
+		return "/stuSub/updatePeriod";
+	}
+
 		// 과목 조회 (현재 학기)
 		@GetMapping("/subjectList/{page}")
 		public String readSubjectList(Model model, @PathVariable(name = "page") Integer page) {

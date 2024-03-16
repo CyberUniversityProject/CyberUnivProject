@@ -123,6 +123,8 @@
 								<br> <a href="/sugang/updatePeriod2"><button
 										type="submit" class="btn--confirm">수강 신청 기간 종료</button></a>
 
+
+
 								<%
 								} else {
 								%>
@@ -130,6 +132,9 @@
 								<div class="alert alert-danger" role="alert">이번 학기 수강 신청
 									기간이 종료되었습니다.</div>
 
+
+<br> <a href="/sugang/updatePeriod0"><button
+										type="submit" class="btn--confirm">예비 수강 신청 기간으로 변경</button></a>
 
 								<%
 								}

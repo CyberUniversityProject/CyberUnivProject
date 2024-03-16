@@ -6,6 +6,8 @@
 
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 <!-- 비밀번호를 확인 하여 id와 비밀번호가 같으면 초기 생성된 계정임, 그래서 비밀번호 변경 팝업창을 띄우게 함 -->
 	
@@ -528,19 +530,34 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 		<!-- End Features Section -->
 
 		<!-- ======= 공지사항 ======= -->
-		<section id="popular-courses" class="courses">
-			<div class="container" data-aos="fade-up">
+        <section id="popular-courses" class="courses">
+            <div class="container" data-aos="fade-up">
 
-				<div class="section-title">
-					<h2>Notice</h2>
-					<p>공지사항</p>
-				</div>
-
-
-
-			</div>
-		</section>
-		<!-- End 공지사항 -->
+                <div class="section-title">
+                    <h2>Notice</h2>
+                    <p>공지사항</p>
+                    <!-- 버튼을 화면 오른쪽 끝에 위치시키기 -->
+                    <div style="position: relative;">
+                        <a href="/notice" class="btn " style="position: absolute; right: 0; background-color: #5fcf80; color: white;">공지사항 바로가기</a>
+                    </div>
+                </div>
+                <!-- 여기에 공지사항 리스트 출력-->
+                <div id="noticeList" class="table-responsive">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>분류</th>
+                                <th>제목</th>
+                                <th>게시일</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- End 공지사항 -->
 
 
 		<!-- ======= 학사일정 ======= -->
@@ -581,3 +598,26 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 	<!-- End #main -->
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
+
+	<script>
+    $(document).ready(function(){
+        // REST API를 호출하여 공지사항 목록을 가져옴
+        $.ajax({
+            url: "/api/notice/list",
+            type: "GET",
+            success: function(data) {
+                 // 가져온 공지사항 목록을 화면에 출력
+                          let noticeListHtml = "";
+                          $.each(data, function(index, notice){
+                              noticeListHtml += "<tr><td>" + notice.id + "</td><td>" + notice.category + "</td><td><a href='/notice/read?id=" + notice.id + "'>" + notice.title + "</a></td><td>" + notice.createdTimeAsString + "</td></tr>";
+                                         });
+
+                          $("#noticeList tbody").html(noticeListHtml);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log("Error:", errorThrown);
+            }
+        });
+    });
+    </script>

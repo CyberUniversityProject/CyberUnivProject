@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,7 +16,6 @@ import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
-import com.cyber.university.dto.professor.UpdateGradesDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.PrincipalDto;
@@ -244,8 +242,7 @@ public class ProfessorController {
 	public String updateStudentSubjdectProc(@PathVariable("subjectId") Integer subjectId, 
 											@PathVariable("studentId") Integer studentId,
 											@RequestParam("grade") String grade,
-											UpdateStudentSubDetailDto dto,
-											UpdateGradesDto dto2) {
+											UpdateStudentSubDetailDto dto) {
 		
 		
 		
@@ -257,7 +254,6 @@ public class ProfessorController {
 	    }
 	    
 	    professorService.updateStudentSubDetail(studentId, subjectId, dto);
-//	    professorService.updateStudentGrade(studentId, subjectId, dto2);
 		
 		return "redirect:/professor/subject/{subjectId}";
 	}

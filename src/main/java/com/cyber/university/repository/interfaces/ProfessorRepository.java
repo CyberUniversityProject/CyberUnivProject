@@ -1,30 +1,26 @@
 package com.cyber.university.repository.interfaces;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import com.cyber.university.dto.professor.ApplySubjectDto;
-import com.cyber.university.dto.professor.MysubjectDetailDto;
-import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
-import com.cyber.university.dto.professor.SubInfoDto;
-import com.cyber.university.dto.professor.SubjectNameDto;
-import com.cyber.university.dto.professor.UpdateGradesDto;
-import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
-import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
-import com.cyber.university.dto.response.ProfessorInfoDto;
-import com.cyber.university.dto.response.UserInfoForUpdateDto;
-
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.UserUpdateDto;
+import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MysubjectDetailDto;
+import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
+import com.cyber.university.dto.professor.SubInfoDto;
+import com.cyber.university.dto.professor.SubjectNameDto;
+import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
+import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
+import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
-import com.cyber.university.repository.model.Subject;
 
 /**
  * @FileName : ProfessorRepository.java
@@ -257,5 +253,5 @@ public interface ProfessorRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 이수 학점 찾기
 	  */
-	public UpdateGradesDto selectGradesInfo(Integer subjectId);
+	public UpdateStudentSubDetailDto selectGradesInfo(Integer subjectId);
 }

@@ -199,13 +199,13 @@
 	<!-- 24.03.16 학생 성적 입력 -->
 	<update id="updateStudentGrade">
 		UPDATE cu_stu_sub
-		SET grade = #{grade}, completeGrade = #{completeGrade}
+		SET grade = #{grade}, complete_grade = #{completeGrade}
 		WHERE student_id = #{studentId}
 		AND subject_id = #{subjectId}
 	</update>
 	
 	<!-- 24.03.16 이수 학점 찾기 -->
-	<select id="selectGradesInfo" resultType="com.cyber.university.dto.professor.UpdateGradesDto">
+	<select id="selectGradesInfo" resultType="com.cyber.university.dto.professor.UpdateStudentSubDetailDto">
 		select grades from cu_subject where id = #{subjectId}
 	</select>
 </mapper>        

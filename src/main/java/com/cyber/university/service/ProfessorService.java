@@ -16,7 +16,6 @@ import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
-import com.cyber.university.dto.professor.UpdateGradesDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
@@ -223,7 +222,9 @@ public class ProfessorService {
 	  * @Method 설명 : 학생 성적 업데이트
 	  */
 	public int updateStudentSubDetail(Integer studentId, Integer subjectId, UpdateStudentSubDetailDto dto) {
+		UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
 		
+		System.out.println("grades : " + grades);
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("studentId", dto.getStudentId());
@@ -233,33 +234,17 @@ public class ProfessorService {
 		map.put("homework", dto.getHomework());
 		map.put("midExam", dto.getMidExam());
 		map.put("finalExam", dto.getFinalExam());
+		map.put("grade", dto.getGrade());
+		map.put("completeGrade", grades.getGrades());
 		map.put("convertedMark", dto.getConvertedMark());
-		
+
 		int result = professorRepository.updateStudentSubDetail(map);
+		int result2 = professorRepository.updateStudentGrade(map);
 		
-		return result;
+		
+		
+		return result + result2;
 	}
 	
-	/**
-	  * @Method Name : updateStudentGrade
-	  * @작성일 : 2024. 3. 16.
-	  * @작성자 : 장명근
-	  * @변경이력 : 
-	  * @Method 설명 : 학생 성적 입력
-	  */
-	public int updateStudentGrade(Integer studentId, Integer subjectId, UpdateGradesDto dto) {
-		UpdateGradesDto grades = professorRepository.selectGradesInfo(subjectId);
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("studentId", dto.getStudentId());
-		map.put("subjectId", dto.getSubjectId());
-		map.put("grade", dto.getGrade());
-		map.put("completeGrade", grades);
-		System.out.println("grade : " + dto.getGrade());
-		System.out.println("completeGrade : " + grades);
-		int result = professorRepository.updateStudentGrade(map);
-		
-		return result;
-	}
+	
 }

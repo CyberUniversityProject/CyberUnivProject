@@ -83,7 +83,7 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/student/myInfo">내 정보 조회</a></li>
-								<li><a href="/student/password">비밀번호 변경</a></li>
+								<li><a href="/password">비밀번호 변경</a></li>
 								<li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
 								<li><a href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
 								<li><a href="/student/tuition">등록금 내역 조회</a></li>
@@ -92,7 +92,7 @@ body {
 						<li class="dropdown"><a href="#"><span>수업</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="#">전체 강의 조회</a></li>
+								<li><a href="/subject/list/1">전체 강의 조회</a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#"><span>수강신청</span> <i
@@ -100,8 +100,8 @@ body {
 							<ul>
 								<li><a href="#">강의시간표 조회</a></li>
 								<li><a href="/sugang/pre/1">예비 수강 신청</a></li>
-								<li><a href="#">수강 신청</a></li>
-								<li><a href="#">수강 신청 내역 조회</a></li>
+								<li><a href="/sugang/preAppList?type=1">수강 신청</a></li>
+								<li><a href="/sugang/list">수강 신청 내역 조회</a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#"><span>성적</span> <i
@@ -180,7 +180,7 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/professor/info">내 정보 조회</a></li>
-								<li><a href="/professor/updatepw">비밀번호 변경</a></li>
+								<li><a href="/password">비밀번호 변경</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#"><span>수업</span> <i
 								class="bi bi-chevron-down"></i></a>

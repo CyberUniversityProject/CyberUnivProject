@@ -26,26 +26,7 @@
 	<div class="container mb-5">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
-			<!-- 사이드바 메뉴 -->
-			<aside class="sidebar col-md-2 mt-5">
-				<div class="card">
-					<div class="card-header">메뉴</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="/student/myInfo">내 정보 조회</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">비밀번호 변경</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">휴학 신청</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">휴학 내역 조회</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">등록금 내역 조회</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">등록금 납부 고지서</a></li>
-					</ul>
-				</div>
-			</aside>
+			<%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
 
 			<div class="col-md-10">
 				<h1 class="mt-5 mb-4">내 정보 조회</h1>

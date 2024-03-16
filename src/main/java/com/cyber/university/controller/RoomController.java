@@ -2,6 +2,7 @@ package com.cyber.university.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,8 @@ public class RoomController {
 	@Autowired
 	private RoomService roomService;
 
+	@Autowired
+	private HttpSession httpSession;
 	// 화면 띄우기
 	@GetMapping("/roomRegister")
 	public String roomRegisterPage() {

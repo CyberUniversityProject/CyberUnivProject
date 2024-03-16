@@ -69,6 +69,17 @@ public class RoomService {
 			
 			return roomRepository.findAllCol();
 		}
+
+	/**
+	 * @FileName : RoomService.java
+	 * @Project : CyberUniversity
+	 * @Date : 2024. 3. 13.
+	 * @작성자 : 김수현
+	 * @변경이력 :
+	 * @프로그램 설명 : 강의실 List 페이징
+	 */
+
+
 	}
 
 	

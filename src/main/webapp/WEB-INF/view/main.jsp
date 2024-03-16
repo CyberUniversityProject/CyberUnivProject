@@ -41,78 +41,85 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 	<!-- End Hero -->
 
 	<main id="main">
-<c:choose>
-    <c:when test="${principal != null}">
-        <!-- ======= User Information Section ======= -->
-        <div class="container">
-            <section id="user-info" class="user-info">
-                <div class="container" data-aos="fade-up">
-                    <div class="section-title">
-                        <h2>User Information</h2>
-                        <p>
-                            <i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님, 환영합니다.
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="info-box">
-                                <h3><i class="bx bx-map"></i> 소속</h3>
-                                <p>
-                                    <c:choose>
-                                        <c:when test="${principal.userRole eq 'staff'}">교직원</c:when>
-                                        <c:when test="${principal.userRole eq 'student'}">학생</c:when>
-                                        <c:when test="${principal.userRole eq 'professor'}">교수</c:when>
-                                    </c:choose>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="info-box">
-                                <h3><i class="bx bx-envelope"></i> 이메일</h3>
-                                <p>${userInfo.email}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="info-box">
-                                <h3><i class="bx bx-bell"></i> 알림</h3>
-                                <p>1개의 업무사항이 있습니다.</p>
-                            </div>
-                        </div>
-                        <!-- My Page Button -->
-                        <c:choose>
-                        <c:when test="${principal.userRole eq 'staff'}">
-                        	<div class="col-lg-3">
-                            <div class="info-box">
-                                <a href="/info/staff" class="btn--confirm ">마이페이지</a>
-                            </div>
-                        </div>
-                        </c:when>
-                        <c:when test="${principal.userRole eq 'student'}">
-                        	<div class="col-lg-3">
-                            <div class="info-box">
-                                <a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
-                            </div>
-                        </div>
-                        </c:when>
-                        <c:when test="${principal.userRole eq 'professor'}">
-                        	<div class="col-lg-3">
-                            <div class="info-box">
-                                <a href="/professor/info" class="btn--confirm ">마이페이지</a>
-                            </div>
-                        </div>
-                        </c:when>
+		<c:choose>
+			<c:when test="${principal != null}">
+				<!-- ======= User Information Section ======= -->
+				<div class="container">
+					<section id="user-info" class="user-info">
+						<div class="container" data-aos="fade-up">
+							<div class="section-title">
+								<h2>User Information</h2>
+								<p>
+									<i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님,
+									환영합니다.
+								</p>
+							</div>
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="info-box">
+										<h3>
+											<i class="bx bx-map"></i> 소속
+										</h3>
+										<p>
+											<c:choose>
+												<c:when test="${principal.userRole eq 'staff'}">교직원</c:when>
+												<c:when test="${principal.userRole eq 'student'}">학생</c:when>
+												<c:when test="${principal.userRole eq 'professor'}">교수</c:when>
+											</c:choose>
+										</p>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="info-box">
+										<h3>
+											<i class="bx bx-envelope"></i> 이메일
+										</h3>
+										<p>${userInfo.email}</p>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="info-box">
+										<h3>
+											<i class="bx bx-bell"></i> 알림
+										</h3>
+										<p>1개의 업무사항이 있습니다.</p>
+									</div>
+								</div>
+								<!-- My Page Button -->
+								<c:choose>
+									<c:when test="${principal.userRole eq 'staff'}">
+										<div class="col-lg-3">
+											<div class="info-box">
+												<a href="/info/staff" class="btn--confirm ">마이페이지</a>
+											</div>
+										</div>
+									</c:when>
+									<c:when test="${principal.userRole eq 'student'}">
+										<div class="col-lg-3">
+											<div class="info-box">
+												<a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
+											</div>
+										</div>
+									</c:when>
+									<c:when test="${principal.userRole eq 'professor'}">
+										<div class="col-lg-3">
+											<div class="info-box">
+												<a href="/professor/info" class="btn--confirm ">마이페이지</a>
+											</div>
+										</div>
+									</c:when>
 
-                        </c:choose>
-                        <!-- End My Page Button -->
-                    </div>
-                </div>
-            </section>
-        </div>
-        <!-- End User Information Section -->
-    </c:when>
-</c:choose>
+								</c:choose>
+								<!-- End My Page Button -->
+							</div>
+						</div>
+					</section>
+				</div>
+				<!-- End User Information Section -->
+			</c:when>
+		</c:choose>
 
 
 
@@ -166,18 +173,22 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 						<div class="icon-boxes d-flex flex-column justify-content-center">
 							<div class="row">
 								<div class="col-xl-4 d-flex align-items-stretch">
-									<div class="icon-box mt-4 mt-xl-0">
-										<i class="bx bx-receipt"></i>
-										<h4>수강신청</h4>
-										<div class="text-center">
-											<a href="about.html" class="more-btn">바로가기 <i
-												class="bx bx-chevron-right"></i></a>
-										</div>
-									</div>
+									<c:choose>
+										<c:when test="${principal.userRole eq 'student'}">
+											<div class="icon-box mt-4 mt-xl-0">
+												<i class="bx bx-book"></i>
+
+												<h4>수강신청</h4>
+												<div class="text-center">
+													<a href="about.html" class="more-btn">바로가기 <i
+														class="bx bx-chevron-right"></i></a>
+												</div>
+											</div>
 								</div>
 								<div class="col-xl-4 d-flex align-items-stretch">
 									<div class="icon-box mt-4 mt-xl-0">
-										<i class="bx bx-cube-alt"></i>
+										<i class="bx bx-bar-chart-alt"></i>
+
 										<h4>성적조회</h4>
 										<div class="text-center">
 											<a href="about.html" class="more-btn">바로가기 <i
@@ -187,20 +198,93 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								</div>
 								<div class="col-xl-4 d-flex align-items-stretch">
 									<div class="icon-box mt-4 mt-xl-0">
-										<i class="bx bx-images"></i>
+										<i class="bx bx-info-circle"></i>
+
 										<h4>학사정보</h4>
 										<div class="text-center">
 											<a href="about.html" class="more-btn">바로가기 <i
 												class="bx bx-chevron-right"></i></a>
 										</div>
 									</div>
+
+
+								</div>
+								</c:when>
+								<c:when test="${principal.userRole eq 'professor'}">
+									<div class="icon-box mt-4 mt-xl-0">
+										<i class="bx bx-book-reader"></i>
+
+										<h4>내 강의조회</h4>
+										<div class="text-center">
+											<a href="professor/mysub" class="more-btn">바로가기 <i
+												class="bx bx-chevron-right"></i></a>
+										</div>
+									</div>
+							</div>
+							<div class="col-xl-4 d-flex align-items-stretch">
+								<div class="icon-box mt-4 mt-xl-0">
+									<i class="bx bx-star"></i>
+
+									<h4>내 강의평가</h4>
+									<div class="text-center">
+										<a href="about.html" class="more-btn">바로가기 <i
+											class="bx bx-chevron-right"></i></a>
+									</div>
 								</div>
 							</div>
-							<!-- End .content-->
-						</div>
-					</div>
+							<div class="col-xl-4 d-flex align-items-stretch">
+								<div class="icon-box mt-4 mt-xl-0">
+									<i class="bx bx-edit"></i>
 
+									<h4>강의 등록</h4>
+									<div class="text-center">
+										<a href="professor/apply" class="more-btn">바로가기 <i
+											class="bx bx-chevron-right"></i></a>
+									</div>
+								</div>
+							</div>
+							</c:when>
+							<c:when test="${principal.userRole eq 'staff'}">
+								<div class="icon-box mt-4 mt-xl-0">
+									<i class="bx bx-user-plus"></i>
+
+									<h4>학생등록</h4>
+									<div class="text-center">
+										<a href="/user/student" class="more-btn">바로가기 <i
+											class="bx bx-chevron-right"></i></a>
+									</div>
+								</div>
+						</div>
+						<div class="col-xl-4 d-flex align-items-stretch">
+							<div class="icon-box mt-4 mt-xl-0">
+								<i class="bx bx-user-plus"></i>
+
+								<h4>교수등록</h4>
+								<div class="text-center">
+									<a href="/user/professor" class="more-btn">바로가기 <i
+										class="bx bx-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-4 d-flex align-items-stretch">
+							<div class="icon-box mt-4 mt-xl-0">
+								<i class="bx bx-user-plus"></i>
+
+								<h4>직원등록</h4>
+								<div class="text-center">
+									<a href="/user/staff" class="more-btn">바로가기 <i
+										class="bx bx-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+						</c:when>
+						</c:choose>
+					</div>
+					<!-- End .content-->
 				</div>
+			</div>
+
+			</div>
 		</section>
 		<!-- End Why Us Section -->
 
@@ -209,71 +293,207 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 			<div class="container" data-aos="fade-up">
 
 				<div class="row" data-aos="zoom-in" data-aos-delay="100">
-					<div class="col-lg-3 col-md-4">
-						<div class="icon-box">
-							<i class="ri-store-line" style="color: #ffbb2c;"></i>
-							<h3>
-								<a href="">휴학신청</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-						<div class="icon-box">
-							<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-							<h3>
-								<a href="">휴학 내역조회</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-						<div class="icon-box">
-							<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-							<h3>
-								<a href="">등록금 내역조회</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-						<div class="icon-box">
-							<i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-							<h3>
-								<a href="">등록금 납부고지서 출력</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-database-2-line" style="color: #47aeff;"></i>
-							<h3>
-								<a href="">강의 조회</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-							<h3>
-								<a href="">강의시간표 조회</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-							<h3>
-								<a href="">금학기 성적조회</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-							<h3>
-								<a href="">학기별 성적조회</a>
-							</h3>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${principal.userRole eq 'student'}">
+							<div class="col-lg-3 col-md-4">
+								<div class="icon-box">
+									<i class="ri-store-line" style="color: #ffbb2c;"></i>
 
+									<h3>
+										<a href="/student/leaveOfAbsence">휴학신청</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+
+									<h3>
+										<a href="/student/leaveOfAbsenceList">휴학 내역조회</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+
+									<h3>
+										<a href="/student/tuition">등록금 내역조회</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+								<div class="icon-box">
+									<i class="ri-paint-brush-line" style="color: #e361ff;"></i>
+
+									<h3>
+										<a href="">등록금 납부고지서 출력</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-database-2-line" style="color: #47aeff;"></i>
+									<h3>
+										<a href="/subject/list/1">강의 조회</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+									<h3>
+										<a href="/sugang/pre/1">예비수강신청</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
+									<h3>
+										<a href="/sugang/preAppList?type=1">수강신청</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
+									<h3>
+										<a href="">학기별 성적조회</a>
+									</h3>
+								</div>
+							</div>
+						</c:when>
+						<c:when test="${principal.userRole eq 'professor'}">
+							<div class="col-lg-3 col-md-4">
+								<div class="icon-box">
+									<i class="ri-store-line" style="color: #ffbb2c;"></i>
+									<h3>
+										<a href="/subject/list/1">전체 강의조회</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+									<h3>
+										<a href="/professor/apply">학사일정</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<h3>
+										<a href="/notice">공지사항</a>
+									</h3>
+								</div>
+							</div>
+
+						</c:when>
+						<c:when test="${principal.userRole eq 'staff'}">
+							<div class="col-lg-3 col-md-4">
+								<div class="icon-box">
+									<i class="ri-store-line" style="color: #ffbb2c;"></i>
+									<h3>
+										<a href="/user/studentList">학생명단조회</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+									<h3>
+										<a href="/user/professorList">교수명단조회</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<h3>
+										<a href="/tuition/bill">등록금 고지서발송</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<h3>
+										<a href="/applySubject/list">교수 강의신청 목록</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #4233ff;"></i>
+									<h3>
+										<a href="/break/list/staff">휴학처리</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<h3>
+										<a href="/sugang/period">수강 신청기간 설정</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<h3>
+										<a href="/college/collegeRegister">단과대 등록</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<h3>
+										<a href="/college/collegeRegister">단과대 등록</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+
+									<h3>
+										<a href="/department/departmentRegister">학과 등록</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+
+									<h3>
+										<a href="/room/roomRegister">강의실 등록</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+
+									<h3>
+										<a href="/staff/subject?crud=insert">강의 등록</a>
+									</h3>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 mt-4">
+								<div class="icon-box">
+									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+
+									<h3>
+										<a href="/staff/tuition?crud=insert">단대별 등록금 등록</a>
+									</h3>
+								</div>
+							</div>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 

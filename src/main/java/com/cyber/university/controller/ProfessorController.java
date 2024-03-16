@@ -6,30 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.SubInfoDto;
+import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
-import com.cyber.university.dto.response.UserInfoForUpdateDto;
-import com.cyber.university.handler.exception.CustomPageException;
 import com.cyber.university.handler.exception.CustomRestfullException;
-import com.cyber.university.repository.model.User;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -63,11 +57,11 @@ public class ProfessorController {
 	  * @Method 설명 : 교수 정보 조회 페이지 요청
 	  */
 	@GetMapping("/info")
-	public String professerInfoPage(@CookieValue(name = "id", required = false)Integer userId , Model model) {
+	public String professerInfoPage(Model model) {
 		
-		log.info("controller cookie id : "+ userId);
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 			
-		ProfessorInfoDto professorInfo = professorService.selectProfessorInfoWithCollegeAndDepartment(userId);
+		ProfessorInfoDto professorInfo = professorService.selectProfessorInfoWithCollegeAndDepartment(principal.getId());
 		model.addAttribute("professorInfo", professorInfo);
 		
 		return "/professor/professorInfo";
@@ -81,9 +75,11 @@ public class ProfessorController {
 	  * @Method 설명 : 정보 수정 페이지 요청
 	  */
 	@GetMapping("/update")
-	public String updateUserPage(@CookieValue(name = "id", required = false)Integer userId, Model model) {
-	
-		UpdateProfessorInfoDto professorInfo = professorService.selectProfessorInfo(userId);
+	public String updateUserPage(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		
+		UpdateProfessorInfoDto professorInfo = professorService.selectProfessorInfo(principal.getId());
 		model.addAttribute("professorInfo", professorInfo);
 		
 		
@@ -160,6 +156,13 @@ public class ProfessorController {
 	}
 	
 	
+	/**
+	  * @Method Name : mySubPage
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 본인 강의 조회
+	  */
 	@GetMapping("/mysub")
 	public String mySubPage(Model model) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -175,9 +178,29 @@ public class ProfessorController {
 	    
 		return "/professor/mySubPage";
 	}
+		
 	
-	@GetMapping("/allsub")
-	public String  allSubPage(Model model) {
+	/**
+	  * @Method Name : updatePwPage
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 비밀번호 변경 페이지 조회
+	  */
+	@GetMapping("/updatepw")
+	public String updatePwPage() {
+		return "/professor/updatePW";
+	}
+	
+	/**
+	  * @Method Name : subjectPage
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 성적 평가 페이지 요청
+	  */
+	@GetMapping("/subject/{subjectId}")
+	public String subjectPage(@PathVariable("subjectId") Integer subjectId, Model model) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
 	    if (!(principal instanceof PrincipalDto)) {
@@ -185,19 +208,13 @@ public class ProfessorController {
 	        return "redirect:/login";
 	    }
 	    
-	    int professorId = principal.getId();
-	    List<SubInfoDto> subInfoList = professorService.selectAllSub(professorId);
-		model.addAttribute("subInfoList", subInfoList);
+	    List<MysubjectDetailDto> mySubEvaluation = professorService.selectMySubDetailList(subjectId);
+	    model.addAttribute("mySubEvaluation", mySubEvaluation);
 		
+	    SubjectNameDto subjectName = professorService.selectSubjectName(subjectId);
+	    model.addAttribute("subjectName", subjectName);
 	    
-		return "/professor/allSubPage";
+		return "/professor/subjectDetail";
 	}
-	
-	@GetMapping("/updatepw")
-	public String updatePwPage() {
-		return "/professor/updatePW";
-	}
-	
-	
 	
 }

@@ -8,8 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
+import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
@@ -28,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
+import com.cyber.university.repository.model.Subject;
 
 /**
  * @FileName : ProfessorService.java
@@ -180,4 +183,27 @@ public class ProfessorService {
 		return list != null ? list : Collections.emptyList();
 	}
 	
+	/**
+	  * @Method Name : selectMySubDetailList
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 신청한 학생 리스트 조회
+	  */
+	public List<MysubjectDetailDto> selectMySubDetailList(Integer subjectId) {
+		
+		return professorRepository.selectMySubDetailList(subjectId);
+	}
+	
+	/**
+	  * @Method Name : selectSubjectName
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 과목 명 찾기
+	  */
+	public SubjectNameDto selectSubjectName(Integer id) {
+		
+		return professorRepository.selectSubjectName(id);
+	}
 }

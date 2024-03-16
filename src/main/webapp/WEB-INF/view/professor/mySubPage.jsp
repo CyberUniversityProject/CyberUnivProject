@@ -56,9 +56,7 @@
 									<button type="submit">
 										<ul class="d-flex justify-content-center" style="margin: 0;">
 											<li style="height: 24px; margin-right: 2px;">조회
-											<li style="height: 24px;"><span
-												class="material-symbols-outlined"
-												style="font-size: 18px; padding-top: 4px;">search</span>
+											
 										</ul>
 									</button>
 								</div>
@@ -99,14 +97,14 @@
 												</td>
 												<td>									
 													<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
-														<li style="height: 24px;"><a href="/subject/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">조회</a>
-														<li style="height: 24px;"><a href="/subject/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;"><span class="material-symbols-outlined">content_paste_search</span></a>
+														<li style="height: 24px;"><a href="/subject/syllabus/${subInfo.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">조회</a>
+														
 													</ul>
 												</td>
 												<td>
 													<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
-														<li style="height: 24px;"><a href="/professor/subject/${subject.id}">조회</a>
-														<li style="height: 24px;"><a href="/professor/subject/${subject.id}"><span class="material-symbols-outlined">content_paste_search</span></a>
+														<li style="height: 24px;"><a href="/professor/subject/${subInfo.id}">조회</a>
+														
 													</ul>
 												</td>
 											</tr>

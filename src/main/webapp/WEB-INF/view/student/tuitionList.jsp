@@ -89,28 +89,34 @@
 												<td id="formatSchAmount"><input type="hidden"
 													value="${tuition.schAmount}" id="schAmount" /></td>
 												<td id="totalAmount"></td>
-																								<c:choose>
-													<c:when test="${tuition.status eq '0'}">
-														<td> 미납 </td>
-													</c:when>
-													<c:otherwise>
-														<td> 납부 완료 </td>
-													</c:otherwise>
-												</c:choose>
 												<c:choose>
 													<c:when test="${tuition.status eq '0'}">
-														<td><a href="/student/tuitionBill" onclick="window.open(this.href, '_blank', 'width=600, height=800'); return false; ">
-																<button class="btn btn-primary" id="tuitionButton"
-																	type="button">등록금 납부</button>
-														</a></td>
+														<td>미납</td>
 													</c:when>
 													<c:otherwise>
-														<td><a href="/student/tuition/">
-																<button class="btn btn-primary" id="tuitionButton"
-																	type="button">등록금 영수증</button>
-														</a></td>
+														<td>납부 완료</td>
 													</c:otherwise>
 												</c:choose>
+
+
+
+
+												<td><a href="/student/tuitionBill?tuiYear=${tuition.tuiYear }&semester=${tuition.semester}"
+													onclick="window.open(this.href, '_blank', 'width=600, height=900'); return false;">
+														<c:choose>
+															<c:when test="${tuition.status eq '0'}">
+																<button class="btn btn-primary" id="tuitionButton"
+																	type="button">등록금 납부</button>
+
+															</c:when>
+															<c:otherwise>
+																<button class="btn btn-primary" id="tuitionButton"
+																	type="button">등록금 영수증</button>
+
+															</c:otherwise>
+														</c:choose>
+												</a></td>
+
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -146,10 +152,10 @@
 
 			</div>
 		</div>
-		
+
 	</div>
-	
-	
+
+
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

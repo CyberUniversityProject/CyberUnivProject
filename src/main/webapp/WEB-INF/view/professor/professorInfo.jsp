@@ -13,7 +13,7 @@
 
 <div class="container mt-5 mb-5">
   <div class="row">
-    <%@ include file="/WEB-INF/view/layout/professorMypageAsidebar.jsp"%>
+  <%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
     
     <!-- 메인 컨텐츠 -->
     <main class="col-lg-9" style="padding-top: 0;"> <!-- 여기에 스타일 추가 -->

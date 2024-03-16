@@ -44,7 +44,7 @@
 	<!-- 상단 제목부분 끝 -->
 	<div class="container mb-5">
 		<div class="row">
-			<%@ include file="/WEB-INF/view/layout/sidebarStaff.jsp"%>
+			<%@ include file="/WEB-INF/view/layout/sidebarSugang.jsp"%>
 			<div class="col-md-10">
 				<h1 class="mt-5 mb-4">예비 수강신청</h1>
 				<hr />
@@ -114,7 +114,7 @@
 										<tr>
 											<th>단과대학</th>
 											<th>개설학과</th>
-											<th>학수번호</th>
+											<th>과목번호</th>
 											<th>강의구분</th>
 											<th style="width: 200px;">강의명</th>
 											<th>담당교수</th>

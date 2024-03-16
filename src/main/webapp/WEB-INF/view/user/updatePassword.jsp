@@ -56,7 +56,7 @@
 	<!-- 상단 제목부분 끝 -->
 	<div class="container mb-5">
 		<div class="row">
-			<%@ include file="/WEB-INF/view/layout/professorMypageAsidebar.jsp"%>
+			<%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
 
 			<div class="col-md-10">
 				<div class="container mt-5">

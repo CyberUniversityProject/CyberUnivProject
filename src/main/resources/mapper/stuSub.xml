@@ -71,7 +71,7 @@
 
 	<select id="selectJoinListByStudentId" resultType="com.cyber.university.dto.response.StuSubAppDto">
 		SELECT pss.student_id, pss.subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
-		FROM pre_cu_stu_sub AS pss
+		FROM cu_pre_stu_sub AS pss
 		LEFT JOIN cu_stu_sub AS ss
 		ON pss.subject_id = ss.subject_id AND pss.student_id = ss.student_id
 		LEFT JOIN cu_subject AS su

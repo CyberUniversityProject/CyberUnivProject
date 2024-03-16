@@ -178,7 +178,7 @@ public class UserController {
 		model.addAttribute("professorList", list);
 		model.addAttribute("deptId", deptId);
 		/**
-		 * @author 서영 1페이지가 선택되어 있음을 보여주기 위함
+		 * @author 1페이지가 선택되어 있음을 보여주기 위함
 		 */
 		model.addAttribute("page", 1);
 

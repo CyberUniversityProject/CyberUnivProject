@@ -74,9 +74,15 @@ public class ScheduleService {
 		return scheduleList;
 	}
 	
+	// 학사일정 수정
 	public int updateSchedule(ScheduleFormDto scheduleFormDto) {
 		int resultRowCount = scheduleRepository.updateSchedule(scheduleFormDto);
 		return resultRowCount;
-		
+	}
+	
+	// 학사일정 삭제
+	public int deleteSchedule(Integer id) {
+		int resultRowCount = scheduleRepository.deleteSchedule(id);
+		return resultRowCount;
 	}
 }

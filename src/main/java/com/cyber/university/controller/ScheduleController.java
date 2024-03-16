@@ -110,7 +110,10 @@ public class ScheduleController {
 	}
 	
 	// 삭제
-	public String deleteSchedule() {
+	@GetMapping("/delete")
+	public String deleteSchedule(Model model, Integer id) {
+		model.addAttribute("id", id);
+		scheduleService.deleteSchedule(id);
 		return "redirect:/schedule/list";
 	}
 	

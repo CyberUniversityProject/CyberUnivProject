@@ -31,6 +31,7 @@ public interface ScheduleRepository {
 	// 학사일정 수정
 	public int updateSchedule(ScheduleFormDto scheduleFormDto);
 	// 학사일정 삭제
+	public int deleteSchedule(Integer id);
 	
 	
 	

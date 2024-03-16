@@ -87,7 +87,6 @@ body {
 								<li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
 								<li><a href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
 								<li><a href="/student/tuition">등록금 내역 조회</a></li>
-								<li><a href="#">등록금 납부 고지서</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#"><span>수업</span> <i
 								class="bi bi-chevron-down"></i></a>
@@ -107,9 +106,7 @@ body {
 						<li class="dropdown"><a href="#"><span>성적</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="#">금학기 성적 조회</a></li>
-								<li><a href="#">학기별 성적 조회</a></li>
-								<li><a href="#">누계 성적</a></li>
+								<li><a href="/student/gradeDetailList">성적 조회</a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#"><span>학사정보</span> <i

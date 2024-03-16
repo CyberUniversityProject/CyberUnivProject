@@ -37,6 +37,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.cyber.university.controller.StuSubController.SUGANG_PERIOD;
+
 
 /**
  * 
@@ -66,6 +68,10 @@ public class PersonalController {
 	@GetMapping("/")
 	public String home(Model model) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+		Integer period = SUGANG_PERIOD;
+		model.addAttribute("periodNumber", period);
+		System.out.println("period : " + period);
 
 		// Principal 객체가 null이 아닌지 확인
 		if (principal != null) {

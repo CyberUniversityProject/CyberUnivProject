@@ -11,7 +11,16 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<style>
+<style type="text/css">
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif !important;
+}
 .table td, .table th {
 	white-space: nowrap; /* 텍스트의 줄바꿈을 막음 */
 	overflow: hidden; /* 넘치는 내용 숨김 */
@@ -240,8 +249,7 @@
 
 
 
-										<div class="form-check"></div>
-										<div class="form-check">
+										<div class="container text-center form-check">
 											<input type="hidden" id="appDate" value="${studentInfo.today }"></input>
 											<h3>${studentInfo.today }</h3>
 											<label class="form-check-label" for="same-address">위와

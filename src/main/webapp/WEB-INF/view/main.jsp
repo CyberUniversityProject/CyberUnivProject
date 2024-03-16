@@ -41,6 +41,20 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 	<!-- End Hero -->
 
 	<main id="main">
+	<c:choose>
+
+    <c:when test="${periodNumber == 0}">
+       <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert" style="height: 100px">
+           <h2 class="text-center">2024년 1학기 예비수강신청 기간입니다.</h2>
+       </div>
+       </c:when>
+        <c:when test="${periodNumber == 1}">
+              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert" style="height: 100px">
+                  <h2 class="text-center">2024년 1학기 수강신청 기간입니다.</h2>
+              </div>
+
+    </c:when>
+    </c:choose>
 		<c:choose>
 			<c:when test="${principal != null}">
 				<!-- ======= User Information Section ======= -->
@@ -157,6 +171,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 		<!-- End Counts Section -->
 
 		<!-- ======= Why Us Section ======= -->
+
 		<section id="why-us" class="why-us">
 			<div class="container" data-aos="fade-up">
 
@@ -277,15 +292,16 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								</div>
 							</div>
 						</div>
-						</c:when>
-						</c:choose>
+
 					</div>
 					<!-- End .content-->
 				</div>
 			</div>
-
+			</c:when>
+			</c:choose>
 			</div>
 		</section>
+
 		<!-- End Why Us Section -->
 
 		<!-- ======= Features Section ======= -->

@@ -1,5 +1,6 @@
 package com.cyber.university.controller;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyber.university.dto.ChangePasswordDto;
@@ -362,7 +364,23 @@ public class StudentController {
 	  * @Method 설명 : 등록금 고지서 페이지
 	  */
 	@GetMapping("/tuitionBill")
-	private String tuitionBill() {
+	private String tuitionBill(@RequestParam("tuiYear") Integer tuiYear, @RequestParam("semester") Integer semester ,Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		LeaveStudentInfoDto studentInfoDto = studentService.findLeaveStudentById(userId);
+		model.addAttribute("student", studentInfoDto);
+		
+		Tuition tuition = tuitionService.findTuitionByStudentIdAndYearAndSemester(userId, tuiYear,semester);
+		model.addAttribute("tuitionBill", tuition);
+		
+		
 
 		return "/student/tuitionBill";
 	}

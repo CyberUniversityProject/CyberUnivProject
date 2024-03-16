@@ -99,7 +99,6 @@ public class TuitionService {
 		// 1학년 2학기 이상의 학생이라면
 		if (studentEntity.getGrade() > 1 || studentEntity.getSemester() == 2) {
 			// 직전 학기 성적 평균
-			// 상수로 선언해둬서 노란줄 뜨는 거니까 무시하기
 			GradeForScholarshipDto gradeDto = null;
 			if (Define.CURRENT_SEMESTER == 1) {
 				gradeDto = gradeService.readAvgGrade(studentId, Define.CURRENT_YEAR - 1, 2);
@@ -130,7 +129,7 @@ public class TuitionService {
 	}
 
 	/**
-	 * 등록금 고지서 생성 교직원 탭에서 사용하도록 할 것
+	 * 등록금 고지서 생성 (현재 학기)
 	 * 
 	 * @param studentId (principal의 id와 동일)
 	 */

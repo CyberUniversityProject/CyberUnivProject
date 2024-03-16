@@ -27,9 +27,9 @@ main {
 					<td><a href="/schedule" class="selected--menu">학사일정</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"staff\") }">
-					<tr>
-						<td><a href="/schedule/list"> 학사일정 등록</a></td>
-					</tr>
+				<tr>
+					<td><a href="/schedule/list"> 학사일정 등록</a></td>
+				</tr>
 				</c:if>
 			</table>
 		</div>
@@ -57,7 +57,7 @@ main {
 			</tbody>
 		</table>
 	</div>
-	<a href="/schedule/list?crud=insert" class="button">등록</a>
+	<a href="/schedule/write" class="button">등록</a>
 	</main>
 </div>
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

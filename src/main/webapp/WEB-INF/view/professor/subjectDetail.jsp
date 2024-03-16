@@ -72,7 +72,7 @@
 										<td>${evaluation.midExam}</td>
 										<td>${evaluation.finalExam}</td>
 										<td>${evaluation.convertedMark}</td>
-										<td><a href="#">기입</a></td>
+										<td><a href="/professor/subject/${evaluation.subjectId}/${evaluation.studentId}">기입</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

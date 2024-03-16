@@ -106,9 +106,7 @@ body {
 						<li class="dropdown"><a href="#"><span>성적</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="#">금학기 성적 조회</a></li>
-								<li><a href="#">학기별 성적 조회</a></li>
-								<li><a href="#">누계 성적</a></li>
+								<li><a href="/student/gradeDetailList">성적 조회</a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#"><span>학사정보</span> <i

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,10 +17,13 @@ import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
+import com.cyber.university.dto.professor.UpdateGradesDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
+import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
 
@@ -217,4 +221,44 @@ public class ProfessorController {
 		return "/professor/subjectDetail";
 	}
 	
+	@GetMapping("/subject/{subjectId}/{studentId}")
+	public String updateStudentSubjdectPage(@PathVariable("subjectId") Integer subjectId, 
+											@PathVariable("studentId") Integer studentId, 
+											Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (!(principal instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+		
+	    Student studentInfo = professorService.selectByStudentId(studentId);
+	    model.addAttribute("studentInfo", studentInfo);
+	    
+		
+		return "/professor/updateStudentDetail";
+	}
+	
+	@PostMapping("/subject/{subjectId}/{studentId}")
+	public String updateStudentSubjdectProc(@PathVariable("subjectId") Integer subjectId, 
+											@PathVariable("studentId") Integer studentId,
+											@RequestParam("grade") String grade,
+											UpdateStudentSubDetailDto dto,
+											UpdateGradesDto dto2) {
+		
+		
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (!(principal instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+	    
+	    professorService.updateStudentSubDetail(studentId, subjectId, dto);
+//	    professorService.updateStudentGrade(studentId, subjectId, dto2);
+		
+		return "redirect:/professor/subject/{subjectId}";
+	}
 }

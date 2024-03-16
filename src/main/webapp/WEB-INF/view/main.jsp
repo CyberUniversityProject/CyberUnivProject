@@ -41,6 +41,20 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 	<!-- End Hero -->
 
 	<main id="main">
+	<c:choose>
+
+    <c:when test="${periodNumber == 0}">
+       <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert" style="height: 100px">
+           <h2 class="text-center">2024년 1학기 예비수강신청 기간입니다.</h2>
+       </div>
+       </c:when>
+        <c:when test="${periodNumber == 1}">
+              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert" style="height: 100px">
+                  <h2 class="text-center">2024년 1학기 수강신청 기간입니다.</h2>
+              </div>
+
+    </c:when>
+    </c:choose>
 		<c:choose>
 			<c:when test="${principal != null}">
 				<!-- ======= User Information Section ======= -->
@@ -174,8 +188,8 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 						<div class="icon-boxes d-flex flex-column justify-content-center">
 							<div class="row">
 								<div class="col-xl-4 d-flex align-items-stretch">
-<c:choose>
-        										<c:when test="${principal.userRole eq 'student'}">
+									<c:choose>
+										<c:when test="${principal.userRole eq 'student'}">
 											<div class="icon-box mt-4 mt-xl-0">
 												<i class="bx bx-book"></i>
 
@@ -283,8 +297,8 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 					<!-- End .content-->
 				</div>
 			</div>
-	</c:when>
-        						</c:choose>
+			</c:when>
+			</c:choose>
 			</div>
 		</section>
 

@@ -41,77 +41,79 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 	<!-- End Hero -->
 
 	<main id="main">
+<c:choose>
+    <c:when test="${principal != null}">
+        <!-- ======= User Information Section ======= -->
+        <div class="container">
+            <section id="user-info" class="user-info">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-title">
+                        <h2>User Information</h2>
+                        <p>
+                            <i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님, 환영합니다.
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="info-box">
+                                <h3><i class="bx bx-map"></i> 소속</h3>
+                                <p>
+                                    <c:choose>
+                                        <c:when test="${principal.userRole eq 'staff'}">교직원</c:when>
+                                        <c:when test="${principal.userRole eq 'student'}">학생</c:when>
+                                        <c:when test="${principal.userRole eq 'professor'}">교수</c:when>
+                                    </c:choose>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="info-box">
+                                <h3><i class="bx bx-envelope"></i> 이메일</h3>
+                                <p>${userInfo.email}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="info-box">
+                                <h3><i class="bx bx-bell"></i> 알림</h3>
+                                <p>1개의 업무사항이 있습니다.</p>
+                            </div>
+                        </div>
+                        <!-- My Page Button -->
+                        <c:choose>
+                        <c:when test="${principal.userRole eq 'staff'}">
+                        	<div class="col-lg-3">
+                            <div class="info-box">
+                                <a href="/info/staff" class="btn--confirm ">마이페이지</a>
+                            </div>
+                        </div>
+                        </c:when>
+                        <c:when test="${principal.userRole eq 'student'}">
+                        	<div class="col-lg-3">
+                            <div class="info-box">
+                                <a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
+                            </div>
+                        </div>
+                        </c:when>
+                        <c:when test="${principal.userRole eq 'professor'}">
+                        	<div class="col-lg-3">
+                            <div class="info-box">
+                                <a href="/professor/info" class="btn--confirm ">마이페이지</a>
+                            </div>
+                        </div>
+                        </c:when>
 
-		<c:choose>
-			<c:when test="${principal != null}">
-				<!-- ======= User Information Section ======= -->
-				<div class="container">
-					<section id="user-info" class="user-info">
-						<div class="container" data-aos="fade-up">
+                        </c:choose>
+                        <!-- End My Page Button -->
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- End User Information Section -->
+    </c:when>
+</c:choose>
 
-							<div class="section-title">
-								<h2>User Information</h2>
-
-								<p>
-									<i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님,
-									환영합니다.
-								</p>
-							</div>
-
-							<div class="row">
-
-								<div class="col-lg-3">
-									<div class="info-box">
-										<h3>
-											<i class="bx bx-map"></i> 소속
-										</h3>
-										<p>
-											<c:choose>
-												<c:when test="${principal.userRole eq 'staff'}">교직원</c:when>
-												<c:when test="${principal.userRole eq 'student'}">학생</c:when>
-												<c:when test="${principal.userRole eq 'professor'}">교수</c:when>
-											</c:choose>
-										</p>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<div class="info-box">
-
-										<h3>
-
-											<i class="bx bx-envelope"></i> 이메일
-										</h3>
-										<p>${userInfo.email}</p>
-
-
-									</div>
-								</div>
-
-							</div>
-
-							<div class="row">
-								<div class="col-lg-3">
-									<div class="info-box">
-
-										<h3>
-
-											<i class="bx bx-bell"></i> 알림
-										</h3>
-
-										<p>1개의 업무사항이 있습니다.</p>
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-					</section>
-				</div>
-				<!-- End User Information Section -->
-
-			</c:when>
-
-		</c:choose>
 
 
 

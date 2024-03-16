@@ -12,8 +12,12 @@ import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.model.ApplySubject;
+import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Staff;
 import com.cyber.university.repository.model.StuStat;
+import com.cyber.university.service.ApplySubjectService;
+import com.cyber.university.service.BreakService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 import jakarta.servlet.http.Cookie;
@@ -56,6 +60,10 @@ public class PersonalController {
 	@Autowired
 	private UserService userService;
 	@Autowired
+	private ApplySubjectService applySubjectService;
+	@Autowired
+	private BreakService breakService;
+	@Autowired
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -83,6 +91,12 @@ public class PersonalController {
 				// 직원인 경우
 				Staff staffInfo = userService.readStaff(principal.getId());
 				model.addAttribute("userInfo", staffInfo);
+				List<Break> breakList = breakService.readByStatus("처리중");
+				model.addAttribute("breakSize", breakList.size());
+				List<ApplySubject> applySubjectList = applySubjectService.findAllList();
+				System.out.println("applySubjectList : " + applySubjectList.size());
+				model.addAttribute("applySubjectSize", applySubjectList.size());
+
 			} else {
 				// 교수인 경우
 				ProfessorInfoDto professorInfo = userService.readProfessorInfo(principal.getId());

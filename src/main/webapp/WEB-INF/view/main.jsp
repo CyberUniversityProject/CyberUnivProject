@@ -93,14 +93,31 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								</div>
 							</div>
 							<div class="row">
+							<c:choose>
+							<c:when test="${principal.userRole eq 'staff'}">
 								<div class="col-lg-3">
 									<div class="info-box">
 										<h3>
 											<i class="bx bx-bell"></i> 알림
 										</h3>
-										<p>1개의 업무사항이 있습니다.</p>
+										<c:choose>
+                                            <c:when test="${breakSize > 0 and applySubjectSize > 0}">
+                                                <div class="main--page--info">
+                                                    <p class="info-link"><a href="/break/list/staff">💡 처리되지 않은 휴학 신청이 존재합니다.</a></p>
+                                                    <p class="info-link"><a href="/applySubject/list">💡 처리되지 않은 강의 신청이 존재합니다.</a></p>
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${breakSize == 0 and applySubjectSize == 0}">
+                                                <div class="main--page--info">
+                                                    <p class="info-message">처리해야 할 업무가 없습니다.</p>
+                                                </div>
+                                            </c:when>
+                                        </c:choose>
+
 									</div>
 								</div>
+                            </c:when>
+								</c:choose>
 								<!-- My Page Button -->
 								<c:choose>
 									<c:when test="${principal.userRole eq 'staff'}">
@@ -434,7 +451,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 							</div>
 							<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
 								<div class="icon-box">
-									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
 									<h3>
 										<a href="/applySubject/list">교수 강의신청 목록</a>
 									</h3>
@@ -458,23 +475,16 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 							</div>
 							<div class="col-lg-3 col-md-4 mt-4">
 								<div class="icon-box">
-									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+									<i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
 									<h3>
 										<a href="/college/collegeRegister">단과대 등록</a>
 									</h3>
 								</div>
 							</div>
+
 							<div class="col-lg-3 col-md-4 mt-4">
 								<div class="icon-box">
-									<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-									<h3>
-										<a href="/college/collegeRegister">단과대 등록</a>
-									</h3>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 mt-4">
-								<div class="icon-box">
-									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+									<i class="ri-file-list-3-line" style="color: #5fcf80;"></i>
 
 									<h3>
 										<a href="/department/departmentRegister">학과 등록</a>
@@ -483,7 +493,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 							</div>
 							<div class="col-lg-3 col-md-4 mt-4">
 								<div class="icon-box">
-									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+									<i class="ri-file-list-3-line" style="color: #585858;"></i>
 
 									<h3>
 										<a href="/room/roomRegister">강의실 등록</a>
@@ -492,7 +502,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 							</div>
 							<div class="col-lg-3 col-md-4 mt-4">
 								<div class="icon-box">
-									<i class="ri-file-list-3-line" style="color: #e80368;"></i>
+									<i class="ri-file-list-3-line" style="color: #FF8000;"></i>
 
 									<h3>
 										<a href="/staff/subject?crud=insert">강의 등록</a>

@@ -29,38 +29,6 @@ import lombok.extern.slf4j.Slf4j;
   * @프로그램 설명 : 학사일정 Controller
   */
 
-/**
-
-  * @FileName : ScheduleController.java
-
-  * @Project : CyberUniversity
-
-  * @Date : 2024. 3. 15. 
-
-  * @작성자 : 조유빈
-
-  * @변경이력 :
-
-  * @프로그램 설명 :
-
-  */
-
-/**
-
-  * @FileName : ScheduleController.java
-
-  * @Project : CyberUniversity
-
-  * @Date : 2024. 3. 15. 
-
-  * @작성자 : 조유빈
-
-  * @변경이력 :
-
-  * @프로그램 설명 :
-
-  */
-
 @Slf4j
 @Controller
 @RequestMapping("/schedule")
@@ -142,7 +110,9 @@ public class ScheduleController {
 	}
 	
 	// 삭제
-	
+	public String deleteSchedule() {
+		return "redirect:/schedule/list";
+	}
 	
 
 }

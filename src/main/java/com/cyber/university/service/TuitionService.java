@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.cyber.university.dto.response.GradeForScholarshipDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
@@ -228,9 +229,20 @@ public class TuitionService {
 	  * @변경이력 : 
 	  * @Method 설명 : StudentId로 tuition 목록 출력
 	  */
-	public List<Tuition> findAllTuitionByStudentId(Integer userId) {
+	public List<Tuition> findAllTuitionByStudentId(Integer studentId) {
 		
-		return tuitionRepository.selectByStudentId(userId);
+		return tuitionRepository.selectByStudentId(studentId);
+	}
+
+	/**
+	  * @Method Name : findTuitionByStudentIdAndYearAndSemester
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studentId, tuiYear, semester 값으로 Tuition 테이블 조회(등록금 디테일)
+	  */
+	public Tuition findTuitionByStudentIdAndYearAndSemester(Integer studentId, Integer tuiYear, Integer semester) {
+		return tuitionRepository.selectByStudentIdAndSemester(studentId, tuiYear, semester);
 	}
 
 

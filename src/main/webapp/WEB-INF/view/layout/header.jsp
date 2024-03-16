@@ -218,9 +218,24 @@ body {
 			<c:choose>
 				<c:when test="${principal != null}">
 					<div class="user-details">
-						<a href="" class="get-started-btn" data-bs-placement="bottom"
+					<c:choose>
+					<c:when test="${principal.userRole.equals(\"student\")}">
+						<a href="/student/myInfo" class="get-started-btn" data-bs-placement="bottom"
 							data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-							님</a> <a href="/logout" class="get-started-btn">로그아웃</a>
+							님</a>
+                    </c:when>
+                    <c:when test="${principal.userRole.equals(\"staff\")}">
+                        <a href="/info/staff" class="get-started-btn" data-bs-placement="bottom"
+                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+                            님</a>
+                    </c:when>
+                    <c:when test="${principal.userRole.equals(\"professor\")}">
+                        <a href="/professor/info" class="get-started-btn" data-bs-placement="bottom"
+                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+                            님</a>
+                    </c:when>
+							</c:choose>
+							 <a href="/logout" class="get-started-btn">로그아웃</a>
 					</div>
 
 				</c:when>

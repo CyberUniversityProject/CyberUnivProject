@@ -1,36 +1,30 @@
 package com.cyber.university.service;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
-import com.cyber.university.dto.response.PrincipalDto;
+import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
-import com.cyber.university.repository.model.User;
-import com.cyber.university.utils.Define;
-
-import jakarta.servlet.http.HttpSession;
-
-import java.util.Collections;
-import java.util.List;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import com.cyber.university.dto.ProfessorListForm;
+import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
-import com.cyber.university.repository.model.Subject;
+import com.cyber.university.repository.model.Student;
 
 /**
  * @FileName : ProfessorService.java
@@ -47,6 +41,8 @@ public class ProfessorService {
 	@Autowired
 	private ProfessorRepository professorRepository;
 	
+	@Autowired
+	private StudentRepository studentRepository;
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment
@@ -206,4 +202,49 @@ public class ProfessorService {
 		
 		return professorRepository.selectSubjectName(id);
 	}
+	
+	/**
+	  * @Method Name : selectByStudentId
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 아이디와 이름 조회
+	  */
+	public Student selectByStudentId(Integer studentId) {
+		return studentRepository.selectByStudentId(studentId);
+	}
+	
+	/**
+	  * @Method Name : updateStudentSubDetail
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 성적 업데이트
+	  */
+	public int updateStudentSubDetail(Integer studentId, Integer subjectId, UpdateStudentSubDetailDto dto) {
+		UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
+		
+		System.out.println("grades : " + grades);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("studentId", dto.getStudentId());
+		map.put("subjectId", dto.getSubjectId());
+		map.put("absent", dto.getAbsent());
+		map.put("lateness", dto.getLateness());
+		map.put("homework", dto.getHomework());
+		map.put("midExam", dto.getMidExam());
+		map.put("finalExam", dto.getFinalExam());
+		map.put("grade", dto.getGrade());
+		map.put("completeGrade", grades.getGrades());
+		map.put("convertedMark", dto.getConvertedMark());
+
+		int result = professorRepository.updateStudentSubDetail(map);
+		int result2 = professorRepository.updateStudentGrade(map);
+		
+		
+		
+		return result + result2;
+	}
+	
+	
 }

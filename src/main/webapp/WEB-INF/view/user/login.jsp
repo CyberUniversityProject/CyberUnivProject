@@ -34,10 +34,18 @@
             <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" required>
           </div>
         </div>
-        <div class="checkbox-id">
-          <input type="checkbox" name="rememberId" id="rememberId">
-          <label for="rememberId">ID 저장</label>
-        </div>
+        <c:choose>
+        							<c:when test="${cookie.id == null}">
+        								<div class="checkbox--id">
+        									<input type="checkbox" name="rememberId">&nbsp;ID 저장
+        								</div>
+        							</c:when>
+        							<c:otherwise>
+        								<div class="checkbox--id">
+        									<input type="checkbox" name="rememberId" checked="checked">&nbsp;ID 저장
+        								</div>
+        							</c:otherwise>
+        						</c:choose>
       </div>
       <div>
         <input type="submit" value="로그인" id="input--submit">

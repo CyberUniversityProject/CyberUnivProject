@@ -175,7 +175,7 @@
 
 	<!-- 24.03.15 강의 신청한 학생 리스트 조회 -->
 	<select id="selectMySubDetailList" resultType="com.cyber.university.dto.professor.MysubjectDetailDto">
-		select a.*, b.name as studnetName, c.name as departmentName, d.name as subjectName 
+		select a.*, b.name as studentName, c.name as departmentName, d.name as subjectName 
 		from cu_stu_sub_detail a
 		join cu_student b on b.id = a.student_id
 		join cu_department c on c.id = b.dept_id
@@ -188,4 +188,24 @@
 		select name as subjectName from cu_subject where id = #{subjectId}
 	</select>
 	
+	<!-- 24.03.16 학생 성적 입력 -->
+	<update id="updateStudentSubDetail">
+		update cu_stu_sub_detail 
+		set
+		absent = #{absent}, lateness = #{lateness}, homework = #{homework}, mid_exam = #{midExam}, final_exam = #{finalExam}, converted_mark = #{convertedMark}
+		where student_id = #{studentId} and subject_id = #{subjectId}
+	</update>
+	
+	<!-- 24.03.16 학생 성적 입력 -->
+	<update id="updateStudentGrade">
+		UPDATE cu_stu_sub
+		SET grade = #{grade}, complete_grade = #{completeGrade}
+		WHERE student_id = #{studentId}
+		AND subject_id = #{subjectId}
+	</update>
+	
+	<!-- 24.03.16 이수 학점 찾기 -->
+	<select id="selectGradesInfo" resultType="com.cyber.university.dto.professor.UpdateStudentSubDetailDto">
+		select grades from cu_subject where id = #{subjectId}
+	</select>
 </mapper>        

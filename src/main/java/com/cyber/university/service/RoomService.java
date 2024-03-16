@@ -2,6 +2,7 @@ package com.cyber.university.service;
 
 import java.util.List;
 
+import com.cyber.university.dto.PageRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -79,7 +80,25 @@ public class RoomService {
 	 * @프로그램 설명 : 강의실 List 페이징
 	 */
 
+	// 총 강의실 수 조회
+	public int getTotoalRoomCount() {
+		return roomRepository.getAllPgCount();
+	}
+/*	// 페이징 된 강의실 목록 조회
+	public PageRequestDto<RoomDto> getRoomUsingPage(PageRequestDto pageRequestDto,String id){
+		int page = pageRequestDto.getPage();
+		int size = pageRequestDto.getSize();
+		int offset = (page - 1) * size; // offset 계산
 
+		// 총 데이터 개수 조회
+		long totalElements = roomRepository.getAllPgCount();
+
+		// 페이징 된 목록 조회
+		List<RoomDto> roomList = roomRepository.findAllwithPasing(offset, size, id);
+
+		// 페이징 결과 객체 생성
+
+	}*/
 	}
 
 	

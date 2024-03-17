@@ -25,22 +25,21 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 </script>
 <body onLoad="javascript:pop()">
 	<!-- ======= Hero Section ======= -->
-	<section id="hero"
-		class="d-flex justify-content-center align-items-center">
-		<div class="container position-relative" data-aos="zoom-in"
-			data-aos-delay="100">
-			<h1>
-				오늘을 배우고,<br>내일을 선도합니다.
-			</h1>
-			<h2>Cyber University 학사관리시스템에 오신것을 환영합니다.</h2>
-			<c:choose>
-				<c:when test="${principal == null}">
-					<a href="/login" class="btn-get-started">로그인하기</a>
-				</c:when>
-			</c:choose>
-		</div>
-	</section>
-	<!-- End Hero -->
+    <section id="hero" class="d-flex justify-content-center align-items-center" >
+        <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+            <h1>
+                오늘을 배우고,<br>내일을 선도합니다.
+            </h1>
+            <h2>Cyber University 학사관리시스템에 오신것을 환영합니다.</h2>
+            <!-- 로그인 버튼 코드 -->
+            <c:choose>
+                <c:when test="${principal == null}">
+                    <a href="/login" class="btn-get-started">로그인하기</a>
+                </c:when>
+            </c:choose>
+        </div>
+    </section>
+    <!-- End Hero -->
 
 	<main id="main">
 	<c:choose>
@@ -103,17 +102,28 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 											<i class="bx bx-bell"></i> 알림
 										</h3>
 										<c:choose>
-                                            <c:when test="${breakSize > 0 and applySubjectSize > 0}">
+                                            <c:when test="${breakSize > 0}">
                                                 <div class="main--page--info">
                                                     <p class="info-link"><a href="/break/list/staff">💡 처리되지 않은 휴학 신청이 존재합니다.</a></p>
+
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${applySubjectSize > 0}">
+                                                <div class="main--page--info">
                                                     <p class="info-link"><a href="/applySubject/list">💡 처리되지 않은 강의 신청이 존재합니다.</a></p>
                                                 </div>
                                             </c:when>
-                                            <c:when test="${breakSize == 0 and applySubjectSize == 0}">
+                                            <c:when test="${breakSize == 0}">
                                                 <div class="main--page--info">
                                                     <p class="info-message">처리해야 할 업무가 없습니다.</p>
                                                 </div>
                                             </c:when>
+                                            <c:when test="${applySubjectSize == 0}">
+                                                <div class="main--page--info">
+                                                    <p class="info-message">처리해야 할 업무가 없습니다.</p>
+                                                </div>
+                                            </c:when>
+                                            
                                         </c:choose>
 
 									</div>
@@ -652,3 +662,6 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
         });
     });
     </script>
+
+
+

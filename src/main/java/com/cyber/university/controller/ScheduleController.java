@@ -55,8 +55,6 @@ public class ScheduleController {
 	public String schedule(Model model) {
 		List<Schedule> schedule = scheduleService.readSchedule();
 		model.addAttribute("schedule", schedule); 
-		log.info("schedule1" + schedule); // year=null, month=null
-		log.info("model1" + model); // year=null, month=null
 		return "/schedule/schedule";
 	}
 	
@@ -64,16 +62,15 @@ public class ScheduleController {
 	public String scheduleList(Model model) {
 		List<Schedule> schedule = scheduleService.readSchedule(); 
 		model.addAttribute("schedule", schedule);
-		log.info("schedule2" + schedule); // year=null, month=null
-		log.info("model2" + model); // year=null, month=null
 		return "/schedule/scheduleList";
 	}
 	
 	@GetMapping("/detail")
-	public String detailSchedule(Model model, Integer id) {
+	public String detailSchedule(Model model, @RequestParam("id") Integer id) {
 		ScheduleDto schedule = scheduleService.readScheduleById(id);
+		log.info("id:" + id);
 		model.addAttribute("schedule", schedule);
-		return "/schedule/detail";
+		return "/schedule/scheduleDetail";
 		
 	}
 	

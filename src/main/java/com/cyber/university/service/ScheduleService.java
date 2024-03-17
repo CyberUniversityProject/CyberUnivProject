@@ -88,7 +88,7 @@ public class ScheduleService {
 	
 	// 학사일정 상세페이지
 	public ScheduleDto readScheduleById(Integer id) {
-		ScheduleDto schedule = scheduleRepository.readScheduleById(id);
+		ScheduleDto schedule = scheduleRepository.selectScheduleById(id);
 		return schedule;
 	}
 }

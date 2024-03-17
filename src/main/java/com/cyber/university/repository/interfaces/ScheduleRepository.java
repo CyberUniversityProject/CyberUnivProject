@@ -33,7 +33,7 @@ public interface ScheduleRepository {
 	// 학사일정 삭제
 	public int deleteSchedule(Integer id);
 	// 학사일정 상세페이지
-	public ScheduleDto readScheduleById(Integer id);
+	public ScheduleDto selectScheduleById(Integer id);
 	
 	
 	

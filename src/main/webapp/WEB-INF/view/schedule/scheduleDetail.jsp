@@ -39,31 +39,27 @@ main {
 
 	<main>
 	
-	
-	
-	
 	<table class="table">
-	<thead>
-	<tr class="first--tr">
-	<th colspan="2">${schedule.years}년 학교 학사일정</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-	<td>시작날짜</td>
-	<td>${schedule.startMday}</td>
-	</tr>
-	<tr>
-	<td>종료날짜</td>
-	<td>${schedule.endMday}</td>
-	</tr>
-	<tr>
-	<td class="td">내용</td>
-	<td class="info">${schedule.information}</td>
-	</tr>
-	</tbody>
+		<thead>
+			<tr class="first--tr">
+				<th colspan="2">${schedule.years}년 학교 학사일정</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>시작날짜</td>
+				<td>${schedule.startMday}</td>
+			</tr>
+			<tr>
+				<td>종료날짜</td>
+				<td>${schedule.endMday}</td>
+			</tr>
+			<tr>
+				<td class="td">내용</td>
+				<td class="info">${schedule.information}</td>
+			</tr>
+		</tbody>
 	</table>
-	
 	
 	<c:if test="${principal.userRole.equals(\"staff\") }">
 	<div class="checkbox">
@@ -72,33 +68,31 @@ main {
 	</div>
 	</c:if>
 	
-
-	
-	
 	<form action="/schedule/update?id=${schedule.id}" method="post">
 	<table class="table">
-	<thead>
-	<tr class="first--tr">
-	<th colspan="2">${schedule.years}년 학교 학사일정</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-	<td>시작날짜</td>
-	<td><input type ="date" name="startDay" value="${schedule.startDay}"></td>
-	</tr>
-	<tr>
-	<td>종료날짜</td>
-	<td><input type ="date" name="endDay" value="${schedule.endDay}"></td>
-	</tr>
-	<tr>
-	<td class="td">내용</td>
-	<td class="info"><input type = "text" name="information" value="${schedule.information}"></td>
-	</tr>
-	</tbody>
+		<thead>
+			<tr class="first--tr">
+				<th colspan="2">${schedule.years}년 학교 학사일정</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>시작날짜</td>
+				<td><input type ="date" name="startDay" value="${schedule.startDay}"></td>
+			</tr>
+			<tr>
+				<td>종료날짜</td>
+				<td><input type ="date" name="endDay" value="${schedule.endDay}"></td>
+			</tr>
+			<tr>
+				<td class="td">내용</td>
+				<td class="info"><input type = "text" name="information" value="${schedule.information}"></td>
+			</tr>
+		</tbody>
 	</table>
 	<div class="checkbox">
 	<button class="button">수정</button>
+	<button class="button">삭제</button>
 	</div>
 	</form>
 	

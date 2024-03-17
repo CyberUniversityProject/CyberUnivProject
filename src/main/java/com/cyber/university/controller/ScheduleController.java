@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.dto.ScheduleDto;
 import com.cyber.university.dto.ScheduleFormDto;
@@ -68,6 +69,15 @@ public class ScheduleController {
 		return "/schedule/scheduleList";
 	}
 	
+	@GetMapping("/detail")
+	public String detailSchedule(Model model, Integer id) {
+		ScheduleDto schedule = scheduleService.readScheduleById(id);
+		model.addAttribute("schedule", schedule);
+		return "/schedule/detail";
+		
+	}
+	
+	
 /**
   * @Method Name : insertNotice
   * @작성일 : 2024. 3. 14.
@@ -111,9 +121,10 @@ public class ScheduleController {
 	
 	// 삭제
 	@GetMapping("/delete")
-	public String deleteSchedule(Model model, Integer id) {
+	public String deleteSchedule(Model model, @RequestParam("id") Integer id) {
 		model.addAttribute("id", id);
 		scheduleService.deleteSchedule(id);
+		
 		return "redirect:/schedule/list";
 	}
 	

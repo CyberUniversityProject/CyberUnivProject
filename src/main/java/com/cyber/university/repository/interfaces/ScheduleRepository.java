@@ -20,7 +20,7 @@ import com.cyber.university.repository.model.Schedule;
 @Mapper
 public interface ScheduleRepository {
 	
-	// 학사일정 등록 / Dto? Model?
+	// 학사일정 등록 
 	public int insertScheduleForm(ScheduleFormDto scheduleFormDto);
 	// 학사일정 목록
 	public List<Schedule> selectSchedule();
@@ -32,7 +32,8 @@ public interface ScheduleRepository {
 	public int updateSchedule(ScheduleFormDto scheduleFormDto);
 	// 학사일정 삭제
 	public int deleteSchedule(Integer id);
-	
+	// 학사일정 상세페이지
+	public ScheduleDto readScheduleById(Integer id);
 	
 	
 	

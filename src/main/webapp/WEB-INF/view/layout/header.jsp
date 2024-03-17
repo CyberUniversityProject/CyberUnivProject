@@ -157,8 +157,8 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
-								<li><a href="#">학사일정 등록</a></li>
+								<li><a href="/schedule">학사일정</a></li>
+								<li><a href="/schedule/list">학사일정 등록</a></li>
 							</ul></li>
 
 
@@ -195,7 +195,7 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
+								<li><a href="/schedule">학사일정</a></li>
 							</ul></li>
 
 

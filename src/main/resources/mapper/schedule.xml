@@ -30,4 +30,8 @@
 		set start_day = #{startDay}, end_day = #{endDay}, information = #{information}
 		where id = #{id}
 	</update>	
+	
+	<delete id="">
+		delete from cu_schedule where id = #{id}
+	</delete>
 </mapper>

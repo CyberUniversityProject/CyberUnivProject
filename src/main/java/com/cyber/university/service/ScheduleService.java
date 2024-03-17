@@ -85,4 +85,10 @@ public class ScheduleService {
 		int resultRowCount = scheduleRepository.deleteSchedule(id);
 		return resultRowCount;
 	}
+	
+	// 학사일정 상세페이지
+	public ScheduleDto readScheduleById(Integer id) {
+		ScheduleDto schedule = scheduleRepository.readScheduleById(id);
+		return schedule;
+	}
 }

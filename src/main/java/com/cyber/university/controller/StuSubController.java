@@ -71,7 +71,7 @@ public class StuSubController {
 	
 	
 		// 예비 수강신청 기간 : 0, 수강신청 기간 : 1, 수강신청 기간 종료 : 2
-		public static int SUGANG_PERIOD = 0;
+		public static int SUGANG_PERIOD = 2;
 
 		// 예비 수강신청 기간에서 수강신청 기간으로 변경하는 페이지 (교직원용)
 		@GetMapping("/period")

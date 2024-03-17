@@ -46,16 +46,16 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 	<c:choose>
 
     <c:when test="${periodNumber == 0}">
-       <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert" style="height: 100px">
-           <h2 class="text-center">2024년 1학기 예비수강신청 기간입니다.</h2>
-       </div>
+       <a href="/sugang/pre/1"><img src="/img/preapp.png" alt="예비수강신청" style="width: 70%; height: 70%; display: block; margin: auto;" class="mt-5"></a>
        </c:when>
         <c:when test="${periodNumber == 1}">
-              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert" style="height: 100px">
-                  <h2 class="text-center">2024년 1학기 수강신청 기간입니다.</h2>
-              </div>
+             <a href="/sugang/preAppList?type=1"><img src="/img/app.png" alt="수강신청" style="width: 70%; height: 70%; display: block; margin: auto;" class="mt-5"></a>
 
     </c:when>
+    <c:otherwise>
+      <img src="/img/apply.jpg" alt="신입생모집" style="width: 70%; height: 70%; display: block; margin: auto;" class="mt-5">
+    </c:otherwise>
+
     </c:choose>
 		<c:choose>
 			<c:when test="${principal != null}">
@@ -190,9 +190,11 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 		<!-- End Counts Section -->
 
 		<!-- ======= Why Us Section ======= -->
-
+<c:choose>
+										<c:when test="${principal.userRole eq 'student'}">
 		<section id="why-us" class="why-us">
 			<div class="container" data-aos="fade-up">
+
 
 				<div class="row">
 					<div class="col-lg-5 d-flex align-items-stretch">
@@ -207,8 +209,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 						<div class="icon-boxes d-flex flex-column justify-content-center">
 							<div class="row">
 								<div class="col-xl-4 d-flex align-items-stretch">
-									<c:choose>
-										<c:when test="${principal.userRole eq 'student'}">
+
 											<div class="icon-box mt-4 mt-xl-0">
 												<i class="bx bx-book"></i>
 
@@ -245,6 +246,21 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								</div>
 								</c:when>
 								<c:when test="${principal.userRole eq 'professor'}">
+								<section id="why-us" class="why-us">
+                                			<div class="container" data-aos="fade-up">
+								<div class="row">
+                                					<div class="col-lg-5 d-flex align-items-stretch">
+                                						<div class="content">
+                                							<h3>One-Stop 서비스</h3>
+                                							<p>해당 서비스를 클릭하시면 해당 서비스로 이동됩니다.</p>
+
+                                						</div>
+                                					</div>
+                                					<div class="col-lg-7 d-flex align-items-stretch" data-aos="zoom-in"
+                                						data-aos-delay="100">
+                                						<div class="icon-boxes d-flex flex-column justify-content-center">
+                                							<div class="row">
+                                								<div class="col-xl-4 d-flex align-items-stretch">
 									<div class="icon-box mt-4 mt-xl-0">
 										<i class="bx bx-book-reader"></i>
 
@@ -279,6 +295,21 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 							</div>
 							</c:when>
 							<c:when test="${principal.userRole eq 'staff'}">
+							<section id="why-us" class="why-us">
+                            			<div class="container" data-aos="fade-up">
+							<div class="row">
+                            					<div class="col-lg-5 d-flex align-items-stretch">
+                            						<div class="content">
+                            							<h3>One-Stop 서비스</h3>
+                            							<p>해당 서비스를 클릭하시면 해당 서비스로 이동됩니다.</p>
+
+                            						</div>
+                            					</div>
+                            					<div class="col-lg-7 d-flex align-items-stretch" data-aos="zoom-in"
+                            						data-aos-delay="100">
+                            						<div class="icon-boxes d-flex flex-column justify-content-center">
+                            							<div class="row">
+                            								<div class="col-xl-4 d-flex align-items-stretch">
 								<div class="icon-box mt-4 mt-xl-0">
 									<i class="bx bx-user-plus"></i>
 

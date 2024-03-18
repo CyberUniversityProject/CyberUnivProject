@@ -45,7 +45,6 @@ public class NoticeController {
 	public String notice(Model model)  {
 		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
-		log.info("dto1 : " + noticePageFormDto);
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -87,10 +86,7 @@ public class NoticeController {
 	@GetMapping("/read")
 	public String selectByIdNotice(Model model, @RequestParam("id") Integer id) {
 		model.addAttribute("id", id);
-		log.info("id:" + id);
-		log.info("Model:" + model);
 		Notice notice = noticeService.readNoticeById(id);
-		log.info("Notice" + notice);
 		if (notice == null) {
 			model.addAttribute("notice", null);
 		} else {
@@ -120,7 +116,6 @@ public class NoticeController {
 	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
 		noticeService.updateNotice(noticeFormDto);
-		log.info("noticeFormDto" + noticeFormDto);
 		return "redirect:/notice";
 	}
 	
@@ -146,8 +141,15 @@ public class NoticeController {
 	  */
 	// pathvariable, requestparam 다시 정리
 	@GetMapping("/search")
-	public String noticeSearch(Model model, @RequestParam("keyword") String keyword) {
-		model.addAttribute("keyword", keyword);
+	public String noticeSearch(Model model, NoticePageFormDto noticePageFormDto, @RequestParam("keyword") String keyword) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+		List<Notice> noticeList = noticeService.noticeSearch(noticePageFormDto);
+		if(noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		
 		return "/notice/noticeList";
 		
 	}

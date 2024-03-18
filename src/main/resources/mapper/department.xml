@@ -62,4 +62,11 @@
 		on c.id = d.college_id;
 	</select>
 
+	<!--페이징 처리 -->
+	<select id="findAllwithPaging"
+			resultType="com.cyber.university.repository.model.Department">
+	SELECT * FROM cu_department
+	ORDER BY name
+	LIMIT #{offset}, #{limit}
+	</select>
 </mapper>

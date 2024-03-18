@@ -57,7 +57,7 @@
 							</div>
 							<div class="mb-3">
 								<label for="time" class="form-label">강의 시간</label> <input
-									type="text" class="form-control" id="time" name="time"
+									type="text" class="form-control" id="subTime" name="subTime"
 									placeholder="강의 시간을 입력하세요">
 							</div>
 							<div class="mb-3">

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.FindIdFormDto;
@@ -11,6 +12,7 @@ import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.UserUpdateDto;
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
@@ -200,6 +202,8 @@ public interface ProfessorRepository {
 	  */
 	public List<SubInfoDto> selectMySub(Integer professorId);
 	
+	public int getMySubjectTotalCount();
+	
 	/**
 	  * @Method Name : selectAllSub
 	  * @작성일 : 2024. 3. 14.
@@ -254,4 +258,32 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 이수 학점 찾기
 	  */
 	public UpdateStudentSubDetailDto selectGradesInfo(Integer subjectId);
+	
+	
+	/**
+	  * @Method Name : selectMyEvaluationDtoByProfessorId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 과목별 강의평가 조회
+	  */
+	public List<MyEvaluationDto> selectEvaluationDtoByprofessorIdAndName(@Param("professorId") Integer professorId, @Param("name") String Name);
+	
+	/**
+	  * @Method Name : selectEvaluationDto
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 평가 과목 조회
+	  */
+	public List<MyEvaluationDto> selectEvaluationDto(Integer professorId);
+	
+	/**
+	  * @Method Name : selectMyEvaluationDtoByProfessorId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의평가 조회
+	  */
+	public List<MyEvaluationDto> selectMyEvaluationDtoByProfessorId(Integer professorId);
 }

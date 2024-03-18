@@ -185,7 +185,7 @@ body {
 							<ul>
 								<li><a href="/subject/list/1">전체 강의 조회</a></li>
 								<li><a href="/professor/mysub">내 강의 조회</a></li>
-								<li><a href="#">내 강의 평가</a></li>
+								<li><a href="/professor/readevaluation">내 강의 평가</a></li>
 								<li><a href="/professor/apply">강의 등록</a></li>
 							</ul></li>
 

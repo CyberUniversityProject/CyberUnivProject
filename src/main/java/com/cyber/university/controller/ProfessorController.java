@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
@@ -25,6 +26,7 @@ import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -131,18 +133,10 @@ public class ProfessorController {
 			throw new CustomRestfullException("교수 명을 입력하세요.", HttpStatus.BAD_REQUEST);
 		}
 		
-		if (dto.getTime() == null || dto.getTime() < 0) {
+		if (dto.getSubTime() == null || dto.getSubTime() < 0) {
 			throw new CustomRestfullException("잘못된 강의 시간입니다.", HttpStatus.BAD_REQUEST);
 		}
-		
-		if (dto.getSubName() == null || dto.getSubName().isEmpty()) {
-			throw new CustomRestfullException("강의 명을 입력하세요.", HttpStatus.BAD_REQUEST);
-		}
-		
-		if (dto.getType() == null || dto.getType().isEmpty()) {
-			throw new CustomRestfullException("전공 또는 교양을 선택하세요.", HttpStatus.BAD_REQUEST);
-		}
-				
+			
 		
 		if (dto.getSubGrade() == null || dto.getSubGrade() < 0) {
 			throw new CustomRestfullException("잘못된 이수 학점입니다.", HttpStatus.BAD_REQUEST);
@@ -219,6 +213,13 @@ public class ProfessorController {
 		return "/professor/subjectDetail";
 	}
 	
+	/**
+	  * @Method Name : updateStudentSubjdectPage
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 성적 입력 페이지 요청
+	  */
 	@GetMapping("/subject/{subjectId}/{studentId}")
 	public String updateStudentSubjdectPage(@PathVariable("subjectId") Integer subjectId, 
 											@PathVariable("studentId") Integer studentId, 
@@ -238,6 +239,13 @@ public class ProfessorController {
 		return "/professor/updateStudentDetail";
 	}
 	
+	/**
+	  * @Method Name : updateStudentSubjdectProc
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 성적 입력 기능
+	  */
 	@PostMapping("/subject/{subjectId}/{studentId}")
 	public String updateStudentSubjdectProc(@PathVariable("subjectId") Integer subjectId, 
 											@PathVariable("studentId") Integer studentId,
@@ -257,4 +265,40 @@ public class ProfessorController {
 		
 		return "redirect:/professor/subject/{subjectId}";
 	}
+	
+	/**
+	  * @Method Name : readEvaluationPage
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 평가 화면 요청
+	  */
+	@GetMapping("/readevaluation")
+	public String readEvaluationPage(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		
+		List<MyEvaluationDto> subjectName = professorService.readSubjectName(principal.getId());
+		model.addAttribute("subjectName", subjectName);
+		
+		List<MyEvaluationDto> eval = professorService.readEvaluationByProfessorId(principal.getId());
+		model.addAttribute("eval", eval);
+		
+		return "/professor/myEvaluation";
+	}
+	
+	@PostMapping("/readevaluation")
+	public String readEvaluation(Model model, HttpServletRequest httpServletRequest) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		String name = httpServletRequest.getParameter("subjectId");
+		
+		List<MyEvaluationDto> subjectName = professorService.readSubjectName(principal.getId());
+		List<MyEvaluationDto> eval = professorService.readEvaluationByProfessorIdAndName(principal.getId(), name);
+		model.addAttribute("subjectName", subjectName);
+		model.addAttribute("eval", eval);
+		return "/professor/myEvaluation";
+		
+	}
+	
 }

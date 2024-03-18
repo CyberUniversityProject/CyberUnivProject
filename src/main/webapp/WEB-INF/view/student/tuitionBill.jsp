@@ -210,7 +210,7 @@ body {
     </div>
 </div>
 		<div class="container mt-4 text-center noprint">
-					<button class="payment btn" style="border:2px solid #3ac162;" >
+					<button class="payment btn" style="border:2px solid #3ac162;" onclick="requestPay()">
 				<i class="bi bi-credit-card" style="width:20px; height:20px"></i> 결제하기
 			</button>
 

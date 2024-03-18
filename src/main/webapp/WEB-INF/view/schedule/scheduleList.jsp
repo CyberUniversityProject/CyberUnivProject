@@ -69,8 +69,9 @@ main {
 				</c:forEach>
 				</tbody>
 			</table>
+			<button type="button" onclick="location.href='/schedule/write'" 
+				class="btn btn-dark update--button">등록</button>
 		</div>
-	<a href="/schedule/write" class="button">등록</a>
 		</div>
 		</div>
 	</div>

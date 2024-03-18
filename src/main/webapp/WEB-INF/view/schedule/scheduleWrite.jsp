@@ -5,82 +5,51 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-.room--table {
-	text-align: center;
-	margin-top: 20px;
-	margin: 10px;
-}
-.room--table td {
-	padding: 10px;
-	width: 300px;
-}
-.first--tr {
-	font-weight: bold;
-}
-.mouth{
-  background-color: #f5f5f5;
-}
-.line{
-}
-.container{
-margin-top: 100px;
-}
 
-.table{
-width: 800px;
-}
-
-.first--tr {
-	background-color: #f7f6f6;
-	font-weight: bolder;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.button {
-	padding: 5px;
-	border: 1px solid #031734;
-	border-radius: 3px;
-	background-color: #031734;
-	color: #ccc;
-	text-decoration: none;
-	margin-left: 770px;
-}
-
-body > div{
-	padding-top: 200px;
-}
 main {
 	height: 550px;
 }
 
 </style>
-<div class="d-flex justify-content-center align-items-start"
-	style="min-width: 100em;">
-	<div class="sub--menu">
-		<div class="sub--menu--top">
-			<h2>학사정보</h2>
-		</div>
-		<div class="sub--menu--mid">
-			<table class="sub--menu--table" border="1">
-				<tr>
-					<td><a href="/notice">공지사항</a></td>
-				</tr>
-				<tr>
-					<td><a href="/schedule" >학사일정</a></td>				
-				</tr>
-				<c:if test="${principal.userRole.equals(\"staff\") }">
-					<tr>
-						<td><a href="/schedule/list" class="selected--menu"> 학사일정 등록</a></td>
-					</tr>
-				</c:if>
-			</table>
+</head>
+<body>
+	<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<!-- ======= 상단 제목부분 ======= -->
+	<div class="breadcrumbs" data-aos="fade-in">
+		<div class="container">
+			<h2>학사일정</h2>
 		</div>
 	</div>
-
-	<main>
+	<!-- 상단 제목부분 끝 -->
+<div class="container mb-5">
+	<div class="row">
+		<!-- 사이드바 메뉴 -->
+		<aside class="sidebar col-md-2 mt-5">
+			<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">학사정보</h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item p-3"><a href="/notice" class="text-black"><i
+								class="fas fa-user mr-2"></i> 공지사항</a></li>
+						<li class="list-group-item p-3"><a href="/schedule" class="text-black"><i
+								class="fas fa-lock mr-2"></i> 학사일정</a></li>
+						<c:if test="${principal.userRole.equals(\"staff\") }">
+						<li class="list-group-item p-3"><a href="/schedule/list" class="text-black"><i
+								class="fas fa-lock mr-2"></i> 학사일정 등록</a></li>
+						</c:if>
+					</ul>
+				</div>
+		</aside>
+	<!-- 메인 div -->
+	<div class="col-md-10">
+		<div class="main-content">
 		<h1>학사일정</h1>
-    <br>
+		<hr />
+		<div class="row">
+		
+		<!-- 학사일정 등록 -->
+		<div class="container">
 	    <form action="/schedule/write" method="post">
 		    <table class="table">
 				<thead>
@@ -104,7 +73,22 @@ main {
 			</table>
 		   <input type="submit" class="button" value="등록">
 	    </form>
-    </main>
+		</div>
+		</div>
+		</div>
+	</div>
+	</div>
 </div>
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
+	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
 

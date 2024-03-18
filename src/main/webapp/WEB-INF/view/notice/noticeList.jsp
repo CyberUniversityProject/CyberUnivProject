@@ -55,7 +55,7 @@ main {
 			<div class="row">
 			
 			<!-- 공지 조회 -->
-			<form>
+			<form action="/notice/search" method="get">
 				<select class="input--box" name="type">
 					<option value="title">제목</option>
 					<option value="keyword">제목+내용</option>

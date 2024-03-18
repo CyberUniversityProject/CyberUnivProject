@@ -89,7 +89,7 @@ public class NoticeController {
 		model.addAttribute("id", id);
 		log.info("id:" + id);
 		log.info("Model:" + model);
-		Notice notice = noticeService.readByIdNotice(id);
+		Notice notice = noticeService.readNoticeById(id);
 		log.info("Notice" + notice);
 		if (notice == null) {
 			model.addAttribute("notice", null);
@@ -108,7 +108,7 @@ public class NoticeController {
 	public String update(Model model, @RequestParam("id") Integer id) {
 		model.addAttribute("id", id);
 		
-		Notice notice = noticeService.readByIdNotice(id);
+		Notice notice = noticeService.readNoticeById(id);
 		model.addAttribute("notice", notice);
 		return "/notice/noticeUpdate";
 	}
@@ -133,5 +133,22 @@ public class NoticeController {
 		model.addAttribute("id", id);
 		noticeService.deleteNotice(id);
 		return "redirect:/notice";
+	}
+	
+	
+	/**
+	  * @Method Name : noticeSearch
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 조유빈
+	  * @변경이력 : 3.18 생성
+	  * @Method 설명 : 공지사항 검색
+	  * @return
+	  */
+	// pathvariable, requestparam 다시 정리
+	@GetMapping("/search")
+	public String noticeSearch(Model model, @RequestParam("keyword") String keyword) {
+		model.addAttribute("keyword", keyword);
+		return "/notice/noticeList";
+		
 	}
 }

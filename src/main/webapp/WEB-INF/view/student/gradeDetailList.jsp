@@ -194,10 +194,10 @@ link:focus, .nav-link:hover {
 										<c:forEach var="allSemesterTotalScore" items="${allSemesterTotalScoreList}">
 											<tr>
 												<td>${allSemesterTotalScore.subYear }</td>
-												<td>학기</td>
-												<td>신청학점</td>
-												<td>취득학점</td>
-												<td>학점 평균</td>
+												<td>${allSemesterTotalScore.semester }</td>
+												<td>${allSemesterTotalScore.totalGrades }</td>
+												<td>${allSemesterTotalScore.totalCompleteGrade }</td>
+												<td>${allSemesterTotalScore.averageGrade }</td>
 											</tr>
 										</c:forEach>
 										</tbody>

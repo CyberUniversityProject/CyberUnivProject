@@ -1611,9 +1611,7 @@ section {
 						</div>
 					</div>
 					
-					<!-- policy 화면 start-->
-					
-					
+		<!-- policy 화면 start-->
         <div class="container-fluid py-5">
         <div class="container py-5 text-center">
         <div class="row justify-content-center">

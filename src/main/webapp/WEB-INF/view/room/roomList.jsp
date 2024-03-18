@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -76,7 +75,8 @@
 					<div class="d-flex justify-content-center">
 						<ul class="pagination">
 							<c:forEach var="index" begin="1" end="${listCount}">
-								<li class="page-item"><c:choose>
+								<li class="page-item">
+								<c:choose>
 										<c:when test="${id != null && index != page}">
 											<a class="page-link" href="/room/roomList/${index}">${index}</a>
 										</c:when>
@@ -89,20 +89,12 @@
 										<c:otherwise>
 											<a class="page-link" href="/room/roomList/${index}">${index}</a>
 										</c:otherwise>
-									</c:choose></li>
+									</c:choose>
+									</li>
 							</c:forEach>
 						</ul>
 					</div>
-
 					
- 
-
-
-       
-
-   
-
-
 				</div>
 			</div>
 		</div>

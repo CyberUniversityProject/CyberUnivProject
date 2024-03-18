@@ -1,18 +1,24 @@
 package com.cyber.university.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.cyber.university.dto.PageRequestDto;
+import com.cyber.university.dto.PageResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cyber.university.dto.RoomDto;
 import com.cyber.university.dto.RoomWithCollegeDto;
+import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
+import com.cyber.university.repository.model.Student;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
   * @FileName : RoomService.java
@@ -22,6 +28,7 @@ import com.cyber.university.repository.model.Room;
   * @변경이력 :
   * @프로그램 설명 : 강의실 service
   */
+@Slf4j
 @Service
 public class RoomService {
 
@@ -40,9 +47,7 @@ public class RoomService {
 			throw new CustomRestfullException("등록 생성 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-		
-		
-		
+
 		// 강의실 전체 리스트 불러오기
 		public List<Room> roomList() {
 			List<Room> roomList = roomRepository.findAll();
@@ -63,22 +68,15 @@ public class RoomService {
 		 roomRepository.updateById(room);
 		}
 		
-		
 		@Transactional
 		public List<RoomWithCollegeDto> findAll(){
-			
 			return roomRepository.findAllCol();
 		}
 
-	/**
-	 * @FileName : RoomService.java
-	 * @Project : CyberUniversity
-	 * @Date : 2024. 3. 13.
-	 * @작성자 : 김수현
-	 * @변경이력 :
-	 * @프로그램 설명 : 강의실 List 페이징
-	 */
+		@Transactional
+		public Integer readRoomAmount(RoomDto roomDto) {
 
+<<<<<<< HEAD
 		
 		public List<Room> findAllRooms(int page, int size) {
 	        // 페이징 처리를 위해 offset 계산
@@ -94,8 +92,29 @@ public class RoomService {
 	        int totalPages = (int) Math.ceil((double) totalRecords / size);
 	        return totalPages;
 	    }
+=======
+			Integer amount = null;
+			if (roomDto.getId() != null) {
+				amount = roomRepository.selectRoomAmountByRoomId(roomDto.getId());
+			} else {
+				amount = roomRepository.selectRoomAmount();
+			}
+>>>>>>> dev
 
-	}
+			return amount;
+		}
+		
+		
+		@Transactional
+		public List<Room> readRoomList(RoomDto roomDto) {
+
+			List<Room> list = null;
+
+			list = roomRepository.selectByRoomId(roomDto);
+			return list;
+		}
+		
+}
 
 	
 	

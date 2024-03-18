@@ -1,10 +1,7 @@
 package com.cyber.university.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.cyber.university.dto.PageRequestDto;
-import com.cyber.university.dto.PageResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,11 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.RoomDto;
 import com.cyber.university.dto.RoomWithCollegeDto;
-import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
-import com.cyber.university.repository.model.Student;
 
 import lombok.extern.slf4j.Slf4j;
 

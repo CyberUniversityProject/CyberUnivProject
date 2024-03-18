@@ -1,26 +1,30 @@
 package com.cyber.university.service;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import com.cyber.university.dto.professor.ApplySubjectDto;
-import com.cyber.university.dto.professor.SubInfoDto;
-import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
-import com.cyber.university.dto.response.ProfessorInfoDto;
-import com.cyber.university.handler.exception.CustomRestfullException;
-import com.cyber.university.repository.interfaces.ProfessorRepository;
-import com.cyber.university.repository.model.User;
-
-import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.ProfessorListForm;
+import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MysubjectDetailDto;
+import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
+import com.cyber.university.dto.professor.SubInfoDto;
+import com.cyber.university.dto.professor.SubjectNameDto;
+import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
+import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
+import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.interfaces.ProfessorRepository;
+import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
+import com.cyber.university.repository.model.Student;
 
 /**
  * @FileName : ProfessorService.java
@@ -36,6 +40,9 @@ public class ProfessorService {
 
 	@Autowired
 	private ProfessorRepository professorRepository;
+	
+	@Autowired
+	private StudentRepository studentRepository;
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment
@@ -47,6 +54,11 @@ public class ProfessorService {
 	public ProfessorInfoDto selectProfessorInfoWithCollegeAndDepartment(Integer id) {
 
 		return professorRepository.selectProfessorInfoWithCollegeAndDepartment(id);
+	}
+	
+	
+	public List<ProfessorAndSubjectFormDto> findAllProfessor() {
+		return professorRepository.findProfessorAndDept();
 	}
 
 	/**
@@ -60,35 +72,7 @@ public class ProfessorService {
 
 		return professorRepository.selectProfessorInfo(id);
 	}
-
-	/**
-	 * @Method Name : updateProfessorInfo
-	 * @작성일 : 2024. 3. 11.
-	 * @작성자 : 장명근
-	 * @변경이력 :
-	 * @Method 설명 : 교수 정보 수정 서비스
-	 */
-	public UpdateProfessorInfoDto updateProfessorInfo(Integer id, User user) {
-
-		String enteredPassword = user.getPassword();
-
-		String savedPassword = professorRepository.selectPassword(id);
-
-		if (savedPassword == null || !savedPassword.equals(enteredPassword)) {
-			throw new CustomRestfullException("비밀번호를 확인해주세요.", HttpStatus.BAD_REQUEST);
-		}
-
-		UpdateProfessorInfoDto updateDto = new UpdateProfessorInfoDto();
-		updateDto.setAddress(updateDto.getAddress());
-		updateDto.setTel(updateDto.getTel());
-		updateDto.setEmail(updateDto.getEmail());
-		updateDto.setId(updateDto.getId());
-
-		professorRepository.updateProfessorInfo(updateDto);
-
-		return updateDto;
-
-	}
+	
 
 	/**
 	 * @param professorListForm
@@ -173,12 +157,94 @@ public class ProfessorService {
 	  * @변경이력 : 
 	  * @Method 설명 : 교수 본인 강의 조회
 	  */
-	public List<SubInfoDto> selectMysub(Integer professorId) {
-		System.out.println("교수 id" + professorId);
+	public List<SubInfoDto> selectMySub(Integer professorId) {
 		
-		List<SubInfoDto> list =  professorRepository.selectMysub(professorId);
-		System.out.println("list???" + list);
-		return list;
+		List<SubInfoDto> list =  professorRepository.selectMySub(professorId);
+		
+		return list != null ? list : Collections.emptyList();
 	}
+	
+	
+	/**
+	  * @Method Name : selectAllSub
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 개설 된 강의 모두 조회
+	  */
+	public List<SubInfoDto> selectAllSub(Integer professorId) {
+		
+		List<SubInfoDto> list =  professorRepository.selectMySub(professorId);
+		
+		return list != null ? list : Collections.emptyList();
+	}
+	
+	/**
+	  * @Method Name : selectMySubDetailList
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 신청한 학생 리스트 조회
+	  */
+	public List<MysubjectDetailDto> selectMySubDetailList(Integer subjectId) {
+		
+		return professorRepository.selectMySubDetailList(subjectId);
+	}
+	
+	/**
+	  * @Method Name : selectSubjectName
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 과목 명 찾기
+	  */
+	public SubjectNameDto selectSubjectName(Integer id) {
+		
+		return professorRepository.selectSubjectName(id);
+	}
+	
+	/**
+	  * @Method Name : selectByStudentId
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 아이디와 이름 조회
+	  */
+	public Student selectByStudentId(Integer studentId) {
+		return studentRepository.selectByStudentId(studentId);
+	}
+	
+	/**
+	  * @Method Name : updateStudentSubDetail
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 성적 업데이트
+	  */
+	public int updateStudentSubDetail(Integer studentId, Integer subjectId, UpdateStudentSubDetailDto dto) {
+		UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
+		
+		System.out.println("grades : " + grades);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("studentId", dto.getStudentId());
+		map.put("subjectId", dto.getSubjectId());
+		map.put("absent", dto.getAbsent());
+		map.put("lateness", dto.getLateness());
+		map.put("homework", dto.getHomework());
+		map.put("midExam", dto.getMidExam());
+		map.put("finalExam", dto.getFinalExam());
+		map.put("grade", dto.getGrade());
+		map.put("completeGrade", grades.getGrades());
+		map.put("convertedMark", dto.getConvertedMark());
 
+		int result = professorRepository.updateStudentSubDetail(map);
+		int result2 = professorRepository.updateStudentGrade(map);
+		
+		
+		
+		return result + result2;
+	}
+	
+	
 }

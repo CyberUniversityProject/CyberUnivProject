@@ -1,8 +1,12 @@
 package com.cyber.university.controller;
 
+import java.io.Console;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,10 +17,12 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyber.university.dto.ChangePasswordDto;
@@ -26,7 +32,11 @@ import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.model.Break;
+import com.cyber.university.repository.model.Tuition;
+import com.cyber.university.service.BreakService;
 import com.cyber.university.service.StudentService;
+import com.cyber.university.service.TuitionService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 
@@ -55,7 +65,10 @@ public class StudentController {
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder; 
-
+	@Autowired
+	private BreakService breakService;
+	@Autowired
+	private TuitionService tuitionService;
 	
 	/**
 	  * @Method Name : myInfo
@@ -74,7 +87,6 @@ public class StudentController {
 		log.info(userId + "userId");
 		
 		if(userId == null) {
-			// TODO: NOT_FOUND_ID -> 얘기해보고 로그인을 해주세요 하고 메인으로 돌려보낼까?
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
@@ -149,24 +161,20 @@ public class StudentController {
 	  * @변경이력 : 
 	  * @Method 설명 : student password 수정
 	  */
+	
+	// TODO : 준혁 코드로 변경 -> 프론트도 확인
 	@PostMapping("/updatePass")
 	private String updatePassword(@Valid @RequestBody ChangePasswordDto changePasswordDto, BindingResult bindingResult) {
 
-		log.info("student controller updatePass start , changePasswordDTO" + changePasswordDto);
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
 		
 		StringBuilder sb = new StringBuilder();
 
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		log.info("애초에 왜 자꾸 유효성 검사 결과만 나오는거같죠?");
-		log.info("박경진~~" + bindingResult.getGlobalErrors().toString());
-		log.info("박경진~~" + bindingResult.getGlobalErrors());
 		
 		// 비밀번호 유효성 검사 결과 확인
 		if(bindingResult.hasErrors()) {
@@ -176,33 +184,28 @@ public class StudentController {
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
 
-		log.info("유효성 검사 이후로 넘어왔을까요? ");
-		log.info("beforepass : "+changePasswordDto.getBeforePassword());
-		log.info("principalpass : "+principal.getPassword());
 		// 현재 로그인된 비밀번호와 변경 전 비밀번호를 비교하여 일치하는지 확인
 		if (!passwordEncoder.matches(changePasswordDto.getBeforePassword(), principal.getPassword())) {
 			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 		
-		log.info("로그인된 비밀번호와 변경전 비밀번호 이후로 넘어왔을까요? ");
 		
 		// 변경 비밀번호와 체크 비밀번호가 같지 않을 경우 
 		if(!changePasswordDto.getAfterPassword().equals(changePasswordDto.getPasswordCheck())) {
 			throw new CustomRestfullException(Define.WRONG_CHECK_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 
-		log.info("변경 비밀번호와 체크비밀번호 다른치 체크가 됐을까요? ");
 		
 		changePasswordDto.setId(principal.getId());
 		changePasswordDto.setAfterPassword(passwordEncoder.encode(changePasswordDto.getAfterPassword()));
 		
-		log.info("student controller changePasswordDto",changePasswordDto);
 		
 		userService.updatePassword(changePasswordDto);
 		
 		return "redirect:/student/password";
 	}
 	
+
 	/**
 	  * @Method Name : leaveOfAbsenceRegisterPage
 	  * @작성일 : 2024. 3. 12.
@@ -220,6 +223,13 @@ public class StudentController {
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+
+	    // 휴학 횟수 조회(count해서 front에서 3회이상이면 main으로 화면전환)
+		int overLeaveCount = studentService.getLeaveCount(userId);
+		model.addAttribute("overLeaveCount", overLeaveCount);
+		
+		int hasPendingLeave = studentService.hasPendingLeave(userId);
+		model.addAttribute("pendingLeaveCount",hasPendingLeave);
 		
 		LeaveStudentInfoDto leaveStudentInfoDto = studentService.findLeaveStudentById(userId);
 		
@@ -239,9 +249,40 @@ public class StudentController {
 	@ResponseBody
 	private ResponseEntity<?> createleaveOfAbsence(@RequestBody LeaveAppDto leaveAppDto) {
 		
-		log.info("controller in!!");
-		log.info("leaveAppDto : "+leaveAppDto);
-		log.info("leaveAppDto : "+leaveAppDto.toString());
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if(userId == leaveAppDto.getStudentId()) {
+			throw new CustomRestfullException(Define.SUBMIT_CHECK_ID, HttpStatus.BAD_REQUEST);
+		}
+
+		if(leaveAppDto.getFromYear() == null ||leaveAppDto.getFromSemester() == null
+				|| leaveAppDto.getToYear() ==null || leaveAppDto.getToSemester() == null) {
+			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("입력되지 않은 정보를 확인해주세요");
+		}
+		
+		int result = studentService.createLeaveApp(userId,leaveAppDto);
+		
+		
+		if(result == 0) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("휴학 신청 중 오류가 발생했습니다.");
+		} else { return ResponseEntity.ok("휴학 신청에 성공 했습니다.");}
+	}
+	
+	/**
+	  * @Method Name : leaveOfAbsenceList
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학 신청 내역(학생)
+	  */
+	@GetMapping("/leaveOfAbsenceList")
+	private String leaveOfAbsenceList(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
@@ -250,21 +291,127 @@ public class StudentController {
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		log.info("user null 통과");
 		
-		if(userId == leaveAppDto.getStudentId()) {
-			throw new CustomRestfullException(Define.SUBMIT_CHECK_ID, HttpStatus.BAD_REQUEST);
-		}
-		log.info("leaveAppDto.getStudetnId?",leaveAppDto.getStudentId());
+		LeaveStudentInfoDto studentInfoDto= studentService.findLeaveStudentById(userId);
+		model.addAttribute("student",studentInfoDto);
+		
+		// 휴학 정보
+		List<Break> breakList= breakService.findBreakByStudentId(userId);
+		log.info("controller user id로 조회한 break :", breakList.toString());
+		
+		model.addAttribute("leaveOfAbsenceList", breakList);
 		
 		
-		int result = studentService.createLeaveApp(userId,leaveAppDto);
-		
-		if(result != 1) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("휴학 신청 중 오류가 발생했습니다.");
-		}
-		
-		return ResponseEntity.ok("휴학 신청에 성공 했습니다.");
+		return "/student/leaveOfAbsenceList";
 	}
 	
+	/**
+	  * @Method Name : deleteLeaveOfAbsence
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 휴학 신청 취소
+	  */
+	@GetMapping("/deleteLeaveApp/{id}")
+	private String deleteLeaveOfAbsence(@PathVariable(name = "id", required=false) Integer id) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		breakService.deleteLeaveAppById(userId,id);
+		
+		return "redirect:/student/leaveOfAbsenceList";
+	}
+	
+	
+	/**
+	  * @Method Name : tuitionPage
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 등록금 페이지
+	  */
+	@GetMapping("/tuition")
+	private String tuitionPage(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		LeaveStudentInfoDto studentInfoDto= studentService.findLeaveStudentById(userId);
+		model.addAttribute("student",studentInfoDto);
+		
+		List<Tuition> tuitionList = tuitionService.findAllTuitionByStudentId(userId);
+		model.addAttribute("tuitionList", tuitionList);
+		
+		return "/student/tuitionList";
+	}
+	
+	/**
+	  * @Method Name : tuitionBill
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 등록금 고지서 페이지
+	  */
+	@GetMapping("/tuitionBill")
+	private String tuitionBill(@RequestParam("tuiYear") Integer tuiYear, @RequestParam("semester") Integer semester ,Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		LeaveStudentInfoDto studentInfoDto = studentService.findLeaveStudentById(userId);
+		model.addAttribute("student", studentInfoDto);
+		
+		Tuition tuition = tuitionService.findTuitionByStudentIdAndYearAndSemester(userId, tuiYear,semester);
+		model.addAttribute("tuitionBill", tuition);
+		
+		
+
+		return "/student/tuitionBill";
+	}
+	
+	/**
+	  * @Method Name : gradeDetailPage
+	  * @작성일 : 2024. 3. 17.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 성적 상세 조회 페이지(금학기)
+	  */
+	@GetMapping("/gradeDetailList")
+	private String gradeDetailPage(Model model) {
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		// 올해 성적 조회
+		// 우선 userId(studentId)로 cu_stu_sub 조회 -> subject_id, grade, compete_grade(최종학점????테이블명세서 다시확인 (subject_id에 grades가 이수학점인듯) 조회 가능
+		//	-> subject_id로 cu_subject join -> 과목명, 교수id, type(전공, 교양), 학년, 수업년도, grades(이수학점)
+		
+		
+		
+		model.addAttribute("gradeList", "gradeList");
+		
+		return "/student/gradeDetailList";
+		
+	}
 }

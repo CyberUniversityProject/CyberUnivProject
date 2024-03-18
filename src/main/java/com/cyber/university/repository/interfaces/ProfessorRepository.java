@@ -1,20 +1,24 @@
 package com.cyber.university.repository.interfaces;
 
-import org.apache.ibatis.annotations.Mapper;
-
-import com.cyber.university.dto.professor.ApplySubjectDto;
-import com.cyber.university.dto.professor.SubInfoDto;
-import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
-import com.cyber.university.dto.response.ProfessorInfoDto;
-import com.cyber.university.dto.response.UserInfoForUpdateDto;
-
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.UserUpdateDto;
+import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MysubjectDetailDto;
+import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
+import com.cyber.university.dto.professor.SubInfoDto;
+import com.cyber.university.dto.professor.SubjectNameDto;
+import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
+import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
+import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
 
@@ -40,6 +44,9 @@ public interface ProfessorRepository {
 
 	// 24.03.11 비밀번호 찾기
 	public String selectPassword(Integer id);
+	
+	
+	public List<ProfessorAndSubjectFormDto> findProfessorAndDept();
 
 	/**
 	 * 
@@ -191,5 +198,60 @@ public interface ProfessorRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 교수 본인 강의 조회
 	  */
-	public List<SubInfoDto> selectMysub(Integer professorId);
+	public List<SubInfoDto> selectMySub(Integer professorId);
+	
+	/**
+	  * @Method Name : selectAllSub
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 개설 된 강의 모두 조회
+	  */
+	public List<SubInfoDto> selectAllSub(Integer professorId);
+	
+	/**
+	  * @Method Name : selectMySubDetailList
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 신청한 학생 리스트 조회
+	  */
+	public List<MysubjectDetailDto> selectMySubDetailList(Integer subjectId);
+	
+	
+	/**
+	  * @Method Name : selectSubjectName
+	  * @작성일 : 2024. 3. 15.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 과목 명 찾기
+	  */
+	public SubjectNameDto selectSubjectName(Integer id);
+	
+	/**
+	  * @Method Name : updateStudentSubDetail
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 성적 업데이트
+	  */
+	public int updateStudentSubDetail(Map<String, Object> params);
+	
+	/**
+	  * @Method Name : updateStudentGrade
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 성적 입력
+	  */
+	public int updateStudentGrade(Map<String, Object> params);
+	
+	/**
+	  * @Method Name : selectGradesInfo
+	  * @작성일 : 2024. 3. 16.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 이수 학점 찾기
+	  */
+	public UpdateStudentSubDetailDto selectGradesInfo(Integer subjectId);
 }

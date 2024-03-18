@@ -34,17 +34,17 @@ pageEncoding="UTF-8"%>
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="#" class="text-dark d-flex align-items-center">
+        <a href="/tuition/bill" class="text-dark d-flex align-items-center">
           <i class="bi bi-file-earmark-text mr-2"></i> 등록금 고지서 발송
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="#" class="text-dark d-flex align-items-center">
+        <a href="/break/list/staff" class="text-dark d-flex align-items-center">
           <i class="bi bi-moon-stars-fill mr-2"></i> 휴학 처리
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="#" class="text-dark d-flex align-items-center">
+        <a href="/sugang/period" class="text-dark d-flex align-items-center">
           <i class="bi bi-calendar-plus-fill mr-2"></i> 수강신청 기간 설정
         </a>
       </li>

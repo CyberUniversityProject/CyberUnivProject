@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cyber.university.dto.RoomWithCollegeDto;
 import com.cyber.university.repository.model.Room;
 
 /**
@@ -23,16 +24,18 @@ public interface RoomRepository {
 	public int insertById(Room room);
 
 	// 강의실 등록 리스트
+	public List<RoomWithCollegeDto> findAllCol();
+	
 	public List<Room> findAll();
 
 	// 강의실 삭제
-	public int deleteById(Integer id);
+	public String deleteById(String id);
 
 	// 강의실 수정
-	public int updateById(Room room);
+	public void updateById(Room room);
 
 	// 강의실 조회(글 상세보기와는 달리 수정을 위한 기능)
-	public Room findById(Integer id);
+	public Room findById(String id);
 
 	// 전체 페이지 불러오기
 	public List<Room> findAllwithPasing(@Param("offset") int offset, @Param("limit") int limit,

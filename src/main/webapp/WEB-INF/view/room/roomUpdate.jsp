@@ -48,29 +48,43 @@
 				</div>
 			</aside>
 
+			<!-- main 시작 -->
 			<div class="col-md-10">
-				<h1 class="mt-5 mb-4">단과대학수정</h1>
 				<!-- main 넣는 시작 부분 -->
-				<form action="/room/roomUpdate/${room.id}" method="post" id="updateById">
-				<div class="col-lg-8 mt-5 mt-lg-0">
-					<div class="row">
-						<div class="col-md-6 form-group mt-3 mt-md-0">
-							<input type="text" class="form-control" name="id" id="name"
-								value="${room.id}">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 form-group mt-3 mt-md-0">
-							<input type="text" class="form-control" name="collegeId" id="name"
-								value="${room.collegeId}">
-						</div>
-					</div>
+		<!-- register form start-->			
+	 <section id="pricing" class="pricing">
+	 <form action="/room/roomUpdate/${room.id}" method="post">
+      <div class="container" data-aos="fade-up">
 
-					<div class="text-center">
-						<button type="submit">수정하기</button>
-					</div>
-				</div>
-				</form>
+        <div class="row" style="justify-content: center;">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="box" style="margin-top: 13%;">
+              <h3 style="text-align: center;">강의실 수정</h3>
+              <ul>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="text" class="form-control" name="id" id="id"
+                    style="width: 226%" value="${room.id}">
+                </div>
+                <br></br>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="text" class="form-control" name="collegeId" id="collegeId"
+                     style="width: 226%" value="${room.collegeId}">
+                </div>
+              </ul>
+              <div class="btn-wrap">
+                <button type="submit" class="btn-buy" style="border: none;">수정하기</button>
+              </div>
+            </div>
+          </div>
+            </div>
+          
+          </div>
+      		
+      	</div>
+      	</form>
+    
+    	</section><!-- End Pricing Section -->
 				<!-- main 끝 -->
 				
 			</div>

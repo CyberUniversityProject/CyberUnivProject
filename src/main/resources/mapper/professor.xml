@@ -26,20 +26,6 @@
 	</select>
 
 
-	<!-- 24.03.11 교수 정보 수정 -->
-	<update id="updateProfessorInfo">
-		UPDATE cu_professor SET
-		address = #{address}, tel =
-		#{tel}, email = #{email}
-		WHERE id = #{id}
-	</update>
-
-	<!-- 24.03.11 비밀번호 찾기 -->
-	<select id="selectPassword"
-		resultType="com.cyber.university.repository.model.User">
-		select password from cu_user where id = #{id}
-	</select>
-
 	<select id="selectByProfessorId"
 		resultType="com.cyber.university.repository.model.Professor">
 		SELECT * FROM cu_professor WHERE id = #{professorId}
@@ -106,65 +92,120 @@
 		WHERE name = #{name}
 		AND email = #{email}
 	</select>
-	
-	
-	<select id="selectProfessorByIdAndNameAndEmail" resultType="integer">
+
+
+	<select id="selectProfessorByIdAndNameAndEmail"
+		resultType="integer">
 		SELECT id
 		FROM cu_professor
 		WHERE id = #{id}
-		AND name = #{name}
+		AND name =
+		#{name}
 		AND email = #{email}
 	</select>
-	
-	
-	
-	<select id="selectProfessorInfoById" resultType="com.cyber.university.dto.response.ProfessorInfoDto">
-		SELECT p.id, p.name, p.birth_date, p.gender, p.address, p.tel, p.email, d.name AS dept_name, c.name AS college_name
-		FROM cu_professor AS p
+
+
+
+	<select id="selectProfessorInfoById"
+		resultType="com.cyber.university.dto.response.ProfessorInfoDto">
+		SELECT p.id, p.name, p.birth_date, p.gender, p.address,
+		p.tel, p.email, d.name AS dept_name, c.name AS college_name
+		FROM
+		cu_professor AS p
 		LEFT
 		JOIN cu_department AS d
 		ON p.dept_id = d.id
-		LEFT JOIN cu_college AS c
+		LEFT
+		JOIN cu_college AS c
 		ON d.college_id = c.id
 		WHERE p.id = #{id};
 	</select>
-	
-	
-	
-	<select id="selectByUserId" resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
+
+
+
+	<select id="selectByUserId"
+		resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
 		SELECT address, tel, email
 		FROM cu_professor
-		WHERE id = #{userId}
+		WHERE id =
+		#{userId}
 	</select>
-	
-	
-	
+
+
+
 	<update id="updateProfessor">
 		UPDATE cu_professor SET
-		address = #{address}, tel = #{tel}, email = #{email}
+		address = #{address}, tel =
+		#{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
-	
+
 	<!-- 24.03.13 강의 등록 -->
 	<insert id="insertApplySubject">
-		insert into cu_apply_sub(pro_id, sub_name, pro_name, sub_time, type, sub_grade, capacity)
-		values(#{proId}, #{subName}, #{proName}, #{time}, #{type}, #{subGrade} , #{capacity})
+		insert into cu_apply_sub(pro_id, sub_name, pro_name,
+		sub_time, type, sub_grade, capacity)
+		values(#{proId}, #{subName},
+		#{proName}, #{time}, #{type}, #{subGrade} , #{capacity})
 	</insert>
 
 	<!-- 24.03.13 강의 이름 찾기 -->
-	<select id="selectSubName" resultType="com.cyber.university.dto.professor.ApplySubjectDto">
+	<select id="selectSubName"
+		resultType="com.cyber.university.dto.professor.ApplySubjectDto">
 		select * from cu_apply_sub where sub_name = #{subName}
 	</select>
 	
-	<!-- 24.03.13 내 강의 조회 -->
-	<select id="selectMysub"  resultType="com.cyber.university.dto.professor.SubInfoDto">
-		select s.name, s.professor_id as professorId, s.room_id as roomId, s.dept_id as departmentId, s.type, s.sub_year, s.semester, s.sub_day, s.start_time, s.end_time, s.grades, s.capacity, s.num_of_student, 
-		p.id, r.id, d.id
-		from cu_subject s
-		left join cu_professor p on s.professor_id = p.id
-		left join cu_room r on r.id = s.room_id
-		left join cu_department d on d.id = s.dept_id
-		where s.professor_id = #{professorId}
+	<!-- 24.03.13 교수 본인 강의 조회 -->
+	<select id="selectMySub"  resultType="com.cyber.university.repository.model.Subject">
+		select * from cu_subject where professor_id = #{professorId}
 	</select>
 	
+	<!-- 24.03.14 등록된 모든 강의 조회 -->
+	<select id="selectAllSub" resultType="com.cyber.university.repository.model.Subject">
+		select * from cu_subject
+		</select>
+
+
+
+	<select id="findProfessorAndDept"
+		resultType="com.cyber.university.dto.professor.ProfessorAndSubjectFormDto">
+		select p.id, p.name, c.name as 'dept_name' from cu_professor as p
+		join cu_department as c
+		on c.id = p.dept_id
+	</select>
+
+	<!-- 24.03.15 강의 신청한 학생 리스트 조회 -->
+	<select id="selectMySubDetailList" resultType="com.cyber.university.dto.professor.MysubjectDetailDto">
+		select a.*, b.name as studentName, c.name as departmentName, d.name as subjectName 
+		from cu_stu_sub_detail a
+		join cu_student b on b.id = a.student_id
+		join cu_department c on c.id = b.dept_id
+		join cu_subject d on d.id = a.subject_id
+		where a.subject_id = #{subjectId}
+	</select>
+	
+	<!-- 24.03.15 강의 이름 찾기 -->
+	<select id="selectSubjectName" resultType="com.cyber.university.dto.professor.SubjectNameDto">
+		select name as subjectName from cu_subject where id = #{subjectId}
+	</select>
+	
+	<!-- 24.03.16 학생 성적 입력 -->
+	<update id="updateStudentSubDetail">
+		update cu_stu_sub_detail 
+		set
+		absent = #{absent}, lateness = #{lateness}, homework = #{homework}, mid_exam = #{midExam}, final_exam = #{finalExam}, converted_mark = #{convertedMark}
+		where student_id = #{studentId} and subject_id = #{subjectId}
+	</update>
+	
+	<!-- 24.03.16 학생 성적 입력 -->
+	<update id="updateStudentGrade">
+		UPDATE cu_stu_sub
+		SET grade = #{grade}, complete_grade = #{completeGrade}
+		WHERE student_id = #{studentId}
+		AND subject_id = #{subjectId}
+	</update>
+	
+	<!-- 24.03.16 이수 학점 찾기 -->
+	<select id="selectGradesInfo" resultType="com.cyber.university.dto.professor.UpdateStudentSubDetailDto">
+		select grades from cu_subject where id = #{subjectId}
+	</select>
 </mapper>        

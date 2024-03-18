@@ -56,20 +56,7 @@
 	<!-- 상단 제목부분 끝 -->
 	<div class="container mb-5">
 		<div class="row">
-			<!-- 사이드바 메뉴 -->
-			<aside class="sidebar col-md-2 mt-5">
-				<div class="card">
-					<div class="card-header">
-						<h5 class="mb-0">메뉴</h5>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a href="" class="text-black"><i
-								class="fas fa-user mr-2"></i> 내 정보 조회</a></li>
-						<li class="list-group-item p-3"><a href="" class="text-black"><i
-								class="fas fa-lock mr-2"></i> 비밀번호 변경</a></li>
-					</ul>
-				</div>
-			</aside>
+			<%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
 
 			<div class="col-md-10">
 				<div class="container mt-5">
@@ -94,7 +81,7 @@
 								class="form-control input--box" id="passwordCheck">
 						</div>
 						<c:choose>
-							<c:when test="${principal.getUserRole().equals(\"staff\")}">
+							<c:when test="${principal.getUserRole().equals(\"professor\")}">
 								<div class="button--container">
 									<input type="submit" value="입력" class="btn btn-primary">
 								</div>
@@ -123,12 +110,12 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- 		 <script>
-  $(document).ready(function() {
-    $('form').submit(function() {
-      alert("비밀번호가 변경되었습니다");
-    });
-  });
-</script> -->
+	 <script>
+//   $(document).ready(function() {
+//     $('form').submit(function() {
+//       alert("비밀번호가 변경되었습니다");
+//     });
+//   });
+</script>
 </body>
 </html>

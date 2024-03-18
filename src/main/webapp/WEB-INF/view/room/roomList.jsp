@@ -49,7 +49,7 @@
 			</aside>
 
 			<div class="col-md-10" style="text-align: center;">
-				<h1 class="mt-5 mb-4">강의실 리스트</h1>
+				<h1 class="mt-5 mb-4"></h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">
 					<table class="table table hover">
@@ -73,9 +73,7 @@
 						</tbody>
 					</table>
 				</div>
-				<!-- main 끝 -->
-
-			</div>
+		</div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

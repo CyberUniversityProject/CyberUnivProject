@@ -178,7 +178,7 @@ public class UserController {
 		model.addAttribute("professorList", list);
 		model.addAttribute("deptId", deptId);
 		/**
-		 * @author 서영 1페이지가 선택되어 있음을 보여주기 위함
+		 * @author 1페이지가 선택되어 있음을 보여주기 위함
 		 */
 		model.addAttribute("page", 1);
 
@@ -272,6 +272,18 @@ public class UserController {
 		userService.createStudentToStudentAndUser(createStudentDto);
 
 		return "redirect:/user/student";
+	}
+	
+	
+	/**
+	 * 학생의 학년, 학기 업데이트
+	 * 
+	 * @return 학생 리스트 조회 페이지
+	 */
+	@GetMapping("/student/update")
+	public String updateStudentGradeAndSemester() {
+		studentService.updateStudentGradeAndSemester();
+		return "redirect:/user/studentList";
 	}
 	
 

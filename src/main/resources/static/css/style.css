@@ -66,6 +66,26 @@ h6 {
   opacity: 1;
 }
 
+ .btn--confirm {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn--confirm:hover {
+        background-color: #45a049;
+    }
+
+
+
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/

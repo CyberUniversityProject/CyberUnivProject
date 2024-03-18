@@ -199,8 +199,6 @@ public interface StudentRepository {
 	 */
 	public Student selectByStudentId(Integer studentId);
 
-
-
 	/**
 	  * @Method Name : findLeaveStudentById
 	  * @작성일 : 2024. 3. 13.
@@ -208,6 +206,7 @@ public interface StudentRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 휴학신청 할 학생 정보 조회
 	  */
+	
 	public LeaveStudentInfoDto findLeaveStudentById(Integer userId);
 
 	/**
@@ -218,5 +217,26 @@ public interface StudentRepository {
 	  * @Method 설명 : 휴학신청 정보 등록
 	  */
 	public Integer createLeaveApp(Map<String, Object> params);
+
+	/**
+	  * @Method Name : getLeaveCount
+	  * @작성일 : 2024. 3. 14.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : userId로 휴학횟수 카운팅
+	  */
+	public int getLeaveCount(Integer userId);
+	
+	
+	// 학생 grade, semester 업데이트
+		public int updateStudentGradeAndSemester1_2();
+		public int updateStudentGradeAndSemester2_1();
+		public int updateStudentGradeAndSemester2_2();
+		public int updateStudentGradeAndSemester3_1();
+		public int updateStudentGradeAndSemester3_2();
+		public int updateStudentGradeAndSemester4_1();
+		public int updateStudentGradeAndSemester4_2();
+		
+
 
 }

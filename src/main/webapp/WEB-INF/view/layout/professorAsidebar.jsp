@@ -8,7 +8,7 @@
 						<h5 class="mb-0">메뉴</h5>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a href="/professor/allsub"
+						<li class="list-group-item p-3"><a href="/subject/list/1"
 							class="text-dark d-flex align-items-center"> <i
 								class="bi bi-person-lines-fill mr-2"></i> 전체 강의 조회
 						</a></li>

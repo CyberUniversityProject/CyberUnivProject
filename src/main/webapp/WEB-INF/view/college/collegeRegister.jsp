@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>교직원 추가페이지</h2>
+			<h2>단과대학 등록 페이지</h2>
 
 		</div>
 	</div>
@@ -49,26 +49,41 @@
 			</aside>
 
 			<div class="col-md-10">
-				<h1 class="mt-5 mb-4">단과대학등록</h1>
-				<!-- main 넣는 시작 부분 -->
-				<form action="/college/collegeRegister" method="post">
-				<div class="col-lg-8 mt-5 mt-lg-0">
-					<div class="row">
-						<div class="col-md-6 form-group mt-3 mt-md-0">
-							<input type="text" class="form-control" name="name" id="name"
-								placeholder="단과대학이름">
-						</div>
-					</div>
+				<section id="pricing" class="pricing">
+					<form action="/college/collegeRegister" method="post">
+						<div class="container" data-aos="fade-up">
 
-					<div class="text-center">
-						<button type="submit">등록하기</button>
-					</div>
-				</div>
-				</form>
-				<!-- main 끝 -->
-				
+							<div class="row" style="justify-content: center;">
+
+								<div class="col-lg-4 col-md-6">
+									<div class="box" style="margin-top: 13%;">
+										<h3 style="text-align: center;">단과대학 등록</h3>
+										<ul>
+											<div class="col-md-6 form-group mt-3 mt-md-0">
+												<input type="text" class="form-control" name="name"
+													id="name" style="width: 226%" placeholder="단과대학이름">
+											</div>
+											<br></br>
+											
+										</ul>
+										<div class="btn-wrap">
+											<button type="submit" class="btn-buy" style="border: none;">등록하기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
 			</div>
+			</form>
+
+			</section>
+			<!-- End Pricing Section -->
+
+			<!-- Register form End Pricing Section -->
+
 		</div>
+	</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script

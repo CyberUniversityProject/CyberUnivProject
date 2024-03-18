@@ -1,8 +1,5 @@
 package com.cyber.university.dto.professor;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 import lombok.Data;
 
 /**
@@ -30,20 +27,5 @@ public class SubInfoDto {
 	private Integer grades; // 이수 학점
 	private Integer capacity; // 수강 정원
 	private Integer numOfStudent; // 현재 신청 인원
-	
-	
-	public String formatStartTime() {
-		SimpleDateFormat dateFormate = new SimpleDateFormat("HH:mm");
-		String fomaterDate = dateFormate.format(startTime);
-		
-		return fomaterDate;
-	}
-	
-	public String formatendTime() {
-		SimpleDateFormat dateFormate = new SimpleDateFormat("HH:mm");
-		String fomaterDate = dateFormate.format(startTime);
-		
-		return fomaterDate;
-	}
 	
 }

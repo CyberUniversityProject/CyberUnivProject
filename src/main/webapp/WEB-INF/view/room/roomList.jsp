@@ -72,6 +72,47 @@
 						</c:forEach>
 						</tbody>
 					</table>
+
+<!-- 					<nav aria-label="Page navigation example" style="display: flex; justify-content: center;"> -->
+<!--                       <ul class="pagination"> -->
+<!--                         <li class="page-item"> -->
+<!--                           <a class="page-link" href="#" aria-label="Previous"> -->
+<!--                             <span aria-hidden="true">&laquo;</span> -->
+<!--                             <span class="sr-only">Previous</span> -->
+<!--                           </a> -->
+<!--                         </li> -->
+<!--                         <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+<!--                         <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!--                         <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+<!--                         <li class="page-item"> -->
+<!--                           <a class="page-link" href="#" aria-label="Next"> -->
+<!--                             <span aria-hidden="true">&raquo;</span> -->
+<!--                             <span class="sr-only">Next</span> -->
+<!--                           </a> -->
+<!--                         </li> -->
+<!--                       </ul> -->
+<!--                     </nav> -->
+
+			 <ul class="pagination">
+                <c:forEach var="index" begin="1" end="${listCount}">
+                    <li class="page-item">
+                        <c:choose>
+                            <c:when test="${id != null && index != page}">
+                                <a class="page-link" href="/room/roomList/${index}">${index}</a>
+                            </c:when>
+                            <c:when test="${id != null && index == page}">
+                                <a class="page-link" href="/room/roomList/${index}">${index}</a>
+                            </c:when>
+                            <c:when test="${id == null && index == page}">
+                                <a class="page-link" href="/room/roomList/${index}">${index}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-link" href="/room/roomList/${index}">${index}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </li>
+                </c:forEach>
+            </ul>
 				</div>
 		</div>
 		</div>

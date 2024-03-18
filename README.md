@@ -33,7 +33,18 @@ Git-flow 전략을 기반으로 main, develop 브랜치와 feature 보조 브랜
 
 ## ⚙ 의존성
 ```java
-
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+	implementation 'com.mysql:mysql-connector-j'
+	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.security:spring-security-crypto'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 ```
 <br>
 

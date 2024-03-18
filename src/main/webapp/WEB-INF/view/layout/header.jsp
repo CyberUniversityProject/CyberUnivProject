@@ -87,7 +87,6 @@ body {
 								<li><a href="/student/leaveOfAbsence">휴학 신청</a></li>
 								<li><a href="/student/leaveOfAbsenceList">휴학 내역 조회</a></li>
 								<li><a href="/student/tuition">등록금 내역 조회</a></li>
-								<li><a href="#">등록금 납부 고지서</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#"><span>수업</span> <i
 								class="bi bi-chevron-down"></i></a>
@@ -107,17 +106,16 @@ body {
 						<li class="dropdown"><a href="#"><span>성적</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="#">금학기 성적 조회</a></li>
-								<li><a href="#">학기별 성적 조회</a></li>
-								<li><a href="#">누계 성적</a></li>
+								<li><a href="/student/gradeDetailList">성적 조회</a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#"><span>학사정보</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
+								<li><a href="/schedule">학사일정</a></li>
 							</ul></li>
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
 					</ul>
 				</c:when>
 				<c:when test="${principal.userRole.equals(\"staff\")}">
@@ -160,10 +158,10 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
-								<li><a href="#">학사일정 등록</a></li>
+								<li><a href="/schedule">학사일정</a></li>
+								<li><a href="/schedule/list">학사일정 등록</a></li>
 							</ul></li>
-
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
 
 					</ul>
 				</c:when>
@@ -173,9 +171,9 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-                                 
-				
-				
+
+
+
 						<li class="dropdown"><a href="#"><span>마이페이지</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
@@ -198,15 +196,17 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
+								<li><a href="/schedule">학사일정</a></li>
 							</ul></li>
 
-
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
 					</ul>
 				</c:when>
 
 				<c:otherwise>
-
+					<ul>
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
+					</ul>
 				</c:otherwise>
 			</c:choose>
 
@@ -218,24 +218,27 @@ body {
 			<c:choose>
 				<c:when test="${principal != null}">
 					<div class="user-details">
-					<c:choose>
-					<c:when test="${principal.userRole.equals(\"student\")}">
-						<a href="/student/myInfo" class="get-started-btn" data-bs-placement="bottom"
-							data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-							님</a>
-                    </c:when>
-                    <c:when test="${principal.userRole.equals(\"staff\")}">
-                        <a href="/info/staff" class="get-started-btn" data-bs-placement="bottom"
-                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-                            님</a>
-                    </c:when>
-                    <c:when test="${principal.userRole.equals(\"professor\")}">
-                        <a href="/professor/info" class="get-started-btn" data-bs-placement="bottom"
-                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-                            님</a>
-                    </c:when>
-							</c:choose>
-							 <a href="/logout" class="get-started-btn">로그아웃</a>
+						<c:choose>
+							<c:when test="${principal.userRole.equals(\"student\")}">
+								<a href="/student/myInfo" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+							<c:when test="${principal.userRole.equals(\"staff\")}">
+								<a href="/info/staff" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+							<c:when test="${principal.userRole.equals(\"professor\")}">
+								<a href="/professor/info" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+						</c:choose>
+						<a href="/logout" class="get-started-btn">로그아웃</a>
 					</div>
 
 				</c:when>

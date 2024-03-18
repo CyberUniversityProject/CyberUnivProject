@@ -3,7 +3,42 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.university.repository.interfaces.ScheduleRepository">
 	
+	<insert id="insertScheduleForm">
+		insert into cu_schedule
+		(staff_id, start_day, end_day, information)
+		values 
+		(#{staffId}, #{startDay}, #{endDay}, #{information})
+	</insert>
+	
 	<select id="selectSchedule">
 		select * from cu_schedule
 	</select>
+	
+	<!-- 일정 상세페이지 -->
+	<select id="selectScheduleById">
+		select * from cu_schedule 
+		where id = #{id}
+	</select>
+	
+	<!-- 월마다 일정이 몇 개인지 조회 -->
+	<select id="selectScheduleInMonth" resultType="com.cyber.university.dto.ScheduleDto">
+		select month, count(month) AS sum
+		from cu_schedule
+		GROUP BY month
+		HAVING COUNT(month) > 1;
+	</select>
+	
+	<select id="selectListByMonth" resultType="com.cyber.university.repository.model.Schedule">
+		select * from cu_schedule where month(start_day) = #{month} or month(end_day) = #{month};
+	</select>
+
+	<update id="updateSchedule">
+		update cu_schedule
+		set start_day = #{startDay}, end_day = #{endDay}, information = #{information}
+		where id = #{id}
+	</update>	
+	
+	<delete id="deleteSchedule">
+		delete from cu_schedule where id = #{id}
+	</delete>
 </mapper>

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>학생 명단 조회</title>
+<title>등록금 납부 리스트</title>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -36,7 +36,7 @@
 	<div class="container mb-5">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
-				<%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
+			<%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
 
 			<div class="col-md-10">
 
@@ -89,28 +89,35 @@
 												<td id="formatSchAmount"><input type="hidden"
 													value="${tuition.schAmount}" id="schAmount" /></td>
 												<td id="totalAmount"></td>
-																								<c:choose>
-													<c:when test="${tuition.status eq '0'}">
-														<td> 미납 </td>
-													</c:when>
-													<c:otherwise>
-														<td> 납부 완료 </td>
-													</c:otherwise>
-												</c:choose>
 												<c:choose>
 													<c:when test="${tuition.status eq '0'}">
-														<td><a href="/student/tuitionBill" onclick="window.open(this.href, '_blank', 'width=600, height=800'); return false; ">
-																<button class="btn btn-primary" id="tuitionButton"
-																	type="button">등록금 납부</button>
-														</a></td>
+														<td>미납</td>
 													</c:when>
 													<c:otherwise>
-														<td><a href="/student/tuition/">
-																<button class="btn btn-primary" id="tuitionButton"
-																	type="button">등록금 영수증</button>
-														</a></td>
+														<td>납부 완료</td>
 													</c:otherwise>
 												</c:choose>
+
+
+
+
+												<td><a
+													href="/student/tuitionBill?tuiYear=${tuition.tuiYear }&semester=${tuition.semester}"
+													onclick="window.open(this.href, '_blank', 'width=600, height=900'); return false;">
+														<c:choose>
+															<c:when test="${tuition.status eq '0'}">
+																<button class="btn btn-primary" id="tuitionButton"
+																	type="button">등록금 납부</button>
+
+															</c:when>
+															<c:otherwise>
+																<button class="btn btn-primary" id="tuitionButton"
+																	type="button">등록금 영수증</button>
+
+															</c:otherwise>
+														</c:choose>
+												</a></td>
+
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -118,7 +125,8 @@
 							</div>
 							<ul class="pagination">
 								<c:forEach var="index" begin="1" end="${listCount}">
-									<li class="page-item"><c:choose>
+									<li class="page-item">
+										<c:choose>
 											<c:when test="${deptId != null && index != page}">
 												<a class="page-link"
 													href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
@@ -133,7 +141,8 @@
 											<c:otherwise>
 												<a class="page-link" href="/user/studentList/${index}">${index}</a>
 											</c:otherwise>
-										</c:choose></li>
+										</c:choose>
+									</li>
 								</c:forEach>
 							</ul>
 						</c:when>
@@ -146,10 +155,10 @@
 
 			</div>
 		</div>
-		
+
 	</div>
-	
-	
+
+
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

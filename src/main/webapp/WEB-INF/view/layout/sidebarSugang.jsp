@@ -13,17 +13,17 @@
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="/user/professorList" class="text-dark d-flex align-items-center">
+        <a href="/sugang/pre/1" class="text-dark d-flex align-items-center">
           <i class="bi bi-person-plus-fill mr-2"></i> 예비수강신청
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="/user/student" class="text-dark d-flex align-items-center">
+        <a href="/sugang/preAppList?type=1" class="text-dark d-flex align-items-center">
           <i class="bi bi-person-plus-fill mr-2"></i> 수강신청
         </a>
       </li>
       <li class="list-group-item p-3">
-        <a href="/user/professor" class="text-dark d-flex align-items-center">
+        <a href="/sugang/list" class="text-dark d-flex align-items-center">
           <i class="bi bi-journal-text mr-2"></i> 수강신청내역 조회
         </a>
       </li>

@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>교직원 추가페이지</h2>
+			<h2>단과대학 리스트 페이지</h2>
 
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 			</aside>
 
 			<div class="col-md-10" style="text-align: center;">
-				<h1 class="mt-5 mb-4">단과대학등록</h1>
+				<h1 class="mt-5 mb-4">단과대학 리스트</h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">
 					<table class="table table hover">
@@ -72,6 +72,25 @@
 						</c:forEach>
 						</tbody>
 					</table>
+					<nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
+                                          <ul class="pagination">
+                                            <li class="page-item">
+                                              <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                              </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                              <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </nav>
 				</div>
 				<!-- main 끝 -->
 

@@ -2,6 +2,7 @@ package com.cyber.university.repository.interfaces;
 
 import java.util.List;
 
+import com.cyber.university.dto.response.NoticeResDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.NoticeFormDto;
@@ -24,4 +25,18 @@ public interface NoticeRepository {
 	public Notice selectById(Integer id);
 	public int updateByNoticeDto(NoticeFormDto noticeFormDto);
 	public int deleteById(Integer id);
+
+	/**
+	 * 메인화면에 보여줄 공지사항 조회
+	 * @Author : 준혁
+	 * @return
+	 */
+	public List<NoticeResDto> selectMainNotice();
+	
+	
+	/**
+	 * 검색 기능
+	 */
+	public List<Notice> selectNoticeByTitle(NoticePageFormDto noticePageFormDto);
+	public List<Notice> selectNoticeByKeyword(NoticePageFormDto noticePageFormDto);
 }

@@ -1,5 +1,7 @@
 package com.cyber.university.controller;
 
+import java.io.Console;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyber.university.dto.ChangePasswordDto;
 import com.cyber.university.dto.LeaveAppDto;
 import com.cyber.university.dto.LeaveStudentInfoDto;
+import com.cyber.university.dto.SemesterGradeDto;
+import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
@@ -33,6 +38,7 @@ import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.service.BreakService;
+import com.cyber.university.service.StuSubService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.TuitionService;
 import com.cyber.university.service.UserService;
@@ -67,6 +73,8 @@ public class StudentController {
 	private BreakService breakService;
 	@Autowired
 	private TuitionService tuitionService;
+	@Autowired
+	private StuSubService stuSubService; 
 	
 	/**
 	  * @Method Name : myInfo
@@ -362,8 +370,64 @@ public class StudentController {
 	  * @Method 설명 : 등록금 고지서 페이지
 	  */
 	@GetMapping("/tuitionBill")
-	private String tuitionBill() {
+	private String tuitionBill(@RequestParam("tuiYear") Integer tuiYear, @RequestParam("semester") Integer semester ,Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		LeaveStudentInfoDto studentInfoDto = studentService.findLeaveStudentById(userId);
+		model.addAttribute("student", studentInfoDto);
+		
+		Tuition tuition = tuitionService.findTuitionByStudentIdAndYearAndSemester(userId, tuiYear,semester);
+		model.addAttribute("tuitionBill", tuition);
+		
+		
 
 		return "/student/tuitionBill";
 	}
+	
+	/**
+	  * @Method Name : gradeDetailPage
+	  * @작성일 : 2024. 3. 17.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 성적 상세 조회 페이지
+	  */
+	@GetMapping("/gradeDetailList")
+	private String gradeDetailPage(Model model) {
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+
+		List<SemesterGradeDto> thisSemesterGradeList = stuSubService.findThisSemesterGradeByStudentId(userId);
+		model.addAttribute("thisSemesterGradeList", thisSemesterGradeList);
+		
+		Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		Integer currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+		TotalScoreDto totalScoreDto = stuSubService.findTotalScoreByYearAndSemesterAndStudentId(currentYear,currentMonth, userId);
+		model.addAttribute("totalScore", totalScoreDto);
+		
+		
+		List<TotalScoreDto> allSemesterTotalScoreDto = stuSubService.findAllSemesterTotalScoreByStudyId(userId);
+		model.addAttribute("allSemesterTotalScoreList", allSemesterTotalScoreDto);
+		
+		log.info("controller allSemesterTotalScoreDto:"+allSemesterTotalScoreDto);
+		
+		return "/student/gradeDetailList";
+		
+	}
+
+
+	
 }

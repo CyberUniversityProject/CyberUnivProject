@@ -55,7 +55,7 @@ public class Define {
      *
      * @author 이준혁
      */
-    public final static String[] PATHS = { "/update", "/password", "/info/**", "/guide", "/notice/**"};
+    public final static String[] PATHS = { "/update", "/password", "/info/**", "/guide"};
     public final static String[] PROFESSOR_PATHS = { "/professor/**" };
     public final static String[] STUDENT_PATHS = {"/grade/**"};
     public final static String[] STAFF_PATHS = { "/user/**" };

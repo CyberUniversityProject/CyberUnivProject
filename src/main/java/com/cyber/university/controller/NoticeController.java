@@ -45,7 +45,6 @@ public class NoticeController {
 	public String notice(Model model)  {
 		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
-		log.info("dto1 : " + noticePageFormDto);
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -87,10 +86,7 @@ public class NoticeController {
 	@GetMapping("/read")
 	public String selectByIdNotice(Model model, @RequestParam("id") Integer id) {
 		model.addAttribute("id", id);
-		log.info("id:" + id);
-		log.info("Model:" + model);
-		Notice notice = noticeService.readByIdNotice(id);
-		log.info("Notice" + notice);
+		Notice notice = noticeService.readNoticeById(id);
 		if (notice == null) {
 			model.addAttribute("notice", null);
 		} else {
@@ -108,7 +104,7 @@ public class NoticeController {
 	public String update(Model model, @RequestParam("id") Integer id) {
 		model.addAttribute("id", id);
 		
-		Notice notice = noticeService.readByIdNotice(id);
+		Notice notice = noticeService.readNoticeById(id);
 		model.addAttribute("notice", notice);
 		return "/notice/noticeUpdate";
 	}
@@ -120,7 +116,6 @@ public class NoticeController {
 	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
 		noticeService.updateNotice(noticeFormDto);
-		log.info("noticeFormDto" + noticeFormDto);
 		return "redirect:/notice";
 	}
 	
@@ -133,5 +128,29 @@ public class NoticeController {
 		model.addAttribute("id", id);
 		noticeService.deleteNotice(id);
 		return "redirect:/notice";
+	}
+	
+	
+	/**
+	  * @Method Name : noticeSearch
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 조유빈
+	  * @변경이력 : 3.18 생성
+	  * @Method 설명 : 공지사항 검색
+	  * @return
+	  */
+	// pathvariable, requestparam 다시 정리
+	@GetMapping("/search")
+	public String noticeSearch(Model model, NoticePageFormDto noticePageFormDto, @RequestParam("keyword") String keyword) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+		List<Notice> noticeList = noticeService.noticeSearch(noticePageFormDto);
+		if(noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		
+		return "/notice/noticeList";
+		
 	}
 }

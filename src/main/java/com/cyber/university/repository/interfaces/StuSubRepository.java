@@ -1,10 +1,13 @@
 package com.cyber.university.repository.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cyber.university.dto.SemesterGradeDto;
+import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.UpdateStudentGradeDto;
 import com.cyber.university.dto.response.StuSubAppDto;
 import com.cyber.university.dto.response.StuSubDayTimeDto;
@@ -49,6 +52,35 @@ public interface StuSubRepository {
 	
 	// 성적 입력 시 취득 학점 컬럼도 추가
 	int updateCompleteGradeByStudentIdAndSubjectId(@Param("studentId") Integer studentId, @Param("subjectId") Integer subjectId, @Param("completeGrade") Integer completeGrade);
+
+	/**
+	  * @Method Name : selectThisSemesterGradeByStudentId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studentId로 금학기 성적 리스트 조회
+	  */
+	List<SemesterGradeDto> selectThisSemesterGradeByStudentId(Integer studentId);
+
+
+	/**
+	  * @Method Name : selectTotalScoreByYearAndSemesterAndStudentId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 :현재 년도와 달, studentId로 금학기 총점 구하기
+	  */
+	TotalScoreDto selectTotalScoreByYearAndSemesterAndStudentId(Map<String, Object> params);
+
+
+	/**
+	  * @Method Name : selectAllSemesterTotalScoreByStudyId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studyId로 각 학기별 총점 조회
+	  */
+	List<TotalScoreDto> selectAllSemesterTotalScoreByStudyId(Integer studentId);
 	
 
 }

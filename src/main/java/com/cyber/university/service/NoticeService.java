@@ -2,6 +2,7 @@ package com.cyber.university.service;
 
 import java.util.List;
 
+import com.cyber.university.dto.response.NoticeResDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -76,7 +77,7 @@ public class NoticeService {
 	 * 공지사항 상세페이지 
 	 */
 
-	public Notice readByIdNotice(Integer id) {
+	public Notice readNoticeById(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
 		// Integer view = noticeRepository.updateView(id);
 		// notice.setViews(view);
@@ -100,6 +101,29 @@ public class NoticeService {
 	public int deleteNotice(Integer id) {
 		int resultRowCount = noticeRepository.deleteById(id);
 		return resultRowCount;
+	}
+
+	/**
+	 * 메인 화면에 보여줄 공지사항 조회
+	 * @Author : 준혁
+	 * @return List<NoticeResDto>
+	 */
+	public List<NoticeResDto> readMainNotice() {
+		return noticeRepository.selectMainNotice();
+	}
+	
+	/**
+	 * 공지 검색 서비스
+	 */
+	public List<Notice> noticeSearch(NoticePageFormDto noticePageFormDto){
+		List<Notice> noticeList = null;
+		
+		if("title".equals(noticePageFormDto.getType())) {
+			noticeList = noticeRepository.selectNoticeByTitle(noticePageFormDto);
+		} else {
+			noticeList = noticeRepository.selectNoticeByKeyword(noticePageFormDto);
+		}
+		return noticeList;
 	}
 	
 }

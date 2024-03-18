@@ -12,8 +12,12 @@ import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.model.ApplySubject;
+import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Staff;
 import com.cyber.university.repository.model.StuStat;
+import com.cyber.university.service.ApplySubjectService;
+import com.cyber.university.service.BreakService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 import jakarta.servlet.http.Cookie;
@@ -37,6 +41,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.cyber.university.controller.StuSubController.SUGANG_PERIOD;
+
 
 /**
  * 
@@ -54,6 +60,10 @@ public class PersonalController {
 	@Autowired
 	private UserService userService;
 	@Autowired
+	private ApplySubjectService applySubjectService;
+	@Autowired
+	private BreakService breakService;
+	@Autowired
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -67,6 +77,10 @@ public class PersonalController {
 	public String home(Model model) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
+		Integer period = SUGANG_PERIOD;
+		model.addAttribute("periodNumber", period);
+		System.out.println("period : " + period);
+
 		// Principal 객체가 null이 아닌지 확인
 		if (principal != null) {
 			if (principal.getUserRole().equals("student")) {
@@ -77,6 +91,12 @@ public class PersonalController {
 				// 직원인 경우
 				Staff staffInfo = userService.readStaff(principal.getId());
 				model.addAttribute("userInfo", staffInfo);
+				List<Break> breakList = breakService.readByStatus("처리중");
+				model.addAttribute("breakSize", breakList.size());
+				List<ApplySubject> applySubjectList = applySubjectService.findAllList();
+				System.out.println("applySubjectList : " + applySubjectList.size());
+				model.addAttribute("applySubjectSize", applySubjectList.size());
+
 			} else {
 				// 교수인 경우
 				ProfessorInfoDto professorInfo = userService.readProfessorInfo(principal.getId());
@@ -423,6 +443,14 @@ public class PersonalController {
 	private String getValidationErrors(BindingResult bindingResult) {
 	    return bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
 	            .collect(Collectors.joining("\\n"));
+	}
+	
+	
+	
+	@GetMapping("/campusMap")
+	public String campus() {
+		
+		return "/campus/campusMap";
 	}
 
 

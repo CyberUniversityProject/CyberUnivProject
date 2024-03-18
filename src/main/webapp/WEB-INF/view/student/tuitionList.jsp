@@ -62,6 +62,8 @@
 							</form>
 						</div>
 					</div>
+					
+					
 					<c:choose>
 						<c:when test="${!tuitionList.isEmpty()}">
 							<div class="table-responsive">

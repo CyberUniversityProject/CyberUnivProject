@@ -15,12 +15,12 @@
 		<title>등록금 납부 영수증</title>
 	</c:otherwise>
 </c:choose>
-<<<<<<< HEAD
+
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-=======
 
 
->>>>>>> dev
+
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -201,18 +201,7 @@ body {
 						본 고지서는 등록금 안내 목적으로 발송되었습니다. 결제는 지정된 기한 내에 수행하여
 
 						<!-- 등록금 고지서 하단 -->
-<<<<<<< HEAD
-						<!-- 등록금 고지서 하단 -->
-					<div class="container mt-4 text-center">
-						<h4>2024년11월11일</h4>
-						<h2>Cyber University</h2>
-						<!-- <img src="대학_직인_이미지_주소" alt="대학 직인 사진"> -->
-					</div>
-		<div class="container mt-4 text-center noprint">
-					<button class="payment btn" id="payment" style="border:2px solid #3ac162;" onclick="requestPay()">
-					    <i class="bi bi-credit-card" style="width:20px; height:20px"></i> 결제하기
-					</button>
-=======
+
 <div class="container mt-4 text-center">
     <h4>2024년11월11일</h4>
     <div style="position: relative; display: inline-block;">
@@ -221,10 +210,10 @@ body {
     </div>
 </div>
 		<div class="container mt-4 text-center noprint">
-					<button class="payment btn" style="border:2px solid #3ac162;" >
+					<button class="payment btn" style="border:2px solid #3ac162;" onclick="requestPay()">
 				<i class="bi bi-credit-card" style="width:20px; height:20px"></i> 결제하기
 			</button>
->>>>>>> dev
+
 			<button class="print btn" style="border:2px solid #3ac162;" onclick="printPage()">
 				<i class="bi bi-printer" style="width:20px; height:20px"></i> 인쇄하기
 			</button>

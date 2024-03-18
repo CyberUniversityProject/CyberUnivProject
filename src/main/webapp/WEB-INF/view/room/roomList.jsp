@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -71,6 +72,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+
 					<div class="d-flex justify-content-center">
 						<ul class="pagination">
 							<c:forEach var="index" begin="1" end="${listCount}">
@@ -91,6 +93,16 @@
 							</c:forEach>
 						</ul>
 					</div>
+
+					
+ 
+
+
+       
+
+   
+
+
 				</div>
 			</div>
 		</div>
@@ -104,4 +116,5 @@
 </html>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
 

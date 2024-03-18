@@ -113,8 +113,9 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
+								<li><a href="/schedule">학사일정</a></li>
 							</ul></li>
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
 					</ul>
 				</c:when>
 				<c:when test="${principal.userRole.equals(\"staff\")}">
@@ -157,10 +158,10 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
-								<li><a href="#">학사일정 등록</a></li>
+								<li><a href="/schedule">학사일정</a></li>
+								<li><a href="/schedule/list">학사일정 등록</a></li>
 							</ul></li>
-
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
 
 					</ul>
 				</c:when>
@@ -170,9 +171,9 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-                                 
-				
-				
+
+
+
 						<li class="dropdown"><a href="#"><span>마이페이지</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
@@ -184,7 +185,7 @@ body {
 							<ul>
 								<li><a href="/subject/list/1">전체 강의 조회</a></li>
 								<li><a href="/professor/mysub">내 강의 조회</a></li>
-								<li><a href="#">내 강의 평가</a></li>
+								<li><a href="/professor/readevaluation">내 강의 평가</a></li>
 								<li><a href="/professor/apply">강의 등록</a></li>
 							</ul></li>
 
@@ -195,15 +196,17 @@ body {
 								class="bi bi-chevron-down"></i></a>
 							<ul>
 								<li><a href="/notice">공지사항</a></li>
-								<li><a href="#">학사일정</a></li>
+								<li><a href="/schedule">학사일정</a></li>
 							</ul></li>
 
-
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
 					</ul>
 				</c:when>
 
 				<c:otherwise>
-
+					<ul>
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
+					</ul>
 				</c:otherwise>
 			</c:choose>
 
@@ -215,24 +218,27 @@ body {
 			<c:choose>
 				<c:when test="${principal != null}">
 					<div class="user-details">
-					<c:choose>
-					<c:when test="${principal.userRole.equals(\"student\")}">
-						<a href="/student/myInfo" class="get-started-btn" data-bs-placement="bottom"
-							data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-							님</a>
-                    </c:when>
-                    <c:when test="${principal.userRole.equals(\"staff\")}">
-                        <a href="/info/staff" class="get-started-btn" data-bs-placement="bottom"
-                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-                            님</a>
-                    </c:when>
-                    <c:when test="${principal.userRole.equals(\"professor\")}">
-                        <a href="/professor/info" class="get-started-btn" data-bs-placement="bottom"
-                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-                            님</a>
-                    </c:when>
-							</c:choose>
-							 <a href="/logout" class="get-started-btn">로그아웃</a>
+						<c:choose>
+							<c:when test="${principal.userRole.equals(\"student\")}">
+								<a href="/student/myInfo" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+							<c:when test="${principal.userRole.equals(\"staff\")}">
+								<a href="/info/staff" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+							<c:when test="${principal.userRole.equals(\"professor\")}">
+								<a href="/professor/info" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+						</c:choose>
+						<a href="/logout" class="get-started-btn">로그아웃</a>
 					</div>
 
 				</c:when>

@@ -88,5 +88,56 @@
 		WHERE student_id = #{studentId}
 		AND subject_id = #{subjectId}
 	</update>
+	
+	<select id="selectThisSemesterGradeByStudentId" resultType="com.cyber.university.dto.SemesterGradeDto">
+		SELECT 
+			a.subject_id,
+		    a.grade,
+    		b.grades,
+		    b.sub_year AS subYear,
+		    b.semester,
+		    b.name AS subjectName,
+		    b.type
+		FROM cu_stu_sub AS a
+		LEFT JOIN cu_subject AS b 
+		ON a.subject_id = b.id
+		WHERE student_id = #{studentId}
+		AND sub_year = YEAR(CURDATE())
+		AND IF(MONTH(CURDATE()) BETWEEN 3 AND 8, 1, 2) = semester
+	</select>
+	
+	<select id="selectTotalScoreByYearAndSemesterAndStudentId" resultType="com.cyber.university.dto.TotalScoreDto">
+		SELECT 
+		     s.sub_year AS subYear,
+		     s.semester AS semester,
+		    SUM(s.grades) AS totalGrades,
+		    SUM(ss.complete_grade) AS totalCompleteGrade,
+		    AVG(g.grade_value) AS averageGrade
+		FROM cu_stu_sub AS ss
+		LEFT JOIN cu_subject AS s
+		ON ss.subject_id = s.id
+		LEFT JOIN cu_grade AS g
+		ON ss.grade = g.grade
+		WHERE ss.student_id = #{studentId}
+		AND s.sub_year = #{subYear}
+		AND semester = #{semester}
+	</select>
+	
+	<select id="selectAllSemesterTotalScoreByStudyId" resultType="com.cyber.university.dto.TotalScoreDto">
+		SELECT 
+		    s.sub_year AS subYear,
+		    s.semester AS semester,
+		    SUM(s.grades) AS totalGrades,
+		    SUM(ss.complete_grade) AS totalCompleteGrade,
+		    AVG(g.grade_value) AS averageGrade
+		FROM cu_stu_sub AS ss
+		LEFT JOIN cu_subject AS s 
+		ON ss.subject_id = s.id
+		LEFT JOIN cu_grade AS g 
+		ON ss.grade = g.grade
+		WHERE ss.student_id = #{studentId}
+		GROUP BY s.sub_year, s.semester
+	</select>
+
 
 </mapper>

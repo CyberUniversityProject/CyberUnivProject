@@ -444,6 +444,14 @@ public class PersonalController {
 	    return bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
 	            .collect(Collectors.joining("\\n"));
 	}
+	
+	
+	
+	@GetMapping("/campusMap")
+	public String campus() {
+		
+		return "/campus/campusMap";
+	}
 
 
 }

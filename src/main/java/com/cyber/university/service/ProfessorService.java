@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubInfoDto;
@@ -128,7 +129,7 @@ public class ProfessorService {
 		subject.setProId(dto.getProId());
 		subject.setSubName(dto.getSubName());
 		subject.setProName(dto.getProName());
-		subject.setSubTime(dto.getTime());
+		subject.setSubTime(dto.getSubTime());
 		subject.setType(dto.getType());
 		subject.setSubGrade(dto.getSubGrade());
 		subject.setCapacity(dto.getCapacity());
@@ -224,7 +225,6 @@ public class ProfessorService {
 	public int updateStudentSubDetail(Integer studentId, Integer subjectId, UpdateStudentSubDetailDto dto) {
 		UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
 		
-		System.out.println("grades : " + grades);
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("studentId", dto.getStudentId());
@@ -235,7 +235,11 @@ public class ProfessorService {
 		map.put("midExam", dto.getMidExam());
 		map.put("finalExam", dto.getFinalExam());
 		map.put("grade", dto.getGrade());
-		map.put("completeGrade", grades.getGrades());
+		if(dto.getGrade().equals("F")) {
+			map.put("completeGrade", 0);
+		} else {
+			map.put("completeGrade", grades.getGrades());
+		}
 		map.put("convertedMark", dto.getConvertedMark());
 
 		int result = professorRepository.updateStudentSubDetail(map);
@@ -246,5 +250,44 @@ public class ProfessorService {
 		return result + result2;
 	}
 	
+	
+	/**
+	  * @Method Name : readSubjectName
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 교수 아이디로 과목 이름 찾기
+	  */
+	public List<MyEvaluationDto> readSubjectName(Integer professorId) {
+		List<MyEvaluationDto> subjectName = professorRepository.selectEvaluationDto(professorId);
+		
+		return subjectName;
+	}
+	
+	/**
+	  * @Method Name : readEvaluationByProfessorIdAndName
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 과목별 강의 평가 조회
+	  */
+	public List<MyEvaluationDto> readEvaluationByProfessorIdAndName(Integer professorId, String name) {
+		List<MyEvaluationDto> evaluation = professorRepository.selectEvaluationDtoByprofessorIdAndName(professorId, name);
+		
+		return evaluation;
+	}
+	
+	/**
+	  * @Method Name : selectMyEvaluationDtoByProfessorId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의평가 조회
+	  */
+	public List<MyEvaluationDto> readEvaluationByProfessorId(Integer professorId) {
+		List<MyEvaluationDto> evaluation = professorRepository.selectMyEvaluationDtoByProfessorId(professorId);
+		
+		return evaluation;
+	}
 	
 }

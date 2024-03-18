@@ -34,9 +34,5 @@ public class NoticeRestFulController {
         return ResponseEntity.ok(noticeService.readMainNotice());
     }
 
-    // 골지사항 상세조회
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> readNoticeDetail(@PathVariable(name = "id") Integer id) {
-        return ResponseEntity.ok(noticeService.readByIdNotice(id));
-    }
+    
 }

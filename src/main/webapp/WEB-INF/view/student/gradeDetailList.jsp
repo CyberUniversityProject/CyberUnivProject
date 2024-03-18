@@ -44,6 +44,7 @@ link:focus, .nav-link:hover {
 
 		</div>
 	</div>
+
 	<!-- 상단 제목부분 끝 -->
 	<div class="container mb-5">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
@@ -63,99 +64,190 @@ link:focus, .nav-link:hover {
 					</div>
 
 					<ul class="nav nav-underline nav-tabs">
-						<li class="nav-item">
-							<a class="nav-link active" data-toggle="tab" href="#id1">금학기 성적</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#id2">학기별 성적
-								조회</a></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#id3">누계 성적</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#id1">금학기 성적</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#id2">학기별 성적 조회</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#id3">누계 성적</a></li>
 					</ul>
-<div class="tab-content">
-<div id="id1" class="tab-pane fade show active">
+					<div class="tab-content">
 
-					<div class="table-responsive">
-						<table class="table table-bordered">
-							<thead class="thead-light">
-								<tr>
-									<th>연도</th>
-									<th>학기</th>
-									<th>과목번호</th>
-									<th>과목명</th>
-									<th>강의 구분</th>
-									<th>이수 학점</th>
-									<th>성적</th>
-									<th>강의 평가</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>연도</td>
-									<td>학기</td>
-									<td>과목번호</td>
-									<td>과목명</td>
-									<td>강의 구분</td>
-									<td>이수 학점</td>
-									<td>성적</td>
-									<td>강의 평가
-										<p>해당 강의평가가 insert된 상태여야만 성적 확인가능하게</p>
-									</td>
 
-								</tr>
-							</tbody>
-						</table>
-					<p class="no--list--p">검색 결과가 없습니다.</p>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<hr>
+
+						<div id="id1" class="tab-pane fade show active">
+
+							<c:choose>
+								<c:when test="${!thisSemesterGradeList.isEmpty()}">
+									<div class="container mt-4">
+										<H5>금학기 성적 조회</H5>
+
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												<thead class="thead-light">
+													<tr>
+														<th>연도</th>
+														<th>학기</th>
+														<th>과목번호</th>
+														<th>과목명</th>
+														<th>강의 구분</th>
+														<th>이수 학점</th>
+														<th>성적</th>
+														<th>강의 평가</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													<c:forEach var="thisSemesterGrade"
+														items="${thisSemesterGradeList}">
+														<tr>
+															<td>${thisSemesterGrade.subYear}</td>
+															<td>${thisSemesterGrade.semester}</td>
+															<td>${thisSemesterGrade.subjectId}</td>
+															<td>${thisSemesterGrade.subjectName}</td>
+															<td>${thisSemesterGrade.type}</td>
+															<td>${thisSemesterGrade.grades}</td>
+															<td>${thisSemesterGrade.grade}</td>
+															<td>강의 평가
+																<p>해당 강의평가가 insert된 상태여야만 성적 확인가능하게</p>
+															</td>
+
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<hr>
+										</div>
+									</div>
+
+									<div class="container mt-4">
+										<H5>금학기 총점 조회</H5>
+
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												<thead class="thead-light">
+													<tr>
+														<th>연도</th>
+														<th>학기</th>
+														<th>신청 학점</th>
+														<th>취득 학점</th>
+														<th>학점 평균</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>${totalScore.subYear }</td>
+														<td>${totalScore.semester }</td>
+														<td>${totalScore.totalGrades}</td>
+														<td>${totalScore.totalCompleteGrade }</td>
+														<td>${totalScore.averageGrade }</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<p class="no--list--p">성적 조회 기간이 아닙니다.</p>
+								</c:otherwise>
+							</c:choose>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<!-- id3 -->
+						<div id="id3" class="tab-pane fade">
+
+							<div class="container mt-4">
+								<H5>학기별 총점 조회</H5>
+
+
+					<c:choose>
+						<c:when test="${!allSemesterTotalScoreList.isEmpty()}">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead class="thead-light">
+											<tr>
+												<th>연도</th>
+												<th>학기</th>
+												<th>신청학점</th>
+												<th>취득학점</th>
+												<th>학점 평균</th>
+											</tr>
+										</thead>
+										<tbody>
+										<c:forEach var="allSemesterTotalScore" items="${allSemesterTotalScoreList}">
+											<tr>
+												<td>${allSemesterTotalScore.subYear }</td>
+												<td>${allSemesterTotalScore.semester }</td>
+												<td>${allSemesterTotalScore.totalGrades }</td>
+												<td>${allSemesterTotalScore.totalCompleteGrade }</td>
+												<td>${allSemesterTotalScore.averageGrade }</td>
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</c:when>
+						<c:otherwise>
+							<p class="no--list--p">확인 할 수 있는 성적 정보가 없습니다.</p>
+						</c:otherwise>
+					</c:choose>
+							<div class="container mt-5">
+								<H5>전체 총점 조회</H5>
+
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead class="thead-light">
+											<tr>
+												<th>연도</th>
+												<th>학기</th>
+												<th>신청학점</th>
+												<th>취득학점</th>
+												<th>학점 평균</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>연도</td>
+												<td>학기</td>
+												<td>신청학점</td>
+												<td>취득학점</td>
+												<td>학점 평균</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+
+
+						</div>
+
+
 					</div>
 				</div>
-
-				<H5>금학기 총점 조회</H5>
-
-
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						<thead class="thead-light">
-							<tr>
-								<th>연도</th>
-								<th>학기</th>
-								<th>신청학점</th>
-								<th>취득학점</th>
-								<th>학점 평균</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>연도</td>
-								<td>학기</td>
-								<td>신청학점</td>
-								<td>취득학점</td>
-								<td>학점 평균</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-</div>
-
-<div id="id2" class="tab-pane fade">
-	<p> id2 출력</p>
-</div>
-
-
-<div id="id3" class="tab-pane fade">
-	<p> id3 출력</p>
-</div>
-
-
-					</div>
 			</div>
 		</div>
-	</div>
 
-</div>
+	</div>
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

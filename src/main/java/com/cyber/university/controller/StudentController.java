@@ -384,4 +384,34 @@ public class StudentController {
 
 		return "/student/tuitionBill";
 	}
+	
+	/**
+	  * @Method Name : gradeDetailPage
+	  * @작성일 : 2024. 3. 17.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 성적 상세 조회 페이지(금학기)
+	  */
+	@GetMapping("/gradeDetailList")
+	private String gradeDetailPage(Model model) {
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		log.info(userId + "userId");
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		// 올해 성적 조회
+		// 우선 userId(studentId)로 cu_stu_sub 조회 -> subject_id, grade, compete_grade(최종학점????테이블명세서 다시확인 (subject_id에 grades가 이수학점인듯) 조회 가능
+		//	-> subject_id로 cu_subject join -> 과목명, 교수id, type(전공, 교양), 학년, 수업년도, grades(이수학점)
+		
+		
+		
+		model.addAttribute("gradeList", "gradeList");
+		
+		return "/student/gradeDetailList";
+		
+	}
 }

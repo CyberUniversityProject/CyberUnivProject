@@ -5,7 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>등록금 고지서</title>
+
+
+<c:choose>
+	<c:when test="${tuitionBill.status eq '0'}">
+		<title>등록금 고지서</title>
+	</c:when>
+	<c:otherwise>
+		<title>등록금 납부 영수증</title>
+	</c:otherwise>
+</c:choose>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -14,7 +25,6 @@
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
 	;
-
 * {
 	margin: 0;
 	padding: 0;
@@ -78,7 +88,13 @@ body {
 .radio--container {
 	text-align: center;
 }
+@media print {
+  .noprint { 
+	display:none;
+	}
+}
 </style>
+
 </head>
 
 <body>
@@ -86,10 +102,25 @@ body {
 		<div class="header--top"></div>
 	</header>
 	<section>
-		<div class="section--header">
-			<h2>등록금 고지서</h2>
-			<br>
-		</div>
+		<c:choose>
+			<c:when test="${tuitionBill.status eq '0'}">
+				<div class="section--header">
+					<h2>등록금 납입 고지서</h2>
+					<br>
+				</div>
+
+			</c:when>
+			<c:otherwise>
+				<div class="section--header">
+					<h2>등록금 납부 영수증</h2>
+					<br>
+				</div>
+
+
+			</c:otherwise>
+		</c:choose>
+
+
 
 		<!-- 등록금 고지서 헤더 -->
 		<div class="container">
@@ -99,19 +130,24 @@ body {
 				<table class="table table-bordered">
 					<tr>
 						<th class="bg-light">항목</th>
-						<th>내용</th>
+						<th colspan="3">내용</th>
 					</tr>
 					<tr>
 						<td>학기</td>
-						<td>2024년도 1학기</td>
+						<td colspan="3">${tuitionBill.tuiYear}년도
+							${tuitionBill.semester }학기</td>
 					</tr>
 					<tr>
 						<td>학과</td>
-						<td>컴퓨터 공학과</td>
+						<td>${student.department }</td>
+						<td>학년</td>
+						<td>${student.grade }학년</td>
 					</tr>
 					<tr>
 						<td>학번</td>
-						<td>2023123456</td>
+						<td>${student.studentId }</td>
+						<td>이름</td>
+						<td>${student.name }</td>
 					</tr>
 				</table>
 			</div>
@@ -120,47 +156,120 @@ body {
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<tr>
-						<th class="bg-light">과목</th>
-						<th>학점</th>
-						<th>단가</th>
+						<th class="bg-light" colspan="2">납입금 내역</th>
+						<th class="bg-light" colspan="2">장학금 내역</th>
+					</tr>
+					<tr>
+						<th class="bg-light">구분</th>
+						<th>금액</th>
+						<th>구분</th>
 						<th>금액</th>
 					</tr>
 					<tr>
-						<td>수학</td>
-						<td>3</td>
-						<td>150,000원</td>
-						<td>450,000원</td>
+						<td>수업료</td>
+						<td>${tuitionBill.tuiFormat()}<input type="hidden"
+							id="tuiAmount" value="${tuitionBill.tuiAmount }">
+						</td>
+
+						<td>장학금</td>
+						<td>${tuitionBill.schFormat() }<input type="hidden"
+							id="schAmount" value="${tuitionBill.schAmount }">
+
+						</td>
 					</tr>
-					<tr>
-						<td>영어</td>
-						<td>3</td>
-						<td>150,000원</td>
-						<td>450,000원</td>
-					</tr>
+
 					<tr class="total">
-						<td colspan="3">총액</td>
-						<td>900,000원</td>
+						<td colspan="2">총 납입 금액</td>
+						<td colspan="2" id="totalAmount"></td>
 					</tr>
 				</table>
+
 			</div>
 
-			<!-- 고지서 설명 -->
-			<p class="mt-4">본 고지서는 등록금 안내 목적으로 발송되었습니다. 실제 결제는 지정된 기한 내에 수행하여
-				주시기 바랍니다.</p>
-				
+			<c:choose>
+				<c:when test="${tuitionBill.status eq '0'}">
+					<!-- 고지서 설명 -->
+					<p class="">납입기간 : 2022~ 2022~</p>
+					<p class="">납입방법 : 신용카드 결제</p>
+
+					<p class="mt-2">
+						본 고지서는 등록금 안내 목적으로 발송되었습니다. 결제는 지정된 기한 내에 수행하여
+
+						<!-- 등록금 고지서 하단 -->
+						<!-- 등록금 고지서 하단 -->
+					<div class="container mt-4 text-center">
+						<h4>2024년11월11일</h4>
+						<h2>Cyber University</h2>
+						<!-- <img src="대학_직인_이미지_주소" alt="대학 직인 사진"> -->
+					</div>
+		<div class="container mt-4 text-center noprint">
+					<button class="payment btn" id="payment" style="border:2px solid #3ac162;" onclick="requestPay()">
+					    <i class="bi bi-credit-card" style="width:20px; height:20px"></i> 결제하기
+					</button>
+			<button class="print btn" style="border:2px solid #3ac162;" onclick="printPage()">
+				<i class="bi bi-printer" style="width:20px; height:20px"></i> 인쇄하기
+			</button>
 		</div>
-				<!-- 등록금 고지서 하단 -->
-<!-- 등록금 고지서 하단 -->
-<div class="container mt-4 text-center">
-    <h2>Cyber University</h2>
-    <!-- <img src="대학_직인_이미지_주소" alt="대학 직인 사진"> -->
-</div>
+
+				</c:when>
+				<c:otherwise>
+					<p class="mt-2">(여기는 결제가 이루어진 날짜가 출력될 곳) 납부가 완료되었습니다.</p>
+		</div>
+		<!-- 등록금 고지서 하단 -->
+		<!-- 등록금 고지서 하단 -->
+		<div class="container mt-4 text-center">
+			<h4>2024년11월11일</h4>
+			<h2>Cyber University</h2>
+			<!-- <img src="대학_직인_이미지_주소" alt="대학 직인 사진"> -->
+		</div>
+		<div class="container mt-4 text-center noprint">
+			<button class="print btn" style="border:2px solid #3ac162;" onclick="printPage()">
+				<i class="bi bi-printer" style="width:20px; height:20px"></i> 인쇄하기
+			</button>
+		</div>
+		</c:otherwise>
+		</c:choose>
 
 
-<button class="print" onclick="printPage()">출력</button>
+
+
 	</section>
 
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- <script src="/js/tuitionBill.js"></script> -->
+<script>
+// IMP 객체 초기화
+var IMP = window.IMP;
+IMP.init("imp04766220");
+
+// 결제 요청 함수
+function requestPay() {
+    IMP.request_pay({
+        pg: "kakaopay",
+        pay_method: "card",
+        merchant_uid: "unique_merchant_uid", // 상점에서 생성한 고유 주문 번호
+        name: "등록금 납부", // 상품명 또는 주문 내용
+        amount: 10000, // 결제 금액 (원 단위)
+        buyer_email: "buyer@example.com", // 구매자 이메일
+        buyer_name: "구매자 이름", // 구매자 이름
+        buyer_tel: "010-1234-5678", // 구매자 전화번호
+        buyer_addr: "구매자 주소", // 구매자 주소
+        buyer_postcode: "123-456", // 구매자 우편번호
+    }, function (rsp) {
+        // 결제 결과 처리
+        if (rsp.success) {
+            // 결제 성공 시 처리할 작업
+            alert("결제가 완료되었습니다.");
+            // 예를 들어, 결제 성공 후 화면 갱신이나 다음 단계로 이동하는 등의 작업을 수행할 수 있습니다.
+        } else {
+            // 결제 실패 시 처리할 작업
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+            alert(msg);
+        }
+    });
+}
+</script>
 </body>
 </html>
-
 

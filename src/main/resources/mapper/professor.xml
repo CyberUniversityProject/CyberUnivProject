@@ -142,10 +142,8 @@
 
 	<!-- 24.03.13 강의 등록 -->
 	<insert id="insertApplySubject">
-		insert into cu_apply_sub(pro_id, sub_name, pro_name,
-		sub_time, type, sub_grade, capacity)
-		values(#{proId}, #{subName},
-		#{proName}, #{time}, #{type}, #{subGrade} , #{capacity})
+		insert into cu_apply_sub(pro_id, sub_name, pro_name, sub_time, type, sub_grade, capacity)
+		values(#{proId}, #{subName}, #{proName}, #{subTime}, #{type}, #{subGrade} , #{capacity})
 	</insert>
 
 	<!-- 24.03.13 강의 이름 찾기 -->
@@ -208,4 +206,33 @@
 	<select id="selectGradesInfo" resultType="com.cyber.university.dto.professor.UpdateStudentSubDetailDto">
 		select grades from cu_subject where id = #{subjectId}
 	</select>
+	
+	<!-- 24.03.18 강의평가 과목 조회 -->
+	<select id="selectEvaluationDto" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
+		SELECT DISTINCT s.name  
+		FROM cu_evaluation AS e
+		INNER JOIN cu_subject AS s
+		ON e.subject_id = s.id
+		WHERE s.professor_id = #{professorId}
+	</select>
+	
+	<!-- 24.03.18 과목별 강의 평가 조회 -->
+	<select id="selectEvaluationDtoByprofessorIdAndName" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
+		SELECT s.name, s.professor_id, e.*  
+		FROM cu_evaluation AS e
+		INNER JOIN cu_subject AS s
+		ON e.subject_id = s.id
+		WHERE s.professor_id = #{professorId} AND s.name= #{name}
+	</select>
+	
+	<!-- 강의평가 조회 -->
+	<select id="selectMyEvaluationDtoByProfessorId" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
+		SELECT s.name, s.professor_id, e.*  
+		FROM cu_evaluation AS e
+		INNER JOIN cu_subject AS s
+		ON e.subject_id = s.id
+		WHERE s.professor_id = #{professorId};
+	</select>
+	
+	
 </mapper>        

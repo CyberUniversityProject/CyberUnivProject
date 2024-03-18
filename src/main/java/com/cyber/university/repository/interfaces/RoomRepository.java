@@ -2,6 +2,7 @@ package com.cyber.university.repository.interfaces;
 
 import java.util.List;
 
+import com.cyber.university.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,7 +26,7 @@ public interface RoomRepository {
 
 	// 강의실 등록 리스트
 	public List<RoomWithCollegeDto> findAllCol();
-	
+
 	public List<Room> findAll();
 
 	// 강의실 삭제
@@ -39,8 +40,9 @@ public interface RoomRepository {
 
 	// 전체 페이지 불러오기
 	public List<Room> findAllwithPasing(@Param("offset") int offset, @Param("limit") int limit,
-			@Param("type") String type);
+										@Param("id") String id);
 
 	// 전체 게시물개수 계산
 	public int getAllPgCount();
+
 }

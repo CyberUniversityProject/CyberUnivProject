@@ -46,6 +46,8 @@
 	</select>
 	<!--페이징 처리 -->
 	<select id="findAllwithPasing" resultType="com.cyber.university.repository.model.Room">
-		SELECT * FROM cu_room
+		<![CDATA[
+		SELECT * FROM cu_room WHERE id >0 ORDER BY id DESC
+		]]>
 	</select>
 </mapper>

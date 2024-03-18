@@ -1,12 +1,14 @@
 package com.cyber.university.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.cyber.university.dto.PageRequestDto;
+import com.cyber.university.dto.PageResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cyber.university.dto.RoomDto;
 import com.cyber.university.dto.RoomWithCollegeDto;
@@ -40,9 +42,7 @@ public class RoomService {
 			throw new CustomRestfullException("등록 생성 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-		
-		
-		
+
 		// 강의실 전체 리스트 불러오기
 		public List<Room> roomList() {
 			List<Room> roomList = roomRepository.findAll();
@@ -79,8 +79,42 @@ public class RoomService {
 	 * @프로그램 설명 : 강의실 List 페이징
 	 */
 
-
+	// 총 강의실 수 조회
+	public int getTotoalRoomCount() {
+		return roomRepository.getAllPgCount();
 	}
+
+
+	// 페이징 된 강의실 목록 조회
+	public PageRequestDto<RoomDto>  getfindwithallpaging(PageRequestDto pageRequestDto, String id) {
+		int page = pageRequestDto.getPage();
+		int size = pageRequestDto.getSize();
+		int offset = (page - 1) * size; // offset 계산
+
+		// 총 데이터 개수 조회
+		long totalElements = roomRepository.getAllPgCount();
+
+		// 페이징 된 목록 조회
+		List<Room> roomList = roomRepository.findAllwithPasing(offset, size, id);
+
+		// 페이징 결과 객체 생성
+		List<RoomDto> roomDtoList = roomList.stream()
+											.map(this::convertToDto)
+											.collect(Collectors.toList());
+		/*PageResponseDto<RoomDto> pageRes = new PageResponseDto<>(roomDtoList ,page, totalElements, size);
+*/
+
+		return null;
+	}
+
+	private RoomDto convertToDto(Room room) {
+		RoomDto roomDto = new RoomDto();
+		roomDto.setId(room.getId());
+		return roomDto;
+	}
+
+
+}
 
 	
 	

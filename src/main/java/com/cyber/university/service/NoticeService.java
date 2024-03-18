@@ -77,7 +77,7 @@ public class NoticeService {
 	 * 공지사항 상세페이지 
 	 */
 
-	public Notice readByIdNotice(Integer id) {
+	public Notice readNoticeById(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
 		// Integer view = noticeRepository.updateView(id);
 		// notice.setViews(view);
@@ -110,6 +110,20 @@ public class NoticeService {
 	 */
 	public List<NoticeResDto> readMainNotice() {
 		return noticeRepository.selectMainNotice();
+	}
+	
+	/**
+	 * 공지 검색 서비스
+	 */
+	public List<Notice> noticeSearch(NoticePageFormDto noticePageFormDto){
+		List<Notice> noticeList = null;
+		
+		if("title".equals(noticePageFormDto.getType())) {
+			noticeList = noticeRepository.selectNoticeByTitle(noticePageFormDto);
+		} else {
+			noticeList = noticeRepository.selectNoticeByKeyword(noticePageFormDto);
+		}
+		return noticeList;
 	}
 	
 }

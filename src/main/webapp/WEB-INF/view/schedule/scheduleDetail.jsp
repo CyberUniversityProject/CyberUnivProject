@@ -5,9 +5,11 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-
+body > div{
+	padding-top: 100px;
+}
 main {
-	height: 550px;
+	height: 1000px;
 }
 
 </style>
@@ -48,31 +50,38 @@ main {
 		<hr />
 		<div class="row">
 		
-		<!-- 학사일정 등록 -->
+		<!-- 학사일정 상세페이지 -->
 		<div class="container">
-	    <form action="/schedule/write" method="post">
-		    <table class="table">
-				<thead>
-					<tr class="first--tr">
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>시작날짜</td>
-						<td><input type="date" name ="startDay"></td>
-					</tr>
-					<tr>
-						<td>종료날짜</td>
-						<td><input type="date" name = "endDay"></td>
-					</tr>
-					<tr>
-						<td class="td">내용</td>
-						<td class="info"><input type="text" name = "information" class="textbox"></td>
-					</tr>
-				</tbody>
-			</table>
-		   <input type="submit" class="button" value="등록">
-	    </form>
+		<form action="/schedule/update?id=${schedule.id}" method="post">
+		<table class="table">
+			<thead>
+				<tr class="first--tr">
+					<th colspan="2">${schedule.years}년 학교 학사일정</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>시작날짜</td>
+					<td><input type ="date" name="startDay" value="${schedule.startDay}"></td>
+				</tr>
+				<tr>
+					<td>종료날짜</td>
+					<td><input type ="date" name="endDay" value="${schedule.endDay}"></td>
+				</tr>
+				<tr>
+					<td class="td">내용</td>
+					<td class="info"><input type = "text" name="information" value="${schedule.information}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="checkbox">
+			<button type="submit" class="button">수정</button>
+		</div>
+		</form>
+		
+		<div class="checkbox">
+	    	<a href="/schedule/delete?id=${schedule.id}" class="button">삭제</a>
+		</div>
 		</div>
 		</div>
 		</div>
@@ -89,6 +98,3 @@ main {
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-

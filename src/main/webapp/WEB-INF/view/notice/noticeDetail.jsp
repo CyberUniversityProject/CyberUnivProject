@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
 body > div{
@@ -16,36 +15,42 @@ main {
 	width: 1000px;
 }
 </style>
-
-<!-- 세부 메뉴 + 메인 -->
-<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
-	<!-- 세부 메뉴 div-->
-	<div class="sub--menu">
-		<div class="sub--menu--top">
+</head>
+<body>
+	<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<!-- ======= 상단 제목부분 ======= -->
+	<div class="breadcrumbs" data-aos="fade-in">
+		<div class="container">
 			<h2>학사정보</h2>
 		</div>
-		<!-- 메뉴 -->
-		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
-		<div class="sub--menu--mid">
-			<table class="sub--menu--table" border="1">
-				<tr>
-					<td><a href="/notice" class="selected--menu">공지사항</a></td>
-				</tr>
-				<tr>
-					<td><a href="#">학사일정</a></td>				
-				</tr>
-				<c:if test="${principal.userRole.equals(\"staff\") }">
-					<tr>
-						<td><a href="/schedule/list"> 학사일정 등록</a></td>
-					</tr>
-				</c:if>
-			</table>
-		</div>
 	</div>
+	<!-- 상단 제목부분 끝 -->
+<div class="container mb-5">
+	<div class="row">
+		<!-- 사이드바 메뉴 -->
+		<aside class="sidebar col-md-2 mt-5">
+			<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0">학사정보</h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item p-3"><a href="/notice" class="text-black"><i
+								class="fas fa-user mr-2"></i> 공지사항</a></li>
+						<li class="list-group-item p-3"><a href="/schedule" class="text-black"><i
+								class="fas fa-lock mr-2"></i> 학사일정</a></li>
+						<c:if test="${principal.userRole.equals(\"staff\") }">
+						<li class="list-group-item p-3"><a href="/schedule/list" class="text-black"><i
+								class="fas fa-lock mr-2"></i> 학사일정 등록</a></li>
+						</c:if>
+					</ul>
+				</div>
+		</aside>
 	<!-- 메인 div -->
-	<main>
+	<div class="col-md-10">
+		<div class="main-content">
 		<h1>공지사항</h1>
-		<div class="split--div"></div>
+		<hr />
+		<div class="row">
 		
 		<!-- 공지 상세 조회 -->
 		<div class="container">
@@ -68,8 +73,17 @@ main {
 				</c:if>
 			</div>
 		</div>
-
+		</div>
+	</div>
 </div>
+</div>
+</div>
+	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
-
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

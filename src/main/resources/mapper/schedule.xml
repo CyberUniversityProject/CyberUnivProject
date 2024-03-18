@@ -14,6 +14,13 @@
 		select * from cu_schedule
 	</select>
 	
+	<!-- 일정 상세페이지 -->
+	<select id="selectScheduleById">
+		select * from cu_schedule 
+		where id = #{id}
+	</select>
+	
+	<!-- 월마다 일정이 몇 개인지 조회 -->
 	<select id="selectScheduleInMonth" resultType="com.cyber.university.dto.ScheduleDto">
 		select month, count(month) AS sum
 		from cu_schedule
@@ -30,4 +37,8 @@
 		set start_day = #{startDay}, end_day = #{endDay}, information = #{information}
 		where id = #{id}
 	</update>	
+	
+	<delete id="deleteSchedule">
+		delete from cu_schedule where id = #{id}
+	</delete>
 </mapper>

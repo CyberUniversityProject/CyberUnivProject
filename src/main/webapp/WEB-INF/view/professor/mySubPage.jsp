@@ -17,6 +17,10 @@
 	overflow: hidden; /* 넘치는 내용 숨김 */
 	text-overflow: ellipsis; /* 넘치는 내용을 줄임표로 표시 */
 }
+	
+ul	{
+	list-style-type: none;
+}	
 </style>
 
 </head>

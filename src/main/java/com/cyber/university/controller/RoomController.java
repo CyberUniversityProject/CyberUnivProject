@@ -62,7 +62,7 @@ public class RoomController {
 	@GetMapping("/roomList")
 	public String roomList(Model model,
 	                       @RequestParam(name = "page" ,defaultValue = "1") int page,
-	                       @RequestParam(name = "size" ,defaultValue = "10") int size) {
+	                       @RequestParam(name = "size" ,defaultValue = "5") int size) {
 	    // 페이지 번호와 페이지 크기를 이용하여 페이징된 강의실 목록 가져오기
 	    List<Room> roomList = roomService.findAllRooms(page, size);
 	    // 전체 페이지 수 계산

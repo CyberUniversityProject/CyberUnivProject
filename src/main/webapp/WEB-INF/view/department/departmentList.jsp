@@ -74,6 +74,49 @@
 						</c:forEach>
 						</tbody>
 					</table>
+
+					<nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
+                                          <ul class="pagination">
+                                            <li class="page-item">
+                                              <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                              </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                              <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                            <!--pagenation code -->
+                                         <div class="d-flex pagination justify-content-center buttons-group">
+                                                <c:if test="${page > 1}">
+                                                    <a href="?page=1&size=${size}">&laquo; 첫 페이지</a>
+                                                    <a href="?page=${page - 1}&size=${size}">&laquo; 이전</a>
+                                                </c:if>
+                                                <c:forEach begin="${startPage}" end="${endPage}" var="i">
+                                                    <c:choose>
+                                                        <c:when test="${i eq page}">
+                                                            <a href="?page=${i}&size=${size}" class="active">${i}</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a href="?page=${i}&size=${size}">${i}</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
+                                                <c:if test="${page < totalPages}">
+                                                    <a href="?page=${page + 1}&size=${size}">다음 &raquo;</a>
+                                                    <a href="?page=${totalPages}&size=${size}">마지막 페이지
+                                                        &raquo;</a>
+                                                </c:if>
+                                            </div>
+                                        </nav>
 				</div>
 				<!-- main 끝 -->
 

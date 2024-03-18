@@ -19,7 +19,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class PageRequestDto {
+public class PageRequestDto<Room> {
 
         // 현재 페이지 번호 : page == number
         private int page;

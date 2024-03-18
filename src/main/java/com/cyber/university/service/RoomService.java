@@ -12,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.RoomDto;
 import com.cyber.university.dto.RoomWithCollegeDto;
+import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
+import com.cyber.university.repository.model.Student;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
   * @FileName : RoomService.java
@@ -24,6 +28,7 @@ import com.cyber.university.repository.model.Room;
   * @변경이력 :
   * @프로그램 설명 : 강의실 service
   */
+@Slf4j
 @Service
 public class RoomService {
 
@@ -63,57 +68,34 @@ public class RoomService {
 		 roomRepository.updateById(room);
 		}
 		
-		
 		@Transactional
 		public List<RoomWithCollegeDto> findAll(){
-			
 			return roomRepository.findAllCol();
 		}
 
-	/**
-	 * @FileName : RoomService.java
-	 * @Project : CyberUniversity
-	 * @Date : 2024. 3. 13.
-	 * @작성자 : 김수현
-	 * @변경이력 :
-	 * @프로그램 설명 : 강의실 List 페이징
-	 */
+		@Transactional
+		public Integer readRoomAmount(RoomDto roomDto) {
 
-	// 총 강의실 수 조회
-	public int getTotoalRoomCount() {
-		return roomRepository.getAllPgCount();
-	}
+			Integer amount = null;
+			if (roomDto.getId() != null) {
+				amount = roomRepository.selectRoomAmountByRoomId(roomDto.getId());
+			} else {
+				amount = roomRepository.selectRoomAmount();
+			}
 
+			return amount;
+		}
+		
+		
+		@Transactional
+		public List<Room> readRoomList(RoomDto roomDto) {
 
-	// 페이징 된 강의실 목록 조회
-	public PageRequestDto<RoomDto>  getfindwithallpaging(PageRequestDto pageRequestDto, String id) {
-		int page = pageRequestDto.getPage();
-		int size = pageRequestDto.getSize();
-		int offset = (page - 1) * size; // offset 계산
+			List<Room> list = null;
 
-		// 총 데이터 개수 조회
-		long totalElements = roomRepository.getAllPgCount();
-
-		// 페이징 된 목록 조회
-		List<Room> roomList = roomRepository.findAllwithPasing(offset, size, id);
-
-		// 페이징 결과 객체 생성
-		List<RoomDto> roomDtoList = roomList.stream()
-											.map(this::convertToDto)
-											.collect(Collectors.toList());
-		/*PageResponseDto<RoomDto> pageRes = new PageResponseDto<>(roomDtoList ,page, totalElements, size);
-*/
-
-		return null;
-	}
-
-	private RoomDto convertToDto(Room room) {
-		RoomDto roomDto = new RoomDto();
-		roomDto.setId(room.getId());
-		return roomDto;
-	}
-
-
+			list = roomRepository.selectByRoomId(roomDto);
+			return list;
+		}
+		
 }
 
 	

@@ -40,14 +40,30 @@
 	</select>
 
 	<!--페이징 관련 쿼리-->
-	<!--전체 데이터 개수-->
-	<select id="getAllPgCount" resultType="int">
-		SELECT COUNT * FROM cu_room
+	<select id="selectRoomAmountByRoomId" resultType="Integer">
+		SELECT
+		count(id) FROM cu_room
+		WHERE id = #{id}
 	</select>
-	<!--페이징 처리 -->
-	<select id="findAllwithPasing" resultType="com.cyber.university.repository.model.Room">
-		<![CDATA[
-		SELECT * FROM cu_room WHERE id >0 ORDER BY id DESC
-		]]>
+	
+	
+	<select id="selectRoomAmount" resultType="Integer">
+		SELECT count(id)
+		FROM cu_room
+	</select>
+	
+	
+	<select id="selectRoomList"
+		resultType="com.cyber.university.repository.model.Room">
+		SELECT * FROM cu_room
+		LIMIT #{page}, 5
+	</select>
+	
+	
+	
+	
+	<select id="selectByRoomId"
+		resultType="com.cyber.university.repository.model.Room">
+		SELECT * FROM cu_room WHERE id = #{id}
 	</select>
 </mapper>

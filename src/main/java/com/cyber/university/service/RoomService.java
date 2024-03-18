@@ -14,6 +14,9 @@ import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
 
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
   * @FileName : RoomService.java
   * @Project : CyberUniversity

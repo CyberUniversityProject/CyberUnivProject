@@ -96,5 +96,13 @@ public class RoomController {
 		roomService.updateById(room);
 		return "redirect:/room/roomList";
 	}
-	
+
+	// page뜨는지 확인
+	@GetMapping("/checkPolicy")
+	public void chekcPolicyScreen() {
+		
+	}
+}
+
+
 }

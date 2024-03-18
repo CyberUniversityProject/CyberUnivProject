@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.dto.RoomDto;
 import com.cyber.university.repository.model.Room;
@@ -58,13 +59,24 @@ public class RoomController {
 	  * @변경이력 :
 	  * @프로그램 설명 : 강의실 List,삭제,수정
 	  */
-	// 강의실 전체 리스트 불러오기
 	@GetMapping("/roomList")
-	public String roomList(Model model) {
-		List<Room> roomList = roomService.roomList();
-		model.addAttribute(roomList);
-		return "/room/roomList";
+	public String roomList(Model model,
+	                       @RequestParam(name = "page" ,defaultValue = "1") int page,
+	                       @RequestParam(name = "size" ,defaultValue = "10") int size) {
+	    // 페이지 번호와 페이지 크기를 이용하여 페이징된 강의실 목록 가져오기
+	    List<Room> roomList = roomService.findAllRooms(page, size);
+	    // 전체 페이지 수 계산
+	    int totalPages = roomService.getTotalPages(size);
+	    // 현재 페이지 번호와 전체 페이지 수를 모델에 추가
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    // 강의실 목록을 모델에 추가
+	    model.addAttribute("roomList", roomList);
+	    return "/room/roomList";
 	}
+
+    
+    
 	@GetMapping("/delete/{id}")
 	public String deleteById(@PathVariable("id") String id,Model model) {
 		roomService.deleteById(id);

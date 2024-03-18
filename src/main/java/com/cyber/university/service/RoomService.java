@@ -79,9 +79,23 @@ public class RoomService {
 	 * @프로그램 설명 : 강의실 List 페이징
 	 */
 
+		
+		public List<Room> findAllRooms(int page, int size) {
+	        // 페이징 처리를 위해 offset 계산
+	        int offset = (page - 1) * size;
+	        // 페이징된 강의실 목록 조회
+	        return roomRepository.findAllwithPaging(offset, size);
+	    }
+
+	    public int getTotalPages(int size) {
+	        // 전체 데이터 개수 가져오기
+	        int totalRecords = roomRepository.getAllPgCount();
+	        // 전체 페이지 수 계산
+	        int totalPages = (int) Math.ceil((double) totalRecords / size);
+	        return totalPages;
+	    }
 
 	}
 
 	
 	
-

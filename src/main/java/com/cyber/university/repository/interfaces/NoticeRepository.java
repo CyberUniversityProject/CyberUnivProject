@@ -32,4 +32,11 @@ public interface NoticeRepository {
 	 * @return
 	 */
 	public List<NoticeResDto> selectMainNotice();
+	
+	
+	/**
+	 * 검색 기능
+	 */
+	public List<Notice> selectNoticeByTitle(NoticePageFormDto noticePageFormDto);
+	public List<Notice> selectNoticeByKeyword(NoticePageFormDto noticePageFormDto);
 }

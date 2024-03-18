@@ -37,10 +37,9 @@ public interface RoomRepository {
 	// 강의실 조회(글 상세보기와는 달리 수정을 위한 기능)
 	public Room findById(String id);
 
-	// 전체 페이지 불러오기
-	public List<Room> findAllwithPasing(@Param("offset") int offset, @Param("limit") int limit,
-			@Param("type") String type);
+	 // 페이징 처리된 강의실 목록 조회
+    public List<Room> findAllwithPaging(@Param("offset") int offset, @Param("limit") int limit);
 
-	// 전체 게시물개수 계산
-	public int getAllPgCount();
+    // 전체 데이터 개수 가져오기
+    public int getAllPgCount();
 }

@@ -24,10 +24,10 @@
 		ON n.id = f.notice_id
 		WHERE n.id = #{id}
 	</select>
+	
 	<delete id="deleteById">
 		delete from cu_notice where id = #{id}
 	</delete>
-
 
 
 	<!-- 메인 공지사항 조회 최신순으로 5개까지만 -->
@@ -36,5 +36,15 @@
 		order by id desc limit 5
 	</select>
 	
+	<select id="selectNoticeByTitle" resultType="com.cyber.university.dto.NoticeFormDto">
+		select * from cu_notice where title like concat('%', #{keyword}, '%')
+		order by id desc
+		
+	</select>
+	
+	<select id="selectNoticeByKeyword" resultType="com.cyber.university.dto.NoticeFormDto">
+		select * from cu_notice where title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
+		order by id desc
+	</select>
 
 </mapper>

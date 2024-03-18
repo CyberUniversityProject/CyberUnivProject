@@ -7,4 +7,6 @@ public class RoomDto {
 
 	private String id;
 	private Integer collegeId;
+	private Integer page;
+	
 }

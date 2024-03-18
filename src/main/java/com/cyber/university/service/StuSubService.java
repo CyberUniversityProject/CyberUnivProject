@@ -1,12 +1,16 @@
 package com.cyber.university.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cyber.university.dto.SemesterGradeDto;
+import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.response.StuSubAppDto;
 import com.cyber.university.dto.response.StuSubDayTimeDto;
 import com.cyber.university.dto.response.StuSubSumGradesDto;
@@ -21,7 +25,10 @@ import com.cyber.university.repository.model.Subject;
 import com.cyber.university.utils.Define;
 import com.cyber.university.utils.StuSubUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class StuSubService {
 
 	@Autowired
@@ -162,6 +169,74 @@ public class StuSubService {
 	@Transactional
 	public void updateCompleteGrade(Integer studentId, Integer subjectId, Integer completeGrade) {
 		stuSubRepository.updateCompleteGradeByStudentIdAndSubjectId(studentId, subjectId, completeGrade);
+	}
+
+	
+	/**
+	  * @Method Name : findThisSemesterGradeByStudentId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 금학기 성적 리스트
+	  */
+	public List<SemesterGradeDto> findThisSemesterGradeByStudentId(Integer studentId) {
+		log.info("stuSubServce in111");
+		List<SemesterGradeDto> thisSemesterGradeList = stuSubRepository.selectThisSemesterGradeByStudentId(studentId);
+		log.info("stuSubServce select after thisSemesterGradeList : "+thisSemesterGradeList);
+		return thisSemesterGradeList;
+	}
+
+	/**
+	  * @Method Name : findTotalScoreByYearAndSemesterAndStudentId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 현재 년도와 달, studentId로 금학기 총점
+	  */
+	public TotalScoreDto findTotalScoreByYearAndSemesterAndStudentId(Integer currentYear, Integer currentMonth,
+			Integer studentId) {
+		
+		Integer semester;
+
+	    if (currentMonth >= 3 && currentMonth <= 8) {
+	        semester = 1;
+	    } else {
+	        semester = 2;
+	    }
+
+	    log.info("service if에서 나온 semester 값은?"+semester);
+
+	    log.info("studentId"+ studentId);
+	    log.info("subYear"+ currentYear);
+	    log.info("semester"+ semester);
+	    
+	    Map<String, Object> map = new HashMap<>() ;
+	    map.put("studentId", studentId);
+	    map.put("subYear", currentYear);
+	    map.put("semester", semester);
+	    
+	    log.info("map" + map);
+		
+		TotalScoreDto totalScoreDto = stuSubRepository.selectTotalScoreByYearAndSemesterAndStudentId(map);
+		
+		log.info("dto:"+totalScoreDto);
+		return totalScoreDto;
+	}
+
+	/**
+	  * @Method Name : findTotalScoreAllSemesterByStudyId
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studyId로 조회한 모든 학기별 총점 조회
+	  */
+	public List<TotalScoreDto> findAllSemesterTotalScoreByStudyId(Integer studentId) {
+		log.info("allsemesterservice로 들어오기는했음" + studentId);
+		
+		List<TotalScoreDto> allSemesterTotalScoreDto = stuSubRepository.selectAllSemesterTotalScoreByStudyId(studentId);
+
+		log.info("service totalScoreDto:"+allSemesterTotalScoreDto);
+		return allSemesterTotalScoreDto;
 	}
 
 }

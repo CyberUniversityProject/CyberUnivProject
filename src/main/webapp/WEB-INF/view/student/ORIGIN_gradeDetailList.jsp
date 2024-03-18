@@ -77,141 +77,51 @@ link:focus, .nav-link:hover {
 
 						<div id="id1" class="tab-pane fade show active">
 
-							<c:choose>
-								<c:when test="${!thisSemesterGradeList.isEmpty()}">
-									<div class="container mt-4">
-										<H5>금학기 성적 조회</H5>
-
-										<div class="table-responsive">
-											<table class="table table-bordered">
-												<thead class="thead-light">
-													<tr>
-														<th>연도</th>
-														<th>학기</th>
-														<th>과목번호</th>
-														<th>과목명</th>
-														<th>강의 구분</th>
-														<th>이수 학점</th>
-														<th>성적</th>
-														<th>강의 평가</th>
-													</tr>
-												</thead>
-												<tbody>
-
-													<c:forEach var="thisSemesterGrade"
-														items="${thisSemesterGradeList}">
-														<tr>
-															<td>${thisSemesterGrade.subYear}</td>
-															<td>${thisSemesterGrade.semester}</td>
-															<td>${thisSemesterGrade.subjectId}</td>
-															<td>${thisSemesterGrade.subjectName}</td>
-															<td>${thisSemesterGrade.type}</td>
-															<td>${thisSemesterGrade.grades}</td>
-															<td>${thisSemesterGrade.grade}</td>
-															<td>강의 평가
-																<p>해당 강의평가가 insert된 상태여야만 성적 확인가능하게</p>
-															</td>
-
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<hr>
-										</div>
-									</div>
-
-									<div class="container mt-4">
-										<H5>금학기 총점 조회</H5>
-
-										<div class="table-responsive">
-											<table class="table table-bordered">
-												<thead class="thead-light">
-													<tr>
-														<th>연도</th>
-														<th>학기</th>
-														<th>신청 학점</th>
-														<th>취득 학점</th>
-														<th>학점 평균</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>${totalScore.subYear }</td>
-														<td>${totalScore.semester }</td>
-														<td>${totalScore.totalGrades}</td>
-														<td>${totalScore.totalCompleteGrade }</td>
-														<td>${totalScore.averageGrade }</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</c:when>
-								<c:otherwise>
-									<p class="no--list--p">성적 조회 기간이 아닙니다.</p>
-								</c:otherwise>
-							</c:choose>
-						</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-						<!-- id3 -->
-						<div id="id3" class="tab-pane fade">
-
 							<div class="container mt-4">
-								<H5>학기별 총점 조회</H5>
-
-
-					<c:choose>
-						<c:when test="${!allSemesterTotalScoreList.isEmpty()}">
+								<H5>금학기 성적 조회</H5>
 								<div class="table-responsive">
 									<table class="table table-bordered">
 										<thead class="thead-light">
 											<tr>
 												<th>연도</th>
 												<th>학기</th>
-												<th>신청학점</th>
-												<th>취득학점</th>
-												<th>학점 평균</th>
+												<th>과목번호</th>
+												<th>과목명</th>
+												<th>강의 구분</th>
+												<th>이수 학점</th>
+												<th>성적</th>
+												<th>강의 평가</th>
 											</tr>
 										</thead>
 										<tbody>
-										<c:forEach var="allSemesterTotalScore" items="${allSemesterTotalScoreList}">
 											<tr>
-												<td>${allSemesterTotalScore.subYear }</td>
+												<td>연도</td>
 												<td>학기</td>
-												<td>신청학점</td>
-												<td>취득학점</td>
-												<td>학점 평균</td>
+												<td>과목번호</td>
+												<td>과목명</td>
+												<td>강의 구분</td>
+												<td>이수 학점</td>
+												<td>성적</td>
+												<td>강의 평가
+													<p>해당 강의평가가 insert된 상태여야만 성적 확인가능하게</p>
+												</td>
+
 											</tr>
-										</c:forEach>
 										</tbody>
 									</table>
+									<p class="no--list--p">검색 결과가 없습니다.</p>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<hr>
 								</div>
 							</div>
 
-						</c:when>
-						<c:otherwise>
-							<p class="no--list--p">확인 할 수 있는 성적 정보가 없습니다.</p>
-						</c:otherwise>
-					</c:choose>
-							<div class="container mt-5">
-								<H5>전체 총점 조회</H5>
+							<div class="container mt-4">
+								<H5>금학기 총점 조회</H5>
+
 
 								<div class="table-responsive">
 									<table class="table table-bordered">
@@ -237,10 +147,61 @@ link:focus, .nav-link:hover {
 								</div>
 							</div>
 
-
-
 						</div>
 
+						<div id="id2" class="tab-pane fade">
+
+
+							<div class="container mt-4">
+								<H5>학기별 성적 조회</H5>
+
+
+								<div class="row">
+									<div class="col-md-12">
+										<form action="/subject/list/search" method="get" class="mb-4">
+											<div class="row">
+												<div class="col-md-3">
+													<label for="subYear">연도</label> <input type="number"
+														class="form-control" value="<%=Define.CURRENT_YEAR%>"
+														name="subYear" id="subYear" min="2005" max="2024">
+												</div>
+												<div class="col-md-3">
+													<label for="subSemester">학기</label> <select
+														class="form-control" name="semester" id="subSemester">
+														<option value="1">1학기</option>
+														<option value="2">2학기</option>
+													</select>
+												</div>
+												<div class="col-md-3">
+													<label for="deptId">개설학과</label> <select
+														class="form-control" name="deptId" id="deptId">
+														<option value="-1">전체</option>
+														<c:forEach var="dept" items="${deptList}">
+															<option value="${dept.id}">${dept.name}</option>
+														</c:forEach>
+													</select>
+												</div>
+												<div class="col-md-3">
+													<label for="subName">강의명</label> <input type="text"
+														class="form-control" name="name" list="subName">
+													<datalist id="subName">
+														<c:forEach var="subName" items="${subNameList}">
+															<option value="${subName}">
+														</c:forEach>
+													</datalist>
+												</div>
+											</div>
+											<button type="submit" class=" btn--confirm mt-3">
+												<i class="fas fa-search"></i> 검색
+											</button>
+
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
 
 					</div>
 				</div>

@@ -1,6 +1,7 @@
 package com.cyber.university.controller;
 
 import java.io.Console;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cyber.university.dto.ChangePasswordDto;
 import com.cyber.university.dto.LeaveAppDto;
 import com.cyber.university.dto.LeaveStudentInfoDto;
+import com.cyber.university.dto.SemesterGradeDto;
+import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.UserInfoDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
@@ -35,6 +38,7 @@ import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.service.BreakService;
+import com.cyber.university.service.StuSubService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.TuitionService;
 import com.cyber.university.service.UserService;
@@ -69,6 +73,8 @@ public class StudentController {
 	private BreakService breakService;
 	@Autowired
 	private TuitionService tuitionService;
+	@Autowired
+	private StuSubService stuSubService; 
 	
 	/**
 	  * @Method Name : myInfo
@@ -390,7 +396,7 @@ public class StudentController {
 	  * @작성일 : 2024. 3. 17.
 	  * @작성자 : 박경진
 	  * @변경이력 : 
-	  * @Method 설명 : 성적 상세 조회 페이지(금학기)
+	  * @Method 설명 : 성적 상세 조회 페이지
 	  */
 	@GetMapping("/gradeDetailList")
 	private String gradeDetailPage(Model model) {
@@ -403,15 +409,25 @@ public class StudentController {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		// 올해 성적 조회
-		// 우선 userId(studentId)로 cu_stu_sub 조회 -> subject_id, grade, compete_grade(최종학점????테이블명세서 다시확인 (subject_id에 grades가 이수학점인듯) 조회 가능
-		//	-> subject_id로 cu_subject join -> 과목명, 교수id, type(전공, 교양), 학년, 수업년도, grades(이수학점)
+
+		List<SemesterGradeDto> thisSemesterGradeList = stuSubService.findThisSemesterGradeByStudentId(userId);
+		model.addAttribute("thisSemesterGradeList", thisSemesterGradeList);
+		
+		Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		Integer currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+		TotalScoreDto totalScoreDto = stuSubService.findTotalScoreByYearAndSemesterAndStudentId(currentYear,currentMonth, userId);
+		model.addAttribute("totalScore", totalScoreDto);
 		
 		
+		List<TotalScoreDto> allSemesterTotalScoreDto = stuSubService.findAllSemesterTotalScoreByStudyId(userId);
+		model.addAttribute("allSemesterTotalScoreList", allSemesterTotalScoreDto);
 		
-		model.addAttribute("gradeList", "gradeList");
+		log.info("controller allSemesterTotalScoreDto:"+allSemesterTotalScoreDto);
 		
 		return "/student/gradeDetailList";
 		
 	}
+
+
+	
 }

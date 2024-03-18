@@ -38,36 +38,6 @@ main {
 	</div>
 
 	<main>
-	
-	<table class="table">
-		<thead>
-			<tr class="first--tr">
-				<th colspan="2">${schedule.years}년 학교 학사일정</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>시작날짜</td>
-				<td>${schedule.startMday}</td>
-			</tr>
-			<tr>
-				<td>종료날짜</td>
-				<td>${schedule.endMday}</td>
-			</tr>
-			<tr>
-				<td class="td">내용</td>
-				<td class="info">${schedule.information}</td>
-			</tr>
-		</tbody>
-	</table>
-	
-	<c:if test="${principal.userRole.equals(\"staff\") }">
-	<div class="checkbox">
-	<a href="/schedule/detail?crud=update&id=${schedule.id}" class="button">수정</a>
-	<a href="/schedule/delete?id=${schedule.id}" class="button">삭제</a>
-	</div>
-	</c:if>
-	
 	<form action="/schedule/update?id=${schedule.id}" method="post">
 	<table class="table">
 		<thead>
@@ -91,10 +61,14 @@ main {
 		</tbody>
 	</table>
 	<div class="checkbox">
-	<button class="button">수정</button>
-	<button class="button">삭제</button>
+		<button type="submit" class="button">수정</button>
 	</div>
 	</form>
 	
+	<div class="checkbox">
+    	<a href="/schedule/delete?id=${schedule.id}" class="button">삭제</a>
+	</div>
+	
     </main>
+    </div>
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

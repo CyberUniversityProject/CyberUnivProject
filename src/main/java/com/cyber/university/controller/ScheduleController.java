@@ -68,7 +68,6 @@ public class ScheduleController {
 	@GetMapping("/detail")
 	public String detailSchedule(Model model, @RequestParam("id") Integer id) {
 		ScheduleDto schedule = scheduleService.readScheduleById(id);
-		log.info("id:" + id);
 		model.addAttribute("schedule", schedule);
 		return "/schedule/scheduleDetail";
 		

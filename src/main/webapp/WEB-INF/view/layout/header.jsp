@@ -170,9 +170,9 @@ body {
 					<ul>
 						<li><a class="active" href="/">Home</a></li>
 
-                                 
-				
-				
+
+
+
 						<li class="dropdown"><a href="#"><span>마이페이지</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
@@ -203,7 +203,9 @@ body {
 				</c:when>
 
 				<c:otherwise>
-
+					<ul>
+						<li><a href="/campusMap">캠퍼스 맵</a></li>
+					</ul>
 				</c:otherwise>
 			</c:choose>
 
@@ -215,24 +217,27 @@ body {
 			<c:choose>
 				<c:when test="${principal != null}">
 					<div class="user-details">
-					<c:choose>
-					<c:when test="${principal.userRole.equals(\"student\")}">
-						<a href="/student/myInfo" class="get-started-btn" data-bs-placement="bottom"
-							data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-							님</a>
-                    </c:when>
-                    <c:when test="${principal.userRole.equals(\"staff\")}">
-                        <a href="/info/staff" class="get-started-btn" data-bs-placement="bottom"
-                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-                            님</a>
-                    </c:when>
-                    <c:when test="${principal.userRole.equals(\"professor\")}">
-                        <a href="/professor/info" class="get-started-btn" data-bs-placement="bottom"
-                            data-bs-toggle="popover" data-bs-content="${popoverContent}">${principal.name}(${principal.id})
-                            님</a>
-                    </c:when>
-							</c:choose>
-							 <a href="/logout" class="get-started-btn">로그아웃</a>
+						<c:choose>
+							<c:when test="${principal.userRole.equals(\"student\")}">
+								<a href="/student/myInfo" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+							<c:when test="${principal.userRole.equals(\"staff\")}">
+								<a href="/info/staff" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+							<c:when test="${principal.userRole.equals(\"professor\")}">
+								<a href="/professor/info" class="get-started-btn"
+									data-bs-placement="bottom" data-bs-toggle="popover"
+									data-bs-content="${popoverContent}">${principal.name}(${principal.id})
+									님</a>
+							</c:when>
+						</c:choose>
+						<a href="/logout" class="get-started-btn">로그아웃</a>
 					</div>
 
 				</c:when>

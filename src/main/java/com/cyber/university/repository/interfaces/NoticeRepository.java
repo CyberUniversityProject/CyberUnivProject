@@ -26,6 +26,9 @@ public interface NoticeRepository {
 	public int updateByNoticeDto(NoticeFormDto noticeFormDto);
 	public int deleteById(Integer id);
 
+	
+	// 페이징 
+	public Integer selectNoticeCount(NoticePageFormDto noticePageFormDto);
 	/**
 	 * 메인화면에 보여줄 공지사항 조회
 	 * @Author : 준혁

@@ -139,11 +139,12 @@ public class NoticeController {
 	  * @Method 설명 : 공지사항 검색
 	  * @return
 	  */
-	// pathvariable, requestparam 다시 정리
+	
 	@GetMapping("/search")
-	public String noticeSearch(Model model, NoticePageFormDto noticePageFormDto, @RequestParam("keyword") String keyword) {
+	public String searchNoticeByKeyword(Model model, NoticePageFormDto noticePageFormDto) {
 		model.addAttribute("keyword", noticePageFormDto.getKeyword());
-		List<Notice> noticeList = noticeService.noticeSearch(noticePageFormDto);
+		noticePageFormDto.setPage(0);
+		List<Notice> noticeList = noticeService.searchNotice(noticePageFormDto);
 		if(noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -153,4 +154,22 @@ public class NoticeController {
 		return "/notice/noticeList";
 		
 	}
+	
+//	public String searchNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto, 
+//			@PathVariable Integer page, @RequestParam("keyword") String keyword) {
+//		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+//		noticePageFormDto.setPage((page - 1) * 10);
+//		List<Notice> noticeList = noticeService.searchNotice(noticePageFormDto);
+//		Integer amount = noticeService.searchNoticeAmount(noticePageFormDto);
+//		
+//		model.addAttribute("list")
+//		if(noticeList.isEmpty()) {
+//			model.addAttribute("noticeList", null);
+//		} else {
+//			model.addAttribute("noticeList", noticeList);
+//		}
+//		
+//		return "/notice/noticeList";
+//		
+//	}
 }

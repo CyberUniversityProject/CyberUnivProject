@@ -146,7 +146,9 @@
 						<c:forEach items="${community.comments}" var="comment">
 							<li class="list-group-item"><strong>작성자:</strong>
 								${comment.userId}<br> <strong>작성 시간:</strong>
-								${comment.appDateFormat()}<br> ${comment.content}</li>
+								${comment.appDateFormat()}
+								<hr/>
+								${comment.content}</li>
 						</c:forEach>
 					</ul>
 				</c:if>

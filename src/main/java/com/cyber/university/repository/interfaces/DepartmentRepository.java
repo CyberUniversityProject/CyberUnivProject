@@ -42,7 +42,7 @@ public interface DepartmentRepository {
 	// 학과 조회(글 상세보기와는 달리 수정을 위한 기능)
 	public Department findById(Integer id);
 	// 전체 페이지 불러오기
-	public List<Department> findAllwithPasing(@Param ("offset") int offset, @Param ("limit") int limit, @Param("type") String type);
+	public List<Department> findAllwithPasing(@Param ("offset") int offset, @Param ("limit") int limit);
 	// 전체 게시물개수 계산
 	public int getAllPgCount();
 	

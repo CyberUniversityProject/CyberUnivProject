@@ -62,4 +62,16 @@
 		on c.id = d.college_id;
 	</select>
 
+	<!--페이징 처리 -->
+	<select id="findAllwithPasing"
+			resultType="com.cyber.university.repository.model.Department">
+	SELECT * FROM cu_department
+	ORDER BY id
+	LIMIT #{offset}, #{limit}
+	</select>
+	
+	<!--  전체 데이터 개수 -->
+	<select id="getAllPgCount" resultType="int">
+		SELECT COUNT(*) FROM cu_department
+	</select>
 </mapper>

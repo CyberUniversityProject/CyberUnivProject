@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cyber.university.dto.AllGradeSearchFormDto;
 import com.cyber.university.dto.ChangePasswordDto;
+import com.cyber.university.dto.EvaluationInfoDto;
 import com.cyber.university.dto.LeaveAppDto;
 import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.dto.SemesterGradeDto;
@@ -38,8 +39,10 @@ import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
+import com.cyber.university.repository.model.Question;
 import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.service.BreakService;
+import com.cyber.university.service.EvaluationService;
 import com.cyber.university.service.StuSubService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.TuitionService;
@@ -77,6 +80,8 @@ public class StudentController {
 	private TuitionService tuitionService;
 	@Autowired
 	private StuSubService stuSubService; 
+	@Autowired
+	private EvaluationService evaluationService;
 	
 	/**
 	  * @Method Name : myInfo
@@ -242,7 +247,6 @@ public class StudentController {
 		LeaveStudentInfoDto leaveStudentInfoDto = studentService.findLeaveStudentById(userId);
 		
 		model.addAttribute("studentInfo", leaveStudentInfoDto);
-		log.info("controller leavestudentdto : " + leaveStudentInfoDto);
 		return "/student/leaveOfAbsenceRegister";
 	}
 	
@@ -294,7 +298,6 @@ public class StudentController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
 		
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -325,7 +328,6 @@ public class StudentController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
 		
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -349,7 +351,6 @@ public class StudentController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
 		
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -376,7 +377,6 @@ public class StudentController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
 		
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -405,7 +405,6 @@ public class StudentController {
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
 		
 		if(userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -444,14 +443,50 @@ public class StudentController {
 	@ResponseBody
 	private  List<SemesterGradeDto> readGradeListSearch(Model model, @Validated AllGradeSearchFormDto allGradeSearchFormDto) {
 		
-		log.info("search에 dto 정보가 잘 들어왔을까?"+ allGradeSearchFormDto);
-
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 		List<SemesterGradeDto> gradeList = stuSubService.findGradeListSearch(allGradeSearchFormDto);
 		model.addAttribute("gradeList", gradeList);
 		
-		log.info("search후 gradeList??"+gradeList);
 		
 		return gradeList;
+	}
+	
+	/**
+	  * @Method Name : evaluationPage
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 학생 강의평가 페이지
+	  */
+	@GetMapping("/evaluation/{subjectId}")
+	private String evaluationPage(@PathVariable(value = "subjectId")Integer subjectId,Model model) {
+		
+		log.info("evaluation controller start subjectid:"+ subjectId);
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer userId = principal.getId();
+		
+		if(userId == null) {
+			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+
+		log.info("evaluation controller center");
+		EvaluationInfoDto evaluationInfo = evaluationService.findEvaluationInfoByStudentId(subjectId,userId);
+		model.addAttribute("evaluationInfo", evaluationInfo);
+		
+		Question question = evaluationService.findQuestion();
+		log.info("QUESTIONLIST가 잘 들어왓나요?"+question);
+		model.addAttribute("question", question);
+
+		log.info("evaluation controller evaluationInfo : "+ evaluationInfo);
+		return "/student/evaluation";
 	}
 
 	

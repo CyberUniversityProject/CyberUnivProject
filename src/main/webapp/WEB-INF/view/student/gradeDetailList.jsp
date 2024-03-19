@@ -107,8 +107,10 @@ link:focus, .nav-link:hover {
 															<td>${thisSemesterGrade.type}</td>
 															<td>${thisSemesterGrade.grades}</td>
 															<td>${thisSemesterGrade.grade}</td>
-															<td>강의 평가
-																<p>해당 강의평가가 insert된 상태여야만 성적 확인가능하게</p>
+															<td>
+																<a href="/student/evaluation/${thisSemesterGrade.subjectId}" onclick="window.open(this.href, '_blank', 'width=1000, height=800'); return false;">
+																	<button>강의평가</button>
+																</a>
 															</td>
 
 														</tr>

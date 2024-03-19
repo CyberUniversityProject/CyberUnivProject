@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cyber.university.dto.AllGradeSearchFormDto;
 import com.cyber.university.dto.SemesterGradeDto;
 import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.response.StuSubAppDto;
@@ -237,6 +238,45 @@ public class StuSubService {
 
 		log.info("service totalScoreDto:"+allSemesterTotalScoreDto);
 		return allSemesterTotalScoreDto;
+	}
+
+	/**
+	  * @Method Name : findTotalScoreByStudentId
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studentId 별 총 학점 
+	  */
+	public TotalScoreDto findTotalScoreByStudentId(Integer studentId) {
+		
+		TotalScoreDto totalScore = stuSubRepository.selectTotalScoreByStudentId(studentId);
+		
+		return totalScore;
+	}
+
+	/**
+	  * @Method Name : findAllSemesterGradeByStudentId
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 모든 학기 성적 조회
+	  */
+	public List<SemesterGradeDto> findAllSemesterGradeByStudentId(Integer studentId) {
+		List<SemesterGradeDto> allSemesterGradeList = stuSubRepository.selectAllSemesterGradeByStudentId(studentId);
+		return allSemesterGradeList;
+	}
+
+	/**
+	  * @Method Name : findGradeListSearch
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  */
+	public List<SemesterGradeDto> findGradeListSearch(AllGradeSearchFormDto allGradeSearchFormDto) {
+		
+		List<SemesterGradeDto> gradeList = stuSubRepository.selectGradeByYearAndSemesterAndType(allGradeSearchFormDto);
+		return gradeList;
 	}
 
 }

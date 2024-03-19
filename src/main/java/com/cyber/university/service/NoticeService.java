@@ -49,6 +49,7 @@ public class NoticeService {
 			System.out.println("공지 입력 오류");
 		}
 		
+		
 	 }
 	
 	/**

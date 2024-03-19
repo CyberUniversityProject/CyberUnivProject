@@ -1,8 +1,11 @@
 package com.cyber.university.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -12,11 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cyber.university.dto.NoticeFormDto;
 import com.cyber.university.dto.NoticePageFormDto;
+import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Notice;
 import com.cyber.university.service.NoticeService;
+import com.cyber.university.utils.Define;
 
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -91,7 +97,28 @@ public class NoticeController {
 	@PostMapping("/write")
 	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
 		// todo: 파일 추가 기능
-		
+		MultipartFile file = noticeFormDto.getFile();
+		if (file.isEmpty() == false) {
+			if (file.getSize() > Define.MAX_FILE_SIZE) {
+				throw new CustomRestfullException("파일 크기는 20MB를 넘길 수 없습니다.", HttpStatus.BAD_REQUEST);
+			}
+			try {
+				String saveDirectory = Define.UPLOAD_DIRECTORY;
+				File dir = new File(saveDirectory);
+				if (dir.exists() == false) {
+					dir.mkdirs();
+				}
+				UUID uuid = UUID.randomUUID();
+				String fileName = uuid + "_" + file.getOriginalFilename();
+				String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
+				File destination = new File(uploadPath);
+				file.transferTo(destination);
+				noticeFormDto.setOriginFilename(file.getOriginalFilename());
+				noticeFormDto.setUuidFilename(fileName);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		noticeService.insertNotice(noticeFormDto);
 		return "redirect:/notice";
 	}

@@ -47,7 +47,6 @@
 		where title like concat('%', #{keyword}, '%')
 		order by id desc
 		limit #{page}, 10
-		
 	</select>
 	
 	<!-- 공지사항 검색 (제목+내용)-->

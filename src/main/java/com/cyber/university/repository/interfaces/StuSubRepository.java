@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cyber.university.dto.AllGradeSearchFormDto;
 import com.cyber.university.dto.SemesterGradeDto;
 import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.UpdateStudentGradeDto;
@@ -81,6 +82,36 @@ public interface StuSubRepository {
 	  * @Method 설명 : studyId로 각 학기별 총점 조회
 	  */
 	List<TotalScoreDto> selectAllSemesterTotalScoreByStudyId(Integer studentId);
+
+
+	/**
+	  * @Method Name : selectTotalScoreByStudentId
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studentId로 총 학점 조회
+	  */
+	TotalScoreDto selectTotalScoreByStudentId(Integer studentId);
+
+
+	/**
+	  * @Method Name : selectAllSemesterGradeByStudentId
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : studentId로 모든 학기 성적 조회
+	  */
+	List<SemesterGradeDto> selectAllSemesterGradeByStudentId(Integer studentId);
+
+
+	/**
+	  * @Method Name : selectGradeByYearAndSemesterAndType
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 연도, 학기, 타입 검색을 조건으로 한 성적 정보
+	  */
+	List<SemesterGradeDto> selectGradeByYearAndSemesterAndType(AllGradeSearchFormDto allGradeSearchFormDto);
 	
 
 }

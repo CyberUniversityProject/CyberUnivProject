@@ -74,51 +74,58 @@
 						</c:forEach>
 						</tbody>
 					</table>
-
-					<nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
-                                          <ul class="pagination">
-                                            <li class="page-item">
-                                              <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
-                                              </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                              <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                              </a>
-                                            </li>
-                                          </ul>
-                                        </nav>
-                                            <!--pagenation code -->
-                                         <div class="d-flex pagination justify-content-center buttons-group">
-                                                <c:if test="${page > 1}">
-                                                    <a href="?page=1&size=${size}">&laquo; 첫 페이지</a>
-                                                    <a href="?page=${page - 1}&size=${size}">&laquo; 이전</a>
-                                                </c:if>
-                                                <c:forEach begin="${startPage}" end="${endPage}" var="i">
-                                                    <c:choose>
-                                                        <c:when test="${i eq page}">
-                                                            <a href="?page=${i}&size=${size}" class="active">${i}</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a href="?page=${i}&size=${size}">${i}</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:forEach>
-                                                <c:if test="${page < totalPages}">
-                                                    <a href="?page=${page + 1}&size=${size}">다음 &raquo;</a>
-                                                    <a href="?page=${totalPages}&size=${size}">마지막 페이지
-                                                        &raquo;</a>
-                                                </c:if>
-                                            </div>
-                                        </nav>
 				</div>
-				<!-- main 끝 -->
+				<!-- main 끝 -->                                            
+				<!--pagination start -->
+	<div style="display: flex; justify-content: center;">
+	<c:if test="${totalPages > 1}">
+    <nav aria-label="Page navigation" style="text-align: center;">
+        <ul class="pagination">
+            <c:if test="${currentPage > 1}">
+                <li class="page-item">
+                    <a class="page-link" href="?page=1&size=${size}" aria-label="처음">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">처음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=${currentPage - 1}&size=${size}" aria-label="이전">
+                        <span aria-hidden="true">&lt;</span>
+                        <span class="sr-only">이전</span>
+                    </a>
+                </li>
+            </c:if>
+
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <li class="page-item active"><span class="page-link">${i}</span></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="?page=${i}&size=${size}">${i}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${currentPage < totalPages}">
+                <li class="page-item">
+                    <a class="page-link" href="?page=${currentPage + 1}&size=${size}" aria-label="다음">
+                        <span aria-hidden="true">&gt;</span>
+                        <span class="sr-only">다음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=${totalPages}&size=${size}" aria-label="마지막">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">마지막</span>
+                    </a>
+                </li>
+            </c:if>
+        </ul>
+    </nav>
+</c:if>
+					
+					<!--pagination end -->
 
 			</div>
 		</div>

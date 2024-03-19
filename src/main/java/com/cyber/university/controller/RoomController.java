@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.dto.RoomDto;
+import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.Room;
+import com.cyber.university.repository.model.Staff;
 import com.cyber.university.service.RoomService;
+import com.cyber.university.service.UserService;
+import com.cyber.university.utils.Define;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,9 +41,18 @@ public class RoomController {
 
 	@Autowired
 	private HttpSession httpSession;
+	
+	@Autowired
+	private UserService userService;
+	
 	// 화면 띄우기
 	@GetMapping("/roomRegister")
-	public String roomRegisterPage() {
+	public String roomRegisterPage(Model model) {
+		// 관리자 session
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+						
 		return "/room/roomRegister";
 	}
 
@@ -63,7 +76,13 @@ public class RoomController {
 	public String roomList(Model model,
 	                       @RequestParam(name = "page" ,defaultValue = "1") int page,
 	                       @RequestParam(name = "size" ,defaultValue = "5") int size) {
-	    // 페이지 번호와 페이지 크기를 이용하여 페이징된 강의실 목록 가져오기
+	    
+		// 관리자 session
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+
+		// 페이지 번호와 페이지 크기를 이용하여 페이징된 강의실 목록 가져오기
 	    List<Room> roomList = roomService.findAllRooms(page, size);
 	    // 전체 페이지 수 계산
 	    int totalPages = roomService.getTotalPages(size);
@@ -79,12 +98,24 @@ public class RoomController {
     
 	@GetMapping("/delete/{id}")
 	public String deleteById(@PathVariable("id") String id,Model model) {
+		
+		// 관리자 session
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+
 		roomService.deleteById(id);
 		return "redirect:/room/roomList";
 	}
 	// 강의실 수정 페이지 띄우기
 	@GetMapping("/roomUpdate/{id}")
 	public String updateById(@PathVariable("id") String id,Model model) {
+		
+		// 관리자 session
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+	
 		Room room = roomService.findById(id);
 		model.addAttribute("room", room);
 		return "/room/roomUpdate";

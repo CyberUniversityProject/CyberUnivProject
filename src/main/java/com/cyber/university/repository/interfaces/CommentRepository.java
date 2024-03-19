@@ -23,6 +23,11 @@ public interface CommentRepository {
     
     public List<Comment> getCommentsByCommunityId(Integer communityId);
     
+    public Integer selectCommentCount(Integer communityId);
+    
+    
+ // 연관된 댓글 삭제
+    public int deleteCommentsByCommunityId(Integer id);
     
    
 }

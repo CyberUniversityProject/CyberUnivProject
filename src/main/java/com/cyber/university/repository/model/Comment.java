@@ -20,6 +20,8 @@ public class Comment {
 	    
 	    private Timestamp createDate;
 	    
+	    private String userId;
+	    
 	    
 	    
 	    public String appDateFormat() {

@@ -35,5 +35,11 @@ public class CommentService {
 	    public void deleteComment(Integer id) {
 	        commentRepository.deleteComment(id);
 	    }
+	    
+	    
+	    public int getCommentCount(Integer communityId) {
+	    	return commentRepository.selectCommentCount(communityId);
+	    }
+
 
 }

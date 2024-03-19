@@ -18,12 +18,18 @@ public interface CommunityRepository {
 
 	public void updateCommunity(Community community);
 
+	
 	public void deleteCommunity(Integer id);
+	
 	
 	
 	public Community getCommunityById(Integer id);
 	
 	
+	public long existById(int id);
+	
+	
+
 
 
 }

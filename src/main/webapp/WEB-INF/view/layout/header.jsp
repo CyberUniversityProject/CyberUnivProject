@@ -116,6 +116,8 @@ body {
 								<li><a href="/schedule">학사일정</a></li>
 							</ul></li>
 						<li><a href="/campusMap">캠퍼스 맵</a></li>
+							<li><a href="/community/list">커뮤니티</a></li>
+						
 					</ul>
 				</c:when>
 				<c:when test="${principal.userRole.equals(\"staff\")}">
@@ -162,8 +164,7 @@ body {
 								<li><a href="/schedule/list">학사일정 등록</a></li>
 							</ul></li>
 						<li><a href="/campusMap">캠퍼스 맵</a></li>
-						<li><a href="/campusMap">커뮤니티</a></li>
-
+					
 					</ul>
 				</c:when>
 

@@ -38,33 +38,60 @@ public class NoticeController {
 	NoticeService noticeService;
 	
 	/**
-	 * 
-	 * @return 공지사항 페이지
+	 * 공지사항 페이지
 	 */
 	@GetMapping("")
 	public String notice(Model model)  {
 		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage(0);
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		Integer amount = noticeService.noticeAmount(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
+		
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
 			model.addAttribute("noticeList", noticeList);
 		}
-		
 		return "/notice/noticeList";
 	}
 	
 	/**
-	 * 
-	 * @return 공지사항 입력 기능
+	 * 공지사항 페이지 이동
 	 */
+	@GetMapping("/list/{page}")
+	public String noticeListByPage(Model model, @PathVariable("page") Integer page) {
+		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage((page - 1) * 10);
+		log.info("noticePageFormDto:" + noticePageFormDto);
+		
+		Integer amount = noticeService.noticeAmount(noticePageFormDto);
+		log.info("amount1:" + amount);
+		log.info("noticePageFormDto:" + noticePageFormDto);
+		
+		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
+		log.info("model:" + model);
+		
+		if(noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/notice/noticeList";
+	}
 	
+	/**
+	 * 공지사항 입력 기능
+	 */
 	@GetMapping("/write")
 	public String insertNoticeForm () {
 		return "/notice/noticeWrite";
 	}
 	@PostMapping("/write")
 	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
+		// todo: 파일 추가 기능
+		
 		noticeService.insertNotice(noticeFormDto);
 		return "redirect:/notice";
 	}
@@ -81,7 +108,7 @@ public class NoticeController {
 	
 	/**
 	 * 
-	 * @return 공지사항 상세페이지
+	 * 공지사항 상세페이지
 	 */
 	@GetMapping("/read")
 	public String selectByIdNotice(Model model, @RequestParam("id") Integer id) {
@@ -96,22 +123,20 @@ public class NoticeController {
 		
 		return "/notice/noticeDetail";
 	}
+	
 	/**
-	 * 
-	 * @return 공지사항 수정 페이지
+	 * 공지사항 수정 페이지
 	 */
 	@GetMapping("/update")
 	public String update(Model model, @RequestParam("id") Integer id) {
 		model.addAttribute("id", id);
-		
 		Notice notice = noticeService.readNoticeById(id);
 		model.addAttribute("notice", notice);
 		return "/notice/noticeUpdate";
 	}
 	
 	/**
-	 * 
-	 * @return 공지사항 수정 기능
+	 * 공지사항 수정 기능
 	 */
 	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
@@ -120,8 +145,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 
-	 * @return 공지사항 삭제 기능
+	 * 공지사항 삭제 기능
 	 */
 	@GetMapping("/delete")
 	public String delete(Model model,  @RequestParam("id") Integer id) {
@@ -129,7 +153,6 @@ public class NoticeController {
 		noticeService.deleteNotice(id);
 		return "redirect:/notice";
 	}
-	
 	
 	/**
 	  * @Method Name : noticeSearch
@@ -140,6 +163,9 @@ public class NoticeController {
 	  * @return
 	  */
 	
+	/**
+	 * 공지사항 검색 기능
+	 */
 	@GetMapping("/search")
 	public String searchNoticeByKeyword(Model model, NoticePageFormDto noticePageFormDto) {
 		model.addAttribute("keyword", noticePageFormDto.getKeyword());
@@ -150,26 +176,27 @@ public class NoticeController {
 		} else {
 			model.addAttribute("noticeList", noticeList);
 		}
-		
 		return "/notice/noticeList";
-		
 	}
 	
-//	public String searchNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto, 
-//			@PathVariable Integer page, @RequestParam("keyword") String keyword) {
-//		model.addAttribute("keyword", noticePageFormDto.getKeyword());
-//		noticePageFormDto.setPage((page - 1) * 10);
-//		List<Notice> noticeList = noticeService.searchNotice(noticePageFormDto);
-//		Integer amount = noticeService.searchNoticeAmount(noticePageFormDto);
-//		
-//		model.addAttribute("list")
-//		if(noticeList.isEmpty()) {
-//			model.addAttribute("noticeList", null);
-//		} else {
-//			model.addAttribute("noticeList", noticeList);
-//		}
-//		
-//		return "/notice/noticeList";
-//		
-//	}
+	/**
+	 * 
+	 * 공지사항 검색 기능 (키워드 검색, 페이징 처리)
+	 */
+	@GetMapping("/search/{page}")
+	public String searchNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto, 
+			@PathVariable Integer page, @RequestParam("keyword") String keyword) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+		noticePageFormDto.setPage((page - 1) * 10);
+		List<Notice> noticeList = noticeService.searchNotice(noticePageFormDto);
+		Integer amount = noticeService.noticeAmount(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
+		
+		if(noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/notice/noticeList";
+	}
 }

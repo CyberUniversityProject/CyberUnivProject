@@ -2,33 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.university.repository.interfaces.NoticeRepository">
+	<!-- 공지사항 등록 -->
 	<insert id="insert">
 		insert into cu_notice (title, category, content, created_time)
 		values(#{title}, #{category}, #{content}, now())
 	</insert>
-
+	
+	<!-- 공지사항 최신순 조회 -->
 	<select id="selectByNoticeDto" resultType="com.cyber.university.dto.NoticeFormDto">
 		select * from cu_notice order by id DESC
+		limit #{page}, 10
 	</select>
 	
+	<!-- 공지사항 상세보기 -->
+	<select id="selectById" resultType="com.cyber.university.repository.model.Notice">
+		select n.*, f.uuid_filename, f.origin_filename
+		from cu_notice as n
+		left join cu_notice_file as f
+		on n.id = f.notice_id
+		where n.id = #{id}
+	</select>
+	
+	<!-- 공지사항 수정 -->
 	<update id="updateByNoticeDto">
 		update cu_notice 
 		set title = #{title}, content = #{content}
 		where id= #{id}
 	</update>
 	
-	<select id="selectById" resultType="com.cyber.university.repository.model.Notice">
-		SELECT n.*, f.uuid_filename, f.origin_filename
-		FROM cu_notice AS n
-		LEFT JOIN cu_notice_file AS f
-		ON n.id = f.notice_id
-		WHERE n.id = #{id}
-	</select>
-	
+	<!-- 공지사항 삭제 -->
 	<delete id="deleteById">
 		delete from cu_notice where id = #{id}
 	</delete>
-
 
 	<!-- 메인 공지사항 조회 최신순으로 5개까지만 -->
 	<select id="selectMainNotice" resultType="com.cyber.university.dto.response.NoticeResDto">
@@ -36,15 +41,38 @@
 		order by id desc limit 5
 	</select>
 	
+	<!-- 공지사항 검색(제목) -->
 	<select id="selectNoticeByTitle" resultType="com.cyber.university.dto.NoticeFormDto">
-		select * from cu_notice where title like concat('%', #{keyword}, '%')
+		select * from cu_notice 
+		where title like concat('%', #{keyword}, '%')
 		order by id desc
+		limit #{page}, 10
 		
 	</select>
 	
+	<!-- 공지사항 검색 (제목+내용)-->
 	<select id="selectNoticeByKeyword" resultType="com.cyber.university.dto.NoticeFormDto">
-		select * from cu_notice where title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
+		select * from cu_notice 
+		where title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
 		order by id desc
+		limit #{page}, 10
 	</select>
-
+	
+<!-- 페이징 -->
+	<!-- 공지사항 개수 -->
+	<select id="selectNoticeCount" resultType="Integer">
+		select count(id) from cu_notice
+	</select>
+	
+	<!-- 공지사항 검색 개수(제목) -->
+	<select id="selectNoticeCountByTitle" resultType="Integer">
+		select count(id) from cu_notice 
+		where title like concat('%', #{keyword},'%')
+	</select> 
+	
+	<!-- 공지사항 검색 개수(제목+내용) -->
+	<select id="selectNoticeCountByKeyword" resultType="Integer">
+		select count(id) from cu_notice 
+		where title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
+	</select>
 </mapper>

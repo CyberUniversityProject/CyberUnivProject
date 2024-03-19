@@ -35,11 +35,8 @@ public class DepartmentService {
 	public void insert(DepartmentDto departmentDto) {
 		
 		Department department = new Department();
-		log.info("insert" + toString());
 		department.setName(departmentDto.getName());
-		log.info("name" + toString());
 		department.setCollegeId(departmentDto.getCollegeId());
-		log.info("collegeId" + toString());
 		
 		 int result = departmentRepository.insertById(department);
 		 if (result != 1) {
@@ -48,6 +45,7 @@ public class DepartmentService {
 	}
 	// 학과 목록 전체 불러오기
 	public List<Department> departmentList() {
+		List<Department> list = departmentRepository.findAll();
 		return departmentRepository.findAll();
 	}
 	// 학과 삭제
@@ -71,6 +69,29 @@ public class DepartmentService {
 	public List<DepartmentWithCollegeDto> findAll(){
 		return departmentRepository.findAlldeptWithCol();
 	}
+	/**
+	  * @FileName : DepartmentService.java
+	  * @Project : CyberUniversity
+	  * @Date : 2024. 3. 19. 
+	  * @작성자 : 김수현
+	  * @변경이력 : 
+	  * @프로그램 설명 : department paging 
+	  */
+	public List<Department> findAllDepartments(int page, int size) {
+		// 페이징 처리를 위해 offset 계산
+		 int offset = (page -1) * size;
+		 // 페이징 된 학과 목록 조회
+		 return departmentRepository.findAllwithPasing(offset, size);
+	}
+	
+	public int getTotalPages(int size) {
+		// 전체 데이터 개수 가져오기
+		int totalRecords = departmentRepository.getAllPgCount();
+		// 전체 페이지 수 계산
+		int totalPages = (int) Math.ceil((double)totalRecords / size);
+		return totalPages;
+	}
+	
 	
 	
 	}

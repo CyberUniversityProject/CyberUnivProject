@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -72,7 +71,28 @@
 							</c:forEach>
 						</tbody>
 					</table>
+				<!-- main 끝 -->                                            
+				<!--pagination start -->
+	<div style="display: flex; justify-content: center;">
+	<c:if test="${totalPages > 1}">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <c:if test="${currentPage > 1}">
+                <li class="page-item">
+                    <a class="page-link" href="?page=1&size=${size}" aria-label="처음">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">처음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=${currentPage - 1}&size=${size}" aria-label="이전">
+                        <span aria-hidden="true">&lt;</span>
+                        <span class="sr-only">이전</span>
+                    </a>
+                </li>
+            </c:if>
 
+<<<<<<< HEAD
 					<!-- 페이지네이션 -->
 <c:if test="${totalPages > 1}">
     <nav aria-label="Page navigation">
@@ -92,6 +112,8 @@
                 </li>
             </c:if>
 
+=======
+>>>>>>> dev
             <c:forEach var="i" begin="1" end="${totalPages}">
                 <c:choose>
                     <c:when test="${currentPage eq i}">
@@ -102,6 +124,7 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
+<<<<<<< HEAD
 
             <c:if test="${currentPage < totalPages}">
                 <li class="page-item">
@@ -120,16 +143,29 @@
         </ul>
     </nav>
 </c:if>
+=======
+>>>>>>> dev
 
+            <c:if test="${currentPage < totalPages}">
+                <li class="page-item">
+                    <a class="page-link" href="?page=${currentPage + 1}&size=${size}" aria-label="다음">
+                        <span aria-hidden="true">&gt;</span>
+                        <span class="sr-only">다음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=${totalPages}&size=${size}" aria-label="마지막">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">마지막</span>
+                    </a>
+                </li>
+            </c:if>
+        </ul>
+    </nav>
+</c:if>
+</div>
 					
- 
-
-
-       
-
-   
-
-
+					<!--pagination end -->
 				</div>
 			</div>
 		</div>

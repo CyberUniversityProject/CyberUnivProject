@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cyber.university.dto.CollegeDto;
+import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.College;
+import com.cyber.university.repository.model.Staff;
 import com.cyber.university.service.CollegeService;
+import com.cyber.university.service.UserService;
+import com.cyber.university.utils.Define;
 import com.mysql.cj.log.Log;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -34,10 +39,21 @@ public class CollegeController {
 
 	@Autowired
 	private CollegeService collegeService;
+	
+	@Autowired
+	private HttpSession httpSession;
+	
+	@Autowired
+	private UserService userService;
 
 	// 화면띄우기
 	@GetMapping("/collegeRegister")
-	public String collegeRegisterPage() {
+	public String collegeRegisterPage(Model model) {
+		// 관리자 session
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+		
 		return "/college/collegeRegister";
 	}
 
@@ -53,6 +69,12 @@ public class CollegeController {
 	// 단과대학 목록 불러오기
 	@GetMapping("/collegeList")
 	public String collegeList(Model model) {
+		// 교직원 session 
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+		
+		
 		List<College> list; 
 		model.addAttribute("collegeList", collegeService.collegeList());
 		System.out.println("collegeList" + model);
@@ -67,20 +89,25 @@ public class CollegeController {
 	  * @프로그램 설명 : 단과대학 삭제,수정
 	  */
 	@GetMapping("/delete/{id}")
-	public String deleteById(@PathVariable("id") Integer id) {
-		System.out.println("delete" + id);
+	public String deleteById(@PathVariable("id") Integer id,Model model) {
+		// 교직원 session 
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+		
 		collegeService.deleteById(id);
-		System.out.println("delete" + id);
 		return "redirect:/college/collegeList";
 	}
 	// 단과대학 수정 페이지띄우기
 	@GetMapping("/collegeUpdate/{id}")
 	public String updateById(@PathVariable("id") Integer id,Model model) {
-		log.info("수정페이지");
+		// 교직원 session 
+		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff",staff);
+		
 		College college = collegeService.findById(id);
-		log.info("수정페이지");
 		model.addAttribute("college", college);
-		log.info("수정페이지");
 		return "/college/collegeUpdate";
 	}
 	// 단과대학 수정 기능

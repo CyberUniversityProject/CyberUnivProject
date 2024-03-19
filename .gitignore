@@ -6,6 +6,9 @@ build/
 !**/src/test/**/build/
 
 
+# Ignore YAML files
+*.yml
+
 
 ### STS ###
 .apt_generated

@@ -1,0 +1,98 @@
+.hUIgIx { 
+        padding-top: 3rem !important;
+        width: 840px;
+        padding: 52px 40px;
+        border: 1px solid  #E0E0E0;
+        border-radius: 6px;
+}
+
+
+.DURcH {
+    font-size: 33px;
+    font-weight: 500;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.ihKLTc {
+
+    max-height: 600px;
+    margin-top: 30px;
+    padding: 32px;
+    box-sizing: border-box;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    word-break: keep-all;
+    overflow-y: auto;
+    outline: none;
+    width: 100%;
+    scrollbar-width: none;
+}
+
+
+
+/* ========================================================================== 
+Caurosel
+========================================================================== */
+.carousel-control {
+    z-index:9999;
+}
+
+.carousel-control>img {
+    position:absolute;
+    top:42%;
+    width:30%;
+}
+
+.left.carousel-control>img {
+    left:30%;
+}
+
+.right.carousel-control>img {
+    right:30%;
+}
+
+.camera-icon {
+    position:absolute;
+    width:100%;
+    left:0;
+    top:0;
+    text-align:center;
+    z-index:99;
+    padding-top: 9%;
+}
+
+.camera-icon .circle {
+    width:200px;
+    height:200px;
+    line-height:200px;
+    display:inline-block;
+    /*border-radius*/
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+    border:1px solid white;
+    position:relative;
+    color:white;
+    opacity:.85;
+}
+
+.camera-icon .circle i {
+    color:white;
+    position:absolute;
+    z-index:1;
+    left:28px;
+    top:8px;
+    font-size:38px;
+}
+
+.camera-icon .circle .hexagon {
+    display:inline-block;
+    margin-top:75px;
+    position: relative;
+}
+
+
+.sc-5847e39e-2, .sc-1f3e47e0-0 {
+            text-align: left;
+}

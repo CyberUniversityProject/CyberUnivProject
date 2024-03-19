@@ -3,7 +3,7 @@ package com.cyber.university.repository.model;
 import lombok.Data;
 
 /**
-  * @FileName : Questionstion.java
+  * @FileName : Question.java
   * @Project : CyberUniversity
   * @Date : 2024. 3. 11. 
   * @작성자 : 이준혁
@@ -11,7 +11,7 @@ import lombok.Data;
   * @프로그램 설명 : 질문내용
   */
 @Data
-public class Questionstion {
+public class Question {
 	
 	private Integer id;
 	private String question1;

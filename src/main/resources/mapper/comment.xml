@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyber.university.repository.interfaces.CommentRepository">
+
+    <!-- 댓글 삽입 -->
+    <insert id="insertComment">
+        INSERT INTO cu_comment (content, createDate, community_id)
+        VALUES (#{content}, #{createDate}, #{communityId})
+    </insert>
+
+    <!-- 특정 게시글에 대한 모든 댓글 조회 -->
+    <select id="selectCommentsByCommunityId" parameterType="Integer" resultType="com.cyber.university.repository.model.Comment">
+        SELECT * FROM cu_comment WHERE community_id = #{communityId}
+    </select>
+
+    <!-- 특정 댓글 조회 -->
+    <select id="selectCommentById" parameterType="Integer" resultType="com.cyber.university.repository.model.Comment">
+        SELECT * FROM cu_comment WHERE id = #{id}
+    </select>
+
+    <!-- 댓글 업데이트 -->
+    <update id="updateComment">
+        UPDATE cu_comment
+        SET content = #{content}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment" parameterType="Integer">
+        DELETE FROM cu_comment WHERE id = #{id}
+    </delete>
+    
+    
+     <select id="getCommentsByCommunityId" parameterType="int" resultType="com.cyber.university.repository.model.Comment">
+        SELECT * FROM cu_comment WHERE communityId = #{communityId}
+    </select>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyber.university.repository.interfaces.CommunityRepository">
+
+    <!-- 게시글 삽입 -->
+    <insert id="insertCommunity">
+        INSERT INTO cu_community (title, content, userName, createDate)
+        VALUES (#{title}, #{content}, #{userName}, #{createDate})
+    </insert>
+
+    <!-- 모든 게시글 조회 -->
+    <select id="selectAllCommunities" resultType="com.cyber.university.repository.model.Community">
+        SELECT * FROM cu_community
+    </select>
+
+    <!-- 특정 ID의 게시글 조회 -->
+    <select id="selectCommunityById" parameterType="Integer" resultType="com.cyber.university.repository.model.Community">
+        SELECT * FROM cu_community WHERE id = #{id}
+    </select>
+
+    <!-- 게시글 업데이트 -->
+    <update id="updateCommunity">
+        UPDATE cu_community
+        SET title = #{title}, content = #{content}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteCommunity" parameterType="Integer">
+        DELETE FROM cu_community WHERE id = #{id}
+    </delete>
+    
+    
+      <select id="getCommunityById" parameterType="int" resultType="com.cyber.university.repository.model.Community">
+        SELECT * FROM cu_community WHERE id = #{id}
+    </select>
+
+</mapper>

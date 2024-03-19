@@ -61,7 +61,7 @@
 										<ul>
 											<div class="col-md-6 form-group mt-3 mt-md-0">
 												<input type="text" class="form-control" name="name"
-													id="name" style="width: 226%" value="${college.name}">
+													id="name" style="width: 226%;top:26px;position:relative;" value="${college.name}">
 											</div>
 											<br></br>
 											

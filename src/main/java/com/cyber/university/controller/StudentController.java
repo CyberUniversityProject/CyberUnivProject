@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cyber.university.dto.AllGradeSearchFormDto;
 import com.cyber.university.dto.ChangePasswordDto;
 import com.cyber.university.dto.LeaveAppDto;
 import com.cyber.university.dto.LeaveStudentInfoDto;
@@ -415,19 +417,42 @@ public class StudentController {
 		
 		Integer currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		Integer currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
-		TotalScoreDto totalScoreDto = stuSubService.findTotalScoreByYearAndSemesterAndStudentId(currentYear,currentMonth, userId);
-		model.addAttribute("totalScore", totalScoreDto);
+		TotalScoreDto thisSemesterTotalScore = stuSubService.findTotalScoreByYearAndSemesterAndStudentId(currentYear,currentMonth, userId);
+		model.addAttribute("thisSemesterTotalScore", thisSemesterTotalScore);
 		
 		
-		List<TotalScoreDto> allSemesterTotalScoreDto = stuSubService.findAllSemesterTotalScoreByStudyId(userId);
-		model.addAttribute("allSemesterTotalScoreList", allSemesterTotalScoreDto);
+		List<TotalScoreDto> allSemesterTotalScoreList = stuSubService.findAllSemesterTotalScoreByStudyId(userId);
+		model.addAttribute("allSemesterTotalScoreList", allSemesterTotalScoreList);
 		
-		log.info("controller allSemesterTotalScoreDto:"+allSemesterTotalScoreDto);
+		TotalScoreDto totalScore = stuSubService.findTotalScoreByStudentId(userId);
+		model.addAttribute("totalScore", totalScore);
+		
+		List<SemesterGradeDto> allSemesterGradeList = stuSubService.findAllSemesterGradeByStudentId(userId);
+		model.addAttribute("gradeList",allSemesterGradeList);
 		
 		return "/student/gradeDetailList";
-		
 	}
 
+	/**
+	  * @Method Name : readGradeListSearch
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 : 전체 성적 목록 필터링
+	  */
+	@GetMapping("/list/search")
+	@ResponseBody
+	private  List<SemesterGradeDto> readGradeListSearch(Model model, @Validated AllGradeSearchFormDto allGradeSearchFormDto) {
+		
+		log.info("search에 dto 정보가 잘 들어왔을까?"+ allGradeSearchFormDto);
+
+		List<SemesterGradeDto> gradeList = stuSubService.findGradeListSearch(allGradeSearchFormDto);
+		model.addAttribute("gradeList", gradeList);
+		
+		log.info("search후 gradeList??"+gradeList);
+		
+		return gradeList;
+	}
 
 	
 }

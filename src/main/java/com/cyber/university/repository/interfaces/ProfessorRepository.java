@@ -270,7 +270,8 @@ public interface ProfessorRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 과목별 강의평가 조회
 	  */
-	public List<MyEvaluationDto> selectEvaluationDtoByprofessorIdAndName(@Param("professorId") Integer professorId, @Param("name") String Name);
+	public List<MyEvaluationDto> selectEvaluationDtoByprofessorIdAndName(@Param("professorId") Integer professorId, 
+																		@Param("name") String Name, @Param ("offset") int offset, @Param ("limit") int limit);
 	
 	/**
 	  * @Method Name : selectEvaluationDto
@@ -288,7 +289,17 @@ public interface ProfessorRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 강의평가 조회
 	  */
-	public List<MyEvaluationDto> selectMyEvaluationDtoByProfessorId(Integer professorId);
+	public List<MyEvaluationDto> selectMyEvaluationDtoByProfessorId(@Param("professorId") Integer professorId, 
+													@Param ("offset") int offset, @Param ("limit") int limit);
+	
+	/**
+	  * @Method Name : getMyEvaluationTotalCount
+	  * @작성일 : 2024. 3. 20.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 평가 총 개수
+	  */
+	public int getMyEvaluationTotalCount();
 	
 	/**
 	  * @Method Name : selectSyllabusBySubjectId

@@ -26,6 +26,8 @@ import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.ReadSyllabusDto;
 import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.model.PageReq;
+import com.cyber.university.repository.model.PageRes;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
@@ -296,16 +298,29 @@ public class ProfessorController {
 	  * @Method 설명 : 강의 평가 화면 요청
 	  */
 	@GetMapping("/readevaluation")
-	public String readEvaluationPage(Model model) {
+	public String readEvaluationPage(Model model, PageReq pageReq) {
 		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		if (pageReq.getPage() <= 0) {
+			pageReq.setPage(1); // 페이지가 0 이하일 경우 첫 페이지로 설정한다
+		}
+
+		if (pageReq.getSize() <= 0) {
+			pageReq.setSize(5); // 페이지 당 보여줄 개수
+		}
 		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);		
 		List<MyEvaluationDto> subjectName = professorService.readSubjectName(principal.getId());
 		model.addAttribute("subjectName", subjectName);
 		
-		List<MyEvaluationDto> eval = professorService.readEvaluationByProfessorId(principal.getId());
+		PageRes<MyEvaluationDto> pageRes = professorService.readEvaluationByProfessorId(pageReq, principal.getId());
+		List<MyEvaluationDto> eval = pageRes.getContent();
 		model.addAttribute("eval", eval);
 		
+		model.addAttribute("page", pageReq.getPage());
+		model.addAttribute("size", pageRes.getSize());
+		model.addAttribute("totalPages", pageRes.getTotalPages());
+		model.addAttribute("startPage", pageRes.getStartPage());
+		model.addAttribute("endPage", pageRes.getEndPage());
 		return "/professor/myEvaluation";
 	}
 	
@@ -314,18 +329,36 @@ public class ProfessorController {
 	  * @작성일 : 2024. 3. 18.
 	  * @작성자 : 장명근
 	  * @변경이력 : 
-	  * @Method 설명 : 강의 평가 검색 기능
+	  * @Method 설명 : 과목별 강의 평가 조회
 	  */
 	@PostMapping("/readevaluation")
-	public String readEvaluation(Model model, HttpServletRequest httpServletRequest) {
+	public String readEvaluation(Model model, HttpServletRequest httpServletRequest, PageReq pageReq, 
+								@RequestParam("subjectId") String subjectId) {
 		
+		if (pageReq.getPage() <= 0) {
+			pageReq.setPage(1); // 페이지가 0 이하일 경우 첫 페이지로 설정한다
+		}
+
+		if (pageReq.getSize() <= 0) {
+			pageReq.setSize(5); // 페이지 당 보여줄 개수
+		}
+				
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		String name = httpServletRequest.getParameter("subjectId");
 		
 		List<MyEvaluationDto> subjectName = professorService.readSubjectName(principal.getId());
-		List<MyEvaluationDto> eval = professorService.readEvaluationByProfessorIdAndName(principal.getId(), name);
 		model.addAttribute("subjectName", subjectName);
+		
+		PageRes<MyEvaluationDto> pageRes = professorService.readEvaluationByProfessorIdAndName(pageReq, principal.getId(), name);		
+		List<MyEvaluationDto> eval = pageRes.getContent();		
 		model.addAttribute("eval", eval);
+		
+		model.addAttribute("page", pageReq.getPage());
+		model.addAttribute("size", pageRes.getSize());
+		model.addAttribute("totalPages", pageRes.getTotalPages());
+		model.addAttribute("startPage", pageRes.getStartPage());
+		model.addAttribute("endPage", pageRes.getEndPage());
+		
 		return "/professor/myEvaluation";
 		
 	}

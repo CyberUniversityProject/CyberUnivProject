@@ -9,8 +9,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+* {
+	
+	font-family: 'Noto Sans KR', sans-serif !important;
+}
 body {
-  font-family: "Open Sans", sans-serif;
+ 
   color: #444444;
 }
 
@@ -1431,6 +1439,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
+	
   color: #37423b;
   font-size: 14px;
   background: #eef0ef;

@@ -11,29 +11,26 @@ import lombok.Data;
 
 @Data
 public class Comment {
-	
-	 private Integer id;
-	    
-	    private Integer communityId;
-	    
-	    private String content;
-	    
-	    private Timestamp createDate;
-	    private Timestamp updateDate;
-	    
-	    private String userId;
-	    
-	    
-	    private String role;
-	    
-	    
-	    
-	    public String appDateFormat() {
-			return TimestampUtil.dateTimeToString(createDate);
-		}
-	    
-	    public String appUpdateFormat() {
-			return TimestampUtil.dateTimeToString(updateDate);
-		}
+
+	private Integer id;
+
+	private Integer communityId;
+
+	private String content;
+
+	private Timestamp createDate;
+	private Timestamp updateDate;
+
+	private String userId;
+
+	private String role;
+
+	public String appDateFormat() {
+		return TimestampUtil.dateTimeToString(createDate);
+	}
+
+	public String appUpdateFormat() {
+		return TimestampUtil.dateTimeToString(updateDate);
+	}
 
 }

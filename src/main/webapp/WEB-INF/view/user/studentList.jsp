@@ -118,26 +118,28 @@
                     </tbody>
                 </table>
             </div>
-            <ul class="pagination">
-                <c:forEach var="index" begin="1" end="${listCount}">
-                    <li class="page-item">
-                        <c:choose>
-                            <c:when test="${deptId != null && index != page}">
-                                <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
-                            </c:when>
-                            <c:when test="${deptId != null && index == page}">
-                                <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
-                            </c:when>
-                            <c:when test="${deptId == null && index == page}">
-                                <a class="page-link" href="/user/studentList/${index}">${index}</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="page-link" href="/user/studentList/${index}">${index}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </li>
-                </c:forEach>
-            </ul>
+<ul class="pagination">
+    <c:forEach var="index" begin="1" end="${listCount}">
+        <li class="page-item ${index == page ? 'active' : ''}">
+            <c:choose>
+                <c:when test="${deptId != null && index != page}">
+                    <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
+                </c:when>
+                <c:when test="${deptId != null && index == page}">
+                    <a class="page-link" href="/user/studentList/${index}?deptId=${deptId}">${index}</a>
+                </c:when>
+                <c:when test="${deptId == null && index == page}">
+                    <a class="page-link" href="/user/studentList/${index}">${index}</a>
+                </c:when>
+                <c:otherwise>
+                    <a class="page-link" href="/user/studentList/${index}">${index}</a>
+                </c:otherwise>
+            </c:choose>
+        </li>
+    </c:forEach>
+</ul>
+
+
         </c:when>
         <c:otherwise>
             <p class="no--list--p">검색 결과가 없습니다.</p>

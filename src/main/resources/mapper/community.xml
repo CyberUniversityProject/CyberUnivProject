@@ -36,5 +36,22 @@
       <select id="getCommunityById" parameterType="int" resultType="com.cyber.university.repository.model.Community">
         SELECT * FROM cu_community WHERE id = #{id}
     </select>
+    
+    
+    
+    
+    <!--페이징 처리 -->
+	<select id="findAllwithPaging"
+		resultType="com.cyber.university.repository.model.Community">
+		SELECT * FROM cu_community
+		ORDER BY id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+
+	<!--전체 데이터 개수 -->
+	<select id="getAllCount" resultType="int">
+		SELECT COUNT(*) FROM cu_community
+	</select>
 
 </mapper>

@@ -162,7 +162,7 @@ a:hover {
 			<c:when test="${principal.userRole == \"professor\"}">
 		<table>
 			<tr>
-				<td><a href="/professor/syllabus/update/${syllabus.subjectId }">수정하기</a></td>
+				<td><a href="/professor/syllabus/update/${syllabus.subjectId}">수정하기</a></td>
 			</tr>
 		</table>
 			</c:when>

@@ -20,6 +20,14 @@
 	
 ul	{
 	list-style-type: none;
+}
+
+#mysub--btn {
+   background: #5fcf80;
+   border-radius: 50px;
+   padding: 8px 25px;
+   border: none;
+   color: #fff;
 }	
 </style>
 
@@ -48,21 +56,15 @@ ul	{
 					<!-- 필터 및 검색 -->
 					<div class="row mb-3">
 						<div class="col-md-7">
-							<form action="/professor/subject" method="post">
+							<form action="/professor/mysub" method="post">
 								<div>
 									<select name="period">
-										<c:forEach items="${subInfoList}" var="yearSemester">
+										<c:forEach items="${semesterList}" var="yearSemester">
 											<option
 												value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도&nbsp;${yearSemester.semester}학기</option>
 										</c:forEach>
 									</select>
-									<!-- 검색 버튼 -->
-									<button type="submit">
-										<ul class="d-flex justify-content-center" style="margin: 0;">
-											<li style="height: 24px; margin-right: 2px;">조회
-											
-										</ul>
-									</button>
+									<button type="submit" id="mysub--btn">조회</button>
 								</div>
 							</form>
 						</div>
@@ -79,43 +81,41 @@ ul	{
 											<th>학수번호</th>
 											<th>강의명</th>
 											<th>강의시간</th>
-											<th>강의계획서</th>
-											<th>학생 목록</th>
+											<th style="text-align: center;">강의계획서</th>
+											<th style="text-align: center;">학생 목록</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="subInfo" items="${subInfoList}">
+										<c:forEach var="subject" items="${subjectList}">
 											<tr>
-												<td>${subInfo.id}</td>
-												<td>${subInfo.name}</td>
+												<td>${subject.id}</td>
+												<td>${subject.name}</td>
 
 												<td>
 													<c:choose>
-														<c:when test="${subInfo.startTime < 10}">
-															${subInfo.subDay} 0${subject.startTime}:00-${subInfo.endTime}:00&nbsp;(${subInfo.roomId})								
+														<c:when test="${subject.startTime < 10}">
+															${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
 														</c:when>
 														<c:otherwise>
-															${subInfo.subDay} ${subInfo.startTime}:00-${subInfo.endTime}:00&nbsp;(${subInfo.roomId})							
+															${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
 														</c:otherwise>
 													</c:choose>
 												</td>
-												<td>									
-													<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
-														<li style="height: 24px;"><a href="/subject/syllabus/${subInfo.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">조회</a>
-														
-													</ul>
+												<td style="text-align: center; padding: 5px;">									
+												    <ul class="d-flex justify-content-center sub--plan--view" style="margin: 0; padding: 0;">
+												        <li style="height: 24px;"><a href="/professor/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">조회</a></li>														
+												    </ul>
 												</td>
-												<td>
-													<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
-														<li style="height: 24px;"><a href="/professor/subject/${subInfo.id}">조회</a>
-														
-													</ul>
+												<td style="text-align: center; padding: 5px;">
+												    <ul class="d-flex justify-content-center sub--plan--view" style="margin: 0; padding: 0;">
+												        <li style="height: 24px;"><a href="/professor/subject/${subject.id}">조회</a></li>														
+												    </ul>
 												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-							</div>
+							</div>							
 							<ul class="pagination">
 								<c:forEach var="index" begin="1" end="${listCount}">
 									<li class="page-item"><c:choose>
@@ -148,9 +148,7 @@ ul	{
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>		
 </body>
 </html>

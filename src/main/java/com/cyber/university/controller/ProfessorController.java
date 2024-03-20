@@ -9,18 +9,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cyber.university.dto.SyllaBusFormDto;
 import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
-import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
+import com.cyber.university.dto.professor.SubjectPeriodForProfessorDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.dto.response.ReadSyllabusDto;
+import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.ProfessorService;
@@ -29,6 +33,7 @@ import com.cyber.university.utils.Define;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * packageName    : com.cyber.university.controller
@@ -161,20 +166,37 @@ public class ProfessorController {
 	  */
 	@GetMapping("/mysub")
 	public String mySubPage(Model model) {
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-
-	    if (!(principal instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
-	    
-	    int professorId = principal.getId();
-	    List<SubInfoDto> subInfoList = professorService.selectMySub(professorId);
-		model.addAttribute("subInfoList", subInfoList);		
-	    
-		return "/professor/mySubPage";
-	}
 		
+	    PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+	    List<SubjectPeriodForProfessorDto> semesterList = professorService.selectSemester(principal.getId());
+	    SubjectPeriodForProfessorDto subjectPeriodForProfessorDto = new SubjectPeriodForProfessorDto();
+	    subjectPeriodForProfessorDto.setSubYear(Define.CURRENT_YEAR);
+	    subjectPeriodForProfessorDto.setSemester(Define.CURRENT_SEMESTER);
+	    subjectPeriodForProfessorDto.setId(principal.getId());
+	    model.addAttribute("semesterList", semesterList);
+	    
+	    List<SubjectForProfessorDto> subjectList = professorService.selectSubjectBySemester(subjectPeriodForProfessorDto);
+	    model.addAttribute("subjectList", subjectList);
+
+	    return "/professor/mySubPage";
+	}
+	
+	@PostMapping("/mysub")
+	public String subjectListProc(Model model, @RequestParam ("period") String period) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		List<SubjectPeriodForProfessorDto> semesterList = professorService.selectSemester(principal.getId());
+		String[] strs = period.split("year");
+		SubjectPeriodForProfessorDto subjectPeriodForProfessorDto = new SubjectPeriodForProfessorDto();
+		subjectPeriodForProfessorDto.setSubYear(Integer.parseInt(strs[0]));
+	    subjectPeriodForProfessorDto.setSemester(Integer.parseInt(strs[1]));
+	    subjectPeriodForProfessorDto.setId(principal.getId());
+	    List<SubjectForProfessorDto> subjectList = professorService.selectSubjectBySemester(subjectPeriodForProfessorDto);
+	    model.addAttribute("semesterList", semesterList);
+	    model.addAttribute("subjectList", subjectList);
+	    
+	    return "/professor/mySubPage";
+	}
 	
 	/**
 	  * @Method Name : updatePwPage
@@ -287,6 +309,13 @@ public class ProfessorController {
 		return "/professor/myEvaluation";
 	}
 	
+	/**
+	  * @Method Name : readEvaluation
+	  * @작성일 : 2024. 3. 18.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 평가 검색 기능
+	  */
 	@PostMapping("/readevaluation")
 	public String readEvaluation(Model model, HttpServletRequest httpServletRequest) {
 		
@@ -299,6 +328,52 @@ public class ProfessorController {
 		model.addAttribute("eval", eval);
 		return "/professor/myEvaluation";
 		
+	}
+	
+	/**
+	  * @Method Name : syllabusPage
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의계획서 조회
+	  */
+	@GetMapping("/syllabus/{subjectId}")
+	public String syllabusPage(Model model, @PathVariable("subjectId") Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
+	
+		 
+		model.addAttribute("syllabus", readSyllabusDto);
+		return "professor/syllabus";
+	}
+	
+	/**
+	  * @Method Name : updateSyllabusPage
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의계획서 수정 페이지 조회
+	  */
+	@GetMapping("/syllabus/update/{subjectId}")
+	public String updateSyllabusPage(Model model, @PathVariable("subjectId") Integer subjectId) {
+		
+		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
+		 
+		model.addAttribute("syllabus", readSyllabusDto);
+		return "professor/updateSyllabus";
+	}
+	
+	/**
+	  * @Method Name : createSyllabusProc
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의계획서 수정 기능
+	  */
+	@PutMapping("/syllabus/update/{subjectId}")
+	public String createSyllabusProc(SyllaBusFormDto dto, @PathVariable("subjectId") Integer subjectId) {
+		professorService.updateSyllabus(dto);
+		
+		return "redirect:/professor/syllabus/" + subjectId;
 	}
 	
 }

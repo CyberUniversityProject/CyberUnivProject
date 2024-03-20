@@ -3,6 +3,7 @@ package com.cyber.university.repository.model;
 import com.cyber.university.utils.NumberUtil;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
   * @FileName : Tuition.java
@@ -13,6 +14,7 @@ import lombok.Data;
   * @프로그램 설명 :등록금
   */
 @Data
+@NoArgsConstructor
 public class Tuition {
 	
 	private Integer studentId; 	// 학생 id

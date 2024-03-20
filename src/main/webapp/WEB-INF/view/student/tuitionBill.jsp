@@ -139,8 +139,9 @@ body {
 					</tr>
 					<tr>
 						<td>학기</td>
-						<td colspan="3">${tuitionBill.tuiYear}년도
+						<td colspan="3" id="tuiInfo">${tuitionBill.tuiYear}년도
 							${tuitionBill.semester }학기</td>
+							
 					</tr>
 					<tr>
 						<td>학과</td>
@@ -152,7 +153,7 @@ body {
 						<td>학번</td>
 						<td>${student.studentId }</td>
 						<td>이름</td>
-						<td>${student.name }</td>
+						<td id="buyer--name">${student.name }</td>
 					</tr>
 				</table>
 			</div>

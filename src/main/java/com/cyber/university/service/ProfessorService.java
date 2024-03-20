@@ -30,7 +30,8 @@ import com.cyber.university.repository.model.PageReq;
 import com.cyber.university.repository.model.PageRes;
 import com.cyber.university.repository.model.Professor;
 import com.cyber.university.repository.model.Student;
-import com.cyber.university.repository.model.Subject;
+
+import jakarta.servlet.http.HttpSession;
 
 /**
  * @FileName : ProfessorService.java
@@ -348,4 +349,5 @@ public class ProfessorService {
 			throw new CustomRestfullException("제출 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }

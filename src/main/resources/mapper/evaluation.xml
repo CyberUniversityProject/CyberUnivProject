@@ -9,7 +9,7 @@
 		SELECT 
 			sj.sub_year AS subYear,
 		    sj.semester,
-		    sj.id AS subjecgtId,
+		    sj.id AS subjectId,
 		    sj.name AS subjectName,
 		    st.id AS studentId,
 		    st.grade,
@@ -28,6 +28,19 @@
 	<select id="selectQuestion" resultType="com.cyber.university.repository.model.Question">
 		select * from cu_question where id= 1;
 	</select>
+	<insert id="insertEvaluation">
+		INSERT INTO cu_evaluation 
+			(student_id, subject_id, 
+		    answer1, answer2, answer3, answer4, answer5, answer6, answer7,
+		    improvements)
+		VALUES
+			(#{studentId}, #{subjectId}, #{answer1}, #{answer2}, #{answer3}, #{answer4}, #{answer5}, #{answer6}, #{answer7}, #{improvements})
+	</insert>
 
+	<select id="selectEvaluationByStudentIdAndSubjectId" resultType="Integer">
+		SELECT count(*) FROM cu_evaluation
+		WHERE student_id = #{studentId}
+		AND subject_id = #{subjectId}
+	</select>
 
 </mapper>

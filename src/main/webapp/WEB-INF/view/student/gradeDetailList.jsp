@@ -99,6 +99,7 @@ link:focus, .nav-link:hover {
 
 													<c:forEach var="thisSemesterGrade"
 														items="${thisSemesterGradeList}">
+																<c:if test="${not empty thisSemesterGrade.grade}">
 														<tr>
 															<td>${thisSemesterGrade.subYear}</td>
 															<td>${thisSemesterGrade.semester}</td>
@@ -114,6 +115,7 @@ link:focus, .nav-link:hover {
 															</td>
 
 														</tr>
+														</c:if>
 													</c:forEach>
 												</tbody>
 											</table>

@@ -38,6 +38,8 @@ public class Define {
 
     public final static  String ENROLLMENT_ERROR_MESSAGE = "수강 신청 대상이 아닙니다.";
     
+    public final static String ALREADY_EVALUATION = "이미 등록하신 강의평가입니다.";
+    
     // Integer로 했더니 ==로 비교하려면 .intValue()를 붙여줘야해서 int로 변경함
     public final static int CURRENT_YEAR = 2024;
 

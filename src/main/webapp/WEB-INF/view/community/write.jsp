@@ -72,7 +72,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-5 mb-5">
             <form action="/community/create" method="post">
                 <div class="form-group">
                     <label for="title">제목</label>
@@ -107,7 +107,7 @@
     $(document).ready(function() {
       $('#content').summernote({
         tabsize: 2,
-        height: 200,
+        height: 300,
         toolbar: [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],

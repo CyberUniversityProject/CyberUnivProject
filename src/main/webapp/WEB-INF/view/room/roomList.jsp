@@ -26,27 +26,7 @@
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
-			<aside class="sidebar col-md-2 mt-5">
-				<div class="card">
-					<div class="card-header">메뉴</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">교수명단 조회</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">학생 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">교수 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">직원 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">등록금 고지서 발송</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">휴학 처리</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">수강 신청 기간 설정</a></li>
-					</ul>
-				</div>
-			</aside>
+			<%@ include file="/WEB-INF/view/layout/sidebarStaff.jsp"%>
 
 			<div class="col-md-10" style="text-align: center;">
 				<h1 class="mt-5 mb-4"></h1>
@@ -72,10 +52,9 @@
 						</tbody>
 					</table>
 				<!-- main 끝 -->                                            
-				<!--pagination start -->
-	<div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: center;">
 	<c:if test="${totalPages > 1}">
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation" style="text-align: center;">
         <ul class="pagination">
             <c:if test="${currentPage > 1}">
                 <li class="page-item">
@@ -92,28 +71,6 @@
                 </li>
             </c:if>
 
-<<<<<<< HEAD
-					<!-- 페이지네이션 -->
-<c:if test="${totalPages > 1}">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <c:if test="${currentPage > 1}">
-                <li class="page-item">
-                    <a class="page-link" href="?page=1&size=${size}" aria-label="처음">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">처음</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page=${currentPage - 1}&size=${size}" aria-label="이전">
-                        <span aria-hidden="true">&lt;</span>
-                        <span class="sr-only">이전</span>
-                    </a>
-                </li>
-            </c:if>
-
-=======
->>>>>>> dev
             <c:forEach var="i" begin="1" end="${totalPages}">
                 <c:choose>
                     <c:when test="${currentPage eq i}">
@@ -124,7 +81,6 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
-<<<<<<< HEAD
 
             <c:if test="${currentPage < totalPages}">
                 <li class="page-item">
@@ -143,27 +99,6 @@
         </ul>
     </nav>
 </c:if>
-=======
->>>>>>> dev
-
-            <c:if test="${currentPage < totalPages}">
-                <li class="page-item">
-                    <a class="page-link" href="?page=${currentPage + 1}&size=${size}" aria-label="다음">
-                        <span aria-hidden="true">&gt;</span>
-                        <span class="sr-only">다음</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page=${totalPages}&size=${size}" aria-label="마지막">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">마지막</span>
-                    </a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
-</c:if>
-</div>
 					
 					<!--pagination end -->
 				</div>

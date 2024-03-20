@@ -48,6 +48,21 @@ pageEncoding="UTF-8"%>
           <i class="bi bi-calendar-plus-fill mr-2"></i> 수강신청 기간 설정
         </a>
       </li>
+      <li class="list-group-item p-3">
+        <a href="/college/collegeRegister" class="text-dark d-flex align-items-center">
+          <i class="bi bi-calendar-plus-fill mr-2"></i> 단과대학 등록
+        </a>
+      </li>
+      <li class="list-group-item p-3">
+        <a href="/department/departmentRegister" class="text-dark d-flex align-items-center">
+          <i class="bi bi-calendar-plus-fill mr-2"></i> 학과 등록
+        </a>
+      </li>
+      <li class="list-group-item p-3">
+        <a href="/room/roomRegister" class="text-dark d-flex align-items-center">
+          <i class="bi bi-calendar-plus-fill mr-2"></i> 강의실 등록
+        </a>
+      </li>
     </ul>
   </div>
 </aside>

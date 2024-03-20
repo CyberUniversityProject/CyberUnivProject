@@ -10,6 +10,7 @@ import com.cyber.university.repository.interfaces.CommentRepository;
 import com.cyber.university.repository.interfaces.CommunityRepository;
 import com.cyber.university.repository.model.Comment;
 import com.cyber.university.repository.model.Community;
+import com.cyber.university.repository.model.Room;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,6 +54,24 @@ public class CommunityService {
 	        
 	        // 게시글 삭제
 	        communityRepository.deleteCommunity(communityId);
+	    }
+	 
+	 
+	 
+	 // 페이징 처리
+	 public List<Community> findAllPost(int page, int size) {
+	        // 페이징 처리를 위해 offset 계산
+	        int offset = (page - 1) * size;
+	        // 페이징된 강의실 목록 조회
+	        return communityRepository.findAllwithPaging(offset, size);
+	    }
+
+	    public int getTotalPages(int size) {
+	        // 전체 데이터 개수 가져오기
+	        int totalRecords = communityRepository.getAllCount();
+	        // 전체 페이지 수 계산
+	        int totalPages = (int) Math.ceil((double) totalRecords / size);
+	        return totalPages;
 	    }
 
 }

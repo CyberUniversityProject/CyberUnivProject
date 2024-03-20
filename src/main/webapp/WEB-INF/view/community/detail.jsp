@@ -21,8 +21,6 @@
 	color: #333;
 }
 
-
-
 .list-group-item {
 	border: none;
 }
@@ -105,13 +103,16 @@
 		<div class="row ">
 			<div class="col-lg-12">
 				<h2>${community.title}</h2>
-				<p>
-					<strong>작성자:</strong> ${community.userName}
-					<br>
-					<strong>작성일:</strong> ${community.appDateFormat()}
+				<hr>
+				<div class="border border-1 rounded-2 p-2" style="width: 300px;">
+					<strong>작성자:</strong> ${community.userName} <br> <strong>작성 시간 :</strong>
+					${community.appDateFormat()}<br>
+					<c:if test="${community.updateDate != null}">
+											<strong>수정 시간 :</strong> ${community.appUpdateFormat()}
+											</c:if>
 
 
-				</p>
+				</div>
 				<hr>
 				<div style="height: 300px;">
 					<p>${community.content}</p>
@@ -151,7 +152,11 @@
 					<input type="hidden" id="userId" name="userId"
 						value="${principal.name}"> <input type="hidden"
 						id="communityId" name="communityId" value="${community.id}">
+					<input type="hidden" id="role" name="role"
+						value="${principal.userRole}">
+
 					<button type="submit" class="btn btn-primary">댓글 등록</button>
+
 				</form>
 
 				<hr>
@@ -162,15 +167,21 @@
 							<li class="list-group-item">
 								<div class="row">
 									<div class="col-md-9">
-										<div class="comment-info">
-											<strong>작성자:</strong> ${comment.userId}<br> <strong>작성
-												시간:</strong> ${comment.appDateFormat()}
+										<div class="comment-info border border-1 rounded-2 p-2" style="width: 250px;">
+											<strong>작성자 :</strong> ${comment.role == 'professor' ? '🎓' : (comment.role == 'staff' ? '🚨' : '')}${comment.userId}
+											${comment.role == 'professor' ? '(교수)' : (comment.role == 'staff' ? '(관리자)' : '')}
+											<br> <strong>작성 시간 :</strong> ${comment.appDateFormat()}<br>
+											<c:if test="${comment.updateDate != null}">
+											<strong>수정 시간 :</strong> ${comment.appUpdateFormat()}
+											</c:if>
+
 										</div>
-										<div class="comment-content">${comment.content}</div>
+
+										<div class="comment-content p-2"><h6>${comment.content}</h6></div>
 										<!-- 수정 폼 -->
 										<div class="comment-edit-form" style="display: none;">
 											<form id="editCommentForm_${comment.id}" method="post">
-											<input type="hidden" name="_method" value="put">
+												<input type="hidden" name="_method" value="put">
 												<textarea class="form-control" name="editedContent">${comment.content}</textarea>
 												<button type="button"
 													class="btn btn-success btn-sm mt-2 save-edit-comment-btn"
@@ -230,6 +241,7 @@
 					$("#commentForm").submit(function(event) {
 						event.preventDefault(); // 폼의 기본 동작을 막음
 						// AJAX를 사용하여 비동기적으로 댓글을 등록합니다.
+
 						$.ajax({
 							type : "POST",
 							url : "/api/comment/create",
@@ -242,33 +254,30 @@
 							}
 						});
 					});
-					
-					
+
 					// 삭제 버튼 클릭 시 confirm 다이얼로그 표시
 					$(".btn--delete").click(function(event) {
-					    event.preventDefault(); // 버튼의 기본 동작을 막음
-					    var deleteConfirmed = confirm("정말로 삭제하시겠습니까?");
-					    if (deleteConfirmed) {
-					        // 확인 버튼 클릭 시 폼 제출
-					        var form = $(this).closest("form");
-					        $.ajax({
-					            type: "DELETE",
-					            url: form.attr("action"), // form의 action 속성 값 (삭제 요청이 전송될 URL)
-					            success: function(response) {
-					                window.location.href = "/community/list"; // 리스트 페이지로 이동
-					            },
-					            error: function(xhr, status, error) {
-					                console.error("Error:", error);
-					            }
-					        });
-					    } else {
-					        // 취소 버튼 클릭 시 아무 동작도 하지 않음
-					        return false;
-					    }
+						event.preventDefault(); // 버튼의 기본 동작을 막음
+						var deleteConfirmed = confirm("정말로 삭제하시겠습니까?");
+						if (deleteConfirmed) {
+							// 확인 버튼 클릭 시 폼 제출
+							var form = $(this).closest("form");
+							$.ajax({
+								type : "DELETE",
+								url : form.attr("action"), // form의 action 속성 값 (삭제 요청이 전송될 URL)
+								success : function(response) {
+									window.location.href = "/community/list"; // 리스트 페이지로 이동
+								},
+								error : function(xhr, status, error) {
+									console.error("Error:", error);
+								}
+							});
+						} else {
+							// 취소 버튼 클릭 시 아무 동작도 하지 않음
+							return false;
+						}
 					});
 
-
-					
 					// 삭제 버튼 클릭 시 confirm 다이얼로그 표시
 					$(".delete-comment-btn").click(function(event) {
 						event.preventDefault(); // 폼의 기본 동작을 막음
@@ -292,38 +301,49 @@
 						}
 					});
 					// 수정 버튼 클릭시 수정 폼 보이도록 설정
-					$('.edit-comment-btn').click(function() {
-					    $(this).closest('.list-group-item').find('.comment-content').hide();
-					    $(this).closest('.list-group-item').find('.comment-edit-form').show();
-					});
+					$('.edit-comment-btn').click(
+							function() {
+								$(this).closest('.list-group-item').find(
+										'.comment-content').hide();
+								$(this).closest('.list-group-item').find(
+										'.comment-edit-form').show();
+							});
 
 					// 저장 버튼 클릭시
-					$('.save-edit-comment-btn').click(function() {
-					    var commentId = $(this).data("comment-id");
-					    var editedContent = $(this).closest('.comment-edit-form').find('textarea').val();
-					    
-					    // 데이터 확인
-					    console.log("Comment ID:", commentId);
-					    console.log("Edited Content:", editedContent);
-					    
-					    var data = JSON.stringify({ content: editedContent });
-					    console.log("Data:", data);
-					    
-					    // AJAX를 사용하여 서버에 수정된 내용을 전송
-					    $.ajax({
-					        type: "PUT",
-					        url: "/api/comment/update/" + commentId, // 수정 요청이 전송될 URL
-					        contentType: "application/json",
-					        data: JSON.stringify({ id: commentId, content: editedContent }), // 수정된 내용을 JSON 형식으로 전송
-					        success: function(response) {
-					            console.log(response); // 서버 응답 확인
-					            window.location.reload();
-					        },
-					        error: function(xhr, status, error) {
-					            console.error("Error:", error);
-					        }
-					    });
-					});
+					$('.save-edit-comment-btn').click(
+							function() {
+								var commentId = $(this).data("comment-id");
+								var editedContent = $(this).closest(
+										'.comment-edit-form').find('textarea')
+										.val();
+
+								// 데이터 확인
+								console.log("Comment ID:", commentId);
+								console.log("Edited Content:", editedContent);
+
+								var data = JSON.stringify({
+									content : editedContent
+								});
+								console.log("Data:", data);
+
+								// AJAX를 사용하여 서버에 수정된 내용을 전송
+								$.ajax({
+									type : "PUT",
+									url : "/api/comment/update/" + commentId, // 수정 요청이 전송될 URL
+									contentType : "application/json",
+									data : JSON.stringify({
+										id : commentId,
+										content : editedContent
+									}), // 수정된 내용을 JSON 형식으로 전송
+									success : function(response) {
+										console.log(response); // 서버 응답 확인
+										window.location.reload();
+									},
+									error : function(xhr, status, error) {
+										console.error("Error:", error);
+									}
+								});
+							});
 
 				});
 	</script>

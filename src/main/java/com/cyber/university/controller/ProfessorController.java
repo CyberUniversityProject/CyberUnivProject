@@ -390,7 +390,7 @@ public class ProfessorController {
 	public String updateSyllabusPage(Model model, @PathVariable("subjectId") Integer subjectId) {
 		
 		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
-		 
+		System.out.println("readSyll"); 
 		model.addAttribute("syllabus", readSyllabusDto);
 		return "professor/updateSyllabus";
 	}

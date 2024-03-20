@@ -27,11 +27,12 @@ public class CommentRestFulController {
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createComment(@RequestParam(name = "commentContent") String commentContent,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "communityId") int communityId) {
+			@RequestParam(name = "userId") String userId, @RequestParam(name = "communityId") int communityId, @RequestParam(name ="role") String role) {
 		Comment comment = new Comment();
 		comment.setContent(commentContent);
 		comment.setUserId(userId);
 		comment.setCommunityId(communityId);
+		comment.setRole(role);
 		commentService.insertComment(comment);
 		// 처리 결과를 반환합니다.
 		return ResponseEntity.ok("success"); // 예시로 성공적으로 처리되었음을 나타내는 문자열을 반환합니다.

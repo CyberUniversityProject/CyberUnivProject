@@ -114,7 +114,7 @@
             </div>
             <ul class="pagination">
                 <c:forEach var="index" begin="1" end="${listCount}">
-                    <li class="page-item">
+                    <li class="page-item ${index == page ? 'active' : ''}">
                         <c:choose>
                             <c:when test="${deptId != null && index != page}">
                                 <a class="page-link" href="/user/professorList/${index}?deptId=${deptId}">${index}</a>

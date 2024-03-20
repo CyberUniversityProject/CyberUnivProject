@@ -6,8 +6,8 @@
 
 	<!-- 댓글 삽입 -->
 	<insert id="insertComment">
-		INSERT INTO cu_comment (content, createDate, community_id, user_id)
-		VALUES (#{content}, now(), #{communityId}, #{userId})
+		INSERT INTO cu_comment (content, createDate, community_id, user_id, role)
+		VALUES (#{content}, now(), #{communityId}, #{userId}, #{role})
 	</insert>
 
 	<!-- 특정 게시글에 대한 모든 댓글 조회 -->
@@ -25,7 +25,7 @@
 	<!-- 댓글 업데이트 -->
 	<update id="updateComment">
 		UPDATE cu_comment
-		SET content = #{content}
+		SET content = #{content}, updateDate = now()
 		WHERE id = #{id}
 	</update>
 

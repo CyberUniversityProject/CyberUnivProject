@@ -22,12 +22,19 @@ private Integer id;
     
     private Timestamp createDate;
     
+    private Timestamp updateDate;
+    
     private List<Comment> comments; // 게시글에 대한 댓글 리스트
     
     
     
     public String appDateFormat() {
 		return TimestampUtil.dateTimeToString(createDate);
+	}
+    
+    
+    public String appUpdateFormat() {
+		return TimestampUtil.dateTimeToString(updateDate);
 	}
 
 }

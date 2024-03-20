@@ -30,7 +30,9 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
             <h1>
                 오늘을 배우고,<br>내일을 선도합니다.
             </h1>
-            <h2>Cyber University 학사관리시스템에 오신것을 환영합니다.</h2>
+            <br>
+            
+            <h2>그린 사이버대학교에 오신것을 환영합니다.</h2>
             <!-- 로그인 버튼 코드 -->
             <c:choose>
                 <c:when test="${principal == null}">

@@ -40,7 +40,6 @@
 	cursor: pointer;
 }
 
-
 .modal-body p {
 	word-break: break-all;
 }
@@ -74,7 +73,7 @@
 								<!-- 강의평가 과목 조회 -->
 								<form action="/professor/readevaluation" method="post">
 									<div>
-										<select name="subjectId" id="subjectId">
+										<select name="subjectId">
 											<c:forEach var="dto" items="${subjectName}">
 												<option value="${dto.name}">${dto.name}</option>
 											</c:forEach>
@@ -113,6 +112,51 @@
 						</c:otherwise>
 					</c:choose>
 				</main>
+
+				<div style="display: flex; justify-content: center;">
+					<c:if test="${totalPages > 1}">
+						<nav aria-label="Page navigation" style="text-align: center;">
+							<ul class="pagination">
+								<c:if test="${currentPage > 1}">
+									<li class="page-item"><a class="page-link"
+										href="?page=1&size=${size}" aria-label="처음"> <span
+											aria-hidden="true">&laquo;</span> <span class="sr-only">처음</span>
+									</a></li>
+									<li class="page-item"><a class="page-link"
+										href="?page=${currentPage - 1}&size=${size}" aria-label="이전">
+											<span aria-hidden="true">&lt;</span> <span class="sr-only">이전</span>
+									</a></li>
+								</c:if>
+
+								<c:forEach var="i" begin="1" end="${totalPages}">
+									<c:choose>
+										<c:when test="${currentPage eq i}">
+											<li class="page-item active"><span class="page-link">${i}</span></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="?page=${i}&size=${size}">${i}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+
+								<c:if test="${currentPage < totalPages}">
+									<li class="page-item"><a class="page-link"
+										href="?page=${currentPage + 1}&size=${size}" aria-label="다음">
+											<span aria-hidden="true">&gt;</span> <span class="sr-only">다음</span>
+									</a></li>
+									<li class="page-item"><a class="page-link"
+										href="?page=${totalPages}&size=${size}" aria-label="마지막">
+											<span aria-hidden="true">&raquo;</span> <span class="sr-only">마지막</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</c:if>
+				</div>
+
+
+
 				<!-- 모달 창 -->
 				<div class="modal fade" id="improvementsModal" tabindex="-1"
 					role="dialog" aria-labelledby="improvementsModalLabel"

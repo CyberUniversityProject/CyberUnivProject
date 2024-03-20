@@ -157,6 +157,7 @@
 	    SELECT sub_year, semester FROM cu_subject
 		WHERE professor_id = #{id}
 		GROUP BY sub_year, semester 
+		ORDER BY sub_year
 	</select>
 	
 		
@@ -228,16 +229,24 @@
 		INNER JOIN cu_subject AS s
 		ON e.subject_id = s.id
 		WHERE s.professor_id = #{professorId} AND s.name= #{name}
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
-	<!-- 강의평가 조회 -->
+	<!-- 24.03.18 강의평가 조회 -->
 	<select id="selectMyEvaluationDtoByProfessorId" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
 		SELECT s.name, s.professor_id, e.*  
 		FROM cu_evaluation AS e
 		INNER JOIN cu_subject AS s
 		ON e.subject_id = s.id
-		WHERE s.professor_id = #{professorId};
+		WHERE s.professor_id = #{professorId}
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
+	
+	<!-- 24.03.19 강의 평가 총 개수 -->
+	<select id="getMyEvaluationTotalCount" resultType="int">
+		select count(*) from cu_evaluation
+	</select>
+	
 	
 	<!-- 24.03.19 강의계획서 조회 -->
 	<select id="selectSyllabusBySubjectId" resultType="com.cyber.university.dto.response.ReadSyllabusDto">

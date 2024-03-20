@@ -26,6 +26,8 @@ import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.ApplySubject;
+import com.cyber.university.repository.model.PageReq;
+import com.cyber.university.repository.model.PageRes;
 import com.cyber.university.repository.model.Professor;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.repository.model.Subject;
@@ -261,10 +263,18 @@ public class ProfessorService {
 	  * @변경이력 : 
 	  * @Method 설명 : 과목별 강의 평가 조회
 	  */
-	public List<MyEvaluationDto> readEvaluationByProfessorIdAndName(Integer professorId, String name) {
-		List<MyEvaluationDto> evaluation = professorRepository.selectEvaluationDtoByprofessorIdAndName(professorId, name);
+	public PageRes<MyEvaluationDto> readEvaluationByProfessorIdAndName(PageReq pageReq, Integer professorId, String name) {
+		int page = pageReq.getPage();
+		int size = pageReq.getSize();
+		int offset = (page - 1) * size;
 		
-		return evaluation;
+		long totalElements = professorRepository.getMyEvaluationTotalCount();
+		
+		List<MyEvaluationDto> evaluation = professorRepository.selectEvaluationDtoByprofessorIdAndName(professorId, name, offset, size);
+		
+		PageRes<MyEvaluationDto> pageRes = new PageRes<>(evaluation, page, totalElements, size);
+		
+		return pageRes;
 	}
 	
 	/**
@@ -274,11 +284,31 @@ public class ProfessorService {
 	  * @변경이력 : 
 	  * @Method 설명 : 강의평가 조회
 	  */
-	public List<MyEvaluationDto> readEvaluationByProfessorId(Integer professorId) {
-		List<MyEvaluationDto> evaluation = professorRepository.selectMyEvaluationDtoByProfessorId(professorId);
+	public PageRes<MyEvaluationDto> readEvaluationByProfessorId(PageReq pageReq, Integer professorId) {
+		int page = pageReq.getPage();
+		int size = pageReq.getSize();
+		int offset = (page - 1) * size;
 		
-		return evaluation;
+		long totalElements = professorRepository.getMyEvaluationTotalCount();
+				
+		List<MyEvaluationDto> evaluation = professorRepository.selectMyEvaluationDtoByProfessorId(professorId, offset, size);
+		
+		PageRes<MyEvaluationDto> pageRes = new PageRes<>(evaluation, page, totalElements, size);
+		
+		return pageRes;
 	}
+	
+	/**
+	  * @Method Name : getTotalCount
+	  * @작성일 : 2024. 3. 20.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 평가 개수 조회
+	  */
+	public int getTotalCount() {
+		return professorRepository.getMyEvaluationTotalCount();
+	}
+	
 	
 	/**
 	  * @Method Name : selectSubYearAndSemester

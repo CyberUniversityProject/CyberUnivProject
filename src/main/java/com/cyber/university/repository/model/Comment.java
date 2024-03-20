@@ -19,6 +19,7 @@ public class Comment {
 	    private String content;
 	    
 	    private Timestamp createDate;
+	    private Timestamp updateDate;
 	    
 	    private String userId;
 	    
@@ -29,6 +30,10 @@ public class Comment {
 	    
 	    public String appDateFormat() {
 			return TimestampUtil.dateTimeToString(createDate);
+		}
+	    
+	    public String appUpdateFormat() {
+			return TimestampUtil.dateTimeToString(updateDate);
 		}
 
 }

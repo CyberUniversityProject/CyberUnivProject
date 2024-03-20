@@ -104,8 +104,11 @@
 			<div class="col-lg-12">
 				<h2>${community.title}</h2>
 				<p>
-					<strong>작성자:</strong> ${community.userName} <br> <strong>작성일:</strong>
-					${community.appDateFormat()}
+					<strong>작성자:</strong> ${community.userName} <br> <strong>작성 시간 :</strong>
+					${community.appDateFormat()}<br>
+					<c:if test="${community.updateDate != null}">
+											<strong>수정 시간 :</strong> ${community.appUpdateFormat()}
+											</c:if>
 
 
 				</p>
@@ -164,9 +167,13 @@
 								<div class="row">
 									<div class="col-md-9">
 										<div class="comment-info border border-1 rounded-2 p-2" style="width: 250px;">
-											<strong>작성자:</strong> ${comment.role == 'professor' ? '🎓' : (comment.role == 'staff' ? '🚨' : '')}${comment.userId}
+											<strong>작성자 :</strong> ${comment.role == 'professor' ? '🎓' : (comment.role == 'staff' ? '🚨' : '')}${comment.userId}
 											${comment.role == 'professor' ? '(교수)' : (comment.role == 'staff' ? '(관리자)' : '')}
-											<br> <strong>작성 시간:</strong> ${comment.appDateFormat()}
+											<br> <strong>작성 시간 :</strong> ${comment.appDateFormat()}<br>
+											<c:if test="${comment.updateDate != null}">
+											<strong>수정 시간 :</strong> ${comment.appUpdateFormat()}
+											</c:if>
+
 										</div>
 
 										<div class="comment-content p-2"><h6>${comment.content}</h6></div>

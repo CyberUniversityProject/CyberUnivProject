@@ -29,7 +29,11 @@
 
 			<div class="col-md-10">
 				<!-- main 넣는 시작 부분 -->
-		<!-- register form start-->			
+		<!-- register form start-->
+        <form action="/report/reportList">
+		<button type="submit" class="btn btn-outline-warning">신고하기</button>
+	    </form>
+
 	 <section id="pricing" class="pricing">
 	 <form action="/room/roomRegister" method="post">
       <div class="container" data-aos="fade-up">

@@ -38,10 +38,11 @@ public interface ReportRepository {
 	public int findByReporterId(Integer reportedUserId);
 	
 	// 특정 사용자 대한 신고당한 목록 조회
-	public int findByReportedUserId(Integer reportedCommunutyId);
+	public int findByReportedUserId(Integer reportedCommunityId);
 	
 	
-	
+	// 신고건 삭제
+	public int deleteByReportId(Integer reportId);
 	
 	
 	

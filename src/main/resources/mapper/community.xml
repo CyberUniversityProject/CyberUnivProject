@@ -44,7 +44,7 @@
 	<select id="findAllwithPaging"
 		resultType="com.cyber.university.repository.model.Community">
 		SELECT * FROM cu_community
-		ORDER BY id
+		ORDER BY id desc
 		LIMIT #{offset}, #{limit}
 	</select>
 

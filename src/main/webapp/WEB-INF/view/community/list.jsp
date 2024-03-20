@@ -108,13 +108,13 @@
                 <c:if test="${currentPage > 1}">
                     <li class="page-item">
                         <a class="page-link" href="?page=1&size=${size}" aria-label="처음">
-                            <span aria-hidden="true">&laquo;</span>
+                            <span aria-hidden="true">처음&laquo;</span>
                             <span class="sr-only">처음</span>
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link" href="?page=${currentPage - 1}&size=${size}" aria-label="이전">
-                            <span aria-hidden="true">&lt;</span>
+                            <span aria-hidden="true">이전&lt;</span>
                             <span class="sr-only">이전</span>
                         </a>
                     </li>
@@ -178,13 +178,13 @@
                 <c:if test="${currentPage < totalPages}">
                     <li class="page-item">
                         <a class="page-link" href="?page=${currentPage + 1}&size=${size}" aria-label="다음">
-                            <span aria-hidden="true">&gt;</span>
+                            <span aria-hidden="true">다음&gt;</span>
                             <span class="sr-only">다음</span>
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link" href="?page=${totalPages}&size=${size}" aria-label="마지막">
-                            <span aria-hidden="true">&raquo;</span>
+                            <span aria-hidden="true">마지막&raquo;</span>
                             <span class="sr-only">마지막</span>
                         </a>
                     </li>

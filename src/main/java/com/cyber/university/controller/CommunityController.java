@@ -40,6 +40,8 @@ public class CommunityController {
 	// 전체게시글 보기
 	 @GetMapping("/list")
 	    public String list(Model model) {
+		 
+		 
 	        List<Community> communityList = communityService.getAllCommunities();
 	        model.addAttribute("communityList", communityList);
 	        return "/community/list";

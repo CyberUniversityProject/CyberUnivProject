@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.cyber.university.repository.interfaces.CommunityImageRepository">
+
+	<!-- 이미지 추가 -->
+	<insert id="uploadImage" parameterType="java.util.Map">
+		INSERT INTO
+		cu_community_img (img) VALUES (#{imageData})
+	</insert>
+
+	<!-- 이미지 조회 -->
+	<select id="getCommunityImageById" parameterType="int"
+		resultType="com.cyber.university.repository.model.CommunityImage">
+		SELECT * FROM cu_community_img WHERE id = #{id}
+	</select>
+
+	<!-- 모든 이미지 조회 -->
+	<select id="getAllCommunityImages"
+		resultType="com.cyber.university.repository.model.CommunityImage">
+		SELECT * FROM cu_community_img
+	</select>
+
+	<!-- 이미지 삭제 -->
+	<delete id="deleteCommunityImageById" parameterType="int">
+		DELETE FROM cu_community_img WHERE id = #{id}
+	</delete>
+
+</mapper>

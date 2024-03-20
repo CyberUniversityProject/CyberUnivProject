@@ -128,6 +128,7 @@
 								class="btn--update me-3">게시글 수정</button></a>
 						<form id="deleteForm"
 							action="/api/Community/delete/${community.id}" method="post">
+							<input type="hidden" name="_method" value="DELETE">
 							<button type="submit" class="btn--delete ">게시글 삭제</button>
 						</form>
 
@@ -241,6 +242,31 @@
 							}
 						});
 					});
+					
+					
+					// 삭제 버튼 클릭 시 confirm 다이얼로그 표시
+					$(".btn--delete").click(function(event) {
+					    event.preventDefault(); // 버튼의 기본 동작을 막음
+					    var deleteConfirmed = confirm("정말로 삭제하시겠습니까?");
+					    if (deleteConfirmed) {
+					        // 확인 버튼 클릭 시 폼 제출
+					        var form = $(this).closest("form");
+					        $.ajax({
+					            type: "DELETE",
+					            url: form.attr("action"), // form의 action 속성 값 (삭제 요청이 전송될 URL)
+					            success: function(response) {
+					                window.location.href = "/community/list"; // 리스트 페이지로 이동
+					            },
+					            error: function(xhr, status, error) {
+					                console.error("Error:", error);
+					            }
+					        });
+					    } else {
+					        // 취소 버튼 클릭 시 아무 동작도 하지 않음
+					        return false;
+					    }
+					});
+
 
 					
 					// 삭제 버튼 클릭 시 confirm 다이얼로그 표시

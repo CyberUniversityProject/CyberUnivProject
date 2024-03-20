@@ -103,7 +103,8 @@
 		<div class="row ">
 			<div class="col-lg-12">
 				<h2>${community.title}</h2>
-				<p>
+				<hr>
+				<div class="border border-1 rounded-2 p-2" style="width: 300px;">
 					<strong>작성자:</strong> ${community.userName} <br> <strong>작성 시간 :</strong>
 					${community.appDateFormat()}<br>
 					<c:if test="${community.updateDate != null}">
@@ -111,7 +112,7 @@
 											</c:if>
 
 
-				</p>
+				</div>
 				<hr>
 				<div style="height: 300px;">
 					<p>${community.content}</p>

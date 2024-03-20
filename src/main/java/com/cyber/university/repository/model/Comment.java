@@ -23,6 +23,9 @@ public class Comment {
 	    private String userId;
 	    
 	    
+	    private String role;
+	    
+	    
 	    
 	    public String appDateFormat() {
 			return TimestampUtil.dateTimeToString(createDate);

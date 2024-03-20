@@ -30,11 +30,15 @@ public class CommentController {
 	@PostMapping("/create")
 	public void createComment(@RequestParam(name ="commentContent") String commentContent,
 	                          @RequestParam(name ="userId") String userId,
-	                          @RequestParam(name ="communityId") int communityId) {
+	                          @RequestParam(name ="communityId") int communityId,
+	                          @RequestParam(name ="role") String role) {
 	    Comment comment = new Comment();
 	    comment.setContent(commentContent);
 	    comment.setUserId(userId); // 작성자의 ID 설정
 	    comment.setCommunityId(communityId); // 게시글의 ID 설정
+	    comment.setRole(role);
+	    System.out.println("role?? " + role);
+	    System.out.println("commentContent?? " + commentContent);
 	    commentService.insertComment(comment);
 	}
 

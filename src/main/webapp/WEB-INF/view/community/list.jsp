@@ -75,7 +75,7 @@
           <table class="table table-bordered community-list-table">
             <thead class="thead-dark">
               <tr>
-                <th style="width: 5%;">ID</th>
+                <th style="width: 5%;">No</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>작성일</th>

@@ -70,7 +70,7 @@
     </div>
     <!-- 상단 제목부분 끝 -->
 
-<div class="container">
+<div class="container mt-5 mb-5  border border-1 rounded-2">
     <div class="row">
         <div class="col-lg-12 mt-5 mb-5">
             <form action="/community/create" method="post">

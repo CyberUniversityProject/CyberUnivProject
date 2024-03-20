@@ -21,9 +21,7 @@
 	color: #333;
 }
 
-.container {
-	margin-top: 20px;
-}
+
 
 .list-group-item {
 	border: none;
@@ -103,12 +101,14 @@
 		</div>
 	</div>
 	<!-- 상단 제목부분 끝 -->
-	<div class="container">
-		<div class="row">
+	<div class="container mt-5 mb-5  border border-1 rounded-2 pt-3 pb-5">
+		<div class="row ">
 			<div class="col-lg-12">
 				<h2>${community.title}</h2>
 				<p>
 					<strong>작성자:</strong> ${community.userName}
+					<br>
+					<strong>작성일:</strong> ${community.appDateFormat()}
 
 
 				</p>

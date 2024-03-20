@@ -10,16 +10,19 @@ import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
+import com.cyber.university.dto.SyllaBusFormDto;
 import com.cyber.university.dto.UserUpdateDto;
 import com.cyber.university.dto.professor.ApplySubjectDto;
 import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
-import com.cyber.university.dto.professor.SubInfoDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
+import com.cyber.university.dto.professor.SubjectPeriodForProfessorDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
+import com.cyber.university.dto.response.ReadSyllabusDto;
+import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
@@ -200,18 +203,18 @@ public interface ProfessorRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 교수 본인 강의 조회
 	  */
-	public List<SubInfoDto> selectMySub(Integer professorId);
-	
-	public int getMySubjectTotalCount();
+	public List<SubjectPeriodForProfessorDto> selectSemester(Integer id);
+
 	
 	/**
-	  * @Method Name : selectAllSub
-	  * @작성일 : 2024. 3. 14.
+	  * @Method Name : selectSubYearAndSemester
+	  * @작성일 : 2024. 3. 19.
 	  * @작성자 : 장명근
 	  * @변경이력 : 
-	  * @Method 설명 : 개설 된 강의 모두 조회
+	  * @Method 설명 : 교수 본인 강의 개강 년도와 학기 조회
 	  */
-	public List<SubInfoDto> selectAllSub(Integer professorId);
+	public List<SubjectForProfessorDto> selectSubjectBySemester(SubjectPeriodForProfessorDto subjectPeriodForProfessorDto);
+		
 	
 	/**
 	  * @Method Name : selectMySubDetailList
@@ -286,4 +289,22 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 강의평가 조회
 	  */
 	public List<MyEvaluationDto> selectMyEvaluationDtoByProfessorId(Integer professorId);
+	
+	/**
+	  * @Method Name : selectSyllabusBySubjectId
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의계획서 조회
+	  */
+	public ReadSyllabusDto selectSyllabusBySubjectId(Integer subjectId);
+	
+	/**
+	  * @Method Name : updateSyllabus
+	  * @작성일 : 2024. 3. 19.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 강의 계획서 수정
+	  */
+	public int updateSyllabus(SyllaBusFormDto dto);
 }

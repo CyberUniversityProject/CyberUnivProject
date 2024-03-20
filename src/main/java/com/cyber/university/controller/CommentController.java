@@ -26,6 +26,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
+	// 댓글 생성
 	@PostMapping("/create")
 	public void createComment(@RequestParam(name ="commentContent") String commentContent,
 	                          @RequestParam(name ="userId") String userId,
@@ -48,14 +49,16 @@ public class CommentController {
         return commentService.getCommentById(id);
     }
 
+    // 댓글 수정
     @PutMapping("/{id}")
     public void updateComment(@PathVariable Integer id, @RequestBody Comment comment) {
         comment.setId(id);
         commentService.updateComment(comment);
     }
 
+    // 댓글 삭제
     @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable Integer id) {
+    public void deleteComment(@PathVariable(name = "id") Integer id) {
         commentService.deleteComment(id);
     }
 

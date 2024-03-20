@@ -403,6 +403,7 @@ public class StudentController {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+		
 		// 금학기 성적 조회
 		List<SemesterGradeDto> thisSemesterGradeList = stuSubService.findThisSemesterGradeByStudentId(userId);
 		model.addAttribute("thisSemesterGradeList", thisSemesterGradeList);

@@ -10,6 +10,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="/css/cdr-list.css" rel="stylesheet">	
 </head>
 
 <body>
@@ -18,7 +19,6 @@
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
 			<h2>강의실 리스트 페이지</h2>
-
 		</div>
 	</div>
 	<!-- 상단 제목부분 끝 -->
@@ -26,9 +26,9 @@
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
-			<%@ include file="/WEB-INF/view/layout/sidebarStaff.jsp"%>
-
-			<div class="col-md-10" style="text-align: center;">
+			<%@ include file="/WEB-INF/view/layout/sidebarCdrList.jsp"%>
+			<!-- main 시작 -->
+					<div class="col-md-10" style="text-align: center;">
 				<h1 class="mt-5 mb-4"></h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">
@@ -37,21 +37,24 @@
 							<tr>
 								<th scope="col">강의실명</th>
 								<th scope="col">단과대학명</th>
+								<th>settings</th>
 							</tr>
 						</thead>
-
 						<tbody>
 							<c:forEach var="room" items="${roomList}">
-								<tr>
-									<th>${room.id}</th>
-									<th>${room.collegeId}<a href="/room/delete/${room.id}">삭제</a>
-										<a href="/room/roomUpdate/${room.id}">수정</a>
-									</th>
-								</tr>
+							<tr>
+								<th>${room.id}</th>
+								<th>${room.collegeId}</th>
+								<th><a href="/room/roomUpdate/${room.id}" class="me-3"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/room/delete/${room.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								
+							</tr>	
 							</c:forEach>
 						</tbody>
 					</table>
-				<!-- main 끝 -->                                            
+				<!-- main 끝 -->   
+				
+							
 <div style="display: flex; justify-content: center;">
 	<c:if test="${totalPages > 1}">
     <nav aria-label="Page navigation" style="text-align: center;">

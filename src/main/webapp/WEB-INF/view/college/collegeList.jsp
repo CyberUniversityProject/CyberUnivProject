@@ -10,6 +10,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="/css/cdr-list.css" rel="stylesheet">	
 </head>
 
 <body>
@@ -26,27 +27,7 @@
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
-			<aside class="sidebar col-md-2 mt-5">
-				<div class="card">
-					<div class="card-header">메뉴</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">교수명단 조회</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">학생 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">교수 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">직원 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">등록금 고지서 발송</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">휴학 처리</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">수강 신청 기간 설정</a></li>
-					</ul>
-				</div>
-			</aside>
+	<%@ include file="/WEB-INF/view/layout/sidebarCdrList.jsp"%>
 
 			<div class="col-md-10" style="text-align: center;">
 				<h1 class="mt-5 mb-4">단과대학 리스트</h1>
@@ -57,6 +38,7 @@
 							<tr>
 								<th scope="col">단과대학 번호</th>
 								<th scope="col">단과대학명</th>
+								<th scope="col">settings</th>
 							</tr>
 						</thead>
 						
@@ -64,33 +46,15 @@
 						<c:forEach var="college" items="${collegeList}">
 							<tr>
 								<th>${college.id}</th> 
-								<th>${college.name}
-								<a href="/college/delete/${college.id}">삭제</a>
-								<a href="/college/collegeUpdate/${college.id}">수정</a>
-								</th>
+								<th>${college.name}</th>
+								<th><a href="/college/collegeUpdate/${college.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/college/delete/${college.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
-					<nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
-                                          <ul class="pagination">
-                                            <li class="page-item">
-                                              <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
-                                              </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                              <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                              </a>
-                                            </li>
-                                          </ul>
-                                        </nav>
+					
 				</div>
 				<!-- main 끝 -->
 

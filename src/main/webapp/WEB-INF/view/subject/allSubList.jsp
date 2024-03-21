@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <button type="submit" class=" btn--confirm mt-3">
-    <i class="fas fa-search"></i> 검색
+     검색
 </button>
 
             </form>

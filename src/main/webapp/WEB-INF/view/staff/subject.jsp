@@ -39,17 +39,16 @@
 				<ul class="nav nav-tabs mt-5">
 					<li class="nav-item"><a
 						class="nav-link <%=(request.getParameter("crud") != null && request.getParameter("crud").equals("insert")) ? "active" : ""%>"
-						href="/staff/subject?crud=insert"> <i
-							class="fas fa-plus-circle"></i> 강의등록
+						href="/staff/subject?crud=insert">  강의등록
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link <%=(request.getParameter("crud") != null && request.getParameter("crud").equals("update")) ? "active" : ""%>"
-						href="/staff/subject?crud=update"> <i class="fas fa-edit"></i>
+						href="/staff/subject?crud=update">
 							강의수정
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link <%=(request.getParameter("crud") != null && request.getParameter("crud").equals("delete")) ? "active" : ""%>"
-						href="/staff/subject?crud=delete"> <i class="fas fa-trash-alt"></i>
+						href="/staff/subject?crud=delete"> 
 							강의삭제
 					</a></li>
 				</ul>

@@ -591,7 +591,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
                             <tr>
                                 <th>번호</th>
                                 <th>분류</th>
-                                <th>제목</th>
+                                <th style="width: 800px;">제목</th>
                                 <th>게시일</th>
                             </tr>
                         </thead>

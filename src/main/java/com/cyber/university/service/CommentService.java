@@ -40,6 +40,9 @@ public class CommentService {
 	    public int getCommentCount(Integer communityId) {
 	    	return commentRepository.selectCommentCount(communityId);
 	    }
+	    
+	    
+	    
 
 
 }

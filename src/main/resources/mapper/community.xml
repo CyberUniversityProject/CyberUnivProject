@@ -6,8 +6,8 @@
 
     <!-- 게시글 삽입 -->
     <insert id="insertCommunity">
-        INSERT INTO cu_community (title, content, userName, createDate)
-        VALUES (#{title}, #{content}, #{userName}, now())
+          INSERT INTO cu_community (title, content, userName, createDate)
+    VALUES (#{title}, #{content}, #{userName}, now())
     </insert>
 
     <!-- 모든 게시글 조회 -->
@@ -23,8 +23,8 @@
     <!-- 게시글 업데이트 -->
     <update id="updateCommunity">
         UPDATE cu_community
-        SET title = #{title}, content = #{content}, updateDate = now()
-        WHERE id = #{id}
+    SET title = #{title}, content = #{content}, updateDate = now()
+    WHERE id = #{id}
     </update>
 
     <!-- 게시글 삭제 -->

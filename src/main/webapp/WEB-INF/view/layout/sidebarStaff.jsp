@@ -3,7 +3,7 @@ pageEncoding="UTF-8"%>
 
 <!-- 사이드바 메뉴 -->
 <aside class="sidebar col-md-2 mt-5">
-  <div class="card">
+  <div class="card mb-5">
     <div class="card-header">
       <h5 class="mb-0">메뉴</h5>
     </div>
@@ -48,6 +48,7 @@ pageEncoding="UTF-8"%>
           <i class="bi bi-calendar-plus-fill mr-2"></i> 수강신청 기간 설정
         </a>
       </li>
+
     </ul>
   </div>
 </aside>

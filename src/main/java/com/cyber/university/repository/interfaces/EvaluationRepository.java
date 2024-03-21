@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.cyber.university.dto.EvaluationDto;
 import com.cyber.university.dto.EvaluationInfoDto;
+import com.cyber.university.repository.model.Evaluation;
 import com.cyber.university.repository.model.Question;
 
 /**
@@ -53,8 +54,16 @@ public interface EvaluationRepository {
 	  * @작성일 : 2024. 3. 20.
 	  * @작성자 : 박경진
 	  * @변경이력 : 
+	  * @Method 설명 : studentId와 subjectId로 강의평가 내역 카운트
+	  */
+	public int selectEvaluationCountByStudentIdAndSubjectId(Map<String, Object> params);
+
+	/**
+	  * @Method Name : selectEvaluationByStudentIdAndSubjectId
+	  * @작성일 : 2024. 3. 21.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
 	  * @Method 설명 : studentId와 subjectId로 강의평가 내역 조회
 	  */
-	public int selectEvaluationByStudentIdAndSubjectId(Map<String, Object> params);
-
+	public Evaluation selectEvaluationIdByStudentIdAndSubjectId(Map<String, Object> params);
 }

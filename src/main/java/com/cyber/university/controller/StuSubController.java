@@ -524,5 +524,30 @@ public class StuSubController {
 		}
 
 
+		/**
+		  * @Method Name : timeTableProc
+		  * @작성일 : 2024. 3. 21.
+		  * @작성자 : 박경진
+		  * @변경이력 : 
+		  * @Method 설명 : 강의 시간표 조회 테이블
+		  */
+		@GetMapping("/timeTable")
+		private String timeTableProc(Model model) {
+
+			PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+			Integer userId = principal.getId();
+
+			if (userId == null) {
+				throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			// student 정보
+			
+			List<StuSubAppDto> stuSubList = stuSubService.readStuSubList(userId);
+			model.addAttribute("stuSubList",stuSubList);
+			
+			return "/stuSub/timeTable";
+		}
+
 
 }

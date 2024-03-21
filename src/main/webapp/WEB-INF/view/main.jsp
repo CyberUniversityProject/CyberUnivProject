@@ -227,7 +227,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 												<h4>수강신청</h4>
 												<div class="text-center">
-													<a href="about.html" class="more-btn">바로가기 <i
+													<a href="/sugang/preAppList?type=1" class="more-btn">바로가기 <i
 														class="bx bx-chevron-right"></i></a>
 												</div>
 											</div>
@@ -238,7 +238,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 										<h4>성적조회</h4>
 										<div class="text-center">
-											<a href="about.html" class="more-btn">바로가기 <i
+											<a href="/student/gradeDetailList" class="more-btn">바로가기 <i
 												class="bx bx-chevron-right"></i></a>
 										</div>
 									</div>
@@ -249,7 +249,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 										<h4>학사정보</h4>
 										<div class="text-center">
-											<a href="about.html" class="more-btn">바로가기 <i
+											<a href="/notice" class="more-btn">바로가기 <i
 												class="bx bx-chevron-right"></i></a>
 										</div>
 									</div>
@@ -289,7 +289,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 									<h4>내 강의평가</h4>
 									<div class="text-center">
-										<a href="about.html" class="more-btn">바로가기 <i
+										<a href="/professor/mysub" class="more-btn">바로가기 <i
 											class="bx bx-chevron-right"></i></a>
 									</div>
 								</div>
@@ -300,7 +300,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 									<h4>강의 등록</h4>
 									<div class="text-center">
-										<a href="professor/apply" class="more-btn">바로가기 <i
+										<a href="/professor/apply" class="more-btn">바로가기 <i
 											class="bx bx-chevron-right"></i></a>
 									</div>
 								</div>
@@ -405,7 +405,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 									<i class="ri-paint-brush-line" style="color: #e361ff;"></i>
 
 									<h3>
-										<a href="">등록금 납부고지서 출력</a>
+										<a href="/student/tuition">등록금 납부고지서 출력</a>
 									</h3>
 								</div>
 							</div>
@@ -437,7 +437,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								<div class="icon-box">
 									<i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
 									<h3>
-										<a href="">학기별 성적조회</a>
+										<a href="/student/gradeDetailList">학기별 성적조회</a>
 									</h3>
 								</div>
 							</div>
@@ -455,7 +455,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								<div class="icon-box">
 									<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
 									<h3>
-										<a href="/professor/apply">학사일정</a>
+										<a href="/schedule">학사일정</a>
 									</h3>
 								</div>
 							</div>

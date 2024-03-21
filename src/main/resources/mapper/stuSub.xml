@@ -93,6 +93,7 @@
 		SELECT 
 			a.subject_id,
 		    a.grade,
+		    a.evaluation_id,
     		b.grades,
 		    b.sub_year AS subYear,
 		    b.semester,
@@ -202,7 +203,12 @@
 		AND b.sub_year = #{subYear}
 		AND b.semester = #{semester};
 		</if>
-		
 	</select>
+	<update id="updateEvaluationId">
+		UPDATE cu_stu_sub SET
+		evaluation_id = #{evaluationId}
+		WHERE student_id = #{studentId}
+		AND subject_id = #{subjectId}
+	</update>
 
 </mapper>

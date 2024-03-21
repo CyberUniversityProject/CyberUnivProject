@@ -1,7 +1,6 @@
 package com.cyber.university.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,8 @@ import com.cyber.university.dto.EvaluationDto;
 import com.cyber.university.dto.EvaluationInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.EvaluationRepository;
-import com.cyber.university.repository.interfaces.StuStatRepository;
+import com.cyber.university.repository.interfaces.StuSubRepository;
+import com.cyber.university.repository.model.Evaluation;
 import com.cyber.university.repository.model.Question;
 import com.cyber.university.utils.Define;
 
@@ -33,6 +33,8 @@ public class EvaluationService {
 	
 	@Autowired
 	private EvaluationRepository evaluationRepository;
+	@Autowired
+	private StuSubRepository stuSubRepository;
 	
 	
 	
@@ -86,7 +88,7 @@ public class EvaluationService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("studentId", dto.getStudentId());
 		map.put("subjectId", dto.getSubjectId());
-		int evalauationResult = evaluationRepository.selectEvaluationByStudentIdAndSubjectId(map);
+		int evalauationResult = evaluationRepository.selectEvaluationCountByStudentIdAndSubjectId(map);
 		if(evalauationResult >= 1) {
 			throw new CustomRestfullException(Define.ALREADY_EVALUATION, HttpStatus.BAD_REQUEST);
 		}
@@ -95,13 +97,14 @@ public class EvaluationService {
 		int result = evaluationRepository.insertEvaluation(dto);
 		log.info("evaluation service 레포지토리는 다녀왔나요?");
 		if(result == 1) {
-			// TODO: 여기서 insert 이후 evaluation_id값을 구해서 stu_sub 테이블에 evaluation_id값을 update해 줄 거야!
-			//StuStatRepository.updateEvaluationId();
+			Evaluation evaluation = evaluationRepository.selectEvaluationIdByStudentIdAndSubjectId(map);
+			Integer evaluationId = evaluation.getEvaluationId();
+			log.info("evaluation"+evaluation);
+			log.info("evaluationId"+evaluationId);
+			map.put("evaluationId", evaluationId);
+			stuSubRepository.updateEvaluationId(map);
 		}
-		
-		
 		return result;
-		
 	}
 
 

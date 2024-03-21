@@ -8,7 +8,7 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item p-3">
-        <a href="/user/studentList" class="text-dark d-flex align-items-center">
+        <a href="/sugang/timeTable" class="text-dark d-flex align-items-center">
           <i class="bi bi-calendar-check-fill mr-2"></i> 강의시간표 조회
         </a>
       </li>

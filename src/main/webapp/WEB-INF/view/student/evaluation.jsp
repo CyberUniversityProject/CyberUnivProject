@@ -318,7 +318,16 @@ body {
 		                alert('강의평가 전송에 실패했습니다. 오류: ' + error);
 		            }
 		        });
-
 			});
+
+		    // 부모 창 새로고침 함수
+		    function refreshParent() {
+		        window.opener.location.reload(); // 부모 창 새로고침
+		    }
+
+		    // 자식 창 닫힐 때 부모 창 새로고침
+		    window.onunload = function() {
+		        refreshParent();
+		    };
 		});
 	</script>

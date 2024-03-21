@@ -84,6 +84,15 @@ main {
 			</table>
 			<div class="paging--container">
 			<!-- 페이징 버튼 들어갈 자리 -->
+				<c:if test="${listCount != null}">
+	                 <ul class="pagination justify-content-center">
+	                     <c:forEach var="i" begin="1" end="${listCount}" step="1">
+	                         <li class="page-item"><a class="page-link" href="/notice/list/${i}">${i}</a></li>
+	                     </c:forEach>
+	                 </ul>
+                 </c:if>
+			</div>
+			<div>
 				<button type="button" onclick="location.href='/notice/write'"
 					class="btn btn-dark update--button">등록</button>
 			</div>

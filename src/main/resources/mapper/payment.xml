@@ -21,18 +21,22 @@
 		select * from cu_student where id = #{id}
 	</select>
 	
+	<!-- 24.03.21 결제 히스토리 등록 -->
 	<insert id="insertPayment">
 		insert into cu_payment (u_id, m_id, buyer_name, sch_amount) 
 		values (#{uId}, #{mId}, #{buyerName}, #{schAmount})
 	</insert>
 	
-	<update id="updateTuition">
+	<!-- 24.03.21 결제 후 상태 정보 수정 -->
+	<update id="updateTuition" parameterType="com.cyber.university.dto.UpdateTuitionInfoDto">
 		UPDATE cu_tuition 
-		SET status = #{status}
+		SET status = 1
 		WHERE student_id = #{studentId}
 		and tui_year = #{tuiYear}
 		and semester = #{semester}
 	</update>
+	
+	
 	
 </mapper>        
         

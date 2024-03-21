@@ -3,6 +3,7 @@ package com.cyber.university.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cyber.university.dto.PaymentDto;
 import com.cyber.university.dto.PaymentInfoDto;
@@ -75,31 +76,45 @@ public class PaymentService {
 	  * @변경이력 : 
 	  * @Method 설명 : 결제 기록 등록
 	  */
+	@Transactional
 	public void insertPayment(PaymentDto dto) {
 		
 		Payment payment = new Payment();
-		payment.setUId(dto.getUId());
-		payment.setMId(dto.getMId());
+		payment.setUId(dto.getImpUid());
+		payment.setMId(dto.getMerchantUid());
 		payment.setBuyerName(dto.getBuyerName());
 		payment.setSchAmount(dto.getSchAmount());
 		
 		int resultRowCount = paymentRepository.insertPayment(payment);
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("결제가 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		} 
-		
-		UpdateTuitionInfoDto dto2 = new UpdateTuitionInfoDto();
-		dto2.setStatus(1);
-//		Tuition tuition = new Tuition();
-//		tuition.setSemester(1);
-//		tuition.setStudentId(dto2.getStudentId());
-//		tuition.setTuiYear(dto2.getTuiYear());
-//		tuition.setSemester(dto2.getSemester());
-		
-		if (resultRowCount == 1) {
-			paymentRepository.updateTuition(dto2);
-		} else {
-			throw new CustomRestfullException("결제가 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		}	
+		} 	
 	}
+	
+	/**
+	  * @Method Name : upateTuitionStatus
+	  * @작성일 : 2024. 3. 21.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 결제 완료 후 고지서 상태 변경
+	  */
+	@Transactional
+	public void upateTuitionStatus() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		PaymentInfoDto dto = paymentRepository.selectTuiYearAndSemester();
+		
+		Tuition tuition = new Tuition();
+		tuition.setTuiYear(dto.getTuiYear());
+	    tuition.setSemester(dto.getSemester());
+	    tuition.setStudentId(principal.getId());
+		
+	    System.out.println("tuition : " + tuition);
+	    
+		int result = paymentRepository.updateTuition(tuition);
+		if (result != 1) {
+			throw new CustomRestfullException("등록금 상태 업데이트에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
 }

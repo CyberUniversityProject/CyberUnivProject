@@ -1,0 +1,42 @@
+.btn-outline-update {
+  --bs-btn-color: #5FCF80;
+  --bs-btn-border-color: #5FCF80;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #5FCF80;
+  --bs-btn-hover-border-color: #5FCF80;
+  --bs-btn-focus-shadow-rgb:25, 135, 84;
+  --bs-btn-active-color: #5FCF80;
+  --bs-btn-active-bg: #5FCF80;
+  --bs-btn-active-border-color: #5FCF80;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #5FCF80;
+  --bs-gradient: none;
+  border-width: 1px; 
+  border-color: #5FCF80;
+  width: 56px; /* 너비를 100px로 설정 */
+  height: 35px; /* 높이를 50px로 설정 */
+}
+
+.btn-outline-delete {
+  --bs-btn-color: #A0307F;
+  --bs-btn-border-color: #A0307F;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #A0307F;
+  --bs-btn-hover-border-color: #A0307F;
+  --bs-btn-focus-shadow-rgb:95, 207, 128;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #A0307F;
+  --bs-btn-active-border-color: #A0307F;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #A0307F;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #A0307F;
+  --bs-gradient: none;
+   border-width: 1px; 
+   border-color: #A0307F;
+  width: 56px; /* 너비를 100px로 설정 */
+  height: 35px; /* 높이를 50px로 설정 */
+  
+}

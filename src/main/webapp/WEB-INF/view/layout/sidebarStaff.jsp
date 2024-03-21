@@ -48,7 +48,10 @@ pageEncoding="UTF-8"%>
           <i class="bi bi-calendar-plus-fill mr-2"></i> 수강신청 기간 설정
         </a>
       </li>
+<<<<<<< HEAD
     
+=======
+>>>>>>> dev
     </ul>
   </div>
 </aside>

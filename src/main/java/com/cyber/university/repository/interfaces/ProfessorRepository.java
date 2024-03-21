@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.cyber.university.dto.CreateProfessorDto;
 import com.cyber.university.dto.FindIdFormDto;
 import com.cyber.university.dto.FindPasswordFormDto;
+import com.cyber.university.dto.PaymentInfoDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.SyllaBusFormDto;
 import com.cyber.university.dto.UserUpdateDto;
@@ -26,6 +27,7 @@ import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.Professor;
+import com.cyber.university.repository.model.Student;
 
 /**
  * @FileName : ProfessorRepository.java
@@ -318,4 +320,6 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 강의 계획서 수정
 	  */
 	public int updateSyllabus(SyllaBusFormDto dto);
+	
+
 }

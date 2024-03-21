@@ -258,7 +258,7 @@
 		LEFT JOIN cu_syllabus AS sy ON s.id = sy.subject_id
 		LEFT JOIN cu_room AS r ON s.room_id = r.id
 		LEFT JOIN cu_college AS c ON r.college_id = c.id
-		WHERE subject_id = #{subjectId};
+		WHERE subject_id = #{subjectId}
 	</select>
 	
 	<!-- 24.03.19 강의계획서 수정 -->
@@ -270,4 +270,5 @@
 		program = #{program}
 		WHERE subject_id = #{subjectId}
 	</update>
+		
 </mapper>        

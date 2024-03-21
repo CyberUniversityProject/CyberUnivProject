@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>강의실 등록</title>
+<title>신고관리페이지</title>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -17,7 +17,7 @@
 	<!-- ======= 상단 제목부분 ======= -->
 	<div class="breadcrumbs" data-aos="fade-in">
 		<div class="container">
-			<h2>강의실 등록 페이지</h2>
+			<h2>신고관리페이지</h2>
 		</div>
 	</div>
 	<!-- 상단 제목부분 끝 -->
@@ -63,10 +63,7 @@
       	</form>
     
     	</section><!-- End Pricing Section -->
-    
     <!-- Register form End Pricing Section -->
-				
-				
 			</div>
 		</div>
 	</div>

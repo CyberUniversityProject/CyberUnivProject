@@ -10,6 +10,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="/css/cdr-list.css" rel="stylesheet">	
 </head>
 
 <body>
@@ -26,27 +27,7 @@
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
-			<aside class="sidebar col-md-2 mt-5">
-				<div class="card">
-					<div class="card-header">메뉴</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">교수명단 조회</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">학생 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">교수 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">직원 등록</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">등록금 고지서 발송</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">휴학 처리</a></li>
-						<li class="list-group-item p-3"><a style="color: black;"
-							href="#">수강 신청 기간 설정</a></li>
-					</ul>
-				</div>
-			</aside>
+			<%@ include file="/WEB-INF/view/layout/sidebarCdrList.jsp"%>
 
 			<div class="col-md-10" style="text-align: center;">
 				<h1 class="mt-5 mb-4">학과 리스트</h1>
@@ -58,6 +39,7 @@
 								<th scope="col">단과대학 번호</th>
 								<th scope="col">학과 번호</th>
 								<th scope="col">학과명</th>
+								<th>settings</th>
 							</tr>
 						</thead>
 						
@@ -66,10 +48,10 @@
 							<tr>
 								<th>${department.collegeId}</th> 
 								<th>${department.id}</th> 
-								<th>${department.name}
-								<a href="/department/delete/${department.id}">삭제</a>
-								<a href="/department/departmentUpdate/${department.id}">수정</a>
-								</th>
+								<th>${department.name}</th>
+								<th><a href="/department/departmentUpdate/${department.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/department/delete/${department.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								
 							</tr>
 						</c:forEach>
 						</tbody>

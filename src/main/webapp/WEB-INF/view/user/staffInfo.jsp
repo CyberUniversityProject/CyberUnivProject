@@ -67,21 +67,19 @@ body {
 	<div class="container mb-5">
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
-			<aside class="sidebar col-md-2 mt-5">
+			<aside class="sidebar col-md-2 mt-5 mb-5" >
 				<div class="card">
 					<div class="card-header">
 						<h5 class="mb-0">메뉴</h5>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item p-3"><a href="/info/staff" class="text-black"><i
-								class="fas fa-user mr-2"></i> 내 정보 조회</a></li>
-						<li class="list-group-item p-3"><a href="/password" class="text-black"><i
-								class="fas fa-lock mr-2"></i> 비밀번호 변경</a></li>
+						<li class="list-group-item p-3"><a href="/info/staff" class="text-black"> 내 정보 조회</a></li>
+						<li class="list-group-item p-3"><a href="/password" class="text-black">비밀번호 변경</a></li>
 					</ul>
 				</div>
 			</aside>
 
-			<div class="col-md-10">
+			<div class="col-md-10 " style="margin-bottom: 400px;">
 				<div class="main-content">
 					<h1>내 정보 조회</h1>
 					<hr />

@@ -58,8 +58,8 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
 
-			<div class="col-md-10">
-				<div class="container mt-5">
+			<div class="col-md-10" >
+				<div class="container mt-5 " style="margin-bottom: 350px;">
 					<h1>비밀번호 변경</h1>
 					<hr />
 					<div class="split--div"></div>

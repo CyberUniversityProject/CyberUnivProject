@@ -86,7 +86,7 @@
 	<div class="container mb-5">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
-			<%@ include file="/WEB-INF/view/layout/sidebarSugang.jsp"%>
+			<%@ include file="/WEB-INF/view/layout/sidebarStaff.jsp"%>
 
 			<div class="col-md-10">
 
@@ -103,7 +103,7 @@
 						<!-- 강의 목록 -->
 						<div class="row">
 							<div class="col-md-12 text-center">
-								
+
 								<div class="split--div"></div>
 								<%
 								if (StuSubController.SUGANG_PERIOD == 0) {
@@ -133,7 +133,7 @@
 									기간이 종료되었습니다.</div>
 
 
-<br> <a href="/sugang/updatePeriod0"><button
+								<br> <a href="/sugang/updatePeriod0"><button
 										type="submit" class="btn--confirm">예비 수강 신청 기간으로 변경</button></a>
 
 								<%
@@ -150,7 +150,7 @@
 
 		</div>
 	</div>
-	</div>
+
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

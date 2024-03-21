@@ -1,9 +1,10 @@
 # 📖 학사관리 웹 서비스 CyberUniversity
+![제목을 입력해주세요_-001](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/dc016ff0-294c-4e7e-8615-63b9d330f433)
 
 
 <br>
 
-## 프로젝트 소개
+## 🏫 프로젝트 소개
 
 이 프로젝트는 5명의 개발자가 스프링부트(Spring Boot), MyBatis, JSP, 그리고 MySQL을 이용하여 개발된 웹 기반의 학사관리시스템입니다. 
 학사 업무를 체계적으로 관리하고 학사 정보를 효율적으로 처리할 수 있도록 개발하였습니다. 
@@ -12,13 +13,19 @@
 
 <br>
 
-## 팀원 구성
+## 📆 개발기간/작업관리
+개발기간
+- 2024.03.11 ~ 2024.03.26 (12일)
+
+일정관리
+
+## 👨‍👩‍👧‍👦 팀원 구성
 ![제목을-입력해주세요_-005](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/bd57bd12-a6fa-4998-b25d-331979c947b7)
 
 
 <br>
 
-## 개발환경
+## 🔧 개발환경
 - 개발 툴 : Spring Tools 4 (4.21.1)
 - Backend : JAVA 17, SpringBoot 3.1.8, MyBatis, JSP, MySQL 8.0.26, lombok, BCrypt HASH, Apache Tomcat : 9.0
 - Frontend : bootstrap : 4.6.2, HTML5, CSS3, JavaScript : 1.16.1, JQuery : 3.6.4
@@ -29,7 +36,7 @@
 
 <br>
 
-## 브랜치 전략
+## 📱 브랜치 전략
 Git-flow 전략을 기반으로 main, develop 브랜치와 feature 보조 브랜치를 운용했습니다.
 - main, develop, Feat 브랜치로 나누어 개발을 하였습니다.
 - main 브랜치는 배포 단계에서만 사용하는 브랜치입니다.
@@ -181,11 +188,6 @@ Git-flow 전략을 기반으로 main, develop 브랜치와 feature 보조 브랜
   1) 포트원 결제 API를 활용한 등록금 결제 구
 
 
-## 개발기간/작업관리
-개발기간
-- 2024.03.11 ~ 2024.03.26 (12일)
-
-일정관리
 
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cyber.university.dto.AllSubjectSearchFormDto;
+import com.cyber.university.dto.response.ReadSyllabusDto;
 import com.cyber.university.dto.response.SubjectDto;
 import com.cyber.university.repository.model.Department;
 import com.cyber.university.service.CollegeService;
@@ -89,6 +90,25 @@ public class SubjectController {
 		model.addAttribute("subNameList", subNameList);
 
 		return "/subject/allSubList";
+	}
+	
+	
+	// 강의계획서
+	@GetMapping("/syllabus/{subjectId}")
+	public String readSyllabus(Model model, @PathVariable(name = "subjectId") Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
+		if (readSyllabusDto.getOverview() != null) {
+			readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\r\n", "<br>"));
+		}
+		if (readSyllabusDto.getObjective() != null) {
+			readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\r\n", "<br>"));
+		}
+		if (readSyllabusDto.getProgram() != null) {
+			readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\r\n", "<br>"));
+		}
+		model.addAttribute("syllabus", readSyllabusDto);
+
+		return "/professor/syllabus";
 	}
 
 }

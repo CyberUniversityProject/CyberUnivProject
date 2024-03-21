@@ -324,3 +324,29 @@ CREATE TABLE `cu_apply_sub` (
     `approval` char(1) NOT NULL DEFAULT 'N', 
     `reason` varchar(1000) DEFAULT NULL
 );
+CREATE TABLE cu_community (
+  id int NOT NULL AUTO_INCREMENT,
+  title varchar(255) NOT NULL,
+  content varchar(1000) DEFAULT NULL,
+  userName varchar(100) NOT NULL,
+  createDate datetime NOT NULL,
+  updateDate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+
+CREATE TABLE cu_comment (
+  id int NOT NULL AUTO_INCREMENT,
+  community_id int DEFAULT NULL,
+  content text,
+  createDate datetime NOT NULL,
+  user_id varchar(20) DEFAULT NULL,
+  role varchar(10) DEFAULT NULL,
+  updateDate datetime DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY fk_community_id(community_id),
+  CONSTRAINT fk_community_comment FOREIGN KEY (community_id) REFERENCES cu_community (id) ON DELETE CASCADE
+
+);
+
+

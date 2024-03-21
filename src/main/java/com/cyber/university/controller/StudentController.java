@@ -174,7 +174,6 @@ public class StudentController {
 	 * @Method 설명 : student password 수정
 	 */
 
-	// TODO : 준혁 코드로 변경 -> 프론트도 확인
 	@PostMapping("/updatePass")
 	private String updatePassword(@Valid @RequestBody ChangePasswordDto changePasswordDto,
 			BindingResult bindingResult) {
@@ -515,5 +514,5 @@ public class StudentController {
 			return ResponseEntity.ok("success");
 		}
 	}
-
+	
 }

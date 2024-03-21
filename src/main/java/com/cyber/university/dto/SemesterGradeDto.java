@@ -19,6 +19,7 @@ public class SemesterGradeDto {
 	private Integer subjectId;		// 과목 번호
 	private String grade;			// 성적(A+,A,A-,...)
 	private Integer grades;	// 학점
+	private Integer evaluationId;
 	
 	// cu_subject
 	private Integer subYear;		// 연도

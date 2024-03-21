@@ -114,4 +114,14 @@ public interface StuSubRepository {
 	List<SemesterGradeDto> selectGradeByYearAndSemesterAndType(AllGradeSearchFormDto allGradeSearchFormDto);
 	
 
+	/**
+	  * @Method Name : updateEvaluationId
+	  * @작성일 : 2024. 3. 21.
+	  * @작성자 : 박경진
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  */
+	public void updateEvaluationId(Map<String, Object> params);
+
+
 }

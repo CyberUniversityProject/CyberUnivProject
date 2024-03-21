@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PaymentDto {
-	private String uId;
-	private String mId;
+	private String impUid;
+	private String merchantUid;
 	private String buyerName;
 	private Long schAmount;
 }

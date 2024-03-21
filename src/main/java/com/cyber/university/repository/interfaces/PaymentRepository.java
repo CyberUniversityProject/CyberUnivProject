@@ -4,9 +4,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.cyber.university.dto.PaymentInfoDto;
-import com.cyber.university.dto.UpdateTuitionInfoDto;
 import com.cyber.university.repository.model.Payment;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.repository.model.Tuition;
 
 /**
   * @FileName : PaymentRepository.java
@@ -62,5 +62,6 @@ public interface PaymentRepository {
 	  * @변경이력 : 
 	  * @Method 설명 : 결제 후 고지서 업데이트
 	  */
-	public int updateTuition(UpdateTuitionInfoDto dto);
+	public int updateTuition(Tuition tuition);
+	
 }

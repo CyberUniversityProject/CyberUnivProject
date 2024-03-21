@@ -14,10 +14,12 @@
 <br>
 
 ## 📆 개발기간/작업관리
-개발기간
+1) 개발기간
 - 2024.03.11 ~ 2024.03.26 (12일)
 
-일정관리
+2) 일정관리
+![image](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/e32a4703-30e9-4bf5-81c4-3b500df88237)
+
 
 ## 👨‍👩‍👧‍👦 팀원 구성
 ![제목을-입력해주세요_-005](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/bd57bd12-a6fa-4998-b25d-331979c947b7)
@@ -124,7 +126,8 @@ Git-flow 전략을 기반으로 main, develop 브랜치와 feature 보조 브랜
 <br>
 
 ## 3️⃣ ERD
-![cyber_uni_erd](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/b5008958-8fb9-4df2-a968-49abb9dcd250)
+![cyber_uni_erd](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/e2e4b351-6681-42bb-ae53-36613bdbc35f)
+
 
 
 ## 4️⃣ SiteMap

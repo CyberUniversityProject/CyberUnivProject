@@ -24,6 +24,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+<<<<<<< HEAD
   datasource:
     url: jdbc:mysql://database-1.chyqscqk4zrv.ap-northeast-2.rds.amazonaws.com:3306/cyberuniv?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -46,7 +47,15 @@ spring:
 #  output:
 #    ansi:
 #      enabled: always
+=======
+>>>>>>> dev
 
+  datasource:
+    url: jdbc:mysql://database-1.chyqscqk4zrv.ap-northeast-2.rds.amazonaws.com:3306/cyberuniv?serverTimeZone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: Asd123456789!
+    
 mybatis:
   mapper-locations:
     - classpath:mapper/**.xml

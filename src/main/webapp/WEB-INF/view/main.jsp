@@ -225,6 +225,50 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 									<h3>One-Stop 서비스</h3>
 									<p>해당 서비스를 클릭하시면 해당 서비스로 이동됩니다.</p>
 
+<<<<<<< HEAD
+=======
+        <div class="row counters">
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Students</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Courses</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Events</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Trainers</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section> -->
+		<!-- End Counts Section -->
+
+		<!-- ======= Why Us Section ======= -->
+		<c:choose>
+			<c:when test="${principal.userRole eq 'student'}">
+				<section id="why-us" class="why-us">
+					<div class="container" data-aos="fade-up">
+
+
+						<div class="row">
+							<div class="col-lg-5 d-flex align-items-stretch">
+								<div class="content">
+									<h3>One-Stop 서비스</h3>
+									<p>해당 서비스를 클릭하시면 해당 서비스로 이동됩니다.</p>
+
+>>>>>>> dev
 								</div>
 							</div>
 							<div class="col-lg-7 d-flex align-items-stretch"
@@ -654,6 +698,27 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 					<h2>Menu</h2>
 					<p>오늘의 학식</p>
 				</div>
+<<<<<<< HEAD
+=======
+				<div class="row" id="dietList">
+					<div class="col">
+						<div class="card">
+							<div class="card-header">Quote</div>
+							<div class="card-body">
+								<blockquote class="blockquote mb-0">
+									<p>여기에 menuList[0]~[6]이 들어올 자리</p>
+									<footer class="blockquote-footer">
+										Someone famous in <cite title="Source Title">Source
+											Title</cite>
+									</footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+>>>>>>> dev
 			</div>
 		</section>
 		<!-- End 학사일정 -->
@@ -668,25 +733,149 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 
 	<script>
-    $(document).ready(function(){
-        // REST API를 호출하여 공지사항 목록을 가져옴
-        $.ajax({
-            url: "/api/notice/list",
-            type: "GET",
-            success: function(data) {
-                 // 가져온 공지사항 목록을 화면에 출력
-                          let noticeListHtml = "";
-                          $.each(data, function(index, notice){
-                              noticeListHtml += "<tr><td>" + notice.id + "</td><td>" + notice.category + "</td><td><a href='/notice/read?id=" + notice.id + "'>" + notice.title + "</a></td><td>" + notice.createdTimeAsString + "</td></tr>";
-                                         });
+    
+		$(document).ready(
+				function() {
+					// REST API를 호출하여 공지사항 목록을 가져옴
+					$.ajax({
+						url : "/api/notice/list",
+						type : "GET",
+						success : function(data) {
+							// 가져온 공지사항 목록을 화면에 출력
+							let noticeListHtml = "";
+							$.each(data, function(index, notice) {
+								noticeListHtml += "<tr><td>" + notice.id
+										+ "</td><td>" + notice.category
+										+ "</td><td><a href='/notice/read?id="
+										+ notice.id + "'>" + notice.title
+										+ "</a></td><td>"
+										+ notice.createdTimeAsString
+										+ "</td></tr>";
+							});
 
-                          $("#noticeList tbody").html(noticeListHtml);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                console.log("Error:", errorThrown);
-            }
-        });
+							$("#noticeList tbody").html(noticeListHtml);
+						},
+						error : function(xhr, textStatus, errorThrown) {
+							console.log("Error:", errorThrown);
+						}
+					});
+				});
+		
+/* 식단 api */
+/* 날짜 */     
+ let today = new Date();
+
+ let year = today.getFullYear(); // 년도
+ let month = (today.getMonth() + 1).toString().padStart(2, '0');  // 월 (두 자리로 표시)
+ let date = today.getDate();  // 날짜
+ let day = today.getDay();  // 요일
+ 
+ let dayOfWeek = today.getDay();
+ let days = ["일", "월", "화", "수", "목", "금", "토"];
+/* 문자열 가공 함수 */
+function processMenu(menu) {
+    // 괄호와 괄호 안의 내용을 정규식으로 제거합니다.
+    menu = menu.replace(/\([^)]+\)/g, '');
+    // 숫자와 .을 정규식으로 제거합니다.
+    menu = menu.replace(/[0-9.]+/g, '');
+    // 자음만 포함된 문자열을 제거합니다.
+    menu = menu.replace(/[ㄱ-ㅎ]/g, '');
+    // 양 끝의 공백을 제거합니다.
+    menu = menu.trim();
+    return menu;
+}
+
+/* 식단 API 호출 및 가공된 메뉴를 표시하는 함수 */
+function displayMenu(menuArray) {
+    // dietList 요소를 선택합니다.
+    let dietListElement = document.getElementById('dietList');
+    
+    // dietList 내부의 기존 내용을 지웁니다.
+    dietListElement.innerHTML = '';
+
+    // 각 메뉴에 대해 카드를 생성하여 dietList에 추가합니다.
+    for (let i = 0; i < menuArray.length; i++) {
+    	let today = new Date();
+    	let dayOfWeek = (today.getDay() + i) %7;
+    	let menuToday = days[dayOfWeek]+'요일';
+    	
+        // 각 메뉴를 가공합니다.
+        let processedMenu = processMenu(menuArray[i]);
+
+        // 카드 HTML 생성
+        let cardHTML = `
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">`+menuToday +`</div>
+                    <div class="card-body" style="height : 250px;">
+                        <blockquote class="blockquote mb-0">
+                            <p>` +  processedMenu + `</p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // 카드를 dietList에 추가합니다.
+        dietListElement.innerHTML += cardHTML;
+    }
+}
+
+/* API 콜백 함수 */
+function ApiCallBack(json) {
+    let menuArray = [];
+
+    if (json.mealServiceDietInfo != null) {
+        for (var i = 0; i < 5; i++) {
+            $.each(json.mealServiceDietInfo[1], function(key, state) {
+                let menu = json.mealServiceDietInfo[1].row[i].DDISH_NM;
+                menuArray.push(menu);
+            });
+        }
+        // 학식 정보를 HTML에 표시
+        displayMenu(menuArray);
+        console.log(menuArray);
+    } else {
+        console.log("json.schoolInfo == null")
+    }
+}
+
+/* API 호출 함수 */
+$(document).ready(function() {
+
+    
+    let todayDate = year + month + date;
+
+    console.log("i'm here!!!!"+today);
+    console.log("i'm here!!!!"+year);
+    console.log("i'm here!!!!"+month);
+    console.log("i'm here!!!!"+date);
+    console.log(todayDate);
+    
+    let url = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=bab543c0c3c6493dad08d3fba3cf73bd&Type=json&pIndex=1&pSize=7&ATPT_OFCDC_SC_CODE=C10&SD_SCHUL_CODE=7150089&MLSV_FROM_YMD=' + todayDate;
+    let param = '';
+    ajaxCallApi(url, param, ApiCallBack);
+});
+
+/* AJAX 호출 함수 */
+function ajaxCallApi(url, param, callback) {
+    console.log("ajaxCallApi in");
+
+    $.ajax({
+        url: url,
+        async: true,
+        type: "POST",
+        data: param,
+        dataType: 'json',
+        success: callback,
+        error: function(requqest, textStatus) {
+            var format = new OpenLayers.Format.WFSDescribeFeatureType();
+            var doc = request.responseXML;
+            var describeFeatureType = format.read(doc);
+            alert("describeFeatureType = " + describeFeatureType + " textStatus = " + textStatus);
+        }
     });
+<<<<<<< HEAD
     </script>
 
 	<script>
@@ -707,3 +896,9 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
             })
             .catch(error => console.error('Error fetching schedule:', error));
     </script>
+=======
+
+}
+
+	</script>
+>>>>>>> dev

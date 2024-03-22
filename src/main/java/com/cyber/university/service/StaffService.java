@@ -2,6 +2,7 @@ package com.cyber.university.service;
 
 import java.util.List;
 
+import com.cyber.university.dto.response.SubjectListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,7 @@ public class StaffService {
 		return subjectList;
 	}
 	
-	public List<Subject> findAllPost(int page, int size) {
+	public List<SubjectListDto> findAllPost(int page, int size) {
         // 페이징 처리를 위해 offset 계산
         int offset = (page - 1) * size;
         // 페이징된 강의실 목록 조회

@@ -34,6 +34,9 @@
 					<div class="col-md-7">
 						<div class="card">
 							<div class="card-body">
+                            <div class="text-center">
+							<img src="${studentInfo.setupProfilImage()}" class="img-fluid border border-1 rounded-2" alt="프로필 이미지" width="60%" height="60%">
+							</div>
 								<form action="#" method="">
 									<div class="form-group">
 										<label for="name">이름</label> <input type="text" name="name"

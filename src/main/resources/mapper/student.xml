@@ -68,10 +68,10 @@
 
 	<insert id="insertToStudent">
 		INSERT INTO cu_student (name, birth_date, gender,
-		address, tel, dept_id, entrance_date, email)
+		address, tel, dept_id, entrance_date, email, origin_file_name, upload_file_name)
 		VALUES (#{name},
 		#{birthDate}, #{gender}, #{address}, #{tel}, #{deptId},
-		#{entranceDate}, #{email})
+		#{entranceDate}, #{email}, #{originFileName}, #{uploadFileName})
 	</insert>
 
 

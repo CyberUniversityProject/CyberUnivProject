@@ -312,17 +312,17 @@ FOREIGN KEY (staff_id) REFERENCES cu_staff(id)
 );
 
 
-CREATE TABLE `cu_apply_sub` (
-    `id` int NOT NULL AUTO_INCREMENT, 
-    `pro_id` int NOT NULL, 
-    `sub_name` varchar(30) NOT NULL, 
-    `pro_name` varchar(20) NOT NULL, 
-    `sub_time` int NOT NULL, 
-    `type` char(2) NOT NULL, 
-    `sub_grade` int NOT NULL, 
-    `capacity` int NOT NULL, 
-    `approval` char(1) NOT NULL DEFAULT 'N', 
-    `reason` varchar(1000) DEFAULT NULL
+CREATE TABLE cu_apply_sub (
+    id int NOT NULL auto_increment primary key, 
+    pro_id int NOT NULL, 
+    sub_name varchar(30) NOT NULL, 
+    pro_name varchar(20) NOT NULL, 
+    sub_time int NOT NULL, 
+    type char(2) NOT NULL, 
+    sub_grade int NOT NULL, 
+    capacity int NOT NULL, 
+    approval char(1) NOT NULL DEFAULT 'N', 
+    reason varchar(1000) DEFAULT NULL
 );
 CREATE TABLE cu_community (
   id int NOT NULL AUTO_INCREMENT,
@@ -348,6 +348,7 @@ CREATE TABLE cu_comment (
   CONSTRAINT fk_community_comment FOREIGN KEY (community_id) REFERENCES cu_community (id) ON DELETE CASCADE
 
 );
+
 
 create table cu_payment (
  id int NOT NULL AUTO_INCREMENT,

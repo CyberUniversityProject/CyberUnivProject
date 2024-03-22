@@ -24,6 +24,37 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 <%}%>
 	
 </script>
+
+<style>
+.schedule-table-wrapper {
+	overflow-x: auto;
+	margin-top: 10px;
+}
+
+#scheduleTable {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#scheduleTable th, #scheduleTable td {
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+#scheduleTable th {
+	background-color: #f2f2f2;
+	color: #333;
+}
+
+#scheduleTable tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#scheduleTable tbody tr:hover {
+	background-color: #ddd;
+}
+</style>
 <body onLoad="javascript:pop()">
 	<!-- ======= Hero Section ======= -->
 	<section id="hero"
@@ -626,18 +657,31 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 
 		<!-- ======= 학사일정 ======= -->
-		<section id="popular-courses" class="courses">
+<section id="popular-courses" class="courses">
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-title">
 					<h2>Academic Calendar</h2>
 					<p>학사일정</p>
 				</div>
-
-
+				<div class="schedule-table-wrapper">
+					<table id="scheduleTable">
+						<thead>
+							<tr>
+								<th>시작일</th>
+								<th>종료일</th>
+								<th>내용</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Data will be inserted here dynamically -->
+						</tbody>
+					</table>
+				</div>
 
 			</div>
 		</section>
+		<!-- End 학사일정 -->
 		<!-- End 학사일정 -->
 
 
@@ -814,3 +858,23 @@ function ajaxCallApi(url, param, callback) {
 }
 
 	</script>
+	
+	
+	<script>
+        fetch('/api/schedule/selectAll')
+            .then(response => response.json())
+            .then(data => {
+                const scheduleTable = document.getElementById('scheduleTable');
+                data.forEach(schedule => {
+                    const row = scheduleTable.insertRow();
+                    const startDateCell = row.insertCell(0);
+                    const endDateCell = row.insertCell(1);
+                    const informationCell = row.insertCell(2);
+                    
+                    startDateCell.textContent = schedule.startDay;
+                    endDateCell.textContent = schedule.endDay;
+                    informationCell.textContent = schedule.information;
+                });
+            })
+            .catch(error => console.error('Error fetching schedule:', error));
+    </script>

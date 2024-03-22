@@ -332,16 +332,12 @@ public class ProfessorController {
 	    if (dto.getConvertedMark() == null || dto.getConvertedMark() < 0) {
 	    	throw new CustomRestfullException("환산 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
 	    }
-		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
 
 	    if (!(principal instanceof PrincipalDto)) {
 	    	
 	        return "redirect:/login";
 	    }
-	    
-	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
-	    System.out.println("sumScore : " + sumScore);
 	    
 	    
 	    

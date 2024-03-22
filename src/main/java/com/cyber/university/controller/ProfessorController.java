@@ -69,7 +69,11 @@ public class ProfessorController {
 	public String professerInfoPage(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-			
+		
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
 		ProfessorInfoDto professorInfo = professorService.selectProfessorInfoWithCollegeAndDepartment(principal.getId());
 		model.addAttribute("professorInfo", professorInfo);
 		
@@ -88,6 +92,10 @@ public class ProfessorController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
 		UpdateProfessorInfoDto professorInfo = professorService.selectProfessorInfo(principal.getId());
 		model.addAttribute("professorInfo", professorInfo);
 		
@@ -105,6 +113,12 @@ public class ProfessorController {
 	@GetMapping("/apply")
 	public String applySubjectPage() {
 		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
 		return "/professor/applysubject";
 	}
 	
@@ -118,14 +132,12 @@ public class ProfessorController {
 	@PostMapping("/apply")
 	public String applySubjectProc(ApplySubjectDto dto, @RequestParam("type") String type) {
 		
-		Object principalObject = session.getAttribute(Define.PRINCIPAL);
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
-	    if (!(principalObject instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
-	    
-	    PrincipalDto principal = (PrincipalDto) principalObject;
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+
 	    int userId = principal.getId();
 		
 		dto.setProId(userId);
@@ -168,6 +180,9 @@ public class ProfessorController {
 	public String mySubPage(Model model) {
 		
 	    PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
 	    List<SubjectPeriodForProfessorDto> semesterList = professorService.selectSemester(principal.getId());
 	    SubjectPeriodForProfessorDto subjectPeriodForProfessorDto = new SubjectPeriodForProfessorDto();
 	    subjectPeriodForProfessorDto.setSubYear(Define.CURRENT_YEAR);
@@ -185,6 +200,10 @@ public class ProfessorController {
 	public String subjectListProc(Model model, @RequestParam ("period") String period) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
 		List<SubjectPeriodForProfessorDto> semesterList = professorService.selectSemester(principal.getId());
 		String[] strs = period.split("year");
 		SubjectPeriodForProfessorDto subjectPeriodForProfessorDto = new SubjectPeriodForProfessorDto();
@@ -207,6 +226,13 @@ public class ProfessorController {
 	  */
 	@GetMapping("/updatepw")
 	public String updatePwPage() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
+		
 		return "/professor/updatePW";
 	}
 	
@@ -221,10 +247,9 @@ public class ProfessorController {
 	public String subjectPage(@PathVariable("subjectId") Integer subjectId, Model model) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
-	    if (!(principal instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
 	    
 	    List<MysubjectDetailDto> mySubEvaluation = professorService.selectMySubDetailList(subjectId);
 	    model.addAttribute("mySubEvaluation", mySubEvaluation);
@@ -249,10 +274,9 @@ public class ProfessorController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
-	    if (!(principal instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
+		if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
 		
 	    Student studentInfo = professorService.selectByStudentId(studentId);
 	    model.addAttribute("studentInfo", studentInfo);
@@ -274,7 +298,18 @@ public class ProfessorController {
 											@RequestParam("grade") String grade,
 											UpdateStudentSubDetailDto dto) {
 		
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+	    
+	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
+	    System.out.println("sumScore : " + sumScore);
+	    
 		if (dto.getAbsent() == null || dto.getAbsent() < 0) {
+
 	    	throw new CustomRestfullException("결석 횟수를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 	    

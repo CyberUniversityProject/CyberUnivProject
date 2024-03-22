@@ -277,7 +277,12 @@ public class ProfessorController {
 											UpdateStudentSubDetailDto dto) {
 		
 		
-		
+		if (dto.getFinalExam() == null || dto.getFinalExam() < 0) {
+			throw new CustomRestfullException("강의 명을 입력하세요.", HttpStatus.BAD_REQUEST);
+		}
+		if (dto.getLateness() == null || dto.getLateness() > 5) {
+			throw new CustomRestfullException("성적이 F학점입니다.", HttpStatus.BAD_REQUEST);
+		}
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
 	    if (!(principal instanceof PrincipalDto)) {

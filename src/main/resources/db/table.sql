@@ -349,27 +349,7 @@ CREATE TABLE cu_comment (
 
 );
 
-<<<<<<< HEAD
-CREATE TABLE cu_community (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content VARCHAR(1000),
-    userName VARCHAR(100) NOT NULL,
-    createDate DATETIME NOT NULL
-);
 
-ALTER TABLE cu_comment ADD COLUMN role varchar(10);
-
-
-CREATE TABLE cu_comment (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    community_id INT,
-    content TEXT,
-    createDate DATETIME NOT NULL,
-    user_id varchar(20),
-    FOREIGN KEY (community_id) REFERENCES cu_community(id)
-);
-=======
 create table cu_payment (
  id int NOT NULL AUTO_INCREMENT,
  u_id varchar(20) NOT NULL,
@@ -382,6 +362,5 @@ create table cu_payment (
  
 
 ); 
->>>>>>> dev
 
 

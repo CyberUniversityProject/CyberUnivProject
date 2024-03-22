@@ -111,7 +111,7 @@
 
 											<div class="my-3 row">
 												<label for="lastName" class="form-label">휴학구분</label> <input
-													type="hidden" id="type" value="일반"></input>
+													type="hidden" id="type" value="일반휴학(개인사정,기타)"></input>
 
 												<div class="col-sm-6">
 													<div class="form-check">
@@ -232,16 +232,16 @@
 										<hr class="my-4">
 										<div class="form-check">
 											<input type="checkbox" class="form-check-input"
-												id="same-address"> <a href="#"><label
+												id="personal"> <a href="#"><label
 												class="form-check-label" for="same-address">개인정보 수집
 													및 활용 동의서 </label></a>
 										</div>
 
 										<div class="form-check">
 											<input type="checkbox" class="form-check-input"
-												id="save-info"> <a href="#"><label
+												id="private"> <a href="#"><label
 												class="form-check-label" for="save-info">민감정보 수집·이용
-													동의(해당자만 동의여부 체크하세요)</label></a>
+													동의</label></a>
 										</div>
 
 
@@ -498,24 +498,31 @@
 		const loaBtn = document.getElementById("loa-btn");
 		
 		loaBtn.addEventListener("click", async function(event){
-			/*if(!confirm("휴학 신청을 하시겠습니까?")){
-				event.preventDefault();
-				return;
-			}*/
+
 
 			let studentId = document.getElementById("studentId").value;
 			let studentGrade = document.getElementById("studentGrade").value;
 			let appDate = document.getElementById("appDate").value;
 
-			console.log("studentId : " + studentId);
-			console.log("studentGrade : " + studentGrade);
-			console.log("startYearValue" + startYearValue);
-			console.log("endYearValue" + endYearValue);
-			console.log("fromSemesterValue"+fromSemesterValue);
-			console.log("toSemesterValue"+toSemesterValue);
-			console.log("type : " + type);
-			console.log("appDate : " + appDate);
-			
+			// 개인정보 및 민감정보 동의 여부 확인
+		    const personalAgreement = document.getElementById("personal").checked;
+		    const privateAgreement = document.getElementById("private").checked;
+
+		    if (!personalAgreement && !privateAgreement) {
+		        alert('개인정보 및 민감정보 제공에 모두 동의해야 합니다.');
+		        return;
+		    }
+
+		    if (!personalAgreement) {
+		        alert('개인 정보 제공 동의를 체크해주세요.');
+		        return;
+		    }
+
+		    if (!privateAgreement) {
+		        alert('민감 정보 제공 동의를 체크해주세요.');
+		        return;
+		    }
+
 	        let formData = {
 	                "studentId": studentId,
 	                "studentGrade": studentGrade,
@@ -549,7 +556,7 @@
 	            // 오류가 발생한 경우
 	            alert(error.message);
 	        }
-		});	// loaBtn.addEventListener end
+		});	
 
 	});
 	</script>

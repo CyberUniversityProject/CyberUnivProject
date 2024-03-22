@@ -650,26 +650,13 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 					<p>오늘의 학식</p>
 				</div>
 				<div class="row" id="dietList">
-					<div class="col">
-						<div class="card">
-							<div class="card-header">Quote</div>
-							<div class="card-body">
-								<blockquote class="blockquote mb-0">
-									<p>여기에 menuList[0]~[6]이 들어올 자리</p>
-									<footer class="blockquote-footer">
-										Someone famous in <cite title="Source Title">Source
-											Title</cite>
-									</footer>
-								</blockquote>
-							</div>
-						</div>
-					</div>
+
 				</div>
 
 
 			</div>
 		</section>
-		<!-- End 학사일정 -->
+		<!-- End 학식 -->
 
 
 

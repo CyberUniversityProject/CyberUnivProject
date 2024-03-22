@@ -83,10 +83,12 @@
                   <label for="email">이메일</label>
                   <input type="text" name="email" id="email" class="form-control">
                 </div>
-                <div class="form-group">
-                  <label for="deptId">과 ID</label>
-                  <input type="text" name="deptId" id="deptId" class="form-control">
-                </div>
+               <div class="form-group">
+										<label for="deptId">학과</label> <select class="form-control"
+											id="deptId" name="deptId">
+											<option value="">학과를 선택하세요</option>
+										</select>
+									</div>
                 <button type="submit" class="btn--confirm">등록하기</button>
               </form>
             </div>
@@ -99,7 +101,7 @@
 
   <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
@@ -107,6 +109,34 @@
     $('form').submit(function() {
       alert("등록되었습니다.");
     });
+    
+    
+	// 학과 목록을 가져오는 함수
+	function getDepts() {
+		$.ajax({
+			url : '/api/department/findAll',
+			type : 'GET',
+			dataType : 'json',
+			success : function(data) {
+				var select = $('#deptId');
+				console.log(data);
+
+				$.each(data, function(index, dept) {
+					select.append($('<option>', {
+						value : dept.id,
+						text : dept.id + ' (' + dept.name + '/'
+								+ dept.collegeName + ')'
+					}));
+				});
+			},
+			error : function(xhr, status, error) {
+				console.error(xhr.responseText);
+			}
+		});
+
+		
+	}
+	getDepts();
   });
 </script>
   

@@ -26,8 +26,7 @@
 		<div class="row">
 			 <%@ include file="/WEB-INF/view/layout/professorAsidebar.jsp"%>
 			<div class="col-md-10 p-5">
-				<form action="/professor/apply" method="post"
-					class="form--container">
+				<form action="/professor/apply" method="post" class="form--container" onsubmit="return validateForm()">
 					<div class="card">
 						<div class="card-body">
 							<div class="mb-3">
@@ -79,58 +78,59 @@
 	</div>
 
 	<script>
-		function validateForm() {
-			var subName = document.getElementById("subName").value.trim();
-			var proName = document.getElementById("proName").value.trim();
-			var time = document.getElementById("time").value.trim();
-			var subGrade = document.getElementById("subGrade").value.trim();
-			var capacity = document.getElementById("capacity").value.trim();
-			var majorChecked = document.getElementById("major").checked;
-			var cultureChecked = document.getElementById("culture").checked;
-			var errorMessage = "";
-			var numericExpression = /^[0-9]+$/;
+        function validateForm() {
+            var subName = document.getElementById("subName").value.trim();
+            var proName = document.getElementById("proName").value.trim();
+            var subTime = document.getElementById("subTime").value.trim();
+            var subGrade = document.getElementById("subGrade").value.trim();
+            var capacity = document.getElementById("capacity").value.trim();
+            var majorChecked = document.getElementById("major").checked;
+            var cultureChecked = document.getElementById("culture").checked;
+            var errorMessage = "";
+            var numericExpression = /^[0-9]+$/;
 
-			if (subName === "") {
-				errorMessage += "강의명을 입력하세요.\n";
-			}
+            if (subName === "") {
+                errorMessage += "강의명을 입력하세요.\n";
+            }
 
-			if (proName === "") {
-				errorMessage += "교수이름을 입력하세요.\n";
-			}
+            if (proName === "") {
+                errorMessage += "교수이름을 입력하세요.\n";
+            }
 
-			if (!numericExpression.test(time)) {
-				errorMessage += "강의 시간은 숫자만 입력하세요.\n";
-			}
-			if (time === "") {
-				errorMessage += "강의 시간을 입력하세요.\n";
-			}
+            if (!numericExpression.test(subTime)) {
+                errorMessage += "강의 시간은 숫자만 입력하세요.\n";
+            }
+            
+            if (subTime === "") {
+                errorMessage += "강의 시간을 입력하세요.\n";
+            }
 
-			if (!numericExpression.test(subGrade)) {
-				errorMessage += "학점은 숫자만 입력하세요.\n";
-			}
-			if (subGrade === "") {
-				errorMessage += "학점을 입력하세요.\n";
-			}
+            if (!numericExpression.test(subGrade)) {
+                errorMessage += "학점은 숫자만 입력하세요.\n";
+            }
+            if (subGrade === "") {
+                errorMessage += "학점을 입력하세요.\n";
+            }
 
-			if (!numericExpression.test(capacity)) {
-				errorMessage += "정원은 숫자만 입력하세요.\n";
-			}
-			if (capacity === "") {
-				errorMessage += "정원을 입력하세요.\n";
-			}
+            if (!numericExpression.test(capacity)) {
+                errorMessage += "정원은 숫자만 입력하세요.\n";
+            }
+            if (capacity === "") {
+                errorMessage += "정원을 입력하세요.\n";
+            }
 
-			if (!majorChecked && !cultureChecked) {
-				errorMessage += "전공 또는 교양을 선택하세요.\n";
-			}
+            if (!majorChecked && !cultureChecked) {
+                errorMessage += "전공 또는 교양을 선택하세요.\n";
+            }
 
-			if (errorMessage !== "") {
-				alert(errorMessage);
-				return false;
-			}
+            if (errorMessage !== "") {
+                alert(errorMessage);
+                return false;
+            }
 
-			return true;
-		}
-	</script>
+            return true;
+        }
+    </script>
 
 </body>
 </html>

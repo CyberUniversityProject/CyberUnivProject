@@ -1,5 +1,7 @@
 package com.cyber.university.dto.professor;
 
+import java.util.regex.Pattern;
+
 import lombok.Data;
 
 /**
@@ -19,4 +21,5 @@ public class ApplySubjectDto {
 	private String type; // 전공/교양
 	private Integer subGrade; // 이수 학점
 	private Integer capacity; // 총 인원
+	
 }

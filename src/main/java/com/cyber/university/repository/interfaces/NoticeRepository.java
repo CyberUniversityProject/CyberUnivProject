@@ -19,33 +19,36 @@ import com.cyber.university.repository.model.Notice;
   */
 @Mapper
 public interface NoticeRepository {
-	/**
-	 * 기본 CRUD
-	 */
 	public int insert(NoticeFormDto noticeFormDto);
 	public List<Notice> selectByNoticeDto(NoticePageFormDto noticePageFormDto);
 	public Notice selectById(Integer id);
 	public int updateByNoticeDto(NoticeFormDto noticeFormDto);
 	public int deleteById(Integer id);
 	
-	/**
-	 * 페이징
-	 */ 
+	// 파일
+	public int insertFile(NoticeFormDto noticeFormDto);
+	public int selectLimit(NoticeFormDto noticeFormDto);
+	
+	// 페이징
+	public List<Notice> selectByNoticeDtoOrderBy();
 	public Integer selectNoticeCount(NoticePageFormDto noticePageFormDto);
 	
+	// 검색
+	public List<Notice> selectNoticeByKeyword(NoticePageFormDto noticePageFormDto);
+	public List<Notice> selectNoticeByTitle(NoticePageFormDto noticePageFormDto);
+	public Integer selectNoticeCountByTitle(NoticePageFormDto noticePageFormDto);
+	public Integer selectNoticeCountByKeyword(NoticePageFormDto noticePageFormDto);
 	
+	// 조회수
+	public Integer updateViews(Integer id);
+	
+	// 메인 페이지에 사용할 최신글 5개
+	public List<NoticeFormDto> selectLimit5();
 	/**
 	 * 메인화면에 보여줄 공지사항 조회	
 	 * @Author : 준혁
 	 * @return
 	 */
 	public List<NoticeResDto> selectMainNotice();
-	
-	/**
-	 * 검색 기능
-	 */
-	public List<Notice> selectNoticeByTitle(NoticePageFormDto noticePageFormDto);
-	public List<Notice> selectNoticeByKeyword(NoticePageFormDto noticePageFormDto);
-	public Integer selectNoticeCountByTitle(NoticePageFormDto noticePageFormDto);
-	public Integer selectNoticeCountByKeyword(NoticePageFormDto noticePageFormDto);
+
 }

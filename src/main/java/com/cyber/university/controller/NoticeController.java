@@ -42,65 +42,38 @@ public class NoticeController {
 	
 	@Autowired 
 	NoticeService noticeService;
-	
 	/**
-	 * 공지사항 페이지
+	 * 
+	 * @return 공지사항 페이지
 	 */
 	@GetMapping("")
-	public String notice(Model model)  {
+	public String notice(Model model, @RequestParam(name ="crud",defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
 		noticePageFormDto.setPage(0);
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
-		Integer amount = noticeService.noticeAmount(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+
 		model.addAttribute("listCount", Math.ceil(amount / 10.0));
-		
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
 			model.addAttribute("noticeList", noticeList);
 		}
-		return "/notice/noticeList";
+		return "/notice/notice";
 	}
-	
+
 	/**
-	 * 공지사항 페이지 이동
+	 * 
+	 * @return 공지사항 입력 기능
 	 */
-	@GetMapping("/list/{page}")
-	public String noticeListByPage(Model model, @PathVariable("page") Integer page) {
-		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
-		noticePageFormDto.setPage((page - 1) * 10);
-		log.info("noticePageFormDto:" + noticePageFormDto);
-		
-		Integer amount = noticeService.noticeAmount(noticePageFormDto);
-		log.info("amount1:" + amount);
-		log.info("noticePageFormDto:" + noticePageFormDto);
-		
-		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
-		model.addAttribute("listCount", Math.ceil(amount / 10.0));
-		log.info("model:" + model);
-		
-		if(noticeList.isEmpty()) {
-			model.addAttribute("noticeList", null);
-		} else {
-			model.addAttribute("noticeList", noticeList);
-		}
-		return "/notice/noticeList";
-	}
-	
-	/**
-	 * 공지사항 입력 기능
-	 */
-	@GetMapping("/write")
-	public String insertNoticeForm () {
-		return "/notice/noticeWrite";
-	}
 	@PostMapping("/write")
 	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
-		// todo: 파일 추가 기능
+
 		MultipartFile file = noticeFormDto.getFile();
 		if (file.isEmpty() == false) {
 			if (file.getSize() > Define.MAX_FILE_SIZE) {
-				throw new CustomRestfullException("파일 크기는 20MB를 넘길 수 없습니다.", HttpStatus.BAD_REQUEST);
+				throw new CustomRestfullException("파일 크기는 20MB 이상 클 수 없습니다.", HttpStatus.BAD_REQUEST);
 			}
 			try {
 				String saveDirectory = Define.UPLOAD_DIRECTORY;
@@ -115,115 +88,125 @@ public class NoticeController {
 				file.transferTo(destination);
 				noticeFormDto.setOriginFilename(file.getOriginalFilename());
 				noticeFormDto.setUuidFilename(fileName);
-			}catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		noticeService.insertNotice(noticeFormDto);
+		noticeService.readNotice(noticeFormDto);
 		return "redirect:/notice";
 	}
 
-/**
-  * @Method Name : update
-  * @작성일 : 2024. 3. 13.
-  * @작성자 : 조유빈
-  * @변경이력 : 
-  * @Method 설명 : 공지사항 상세 페이지, 수정 기능
-  * @param noticeFormDto
-  * @return
-  */
-	
 	/**
 	 * 
-	 * 공지사항 상세페이지
+	 * @return 공지사항 상세 조회 기능
 	 */
 	@GetMapping("/read")
-	public String selectByIdNotice(Model model, @RequestParam("id") Integer id) {
+	public String selectByIdNotice(Model model, @RequestParam(name = "id") Integer id) {
+		model.addAttribute("crud", "read");
 		model.addAttribute("id", id);
-		Notice notice = noticeService.readNoticeById(id);
+		Notice notice = noticeService.readByIdNotice(id);
 		if (notice == null) {
 			model.addAttribute("notice", null);
 		} else {
 			model.addAttribute("notice", notice);
 		}
 		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
-		
-		return "/notice/noticeDetail";
+
+		return "/notice/notice";
 	}
-	
+
 	/**
-	 * 공지사항 수정 페이지
+	 * 공지사항 페이지 이동
+	 */
+	@GetMapping("/list/{page}")
+	public String showNoticeListByPage(Model model, @RequestParam(name = "crud",defaultValue = "select") String crud,
+			@PathVariable(name="page") Integer page) {
+		model.addAttribute("crud", crud);
+		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage((page - 1) * 10);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/notice/notice";
+	}
+
+	/**
+	 * 공지사항 검색 기능
+	 */
+	@GetMapping("/search")
+	public String showNoticeByKeyword(Model model, NoticePageFormDto noticePageFormDto) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+		model.addAttribute("crud", "selectKeyword");
+		noticePageFormDto.setPage(0);
+		List<Notice> noticeList = noticeService.readNoticeByKeyword(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/notice/notice";
+	}
+
+	/**
+	 * 공지사항 검색 기능 (키워드 검색 페이징 처리)
+	 */
+	@GetMapping("/search/{page}")
+	public String showNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto,
+			@PathVariable(name ="page") Integer page, @RequestParam(name ="keyword") String keyword) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+		model.addAttribute("crud", "selectKeyword");
+		noticePageFormDto.setPage((page - 1) * 10);
+		List<Notice> noticeList = noticeService.readNoticeByKeyword(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/notice/notice";
+	}
+
+	/**
+	 * 
+	 * @return 공지사항 수정 페이지
 	 */
 	@GetMapping("/update")
-	public String update(Model model, @RequestParam("id") Integer id) {
+	public String update(Model model, @RequestParam(name ="id") Integer id) {
+		model.addAttribute("crud", "update");
 		model.addAttribute("id", id);
-		Notice notice = noticeService.readNoticeById(id);
+
+		Notice notice = noticeService.readByIdNotice(id);
 		model.addAttribute("notice", notice);
-		return "/notice/noticeUpdate";
+		return "/notice/notice";
 	}
-	
+
 	/**
-	 * 공지사항 수정 기능
+	 * 
+	 * @return 공지사항 수정 기능
 	 */
 	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
 		noticeService.updateNotice(noticeFormDto);
 		return "redirect:/notice";
 	}
-	
+
 	/**
-	 * 공지사항 삭제 기능
+	 * 
+	 * @return 공지사항 삭제 조회 기능
 	 */
 	@GetMapping("/delete")
-	public String delete(Model model,  @RequestParam("id") Integer id) {
+	public String delete(Model model, @RequestParam(name ="id") Integer id) {
 		model.addAttribute("id", id);
 		noticeService.deleteNotice(id);
 		return "redirect:/notice";
-	}
-	
-	/**
-	  * @Method Name : noticeSearch
-	  * @작성일 : 2024. 3. 18.
-	  * @작성자 : 조유빈
-	  * @변경이력 : 3.18 생성
-	  * @Method 설명 : 공지사항 검색
-	  * @return
-	  */
-	
-	/**
-	 * 공지사항 검색 기능
-	 */
-	@GetMapping("/search")
-	public String searchNoticeByKeyword(Model model, NoticePageFormDto noticePageFormDto) {
-		model.addAttribute("keyword", noticePageFormDto.getKeyword());
-		noticePageFormDto.setPage(0);
-		List<Notice> noticeList = noticeService.searchNotice(noticePageFormDto);
-		if(noticeList.isEmpty()) {
-			model.addAttribute("noticeList", null);
-		} else {
-			model.addAttribute("noticeList", noticeList);
-		}
-		return "/notice/noticeList";
-	}
-	
-	/**
-	 * 
-	 * 공지사항 검색 기능 (키워드 검색, 페이징 처리)
-	 */
-	@GetMapping("/search/{page}")
-	public String searchNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto, 
-			@PathVariable Integer page, @RequestParam("keyword") String keyword) {
-		model.addAttribute("keyword", noticePageFormDto.getKeyword());
-		noticePageFormDto.setPage((page - 1) * 10);
-		List<Notice> noticeList = noticeService.searchNotice(noticePageFormDto);
-		Integer amount = noticeService.noticeAmount(noticePageFormDto);
-		model.addAttribute("listCount", Math.ceil(amount / 10.0));
-		
-		if(noticeList.isEmpty()) {
-			model.addAttribute("noticeList", null);
-		} else {
-			model.addAttribute("noticeList", noticeList);
-		}
-		return "/notice/noticeList";
 	}
 }

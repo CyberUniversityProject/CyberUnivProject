@@ -298,6 +298,7 @@ public class ProfessorController {
 											@RequestParam("grade") String grade,
 											UpdateStudentSubDetailDto dto) {
 		
+
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
 	    if (principal == null) {
@@ -307,7 +308,8 @@ public class ProfessorController {
 	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
 	    System.out.println("sumScore : " + sumScore);
 	    
-	    if (dto.getAbsent() == null || dto.getAbsent() < 0) {
+		if (dto.getAbsent() == null || dto.getAbsent() < 0) {
+
 	    	throw new CustomRestfullException("결석 횟수를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 	    
@@ -330,6 +332,18 @@ public class ProfessorController {
 	    if (dto.getConvertedMark() == null || dto.getConvertedMark() < 0) {
 	    	throw new CustomRestfullException("환산 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
 	    }
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (!(principal instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+	    
+	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
+	    System.out.println("sumScore : " + sumScore);
+	    
+	    
 	    
 	    if (dto.getConvertedMark() != sumScore) {
 			throw new CustomRestfullException("잘못된 환산 점수 입니다", HttpStatus.BAD_REQUEST);

@@ -120,5 +120,23 @@ public class SubjectService {
 		Subject subjectEntity = subjectRepository.selectSubjectById(id);
 		return subjectEntity;
 	}
+	
+	
+	
+	 public List<Subject> findAllPost(int page, int size) {
+	        // 페이징 처리를 위해 offset 계산
+	        int offset = (page - 1) * size;
+	        // 페이징된 강의실 목록 조회
+	        return subjectRepository.findAllwithPaging(offset, size);
+	    }
+	 
+	 
+	 public int getTotalPages(int size) {
+	        // 전체 데이터 개수 가져오기
+	        int totalRecords = subjectRepository.getAllCount();
+	        // 전체 페이지 수 계산
+	        int totalPages = (int) Math.ceil((double) totalRecords / size);
+	        return totalPages;
+	    }
 
 }

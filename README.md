@@ -18,7 +18,8 @@
 - 2024.03.11 ~ 2024.03.26 (12일)
 
 2) 일정관리
-![image](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/e32a4703-30e9-4bf5-81c4-3b500df88237)
+![image](https://github.com/CyberUniversityProject/CyberUnivProject/assets/126323071/71ac3b7b-84b4-48b5-b3f2-38acaf54ed5b)
+
 
 
 ## 👨‍👩‍👧‍👦 팀원 구성

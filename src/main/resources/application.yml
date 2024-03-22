@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
   servlet:
     encoding:
       charset: utf-8
@@ -25,9 +25,9 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
   datasource:
-    url: jdbc:mysql://54.180.81.23:3306/cyberuni?serverTimeZone=Asia/Seoul
+    url: jdbc:mysql://database-1.chyqscqk4zrv.ap-northeast-2.rds.amazonaws.com:3306/cyberuniv?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: cyberuni
+    username: admin
     password: Asd123456789!
 #  datasource: # DB 설정
 #    url: jdbc:h2:mem:testdb;MODE=MySQL

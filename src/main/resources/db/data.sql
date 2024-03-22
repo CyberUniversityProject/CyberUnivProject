@@ -1,4 +1,3 @@
-SELECT * FROM cu_tuition;
 
 -- 대학
 INSERT INTO cu_college VALUES (1, '공과대학');

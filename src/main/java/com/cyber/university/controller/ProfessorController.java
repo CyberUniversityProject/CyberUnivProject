@@ -34,7 +34,6 @@ import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -50,7 +49,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Controller
 @RequestMapping("/professor")
-@Slf4j
 public class ProfessorController {
 	
 	@Autowired
@@ -141,16 +139,16 @@ public class ProfessorController {
 		}
 		
 		if (dto.getSubTime() == null || dto.getSubTime() < 0) {
-			throw new CustomRestfullException("잘못된 강의 시간입니다.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("올바른 강의 시간입니다.", HttpStatus.BAD_REQUEST);
 		}
-			
+		
 		
 		if (dto.getSubGrade() == null || dto.getSubGrade() < 0) {
-			throw new CustomRestfullException("잘못된 이수 학점입니다.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("올바른 이수 학점입니다.", HttpStatus.BAD_REQUEST);
 		}
 		
 		if (dto.getCapacity() == null || dto.getCapacity() < 0) {
-			throw new CustomRestfullException("잘못된 인원 수 입니다.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("올바른 인원 수 입니다.", HttpStatus.BAD_REQUEST);
 		}
 		
 		professorService.insertApplySubject(dto, userId);
@@ -283,6 +281,41 @@ public class ProfessorController {
 	    if (!(principal instanceof PrincipalDto)) {
 	    	
 	        return "redirect:/login";
+	    }
+	    
+	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
+	    System.out.println("sumScore : " + sumScore);
+	    
+	    if (dto.getAbsent() == null || dto.getAbsent() < 0) {
+	    	throw new CustomRestfullException("결석 횟수를 입력해주세요", HttpStatus.BAD_REQUEST);
+		}
+	    
+	    if (dto.getLateness() == null || dto.getLateness() < 0) {
+	    	throw new CustomRestfullException("지각 횟수를 입력해주세요", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    if (dto.getHomework() == null || dto.getHomework() < 0) {
+	    	throw new CustomRestfullException("과제 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    if (dto.getMidExam() == null || dto.getMidExam() < 0) {
+	    	throw new CustomRestfullException("중간고사 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    if (dto.getFinalExam() == null || dto.getFinalExam() < 0) {
+	    	throw new CustomRestfullException("기말고사 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    if (dto.getConvertedMark() == null || dto.getConvertedMark() < 0) {
+	    	throw new CustomRestfullException("환산 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    if (dto.getConvertedMark() != sumScore) {
+			throw new CustomRestfullException("잘못된 환산 점수 입니다", HttpStatus.BAD_REQUEST);
+	    }	    
+	    
+	    if (dto.getLateness() >= 5) {
+	        grade = "F";
 	    }
 	    
 	    professorService.updateStudentSubDetail(studentId, subjectId, dto);

@@ -48,7 +48,11 @@ public class NoticeService {
 		if(resultRowCount != 1) {
 			System.out.println("공지 입력 오류");
 		}
-		
+		int noticeId = noticeRepository.selectLimit(noticeFormDto);
+		noticeFormDto.setNoticeId(noticeId);
+		if (noticeFormDto.getOriginFilename() != null) {
+			noticeRepository.insertFile(noticeFormDto);
+		}
 		
 	 }
 	
@@ -76,9 +80,10 @@ public class NoticeService {
 	 */
 	public Notice readNoticeById(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
+		
 		// 조회수
-		// Integer view = noticeRepository.updateView(id);
-		// notice.setViews(view);
+		Integer view = noticeRepository.updateViews(id);
+		notice.setViews(view);
 		return notice;
 	}
 	

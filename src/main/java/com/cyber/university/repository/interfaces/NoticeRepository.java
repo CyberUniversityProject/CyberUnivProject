@@ -28,6 +28,17 @@ public interface NoticeRepository {
 	public int updateByNoticeDto(NoticeFormDto noticeFormDto);
 	public int deleteById(Integer id);
 	
+	/*
+	 * 파일
+	 */
+	public int insertFile(NoticeFormDto noticeFormDto);
+	public int selectLimit(NoticeFormDto noticeFormDto);
+	
+	/*
+	 * 공지사항 조회수
+	 */
+	public Integer updateViews(Integer id);
+	
 	/**
 	 * 페이징
 	 */ 

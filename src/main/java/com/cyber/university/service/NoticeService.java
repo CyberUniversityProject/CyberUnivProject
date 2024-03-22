@@ -30,30 +30,22 @@ public class NoticeService {
 	private NoticeRepository noticeRepository;
 	
 	/**
-	 * 
-	  * @Method Name : insertNotice
-	  * @작성일 : 2024. 3. 11.
-	  * @작성자 : 조유빈
-	  * @변경이력 : 
-	  * @Method 설명 : 공지사항 작성, 목록 조회
-	  * @param noticeDto
-	  * @return
+	 * 공지 입력 서비스
 	 */
-	
-	/**
-	 * 공지사항 작성
-	 */
-	 public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
+	public void readNotice(@Validated NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
-		if(resultRowCount != 1) {
-			System.out.println("공지 입력 오류");
+		if (resultRowCount != 1) {
+			System.out.println("공지 입력 서비스 오류");
 		}
-		
-		
-	 }
-	
+		int noticeId = noticeRepository.selectLimit(noticeFormDto);
+		noticeFormDto.setNoticeId(noticeId);
+		if (noticeFormDto.getOriginFilename() != null) {
+			noticeRepository.insertFile(noticeFormDto);
+		}
+	}
+
 	/**
-	 * 공지사항 조회 
+	 * 공지 조회 서비스
 	 */
 	public List<Notice> readNotice(NoticePageFormDto noticePageFormDto) {
 		List<Notice> noticeList = noticeRepository.selectByNoticeDto(noticePageFormDto);
@@ -62,28 +54,49 @@ public class NoticeService {
 
 	/**
 	 * 
-	  * @Method Name : readByIdNotice
-	  * @작성일 : 2024. 3. 13.
-	  * @작성자 : 조유빈
-	  * @변경이력 : 
-	  * @Method 설명 : 공지사항 상세페이지
-	  * @param id
-	  * @return
+	 * @param noticePageFormDto
+	 * @return 공지 갯수 확인 서비스
 	 */
-	
+	public Integer readNoticeAmount(NoticePageFormDto noticePageFormDto) {
+		Integer amount = null;
+		if (noticePageFormDto.getKeyword() == null) {
+			amount = noticeRepository.selectNoticeCount(noticePageFormDto);
+		} else {
+			if ("title".equals(noticePageFormDto.getType())) {
+				amount = noticeRepository.selectNoticeCountByTitle(noticePageFormDto);
+			} else {
+				amount = noticeRepository.selectNoticeCountByKeyword(noticePageFormDto);
+			}
+		}
+		return amount;
+	}
+
 	/**
-	 * 공지사항 상세페이지 
+	 * 공지 검색 서비스
 	 */
-	public Notice readNoticeById(Integer id) {
+	public List<Notice> readNoticeByKeyword(NoticePageFormDto noticePageFormDto) {
+		List<Notice> noticeList = null;
+
+		if ("title".equals(noticePageFormDto.getType())) {
+			noticeList = noticeRepository.selectNoticeByTitle(noticePageFormDto);
+		} else {
+			noticeList = noticeRepository.selectNoticeByKeyword(noticePageFormDto);
+		}
+		return noticeList;
+	}
+
+	/**
+	 * 공지 상세 조회 서비스
+	 */
+	public Notice readByIdNotice(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
-		// 조회수
-		// Integer view = noticeRepository.updateView(id);
-		// notice.setViews(view);
+		Integer views = noticeRepository.updateViews(id);
+		notice.setViews(views);
 		return notice;
 	}
-	
+
 	/**
-	 * 공지사항 수정 
+	 * 공지 수정 서비스
 	 */
 	public int updateNotice(NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.updateByNoticeDto(noticeFormDto);
@@ -94,13 +107,21 @@ public class NoticeService {
 	}
 
 	/**
-	 * 공지사항 삭제
+	 * 공지 삭제 서비스
 	 */
 	public int deleteNotice(Integer id) {
 		int resultRowCount = noticeRepository.deleteById(id);
 		return resultRowCount;
 	}
-
+	
+	/**
+	 * 최근 글 5개 조회
+	 */
+	public List<NoticeFormDto> readCurrentNotice() {
+		List<NoticeFormDto> noticeList = noticeRepository.selectLimit5();
+		return noticeList;
+	}
+	
 	/**
 	 * 메인 화면에 보여줄 공지사항 조회
 	 * @Author : 준혁
@@ -110,35 +131,6 @@ public class NoticeService {
 		return noticeRepository.selectMainNotice();
 	}
 	
-	/**
-	 * 공지사항 검색
-	 */
-	public List<Notice> searchNotice(NoticePageFormDto noticePageFormDto){
-		List<Notice> noticeList = null;
-		
-		if("title".equals(noticePageFormDto.getType())) {
-			noticeList = noticeRepository.selectNoticeByTitle(noticePageFormDto);
-		} else {
-			noticeList = noticeRepository.selectNoticeByKeyword(noticePageFormDto);
-		}
-		return noticeList;
-	}
 	
-	/**
-	 * 공지사항 개수 확인
-	 */
-	public Integer noticeAmount (NoticePageFormDto noticePageFormDto) {
-		Integer amount = null;
-		if(noticePageFormDto.getKeyword() == null) {
-			amount = noticeRepository.selectNoticeCount(noticePageFormDto);
-		} else {
-			if("title".equals(noticePageFormDto.getType())) {
-				amount = noticeRepository.selectNoticeCountByTitle(noticePageFormDto);
-			}else {
-				amount = noticeRepository.selectNoticeCountByKeyword(noticePageFormDto);
-			}
-		}
-		return amount;
-	}
 	
 }

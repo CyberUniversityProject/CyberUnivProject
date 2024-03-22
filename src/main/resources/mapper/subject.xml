@@ -51,6 +51,18 @@
 		resultType="com.cyber.university.repository.model.Subject">
 		select * from cu_subject
 	</select>
+	
+	<select id="findAllwithPaging"
+		resultType="com.cyber.university.repository.model.Subject">
+		SELECT * FROM cu_subject
+		LIMIT #{offset}, #{limit}
+</select>
+
+
+<!--전체 데이터 개수 -->
+	<select id="getAllCount" resultType="int">
+		SELECT COUNT(*) FROM cu_subject
+	</select>
 
 
 

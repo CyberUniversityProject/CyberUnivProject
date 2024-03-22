@@ -28,43 +28,57 @@ var parts = tuiInfoText.split(" ");
 // 결제 요청 함수
 function requestPay() {
 
-var tuiYear = tuiInfoText.match(/\d+/)[0];
-var semester = parts[1].replace(/[^0-9]/g, '');
-var buyerName = document.getElementById("buyer--name").innerText;
+	var tuiYear = tuiInfoText.match(/\d+/)[0];
+	var semester = parts[1].replace(/[^0-9]/g, '');
+	var buyerName = document.getElementById("buyer--name").innerText;
 
 	$.ajax({
-		url: "/buy/" + tuiYear +"/"+  semester,
+		url: "/buy/" + tuiYear + "/" + semester,
 		type: "GET",
 		data: {
-            tuiYear: tuiYear,
-            semester: semester,
-            buyerName: buyerName
-        },
+			tuiYear: tuiYear,
+			semester: semester,
+			buyerName: buyerName,
+			tuiAmount: tuiAmount,
+			schAmount: schAmount
+		},
 		success: function(paymentdto) {
 			var buyer_name = paymentdto.buyerName;
-			
+			var tuiYear = paymentdto.tuiYear;
+			var semester = paymentdto.semester;
+			var tuiAmount = paymentdto.tuiAmount;
+			var schAmount = paymentdto.schAmount;
+			var totalPrice = tuiAmount - schAmount;
 			IMP.request_pay({
 				pg: "kakaopay",
 				pay_method: "card",
-				merchant_uid: buyer_name + generateMerchantUid(), // 상점에서 생성한 고유 주문 번호
+				merchant_uid: buyer_name + "_" + generateMerchantUid(), // 상점에서 생성한 고유 주문 번호
 				name: "등록금 납부", // 상품명 또는 주문 내용
-				amount: totalAmount, // 결제 금액 (원 단위)
+				amount: totalPrice, // 결제 금액 (원 단위)
 				buyer_name: buyer_name, // 구매자 이름
-				
 
-			}, function (rsp) {
+
+			}, function(rsp) {
 				if (rsp.success) {
-					
+					var userData = {
+						"impUid": rsp.imp_uid,
+						"merchantUid": rsp.merchant_uid,
+						"buyerName": buyer_name,
+						"totalPrice": totalPrice,
+
+					};
+					console.log("impUid: ", userData.impUid);
+					console.log("merchantUid: ", userData.merchantUid);
+					console.log("buyerName: ", userData.buyerName);
+					console.log("totalPrice: ", userData.totalPrice);
+
 					jQuery.ajax({
-						url: "/buy/" + tuiYear +"/"+  semester,
+						url: "/buy/" + tuiYear + "/" + semester,
 						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						data: {
-							imp_uid: rsp.imp_uid,             // 결제 고유번호
-							merchant_uid: rsp.merchant_uid,   // 주문번호
-							amount: totalAmount,
-							buyer_name: buyer_name							
-						}
+						headers: {
+							"Content-Type": "application/json"
+						},
+						data: JSON.stringify(userData),
 					}).done(function(data) {
 						alert("결제가 완료되었습니다.");
 						window.close();
@@ -76,14 +90,21 @@ var buyerName = document.getElementById("buyer--name").innerText;
 			});
 		},
 		error: function(xhr, status, error) {
-            console.error("결제 정보를 받아오는 도중 오류가 발생했습니다:", error);
-            // 오류 처리 로직 추가
-        }
+			console.error("결제 정보를 받아오는 도중 오류가 발생했습니다:", error);
+			// 오류 처리 로직 추가
+		}
 	});
 
 
 
+function refreshParent() {
+		window.opener.location.reload(); // 부모 창 새로고침
+	}
 
+	// 자식 창 닫힐 때 부모 창 새로고침
+	window.onunload = function() {
+		refreshParent();
+	};
 
 
 

@@ -312,15 +312,55 @@ FOREIGN KEY (staff_id) REFERENCES cu_staff(id)
 );
 
 
-CREATE TABLE `cu_apply_sub` (
-    `id` int NOT NULL AUTO_INCREMENT, 
-    `pro_id` int NOT NULL, 
-    `sub_name` varchar(30) NOT NULL, 
-    `pro_name` varchar(20) NOT NULL, 
-    `sub_time` int NOT NULL, 
-    `type` char(2) NOT NULL, 
-    `sub_grade` int NOT NULL, 
-    `capacity` int NOT NULL, 
-    `approval` char(1) NOT NULL DEFAULT 'N', 
-    `reason` varchar(1000) DEFAULT NULL
+CREATE TABLE cu_apply_sub (
+    id int NOT NULL auto_increment primary key, 
+    pro_id int NOT NULL, 
+    sub_name varchar(30) NOT NULL, 
+    pro_name varchar(20) NOT NULL, 
+    sub_time int NOT NULL, 
+    type char(2) NOT NULL, 
+    sub_grade int NOT NULL, 
+    capacity int NOT NULL, 
+    approval char(1) NOT NULL DEFAULT 'N', 
+    reason varchar(1000) DEFAULT NULL
 );
+CREATE TABLE cu_community (
+  id int NOT NULL AUTO_INCREMENT,
+  title varchar(255) NOT NULL,
+  content varchar(1000) DEFAULT NULL,
+  userName varchar(100) NOT NULL,
+  createDate datetime NOT NULL,
+  updateDate datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+
+CREATE TABLE cu_comment (
+  id int NOT NULL AUTO_INCREMENT,
+  community_id int DEFAULT NULL,
+  content text,
+  createDate datetime NOT NULL,
+  user_id varchar(20) DEFAULT NULL,
+  role varchar(10) DEFAULT NULL,
+  updateDate datetime DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY fk_community_id(community_id),
+  CONSTRAINT fk_community_comment FOREIGN KEY (community_id) REFERENCES cu_community (id) ON DELETE CASCADE
+
+);
+
+
+create table cu_payment (
+ id int NOT NULL AUTO_INCREMENT,
+ u_id varchar(20) NOT NULL,
+ m_id varchar(20) NOT NULL,
+ stu_id int NOT NULL,
+ buyer_name varchar(20) not null,
+ total_price int not null,
+ payment_date timestamp DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (id)
+ 
+
+); 
+
+

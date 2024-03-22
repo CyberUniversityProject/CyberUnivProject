@@ -22,8 +22,8 @@ class CyberUniversityApplicationTests {
 	    void insertDummyData() {
 	        for (int i = 0; i < 1000; i++) {
 	            Community community = new Community();
-	            community.setTitle("게시글 제목 " + i);
-	            community.setContent("게시글 내용 " + i);
+	            community.setTitle("테스트 게시글 제목 " + i);
+	            community.setContent("테스트 게시글 내용 " + i);
 	            community.setUserName("user" + i);
 	            communityService.insertCommunity(community);
 	        }

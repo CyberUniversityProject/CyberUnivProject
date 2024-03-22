@@ -3,10 +3,11 @@ package com.cyber.university.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.cyber.university.dto.PaymentDto;
-import com.cyber.university.dto.PaymentInfoDto;
-import com.cyber.university.dto.UpdateTuitionInfoDto;
+import com.cyber.university.dto.payment.PaymentDto;
+import com.cyber.university.dto.payment.PaymentInfoDto;
+import com.cyber.university.dto.payment.SelectPaymentDateDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.PaymentRepository;
@@ -75,31 +76,74 @@ public class PaymentService {
 	  * @변경이력 : 
 	  * @Method 설명 : 결제 기록 등록
 	  */
+	@Transactional
 	public void insertPayment(PaymentDto dto) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer StudentId = principal.getId();
 		
 		Payment payment = new Payment();
-		payment.setUId(dto.getUId());
-		payment.setMId(dto.getMId());
+		payment.setUId(dto.getImpUid());
+		payment.setMId(dto.getMerchantUid());
+		payment.setStudentId(StudentId);
 		payment.setBuyerName(dto.getBuyerName());
-		payment.setSchAmount(dto.getSchAmount());
+		payment.setTotalPrice(dto.getTotalPrice());
 		
 		int resultRowCount = paymentRepository.insertPayment(payment);
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("결제가 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		} 
+		} 	
+	}
+	
+	/**
+	  * @Method Name : upateTuitionStatus
+	  * @작성일 : 2024. 3. 21.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 결제 완료 후 고지서 상태 변경
+	  */
+	@Transactional
+	public void upateTuitionStatus() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		PaymentInfoDto dto = paymentRepository.selectTuiYearAndSemester();
 		
-		UpdateTuitionInfoDto dto2 = new UpdateTuitionInfoDto();
-		dto2.setStatus(1);
-//		Tuition tuition = new Tuition();
-//		tuition.setSemester(1);
-//		tuition.setStudentId(dto2.getStudentId());
-//		tuition.setTuiYear(dto2.getTuiYear());
-//		tuition.setSemester(dto2.getSemester());
+		Tuition tuition = new Tuition();
+		tuition.setTuiYear(dto.getTuiYear());
+	    tuition.setSemester(dto.getSemester());
+	    tuition.setStudentId(principal.getId());
 		
-		if (resultRowCount == 1) {
-			paymentRepository.updateTuition(dto2);
-		} else {
-			throw new CustomRestfullException("결제가 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		}	
+	    System.out.println("tuition : " + tuition);
+	    
+		int result = paymentRepository.updateTuition(tuition);
+		if (result != 1) {
+			throw new CustomRestfullException("등록금 상태 업데이트에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	  * @Method Name : selectPaymentDate
+	  * @작성일 : 2024. 3. 22.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 결제 완료 기간 조회
+	  */
+	public SelectPaymentDateDto selectPaymentDate() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer studentId = principal.getId();
+		
+		return paymentRepository.selectPaymentDate(studentId);
+	}
+	
+	/**
+	  * @Method Name : selectPaymentAmount
+	  * @작성일 : 2024. 3. 22.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 실제 결제 금액 조회
+	  */
+	public Tuition selectPaymentAmount(Integer tuiYear, Integer semester) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer studentId = principal.getId();
+		
+		return paymentRepository.selectPaymentAmount(studentId, tuiYear, semester);
 	}
 }

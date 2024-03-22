@@ -111,7 +111,7 @@
 
 											<div class="my-3 row">
 												<label for="lastName" class="form-label">휴학구분</label> <input
-													type="hidden" id="type" value="일반휴학(개인사정,기타)"></input>
+													type="hidden" id="type" value="일반"></input>
 
 												<div class="col-sm-6">
 													<div class="form-check">

@@ -25,6 +25,7 @@ import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.ProfessorRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
+import com.cyber.university.repository.interfaces.SubjectRepository;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.repository.model.PageReq;
 import com.cyber.university.repository.model.PageRes;
@@ -50,6 +51,9 @@ public class ProfessorService {
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private SubjectRepository subjectRepository;
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment
@@ -350,4 +354,13 @@ public class ProfessorService {
 		}
 	}
 	
+	
+	// 강의계획서 불러오기
+	@Transactional
+	public ReadSyllabusDto readSyllabus(Integer subjectId) {
+
+		ReadSyllabusDto readSyllabusDto = subjectRepository.selectSyllabusBySubjectId(subjectId);
+		System.out.println(readSyllabusDto.toString());
+		return readSyllabusDto;
+	}
 }

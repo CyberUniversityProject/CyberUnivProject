@@ -330,9 +330,9 @@
 		ON s.professor_id = p.id
 		LEFT JOIN cu_department AS d
 		ON p.dept_id = d.id
-		LEFT JOIN syllabus_tb AS sy
+		LEFT JOIN cu_syllabus AS sy
 		ON s.id = sy.subject_id
-		LEFT JOIN room_tb AS r
+		LEFT JOIN cu_room AS r
 		ON s.room_id = r.id
 		LEFT JOIN cu_college AS c
 		ON r.college_id = c.id

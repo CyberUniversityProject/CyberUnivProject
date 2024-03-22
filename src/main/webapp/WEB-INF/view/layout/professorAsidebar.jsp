@@ -29,7 +29,7 @@
 						<c:if test="${principal.userRole.equals(\"professor\") }">
 						<li class="list-group-item p-3"><a href="/professor/apply"
 							class="text-dark d-flex align-items-center"> <i
-								class="bi bi-person-plus-fill mr-2"></i> 강의 등록
+								class="bi bi-person-plus-fill mr-2"></i> 강의 신청
 						</a></li>
 						</c:if>
 					</ul>

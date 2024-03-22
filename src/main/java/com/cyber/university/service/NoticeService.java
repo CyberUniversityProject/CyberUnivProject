@@ -44,20 +44,18 @@ public class NoticeService {
 	 * 공지사항 작성
 	 */
 	 public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
-	    log.info("dto2 : " + noticeFormDto);
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if(resultRowCount != 1) {
 			System.out.println("공지 입력 오류");
 		}
 		
+		
 	 }
-	
 	
 	/**
 	 * 공지사항 조회 
 	 */
 	public List<Notice> readNotice(NoticePageFormDto noticePageFormDto) {
-		log.info("dto3 : " + noticePageFormDto);
 		List<Notice> noticeList = noticeRepository.selectByNoticeDto(noticePageFormDto);
 		return noticeList;
 	}
@@ -76,9 +74,9 @@ public class NoticeService {
 	/**
 	 * 공지사항 상세페이지 
 	 */
-
 	public Notice readNoticeById(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
+		// 조회수
 		// Integer view = noticeRepository.updateView(id);
 		// notice.setViews(view);
 		return notice;
@@ -113,9 +111,9 @@ public class NoticeService {
 	}
 	
 	/**
-	 * 공지 검색 서비스
+	 * 공지사항 검색
 	 */
-	public List<Notice> noticeSearch(NoticePageFormDto noticePageFormDto){
+	public List<Notice> searchNotice(NoticePageFormDto noticePageFormDto){
 		List<Notice> noticeList = null;
 		
 		if("title".equals(noticePageFormDto.getType())) {
@@ -124,6 +122,23 @@ public class NoticeService {
 			noticeList = noticeRepository.selectNoticeByKeyword(noticePageFormDto);
 		}
 		return noticeList;
+	}
+	
+	/**
+	 * 공지사항 개수 확인
+	 */
+	public Integer noticeAmount (NoticePageFormDto noticePageFormDto) {
+		Integer amount = null;
+		if(noticePageFormDto.getKeyword() == null) {
+			amount = noticeRepository.selectNoticeCount(noticePageFormDto);
+		} else {
+			if("title".equals(noticePageFormDto.getType())) {
+				amount = noticeRepository.selectNoticeCountByTitle(noticePageFormDto);
+			}else {
+				amount = noticeRepository.selectNoticeCountByKeyword(noticePageFormDto);
+			}
+		}
+		return amount;
 	}
 	
 }

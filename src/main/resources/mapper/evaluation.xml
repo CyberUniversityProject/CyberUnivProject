@@ -2,44 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper	namespace="com.cyber.university.repository.interfaces.EvaluationRepository">
+<mapper
+	namespace="com.cyber.university.repository.interfaces.EvaluationRepository">
 
-	
-	<select id="selectEvaluationInfoByStudentId" resultType="com.cyber.university.dto.EvaluationInfoDto">
-		SELECT 
-			sj.sub_year AS subYear,
-		    sj.semester,
-		    sj.id AS subjectId,
-		    sj.name AS subjectName,
-		    st.id AS studentId,
-		    st.grade,
-		    st.name AS studentName,
-		    pr.name AS professorName
+
+	<select id="selectEvaluationInfoByStudentId"
+		resultType="com.cyber.university.dto.EvaluationInfoDto">
+		SELECT
+		sj.sub_year AS subYear,
+		sj.semester,
+		sj.id AS subjectId,
+		sj.name AS subjectName,
+		st.id AS studentId,
+		st.grade,
+		st.name AS studentName,
+		pr.name AS professorName
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_student AS st
-		ON ss.student_id = st.id
+		ON
+		ss.student_id = st.id
 		LEFT JOIN cu_subject AS sj
-		ON ss.subject_id = sj.id
+		ON ss.subject_id =
+		sj.id
 		LEFT JOIN cu_professor AS pr
 		ON sj.professor_id = pr.id
-		WHERE ss.student_id = #{studentId}
+		WHERE
+		ss.student_id = #{studentId}
 		AND sj.id = #{subjectId}
 	</select>
-	<select id="selectQuestion" resultType="com.cyber.university.repository.model.Question">
+	<select id="selectQuestion"
+		resultType="com.cyber.university.repository.model.Question">
 		select * from cu_question where id= 1;
 	</select>
 	<insert id="insertEvaluation">
-		INSERT INTO cu_evaluation 
-			(student_id, subject_id, 
-		    answer1, answer2, answer3, answer4, answer5, answer6, answer7,
-		    improvements)
+		INSERT INTO cu_evaluation
+		(student_id, subject_id,
+		answer1, answer2, answer3, answer4, answer5, answer6, answer7,
+		improvements)
 		VALUES
-			(#{studentId}, #{subjectId}, #{answer1}, #{answer2}, #{answer3}, #{answer4}, #{answer5}, #{answer6}, #{answer7}, #{improvements})
+		(#{studentId}, #{subjectId}, #{answer1}, #{answer2}, #{answer3}, #{answer4},
+		#{answer5}, #{answer6}, #{answer7}, #{improvements})
 	</insert>
 
-	<select id="selectEvaluationByStudentIdAndSubjectId" resultType="Integer">
+	<select id="selectEvaluationCountByStudentIdAndSubjectId"
+		resultType="Integer">
 		SELECT count(*) FROM cu_evaluation
-		WHERE student_id = #{studentId}
+		WHERE student_id =
+		#{studentId}
+		AND subject_id = #{subjectId}
+	</select>
+
+	<select id="selectEvaluationIdByStudentIdAndSubjectId"
+		resultType="com.cyber.university.repository.model.Evaluation">
+		SELECT * FROM cu_evaluation
+		WHERE student_id =
+		#{studentId}
 		AND subject_id = #{subjectId}
 	</select>
 

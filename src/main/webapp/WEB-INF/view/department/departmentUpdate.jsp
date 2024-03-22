@@ -51,7 +51,7 @@
                 </div>
               </ul>
               <div class="btn-wrap">
-                <button type="submit" class="btn-buy" style="border: none;">등록하기</button>
+                <button type="submit" class="btn-buy" style="border: none;">수정하기</button>
               </div>
             </div>
           </div>

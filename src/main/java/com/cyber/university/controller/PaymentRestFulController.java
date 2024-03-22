@@ -60,14 +60,15 @@ public class PaymentRestFulController {
 		
 		System.out.println("paymentPrice : " + paymentPrice);
 		
-		if (totalPrice == paymentPrice) {
-			paymentService.insertPayment(dto);			
-			paymentService.upateTuitionStatus();				
-		} else {
-			throw new CustomRestfullException("결제 금액이 유효하지 않습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		 if (totalPrice.equals(paymentPrice)) {
+		        paymentService.insertPayment(dto);            
+		        paymentService.upateTuitionStatus();               
+		        return ResponseEntity.ok("결제가 완료되었습니다.");
+		    } else {
+		        // totalPrice와 paymentPrice가 일치하지 않는 경우 처리
+		        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("결제 금액이 올바르지 않습니다.");
+		    }
 		
-		return ResponseEntity.ok("결제가 완료되었습니다.");
 		
 		
     }

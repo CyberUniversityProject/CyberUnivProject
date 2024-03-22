@@ -149,55 +149,7 @@
 							</form>
 						</div>
 					</div>
-					<!-- 강의 테이블 -->
-					<div class="card mt-3">
-						<div class="card-header">📖 등록된 강의목록</div>
-						<div class="card-body">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>강의명</th>
-										<th>교수</th>
-										<th>강의실</th>
-										<th>학과ID</th>
-										<th>구분</th>
-										<th>연도</th>
-										<th>학기</th>
-										<th>시간</th>
-										<th>이수학점</th>
-										<th>정원</th>
-										<th>신청인원</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="subject" items="${subjectList}">
-										<tr>
-											<td>${subject.id}</td>
-											<td>${subject.name}</td>
-											<td>${subject.professorId}</td>
-											<td>${subject.roomId}</td>
-											<td>${subject.deptId}</td>
-											<td>${subject.type}</td>
-											<td>${subject.subYear}</td>
-											<td>${subject.semester}</td>
-											<td><c:choose>
-													<c:when test="${subject.startTime < 10}">
-                            ${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00
-                        </c:when>
-													<c:otherwise>
-                            ${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00
-                        </c:otherwise>
-												</c:choose></td>
-											<td>${subject.grades}</td>
-											<td>${subject.capacity}</td>
-											<td>${subject.numOfStudent}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					
 				</c:if>
 
 

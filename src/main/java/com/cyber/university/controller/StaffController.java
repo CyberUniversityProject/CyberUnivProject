@@ -50,6 +50,29 @@ public class StaffController {
 		}
 		return "/staff/subject";
 	}
+	
+	
+	@GetMapping("/subjectList")
+	public String subjectList(Model model, @RequestParam(name = "crud", required = false) String crud, @RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "size", defaultValue = "10") int size) {
+		model.addAttribute("crud", crud);
+		List<Subject> subjectList = staffService.findAllPost(page, size);
+		List<College> collegeList = staffService.readCollege();
+		int totalPages = staffService.getTotalPages(size);
+		model.addAttribute("currentPage", page); // 공통부분
+		model.addAttribute("totalPages", totalPages); // 공통부분
+		if (collegeList.isEmpty()) {
+			model.addAttribute("collegeList", null);
+		} else {
+			model.addAttribute("collegeList", collegeList);
+		}
+		if (subjectList.isEmpty()) {
+			model.addAttribute("subjectList", null);
+		} else {
+			model.addAttribute("subjectList", subjectList);
+		}
+		return "/staff/list";
+	}
 
 	/**
 	 * 
@@ -58,7 +81,7 @@ public class StaffController {
 	@PostMapping("/subject")
 	public String insertSubject(SubjectFormDto subjectFormDto) {
 		staffService.createSubjectAndSyllabus(subjectFormDto);
-		return "redirect:/staff/subject?crud=select";
+		return "redirect:/staff/subjectList";
 	}
 
 	/**
@@ -69,7 +92,7 @@ public class StaffController {
 	public String deleteSubject(Model model, @RequestParam(name = "id") Integer id) {
 		model.addAttribute("id", id);
 		staffService.deleteSubject(id);
-		return "redirect:/staff/subject?crud=select";
+		return "redirect:/staff/subjectList";
 	}
 
 	/**
@@ -79,7 +102,7 @@ public class StaffController {
 	@PutMapping("/subject")
 	public String updateSubject(SubjectFormDto subjectFormDto) {
 		staffService.updateSubject(subjectFormDto);
-		return "redirect:/staff/subject?crud=select";
+		return "redirect:/staff/subjectList";
 	}
 	
 	

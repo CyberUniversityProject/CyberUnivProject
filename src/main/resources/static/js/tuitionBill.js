@@ -39,19 +39,22 @@ function requestPay() {
 			tuiYear: tuiYear,
 			semester: semester,
 			buyerName: buyerName,
+			tuiAmount: tuiAmount,
 			schAmount: schAmount
 		},
 		success: function(paymentdto) {
 			var buyer_name = paymentdto.buyerName;
 			var tuiYear = paymentdto.tuiYear;
 			var semester = paymentdto.semester;
+			var tuiAmount = paymentdto.tuiAmount;
 			var schAmount = paymentdto.schAmount;
+			var totalPrice = tuiAmount - schAmount;
 			IMP.request_pay({
 				pg: "kakaopay",
 				pay_method: "card",
 				merchant_uid: buyer_name + "_" + generateMerchantUid(), // 상점에서 생성한 고유 주문 번호
 				name: "등록금 납부", // 상품명 또는 주문 내용
-				amount: totalAmount, // 결제 금액 (원 단위)
+				amount: totalPrice, // 결제 금액 (원 단위)
 				buyer_name: buyer_name, // 구매자 이름
 
 
@@ -61,13 +64,13 @@ function requestPay() {
 						"impUid": rsp.imp_uid,
 						"merchantUid": rsp.merchant_uid,
 						"buyerName": buyer_name,
-						"schAmount": schAmount,
+						"totalPrice": totalPrice,
 
 					};
 					console.log("impUid: ", userData.impUid);
 					console.log("merchantUid: ", userData.merchantUid);
 					console.log("buyerName: ", userData.buyerName);
-					console.log("schAmount: ", userData.schAmount);
+					console.log("totalPrice: ", userData.totalPrice);
 
 					jQuery.ajax({
 						url: "/buy/" + tuiYear + "/" + semester,

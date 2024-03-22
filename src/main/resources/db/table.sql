@@ -349,4 +349,17 @@ CREATE TABLE cu_comment (
 
 );
 
+create table cu_payment (
+ id int NOT NULL AUTO_INCREMENT,
+ u_id varchar(20) NOT NULL,
+ m_id varchar(20) NOT NULL,
+ stu_id int NOT NULL,
+ buyer_name varchar(20) not null,
+ total_price int not null,
+ payment_date timestamp DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (id)
+ 
+
+); 
+
 

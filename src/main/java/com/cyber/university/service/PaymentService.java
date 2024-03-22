@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cyber.university.dto.PaymentDto;
-import com.cyber.university.dto.PaymentInfoDto;
-import com.cyber.university.dto.UpdateTuitionInfoDto;
+import com.cyber.university.dto.payment.PaymentDto;
+import com.cyber.university.dto.payment.PaymentInfoDto;
+import com.cyber.university.dto.payment.SelectPaymentDateDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.PaymentRepository;
@@ -78,12 +78,15 @@ public class PaymentService {
 	  */
 	@Transactional
 	public void insertPayment(PaymentDto dto) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer StudentId = principal.getId();
 		
 		Payment payment = new Payment();
 		payment.setUId(dto.getImpUid());
 		payment.setMId(dto.getMerchantUid());
+		payment.setStudentId(StudentId);
 		payment.setBuyerName(dto.getBuyerName());
-		payment.setSchAmount(dto.getSchAmount());
+		payment.setTotalPrice(dto.getTotalPrice());
 		
 		int resultRowCount = paymentRepository.insertPayment(payment);
 		if (resultRowCount != 1) {
@@ -116,5 +119,31 @@ public class PaymentService {
 		}
 	}
 	
+	/**
+	  * @Method Name : selectPaymentDate
+	  * @작성일 : 2024. 3. 22.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 결제 완료 기간 조회
+	  */
+	public SelectPaymentDateDto selectPaymentDate() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer studentId = principal.getId();
+		
+		return paymentRepository.selectPaymentDate(studentId);
+	}
 	
+	/**
+	  * @Method Name : selectPaymentAmount
+	  * @작성일 : 2024. 3. 22.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 실제 결제 금액 조회
+	  */
+	public Tuition selectPaymentAmount(Integer tuiYear, Integer semester) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer studentId = principal.getId();
+		
+		return paymentRepository.selectPaymentAmount(studentId, tuiYear, semester);
+	}
 }

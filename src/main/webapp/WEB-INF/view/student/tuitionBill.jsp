@@ -222,7 +222,7 @@ body {
 
 				</c:when>
 				<c:otherwise>
-					<p class="mt-2">(여기는 결제가 이루어진 날짜가 출력될 곳) 납부가 완료되었습니다.</p>
+					<p class="mt-2">${paymentDate.formatDateTime()} 납부가 완료되었습니다.</p>
 		</div>
 		<!-- 등록금 고지서 하단 -->
 		<!-- 등록금 고지서 하단 -->

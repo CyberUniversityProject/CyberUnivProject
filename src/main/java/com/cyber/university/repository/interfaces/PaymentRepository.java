@@ -3,7 +3,8 @@ package com.cyber.university.repository.interfaces;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cyber.university.dto.PaymentInfoDto;
+import com.cyber.university.dto.payment.PaymentInfoDto;
+import com.cyber.university.dto.payment.SelectPaymentDateDto;
 import com.cyber.university.repository.model.Payment;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.repository.model.Tuition;
@@ -63,5 +64,23 @@ public interface PaymentRepository {
 	  * @Method 설명 : 결제 후 고지서 업데이트
 	  */
 	public int updateTuition(Tuition tuition);
+	
+	/**
+	  * @Method Name : selectPaymentDate
+	  * @작성일 : 2024. 3. 22.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 결제 완료 기간 조회
+	  */
+	public SelectPaymentDateDto selectPaymentDate(Integer StudentId);
+	
+	/**
+	  * @Method Name : selectPaymentAmount
+	  * @작성일 : 2024. 3. 22.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 실제 결제 금액 조회
+	  */
+	public Tuition selectPaymentAmount(@Param("studentId") Integer studentId, @Param("tuiYear") Integer tuiYear, @Param("semester") Integer semester);
 	
 }

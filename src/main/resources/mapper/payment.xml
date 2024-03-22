@@ -4,7 +4,7 @@
 <mapper namespace="com.cyber.university.repository.interfaces.PaymentRepository">
 	
 	<!-- 24.03.20 결제 정보 조회 -->
-	<select id="selectPaymentInfo" resultType="com.cyber.university.dto.PaymentInfoDto">
+	<select id="selectPaymentInfo" resultType="com.cyber.university.dto.payment.PaymentInfoDto">
 		select a.name, b.*
 		from cu_student a
 		join cu_tuition b on b.student_id = a.id
@@ -12,7 +12,7 @@
 	</select>
 	
 	<!-- 24.03.20 년도, 학기 조회 -->
-	<select id="selectTuiYearAndSemester" resultType="com.cyber.university.dto.PaymentInfoDto">
+	<select id="selectTuiYearAndSemester" resultType="com.cyber.university.dto.payment.PaymentInfoDto">
 		select tui_year, semester from cu_tuition group by tui_year, semester
 	</select>
 	
@@ -23,12 +23,12 @@
 	
 	<!-- 24.03.21 결제 히스토리 등록 -->
 	<insert id="insertPayment">
-		insert into cu_payment (u_id, m_id, buyer_name, sch_amount) 
-		values (#{uId}, #{mId}, #{buyerName}, #{schAmount})
+		insert into cu_payment (u_id, m_id, stu_id, buyer_name, total_price) 
+		values (#{uId}, #{mId}, #{studentId}, #{buyerName}, #{totalPrice})
 	</insert>
 	
 	<!-- 24.03.21 결제 후 상태 정보 수정 -->
-	<update id="updateTuition" parameterType="com.cyber.university.dto.UpdateTuitionInfoDto">
+	<update id="updateTuition" parameterType="com.cyber.university.dto.payment.UpdateTuitionInfoDto">
 		UPDATE cu_tuition 
 		SET status = 1
 		WHERE student_id = #{studentId}
@@ -36,7 +36,20 @@
 		and semester = #{semester}
 	</update>
 	
+	<!-- 24.03.22 결제 시간 조회 -->
+	<select id="selectPaymentDate" resultType="com.cyber.university.dto.payment.SelectPaymentDateDto">
+		select a.payment_date
+		from cu_payment a
+		join cu_student b on b.id = a.stu_id
+		where a.stu_id = #{studentId}
+	</select>
 	
-	
+	<!-- 24.03.22 결제할 금액 조회 -->
+	<select id="selectPaymentAmount" resultType="com.cyber.university.repository.model.Tuition">
+		select * from cu_tuition 
+		where student_id = #{studentId} 
+		and tui_year = #{tuiYear} 
+		and semester = #{semester}
+	</select>
 </mapper>        
         

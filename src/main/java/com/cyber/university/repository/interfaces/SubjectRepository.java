@@ -96,5 +96,8 @@ public interface SubjectRepository {
 	
 	public List<Integer> selectIdByMoreNumOfStudent();
 	
+    public List<Subject> findAllwithPaging(@Param("offset") int offset, @Param("limit") int limit);
+	
+    public int getAllCount();
 
 }

@@ -36,6 +36,7 @@ import com.cyber.university.dto.LeaveStudentInfoDto;
 import com.cyber.university.dto.SemesterGradeDto;
 import com.cyber.university.dto.TotalScoreDto;
 import com.cyber.university.dto.UserInfoDto;
+import com.cyber.university.dto.payment.SelectPaymentDateDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.StudentInfoDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
@@ -44,6 +45,7 @@ import com.cyber.university.repository.model.Question;
 import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.EvaluationService;
+import com.cyber.university.service.PaymentService;
 import com.cyber.university.service.StuSubService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.TuitionService;
@@ -83,6 +85,8 @@ public class StudentController {
 	private StuSubService stuSubService;
 	@Autowired
 	private EvaluationService evaluationService;
+	@Autowired
+	private PaymentService paymentService;
 
 	/**
 	 * @Method Name : myInfo
@@ -381,6 +385,9 @@ public class StudentController {
 
 		Tuition tuition = tuitionService.findTuitionByStudentIdAndYearAndSemester(userId, tuiYear, semester);
 		model.addAttribute("tuitionBill", tuition);
+		
+		SelectPaymentDateDto paymentDate = paymentService.selectPaymentDate();
+		model.addAttribute("paymentDate", paymentDate);
 
 		return "/student/tuitionBill";
 	}

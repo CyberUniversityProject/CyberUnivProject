@@ -213,20 +213,12 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 		</c:choose>
 
 
-		<c:choose>
-			<c:when test="${principal.userRole eq 'student'}">
-				<section id="why-us" class="why-us">
-					<div class="container" data-aos="fade-up">
 
 
-						<div class="row">
-							<div class="col-lg-5 d-flex align-items-stretch">
-								<div class="content">
-									<h3>One-Stop 서비스</h3>
-									<p>해당 서비스를 클릭하시면 해당 서비스로 이동됩니다.</p>
+		<!-- ======= Counts Section ======= -->
+		<!-- <section id="counts" class="counts section-bg">
+      <div class="container">
 
-<<<<<<< HEAD
-=======
         <div class="row counters">
 
           <div class="col-lg-3 col-6 text-center">
@@ -268,7 +260,6 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 									<h3>One-Stop 서비스</h3>
 									<p>해당 서비스를 클릭하시면 해당 서비스로 이동됩니다.</p>
 
->>>>>>> dev
 								</div>
 							</div>
 							<div class="col-lg-7 d-flex align-items-stretch"
@@ -664,7 +655,9 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 		</section>
 		<!-- End 공지사항 -->
 
-		<section id="popular-courses" class="courses">
+
+		<!-- ======= 학사일정 ======= -->
+<section id="popular-courses" class="courses">
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-title">
@@ -689,17 +682,17 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 			</div>
 		</section>
 		<!-- End 학사일정 -->
+		<!-- End 학사일정 -->
 
 
 		<!-- ======= 오늘의 학식 ======= -->
 		<section id="popular-courses" class="courses">
 			<div class="container" data-aos="fade-up">
+
 				<div class="section-title">
 					<h2>Menu</h2>
 					<p>오늘의 학식</p>
 				</div>
-<<<<<<< HEAD
-=======
 				<div class="row" id="dietList">
 					<div class="col">
 						<div class="card">
@@ -718,7 +711,6 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 				</div>
 
 
->>>>>>> dev
 			</div>
 		</section>
 		<!-- End 학사일정 -->
@@ -875,9 +867,12 @@ function ajaxCallApi(url, param, callback) {
             alert("describeFeatureType = " + describeFeatureType + " textStatus = " + textStatus);
         }
     });
-<<<<<<< HEAD
-    </script>
 
+}
+
+	</script>
+	
+	
 	<script>
         fetch('/api/schedule/selectAll')
             .then(response => response.json())
@@ -896,9 +891,3 @@ function ajaxCallApi(url, param, callback) {
             })
             .catch(error => console.error('Error fetching schedule:', error));
     </script>
-=======
-
-}
-
-	</script>
->>>>>>> dev

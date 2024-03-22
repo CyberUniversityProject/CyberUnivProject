@@ -216,7 +216,8 @@
 									<label for="name">강의번호</label> <select name="id"
 										class="form-control">
 										<c:forEach var="subject" items="${subjectList}">
-											<option>${subject.id} (${subject.name})</option>
+											<option value="${subject.id}">${subject.id} (${subject.name})</option>
+
 										</c:forEach>
 									</select> <label for="name">강의요일</label> <select name="subDay"
 										class="form-control">
@@ -294,7 +295,7 @@
 										<c:forEach var="subject" items="${subjectList}">
 											<tr>
 												<td>${subject.id}</td>
-												<td><a href="/staff/subject?crud=updateById">${subject.name}</a></td>
+												<td>${subject.name}</td>
 												<td>${subject.professorId}</td>
 												<td>${subject.roomId}</td>
 												<td>${subject.deptId}</td>

@@ -48,13 +48,15 @@
 
 
 	<select id="selectAll"
-		resultType="com.cyber.university.repository.model.Subject">
+			resultType="com.cyber.university.repository.model.Subject">
 		select * from cu_subject
 	</select>
 	
 	<select id="findAllwithPaging"
-		resultType="com.cyber.university.repository.model.Subject">
-		SELECT * FROM cu_subject
+		resultType="com.cyber.university.dto.response.SubjectListDto">
+		select s.id, s.name, p.name as 'professor_name', s.professor_id, s.room_id, s.dept_id, s.type, s.sub_year, s.semester, s.sub_day, s.start_time, s.end_time, s.grades, s.capacity, s.num_of_student from cu_subject as s
+		join cu_professor as p
+		on p.id = s.professor_id
 		LIMIT #{offset}, #{limit}
 </select>
 

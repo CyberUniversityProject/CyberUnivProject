@@ -28,7 +28,18 @@
 
 .btn--confirm:hover {
 	background-color: #45a049;
+
 }
+
+ #preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none; /* 이미지 미리보기를 기본적으로 숨김 */
+        }
+        #preview-label {
+            display: none; /* 미리보기 텍스트를 기본적으로 숨김 */
+        }
 </style>
 </head>
 
@@ -55,7 +66,7 @@
 					<div class="col-md-7">
 						<div class="card">
 							<div class="card-body">
-								<form action="/user/student" method="post">
+								<form action="/user/student" method="post" enctype="multipart/form-data">
 									<div class="form-group">
 										<label for="name">이름</label> <input type="text" name="name"
 											id="name" class="form-control">
@@ -99,6 +110,12 @@
 										<label for="entranceDate">입학일</label> <input type="date"
 											name="entranceDate" id="entranceDate" class="form-control">
 									</div>
+									<div class="form-group">
+                                                                    <label for="file">증명사진 업로드</label>
+                                                                    <input type="file" class="form-control" id="file" name="profilImage" accept=".jpg, .jpeg, .png, .gif" required>
+                                                                    <img id="preview-image" src="#" alt="미리보기"> <!-- 이미지 미리보기를 위한 img 요소 -->
+                                                                    <label id="preview-label" for="file">이미지 미리보기</label> <!-- 이미지 미리보기 텍스트 -->
+                                                                </div>
 									<button type="submit" class="btn--confirm">등록하기</button>
 								</form>
 							</div>
@@ -145,9 +162,20 @@
 								console.error(xhr.responseText);
 							}
 						});
-
-						
 					}
+					// 파일 입력 변경 이벤트 핸들러
+                                $('#file').change(function() {
+                                    // 파일이 선택되었는지 확인
+                                    if (this.files && this.files[0]) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            $('#preview-image').attr('src', e.target.result); // 이미지 미리보기 업데이트
+                                            $('#preview-image').show(); // 이미지 미리보기를 보이도록 설정
+                                            $('#preview-label').hide(); // 미리보기 텍스트를 숨김
+                                        }
+                                        reader.readAsDataURL(this.files[0]); // 파일을 읽어서 데이터 URL로 변환하여 이미지 미리보기에 삽입
+                                    }
+                                });
 					getDepts();
 				});
 	</script>

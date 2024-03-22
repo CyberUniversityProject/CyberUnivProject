@@ -21,5 +21,12 @@ public class StudentInfoDto {
 	private Date graduationDate;
 	private String deptName;
 	private String collegeName;
+	private String originFileName;
+	private String uploadFileName;
+
+
+	public String setupProfilImage(){
+		return uploadFileName == null ? "이미지가 없습니다." : "/images/uploads/" + uploadFileName;
+	}
 
 }

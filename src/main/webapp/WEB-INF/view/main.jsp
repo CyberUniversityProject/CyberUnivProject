@@ -130,11 +130,15 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 
 							<div class="row">
 							  <!-- 프로필 이미지 -->
+							  <c:choose>
+							  <c:when test="${principal.userRole eq 'student'}">
                                             <div class="col-lg-3">
                                                 <div class="info-box">
                                                     <img src="${userInfo.setupProfilImage()}" width="200" height="200" alt="프로필 이미지">
                                                 </div>
                                             </div>
+                                            </c:when>
+                                            </c:choose>
 
 								<div class="col-lg-3">
 

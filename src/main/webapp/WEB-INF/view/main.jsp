@@ -110,11 +110,36 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								<p>
 									<i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님,
 									환영합니다.
+
+									<!-- 마이페이지 버튼을 님 환영합니다 글자 옆에 배치 -->
+									<div class="text-end">
+                                                        <c:choose>
+                                                            <c:when test="${principal.userRole eq 'staff'}">
+                                                                <a href="/info/staff" class="btn--confirm ">마이페이지</a>
+                                                            </c:when>
+                                                            <c:when test="${principal.userRole eq 'student'}">
+                                                                <a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
+                                                            </c:when>
+                                                            <c:when test="${principal.userRole eq 'professor'}">
+                                                                <a href="/professor/info" class="btn--confirm ">마이페이지</a>
+                                                            </c:when>
+                                                        </c:choose>
+</div>
 								</p>
 							</div>
+
 							<div class="row">
+							  <!-- 프로필 이미지 -->
+                                            <div class="col-lg-3">
+                                                <div class="info-box">
+                                                    <img src="${userInfo.setupProfilImage()}" width="200" height="200" alt="프로필 이미지">
+                                                </div>
+                                            </div>
+
 								<div class="col-lg-3">
+
 									<div class="info-box">
+
 										<h3>
 											<i class="bx bx-map"></i> 소속
 										</h3>
@@ -125,6 +150,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 												<c:when test="${principal.userRole eq 'professor'}">교수</c:when>
 											</c:choose>
 										</p>
+
 									</div>
 								</div>
 								<div class="col-lg-3">
@@ -178,32 +204,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 										</div>
 									</c:when>
 								</c:choose>
-								<!-- My Page Button -->
-								<c:choose>
-									<c:when test="${principal.userRole eq 'staff'}">
-										<div class="col-lg-3">
-											<div class="info-box">
-												<a href="/info/staff" class="btn--confirm ">마이페이지</a>
-											</div>
-										</div>
-									</c:when>
-									<c:when test="${principal.userRole eq 'student'}">
-										<div class="col-lg-3">
-											<div class="info-box">
-												<a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
-											</div>
-										</div>
-									</c:when>
-									<c:when test="${principal.userRole eq 'professor'}">
-										<div class="col-lg-3">
-											<div class="info-box">
-												<a href="/professor/info" class="btn--confirm ">마이페이지</a>
-											</div>
-										</div>
-									</c:when>
 
-								</c:choose>
-								<!-- End My Page Button -->
 							</div>
 						</div>
 					</section>

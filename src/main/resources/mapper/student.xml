@@ -117,7 +117,7 @@
 	
 	
 	<select id="selectStudentInfoById" resultType="com.cyber.university.dto.response.StudentInfoDto">
-		SELECT s.id, s.name, s.birth_date, s.gender, s.address, s.tel, s.email, s.grade, s.semester, s.entrance_date, s.graduation_date, d.name AS
+		SELECT s.id, s.name, s.birth_date, s.gender, s.address, s.tel, s.email, s.grade, s.semester, s.entrance_date, s.graduation_date, s.origin_file_name, s.upload_file_name, d.name AS
 		dept_name, c.name AS college_name
 		FROM cu_student AS s
 		LEFT JOIN cu_department AS d
@@ -147,7 +147,9 @@
 		UPDATE cu_student
 		SET address = #{address},
 		tel = #{tel},
-		email = #{email}
+		email = #{email},
+		origin_file_name = #{originFileName},
+		upload_file_name = #{uploadFileName}
 		WHERE id = #{userId}
 	</update>
 	

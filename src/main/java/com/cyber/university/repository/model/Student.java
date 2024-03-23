@@ -30,4 +30,8 @@ public class Student {
 	private String originFileName;
 	private String uploadFileName;
 
+	public String setupProfilImage(){
+		return uploadFileName == null ? "/img/profil.png" : "/images/uploads/" + uploadFileName;
+	}
+
 }

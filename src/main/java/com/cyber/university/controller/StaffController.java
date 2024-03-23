@@ -2,6 +2,7 @@ package com.cyber.university.controller;
 
 import java.util.List;
 
+import com.cyber.university.dto.response.SubjectListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +57,7 @@ public class StaffController {
 	public String subjectList(Model model, @RequestParam(name = "crud", required = false) String crud, @RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "10") int size) {
 		model.addAttribute("crud", crud);
-		List<Subject> subjectList = staffService.findAllPost(page, size);
+		List<SubjectListDto> subjectList = staffService.findAllPost(page, size);
 		List<College> collegeList = staffService.readCollege();
 		int totalPages = staffService.getTotalPages(size);
 		model.addAttribute("currentPage", page); // 공통부분

@@ -27,4 +27,6 @@ public class ApplySubject {
 	private Integer capacity; // 총 인원
 	private String approval; // 승인 여부
 	private String reason; // 미승인 이유
+
+
 }

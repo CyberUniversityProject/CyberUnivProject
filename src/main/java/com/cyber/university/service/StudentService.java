@@ -120,6 +120,8 @@ public class StudentService {
 		map.put("address", studentInfoDto.getAddress());
 		map.put("tel", studentInfoDto.getTel());
 		map.put("email", studentInfoDto.getEmail());
+		map.put("originFileName", studentInfoDto.getOriginFileName());
+		map.put("uploadFileName", studentInfoDto.getUploadFileName());
 		
 		int result = studentRepository.updateStudentInfo(map); 
 		

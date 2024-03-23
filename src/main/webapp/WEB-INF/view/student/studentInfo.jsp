@@ -34,7 +34,37 @@
 					<div class="col-md-7">
 						<div class="card">
 							<div class="card-body">
-								<form action="#" method="">
+
+                            <div class="text-center">
+							<img src="${studentInfo.setupProfilImage()}" class="img-fluid border border-1 rounded-2" alt="프로필 이미지" width="60%" height="60%">
+							</div>
+<form action="#" method="POST" enctype="multipart/form-data">
+							  <div class="form-group">
+                                    <label for="profilImage">증명사진 업로드</label>
+                                    <input type="file" class="form-control" id="profilImage" name="profilImage">
+                                    <div class="card mt-3">
+                                        <div class="card-header bg-warning">현재 이미지</div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img src="${studentInfo.setupProfilImage()}" style="width: 40%; height: 40%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            							<!-- 수정된 이미지 미리보기 -->
+                            							<div class="card mt-3" id="updatedImagePreview"
+                            								style="display: none;">
+                            								<div class="card-header bg-success text-white">수정된 이미지
+                            									미리보기</div>
+                            								<div class="card-body">
+                            									<div class="text-center">
+                            										<img id="updatedImage" src="#"
+                            											style="max-width: 100%; max-height: 200px;">
+                            									</div>
+                            								</div>
+                            							</div>
+
 									<div class="form-group">
 										<label for="name">이름</label> <input type="text" name="name"
 											id="name" class="form-control" value="${studentInfo.name }"
@@ -119,47 +149,54 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+
+	<script>
+    $(document).ready(function() {
+        $('#profilImage').change(function() {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#updatedImage').attr('src', e.target.result); // 이미지 미리보기 업데이트
+                    $('#updatedImagePreview').show(); // 수정된 이미지 미리보기 표시
+                }
+                reader.readAsDataURL(this.files[0]); // 파일을 읽어서 데이터 URL로 변환하여 이미지 미리보기에 삽입
+            }
+        });
+    });
+    </script>
+
 	<script>
 	document.addEventListener("DOMContentLoaded", function(){
-	    const updateBtn = document.getElementById("update-student-btn");
-	    
-	    updateBtn.addEventListener("click", function(event){
-	        if (!confirm("회원 정보를 수정 하시겠습니까?")) {
-	            event.preventDefault();
-	            return;
-	        }
-	        
-	        let address = document.getElementById("address").value;
-	        let tel = document.getElementById("tel").value;
-	        let email = document.getElementById("email").value;
-	        
-	        let formData = {
-	            "address": address,
-	            "tel": tel,
-	            "email": email
-	        };
-	        
-	        fetch("/student/updateInfo", {
-	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/json; charset=UTF-8"
-	            },
-	            body: JSON.stringify(formData)
-	        })
-	        .then(response => {
-	            if (!response.ok) {
-	                throw new Error("오류 발생");
-	            }
-	            alert("정보가 성공적으로 수정되었습니다.");
-	            window.location.reload();
-	        })
-	        .catch(error => {
-	            console.error(error);
-	        });
-	    });
-	});
+        const updateBtn = document.getElementById("update-student-btn");
+
+        updateBtn.addEventListener("click", function(event){
+            if (!confirm("회원 정보를 수정 하시겠습니까?")) {
+                event.preventDefault();
+                return;
+            }
+
+            let form = document.querySelector('form');
+            let formData = new FormData(form);
+
+            fetch("/student/updateInfo", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("오류 발생");
+                }
+                alert("정보가 성공적으로 수정되었습니다.");
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        });
+    });
 	</script>
+
+
 		
 		
 </body>

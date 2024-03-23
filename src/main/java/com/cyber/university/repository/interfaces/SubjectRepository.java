@@ -2,6 +2,7 @@ package com.cyber.university.repository.interfaces;
 
 import java.util.List;
 
+import com.cyber.university.dto.response.SubjectListDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -96,7 +97,7 @@ public interface SubjectRepository {
 	
 	public List<Integer> selectIdByMoreNumOfStudent();
 	
-    public List<Subject> findAllwithPaging(@Param("offset") int offset, @Param("limit") int limit);
+    public List<SubjectListDto> findAllwithPaging(@Param("offset") int offset, @Param("limit") int limit);
 	
     public int getAllCount();
 

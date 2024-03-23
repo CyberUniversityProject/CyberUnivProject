@@ -63,6 +63,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/uploads/**")
 //                .addResourceLocations("file:///C:\\spring_upload\\cyberUniversity\\upload/");
                 .addResourceLocations("file:////Users/junhyuk/Documents/upload/");
+
         
         
     }

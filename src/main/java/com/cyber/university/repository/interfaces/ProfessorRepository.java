@@ -12,8 +12,8 @@ import com.cyber.university.dto.FindPasswordFormDto;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.SyllaBusFormDto;
 import com.cyber.university.dto.UserUpdateDto;
-import com.cyber.university.dto.payment.PaymentInfoDto;
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.FindDeptIdDto;
 import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
@@ -26,8 +26,9 @@ import com.cyber.university.dto.response.ReadSyllabusDto;
 import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.dto.response.UserInfoForUpdateDto;
 import com.cyber.university.repository.model.ApplySubject;
+import com.cyber.university.repository.model.Department;
 import com.cyber.university.repository.model.Professor;
-import com.cyber.university.repository.model.Student;
+import com.cyber.university.repository.model.Room;
 
 /**
  * @FileName : ProfessorRepository.java
@@ -321,5 +322,31 @@ public interface ProfessorRepository {
 	  */
 	public int updateSyllabus(SyllaBusFormDto dto);
 	
-
+	
+	/**
+	  * @Method Name : selectRoom
+	  * @작성일 : 2024. 3. 23.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학과 강의실 조회
+	  */
+	public List<Room> selectRoom(Integer collegeId);
+	
+	/**
+	  * @Method Name : selectDepartment
+	  * @작성일 : 2024. 3. 23.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학과 이름 조회
+	  */
+	public List<Department> selectDepartment(Integer collegeId);
+	
+	/**
+	  * @Method Name : selectDeptId
+	  * @작성일 : 2024. 3. 23.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 단과대 아이디 조회
+	  */
+	public FindDeptIdDto selectDeptId(Integer professorId);
 }

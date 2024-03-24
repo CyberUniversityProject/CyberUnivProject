@@ -48,8 +48,8 @@ public class Define {
     // 이미지 처리 관련
     // 1KB = 1024byte
     // 1MB = 1024*1024 = 1,048,476 byte
-//    public final static String UPLOAD_DIRECTORY = "C:\\spring_upload\\cyberUniversity\\upload";
-    public final static String UPLOAD_DIRECTORY = "/Users/junhyuk/Documents/upload";
+    public final static String UPLOAD_DIRECTORY = "C:\\spring_upload\\cyberUniversity\\upload";
+    //public final static String UPLOAD_DIRECTORY = "/Users/junhyuk/Documents/upload";
 
     public final static int MAX_FILE_SIZE = 1024 * 1024 * 20;
 
@@ -58,8 +58,8 @@ public class Define {
      *
      * @author 이준혁
      */
-    public final static String[] PATHS = { "/update", "/password", "/info/**", "/guide"};
-//    public final static String UPLOAD_DIRECTORY = "/Users/junhyuk/Documents/upload";
+    public final static String[] PATHS = { "/update", "/password", "/info/**", "/guide", "/myInfo/**", "/community", "/community/**", "/subject/**", 
+    		"/student/**", "/sugang/**", "/professor/**", "/user/**", "/tuition/**", "/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**"};
     public final static String[] PROFESSOR_PATHS = { "/professor/**" };
     public final static String[] STUDENT_PATHS = {"/grade/**"};
     public final static String[] STAFF_PATHS = { "/user/**" };

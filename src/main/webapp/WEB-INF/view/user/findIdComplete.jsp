@@ -21,7 +21,7 @@ body {
 
 .header--top {
 	height: 40px;
-	background-color: #031734;
+	background-color: #3ac162;
 }
 
 .section--header {

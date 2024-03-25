@@ -44,7 +44,7 @@ public class NoticeService {
 		if (noticeFormDto.getOriginFilename() != null) {
 			noticeRepository.insertFile(noticeFormDto);
 		}
-	}
+	 }
 
 	/**
 	 * 공지 조회 서비스
@@ -57,7 +57,7 @@ public class NoticeService {
 	/**
 	 * 
 	 * @param noticePageFormDto
-	 * @return 공지 갯수 확인 서비스
+	 * @return 공지사항 개수 확인 서비스
 	 */
 	public Integer readNoticeAmount(NoticePageFormDto noticePageFormDto) {
 		Integer amount = null;
@@ -92,8 +92,11 @@ public class NoticeService {
 	 */
 	public Notice readByIdNotice(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
-		Integer views = noticeRepository.updateViews(id);
-		notice.setViews(views);
+	
+		// 조회수
+		Integer view = noticeRepository.updateViews(id);
+		notice.setViews(view);
+
 		return notice;
 	}
 

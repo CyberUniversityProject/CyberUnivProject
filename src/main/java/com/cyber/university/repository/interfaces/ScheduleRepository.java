@@ -21,7 +21,7 @@ import com.cyber.university.repository.model.Schedule;
 public interface ScheduleRepository {
 	
 	// 학사일정 등록 
-	public int insertScheduleForm(ScheduleFormDto scheduleFormDto);
+	public int insertScheduleForm(Schedule schedule);
 	// 학사일정 목록
 	public List<Schedule> selectSchedule();
 	// 학사일정 월에 있는 일정 조회

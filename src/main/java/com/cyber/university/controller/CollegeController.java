@@ -15,12 +15,14 @@ import com.cyber.university.dto.CollegeDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Staff;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 import com.mysql.cj.log.Log;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -35,16 +37,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/college")
+@RequiredArgsConstructor
 public class CollegeController {
 
 	@Autowired
-	private CollegeService collegeService;
+	private final CollegeService collegeService;
 	
 	@Autowired
-	private HttpSession httpSession;
+	private final HttpSession httpSession;
 	
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 
 	// 화면띄우기
 	@GetMapping("/collegeRegister")

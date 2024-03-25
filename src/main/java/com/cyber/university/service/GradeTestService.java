@@ -12,6 +12,8 @@ import com.cyber.university.dto.response.MyGradeDto;
 import com.cyber.university.repository.interfaces.GradeRespository;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * 
   * @FileName : GradeService.java
@@ -22,11 +24,12 @@ import com.cyber.university.utils.Define;
   * @프로그램 설명 : 성적 서비스
  */
 @Service
+@RequiredArgsConstructor
 public class GradeTestService {
 	
 	
 	@Autowired
-	private GradeRespository gradeRespository;
+	private final GradeRespository gradeRespository;
 
 	
 

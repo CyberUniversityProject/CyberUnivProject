@@ -18,6 +18,7 @@ import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.SubjectPeriodForProfessorDto;
+import com.cyber.university.dto.professor.UpdateApplySubListDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.PrincipalDto;
@@ -38,6 +39,7 @@ import com.cyber.university.repository.model.Student;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @FileName : ProfessorService.java
@@ -49,19 +51,20 @@ import jakarta.servlet.http.HttpSession;
  */
 
 @Service
+@RequiredArgsConstructor
 public class ProfessorService {
 
 	@Autowired
-	private ProfessorRepository professorRepository;
+	private final ProfessorRepository professorRepository;
 	
 	@Autowired
-	private StudentRepository studentRepository;
+	private final StudentRepository studentRepository;
 	
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private final SubjectRepository subjectRepository;
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment
@@ -255,7 +258,9 @@ public class ProfessorService {
 			map.put("completeGrade", grades.getGrades());
 		}
 		map.put("convertedMark", dto.getConvertedMark());
-
+		
+		
+		
 		int result = professorRepository.updateStudentSubDetail(map);
 		int result2 = professorRepository.updateStudentGrade(map);
 		
@@ -416,4 +421,34 @@ public class ProfessorService {
 		
 		return professorRepository.selectDeptId(professorId);
 	}
+	
+	/**
+	  * @Method Name : selectUpdateSubInfo
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 수정 정보 조회
+	  */
+	public ApplySubjectDto selectUpdateSubInfo(Integer id) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer professorId = principal.getId();
+		
+		return professorRepository.selectUpdateSubInfo(professorId, id);
+	}
+	
+	/**
+	  * @Method Name : selectMyApplySubList
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 내 신청 강의 목록 조회
+	  */
+	public List<UpdateApplySubListDto> selectMyApplySubList() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer professorId = principal.getId();
+		
+		return professorRepository.selectMyApplySubList(professorId);
+	}
+	
+	
 }

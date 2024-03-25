@@ -26,26 +26,28 @@ import com.cyber.university.repository.model.Subject;
 import com.cyber.university.utils.Define;
 import com.cyber.university.utils.StuSubUtil;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StuSubService {
 
 	@Autowired
-	private StuSubRepository stuSubRepository;
+	private final StuSubRepository stuSubRepository;
 
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private final SubjectRepository subjectRepository;
 
 	@Autowired
-	private SubjectService subjectService;
+	private final SubjectService subjectService;
 
 	@Autowired
-	private PreStuSubRepository preStuSubRepository;
+	private final PreStuSubRepository preStuSubRepository;
 
 	@Autowired
-	private StuSubDetailRepository stuSubDetailRepository;
+	private final StuSubDetailRepository stuSubDetailRepository;
 
 	// 학생의 수강신청 내역에 해당 강의가 존재하는지 확인
 	public StuSub readStuSub(Integer studentId, Integer subjectId) {

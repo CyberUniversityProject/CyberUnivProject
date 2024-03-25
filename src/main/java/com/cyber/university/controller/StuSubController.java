@@ -27,6 +27,7 @@ import com.cyber.university.repository.model.PreStuSub;
 import com.cyber.university.repository.model.StuStat;
 import com.cyber.university.repository.model.StuSub;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.PreStuSubService;
@@ -38,34 +39,36 @@ import com.cyber.university.utils.Define;
 import com.cyber.university.utils.StuStatUtil;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/sugang")
+@RequiredArgsConstructor
 public class StuSubController {
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 
 	@Autowired
-	private SubjectService subjectService;
+	private final SubjectService subjectService;
 
 	@Autowired
-	private CollegeService collegeService;
+	private final CollegeService collegeService;
 
 	@Autowired
-	private PreStuSubService preStuSubService;
+	private final PreStuSubService preStuSubService;
 
 	@Autowired
-	private StuSubService stuSubService;
+	private final StuSubService stuSubService;
 
 	@Autowired
-	private StuStatService stuStatService;
+	private final StuStatService stuStatService;
 
 	@Autowired
-	private BreakService breakAppService;
+	private final BreakService breakAppService;
 
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	
 	

@@ -21,6 +21,7 @@ import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.StuStatService;
@@ -28,6 +29,7 @@ import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -43,22 +45,23 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/break")
 @Slf4j
+@RequiredArgsConstructor
 public class BreakController {
 
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 
 	@Autowired
-	private BreakService breakService;
+	private final BreakService breakService;
 
 	@Autowired
-	private StuStatService stuStatService;
+	private final StuStatService stuStatService;
 
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 
 	@Autowired
-	private CollegeService collegeService;
+	private final CollegeService collegeService;
 
 	// 휴, 복학 처리되지 않은 신청내역 페이지
 	@GetMapping("/list/staff")

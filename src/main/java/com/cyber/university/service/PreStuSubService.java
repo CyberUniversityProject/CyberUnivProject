@@ -18,18 +18,21 @@ import com.cyber.university.repository.model.Subject;
 import com.cyber.university.utils.Define;
 import com.cyber.university.utils.StuSubUtil;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class PreStuSubService {
 	
 	
 	@Autowired
-	private PreStuSubRepository preStuSubRepository;
+	private final PreStuSubRepository preStuSubRepository;
 
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private final SubjectRepository subjectRepository;
 
 	@Autowired
-	private SubjectService subjectService;
+	private final SubjectService subjectService;
 
 	// 학생의 예비 수강신청 내역에 해당 강의가 존재하는지 확인
 	public PreStuSub readPreStuSub(Integer studentId, Integer subjectId) {

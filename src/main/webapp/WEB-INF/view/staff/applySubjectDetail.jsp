@@ -173,24 +173,40 @@
 	                        type : 'PUT', // 업데이트를 위한 HTTP 메서드는 PUT을 사용합니다.
 	                        url : '/api/applySub/updateApproval/${subject.id}?approval=승인', // 해당 엔드포인트의 URL을 입력합니다.
 	                        success : function(response) {
-	                            // 성공 알림창 표시
+	                          // 성공 알림창 표시
 	                            alert('신청이 승인되었습니다.');
 	                            window.location.href = '/applySubject/list';
 	                        },
-	                        error : function(xhr, status, error) {
-	                            // 요청이 실패하면 콘솔에 오류를 출력합니다.
-	                            console.error(error);
+	                        error: function(xhr, status, error) {
+	                            // 서버에서 오류 응답을 받은 경우
+	                            if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.message) {
+	                                // 400 오류와 함께 메시지를 받은 경우에만 해당 오류를 처리
+	                                alert(xhr.responseJSON.message);
+	                            } else {
+	                                // 그 외의 오류에 대해서는 일반적인 오류 메시지를 표시
+	                                alert('강의를 추가하는 동안 오류가 발생했습니다.');
+	                                console.error(error);
+	                            }
 	                        }
+
 	                    });
 	                    // 성공 알림창 표시
 	                   
 	                    // 페이지 이동
 	                    
 	                },
-	                error : function(xhr, status, error) {
-	                    // 요청이 실패하면 콘솔에 오류를 출력합니다.
-	                    console.error(error);
+	                error: function(xhr, status, error) {
+	                    // 서버에서 오류 응답을 받은 경우
+	                    if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.message) {
+	                        // 400 오류와 함께 메시지를 받은 경우에만 해당 오류를 처리
+	                        alert(xhr.responseJSON.message);
+	                    } else {
+	                        // 그 외의 오류에 대해서는 일반적인 오류 메시지를 표시
+	                        alert('강의를 추가하는 동안 오류가 발생했습니다. 강의실과 강의시간이 중복되는지 확인하세요');
+	                        console.error(error);
+	                    }
 	                }
+
 	            });
 	        }
 	    });

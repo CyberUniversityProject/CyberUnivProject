@@ -22,6 +22,8 @@ import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Subject;
 import com.cyber.university.utils.SubjectUtil;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * 
   * @FileName : StaffService.java
@@ -32,24 +34,25 @@ import com.cyber.university.utils.SubjectUtil;
   * @프로그램 설명 : 교직원 서비스
  */
 @Service
+@RequiredArgsConstructor
 public class StaffService {
 	
 	
 	@Autowired
-	private CollegeRepository collegeRepository;
+	private final CollegeRepository collegeRepository;
 	@Autowired
-	private DepartmentRepository departmentRepository;
+	private final DepartmentRepository departmentRepository;
 	
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private final SubjectRepository subjectRepository;
 	
 	@Autowired
-	private SyllaBusRepository syllaBusRepository;
+	private final SyllaBusRepository syllaBusRepository;
 	
 	@Autowired
-	private CollTuitRepository collTuitRepository;
+	private final CollTuitRepository collTuitRepository;
 	@Autowired
-	private RoomRepository roomRepository;
+	private final RoomRepository roomRepository;
 	
 	
 	

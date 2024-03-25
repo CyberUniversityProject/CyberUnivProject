@@ -28,7 +28,7 @@ body {
 .header--top {
 	width: 100%;
 	height: 10px;
-	background-color: #031734;
+	background-color: #3ac162;
 }
 
 .section--header {
@@ -66,7 +66,7 @@ p {
 	border: none;
 	border-radius: 5px;
 	color: #fff;
-	background-color: #142845;
+	background-color: #3ac162;
 	font-size: 18px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
@@ -94,7 +94,7 @@ p {
 				<h2>비밀번호 변경 안내</h2>
 			</div>
 			<div class="section--content">
-				<p>현재 계정이 신규로 생성되어 <br> 비밀번호가 초기 설정되어있는 비밀번호입니다.<br>비밀번호를 다시 설정해주세요.</p>
+				<p>현재 계정이 신규로 생성되어 <br> 비밀번호가 초기 설정되어있는 비밀번호입니다.<br>보안을 위해 비밀번호를 다시 설정해주세요.</p>
 				<div class="button-container">
 					<button class="button" onclick="linkToOpener()">비밀번호 변경하러 가기</button>
 				</div>

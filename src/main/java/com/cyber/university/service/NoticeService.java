@@ -12,6 +12,7 @@ import com.cyber.university.dto.NoticePageFormDto;
 import com.cyber.university.repository.interfaces.NoticeRepository;
 import com.cyber.university.repository.model.Notice;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -24,10 +25,11 @@ import lombok.extern.slf4j.Slf4j;
   */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class NoticeService {
 	
 	@Autowired
-	private NoticeRepository noticeRepository;
+	private final NoticeRepository noticeRepository;
 	
 	/**
 	 * 공지 입력 서비스

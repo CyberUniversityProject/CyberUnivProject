@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.dto.DepartmentWithCollegeDto;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.DepartmentService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/department")
+@RequiredArgsConstructor
 public class DepartmentRestFulController {
 	
 	@Autowired
-	private DepartmentService departmentService;
+	private final DepartmentService departmentService;
 	
 	@GetMapping("/findAll")
 	public List<DepartmentWithCollegeDto> findAll (){

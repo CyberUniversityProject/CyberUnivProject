@@ -16,7 +16,10 @@ import com.cyber.university.dto.CollTuitFormDto;
 import com.cyber.university.dto.SubjectFormDto;
 import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Subject;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.StaffService;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * 
@@ -29,10 +32,11 @@ import com.cyber.university.service.StaffService;
  */
 @Controller
 @RequestMapping("/staff")
+@RequiredArgsConstructor
 public class StaffController {
 
 	@Autowired
-	private StaffService staffService;
+	private final StaffService staffService;
 
 	@GetMapping("/subject")
 	public String subject(Model model, @RequestParam(name = "crud", required = false) String crud) {

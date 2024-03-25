@@ -12,6 +12,7 @@ import com.cyber.university.repository.interfaces.StuStatRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.StuStat;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -24,13 +25,14 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StuStatService {
 
 	@Autowired
-	private StuStatRepository stuStatRepository;
+	private final StuStatRepository stuStatRepository;
 
 	@Autowired
-	private StudentRepository studentRepository;
+	private final StudentRepository studentRepository;
 
 	/**
 	 * @param studentId

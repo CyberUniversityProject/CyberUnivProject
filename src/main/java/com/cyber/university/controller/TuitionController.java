@@ -16,6 +16,7 @@ import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.StuStat;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.repository.model.Tuition;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.StuStatService;
@@ -25,6 +26,7 @@ import com.cyber.university.utils.Define;
 import com.cyber.university.utils.StuStatUtil;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 
@@ -37,25 +39,26 @@ import jakarta.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/tuition")
+@RequiredArgsConstructor
 public class TuitionController {
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	
     @Autowired
-    private TuitionService tuitionService;
+    private final TuitionService tuitionService;
 	
 	@Autowired
-	private StuStatService stuStatService;
+	private final StuStatService stuStatService;
 	
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	@Autowired
-	private BreakService breakService;
+	private final BreakService breakService;
 	
 	@Autowired
-	private CollegeService collegeService;
+	private final CollegeService collegeService;
 	
 	
 	/**

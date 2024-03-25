@@ -17,6 +17,7 @@ import com.cyber.university.repository.model.Evaluation;
 import com.cyber.university.repository.model.Question;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -29,12 +30,13 @@ import lombok.extern.slf4j.Slf4j;
   */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class EvaluationService {
 	
 	@Autowired
-	private EvaluationRepository evaluationRepository;
+	private final EvaluationRepository evaluationRepository;
 	@Autowired
-	private StuSubRepository stuSubRepository;
+	private final StuSubRepository stuSubRepository;
 	
 	
 	

@@ -18,22 +18,25 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.Community;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.CommunityService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/community")
+@RequiredArgsConstructor
 public class CommunityController {
 
 	@Autowired
-	private CommunityService communityService;
+	private final CommunityService communityService;
 
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 
 	// 전체게시글 보기
 	@GetMapping("/list")

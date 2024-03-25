@@ -12,17 +12,19 @@ import com.cyber.university.repository.model.Comment;
 import com.cyber.university.repository.model.Community;
 import com.cyber.university.repository.model.Room;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class CommunityService {
 
 	@Autowired
-	private CommunityRepository communityRepository;
+	private final CommunityRepository communityRepository;
 
 	@Autowired
-	private CommentRepository commentRepository;
+	private final CommentRepository commentRepository;
 
 	public void insertCommunity(Community community) {
 		communityRepository.insertCommunity(community);

@@ -46,6 +46,7 @@ import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Break;
 import com.cyber.university.repository.model.Question;
 import com.cyber.university.repository.model.Tuition;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.BreakService;
 import com.cyber.university.service.EvaluationService;
 import com.cyber.university.service.PaymentService;
@@ -57,6 +58,7 @@ import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -71,26 +73,27 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/student")
 @Slf4j
+@RequiredArgsConstructor
 public class StudentController {
 
 	@Autowired
-	private StudentService studentService;
+	private final StudentService studentService;
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 	@Autowired
-	private BreakService breakService;
+	private final BreakService breakService;
 	@Autowired
-	private TuitionService tuitionService;
+	private final TuitionService tuitionService;
 	@Autowired
-	private StuSubService stuSubService;
+	private final StuSubService stuSubService;
 	@Autowired
-	private EvaluationService evaluationService;
+	private final EvaluationService evaluationService;
 	@Autowired
-	private PaymentService paymentService;
+	private final PaymentService paymentService;
 
 	/**
 	 * @Method Name : myInfo

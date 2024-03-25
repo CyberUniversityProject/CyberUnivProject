@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.dto.SubjectFormDto;
+import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.StaffService;
 /**
@@ -54,8 +55,12 @@ public class ApplySubjectRestFulController {
 	 
 	 @PostMapping("/postSubject")
 	    public ResponseEntity<?> insertSubject(@RequestBody SubjectFormDto subjectFormDto) {
-	        staffService.createSubjectAndSyllabus(subjectFormDto);
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Subject created successfully");
+	        try {
+	            staffService.createSubjectAndSyllabus(subjectFormDto);
+	            return ResponseEntity.status(HttpStatus.CREATED).body("Subject created successfully");
+	        } catch (CustomRestfullException e) {
+	            return ResponseEntity.status(e.getStatus()).body(e.getMessage());
+	        }
 	    }
 
 }

@@ -305,4 +305,23 @@
 		and approval = "반려"
 	</select>
 	
+	<!-- 24.03.25 신청 강의 수정 -->
+	<update id="updateMyApplySubInfo">
+		update cu_apply_sub
+		set 
+		name = #{name},
+		room_id = #{roomId},
+		dept_id = #{deptId},
+		type = #{type},
+		start_time = #{startTime},
+		end_time = #{endTime},
+		sub_year = #{subYear},
+		semester = #{semester},
+		sub_day = #{subDay},
+		grades = #{grades},
+		capacity = #{capacity},
+		approval = "미승인",
+		reason = ""
+		where id = #{id}
+	</update>
 </mapper>        

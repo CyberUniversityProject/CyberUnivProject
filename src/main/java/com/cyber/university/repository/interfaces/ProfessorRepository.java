@@ -369,4 +369,13 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 내 신청 강의 목록 조회
 	  */
 	public List<UpdateApplySubListDto> selectMyApplySubList(Integer professorId);
+	
+	/**
+	  * @Method Name : updateMyApplySubInfo
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 수정
+	  */
+	public int updateMyApplySubInfo(ApplySubjectDto dto);
 }

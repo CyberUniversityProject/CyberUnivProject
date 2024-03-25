@@ -450,5 +450,19 @@ public class ProfessorService {
 		return professorRepository.selectMyApplySubList(professorId);
 	}
 	
+	/**
+	  * @Method Name : updateMyApplySubInfo
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 수정
+	  */
+	public void updateMyApplySubInfo(ApplySubjectDto dto) {
+		
+		int resultRowCount = professorRepository.updateMyApplySubInfo(dto);
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("제출 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 }

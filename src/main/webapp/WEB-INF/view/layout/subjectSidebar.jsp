@@ -19,20 +19,28 @@
 				<c:when test="${principal.userRole.equals(\"professor\")}">
 					<li class="list-group-item p-3"><a href="/user/studentList"
 						class="text-dark d-flex align-items-center"> <i
-							class="bi bi-person-lines-fill mr-2"></i> 전체 강의조회
+							class="bi bi-person-lines-fill mr-2"></i> 전체 강의목록
 					</a></li>
+					
 					<li class="list-group-item p-3"><a href="/professor/mysub"
 						class="text-dark d-flex align-items-center"> <i
-							class="bi bi-person-lines-fill mr-2"></i> 내 강의 조회
+							class="bi bi-person-lines-fill mr-2"></i> 내 강의 목록
 					</a></li>
-					<li class="list-group-item p-3"><a
-						href="/professor/readevaluation"
+					
+					<li class="list-group-item p-3"><a href="/professor/readevaluation"
 						class="text-dark d-flex align-items-center"> <i
-							class="bi bi-person-plus-fill mr-2"></i> 내 강의 평가
+							class="bi bi-person-lines-fill mr-2"></i> 내 강의 평가
 					</a></li>
+					
+					
 					<li class="list-group-item p-3"><a href="/professor/apply"
 						class="text-dark d-flex align-items-center"> <i
 							class="bi bi-person-plus-fill mr-2"></i> 강의 신청
+					</a></li>
+					
+					<li class="list-group-item p-3"><a href="/professor/update-list"
+						class="text-dark d-flex align-items-center"> <i
+							class="bi bi-person-lines-fill mr-2"></i> 신청 강의목록
 					</a></li>
 
 				</c:when>

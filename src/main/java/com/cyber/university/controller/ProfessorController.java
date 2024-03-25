@@ -150,7 +150,8 @@ public class ProfessorController {
 			@RequestParam("type") String type, 
 			@RequestParam("subDay") String subDay,
 			@RequestParam("roomId") String roomId,
-			@RequestParam("deptId") Integer deptId) {
+			@RequestParam("deptId") Integer deptId,
+			@RequestParam("semester") Integer semester) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
@@ -181,10 +182,6 @@ public class ProfessorController {
 		if (dto.getSubYear() == null || dto.getSubYear() < 0) {
 			throw new CustomRestfullException("강의 개설 년도를 입력하세요", HttpStatus.BAD_REQUEST);
 		}
-		
-		if (dto.getSemester() == null || dto.getSemester() < 0) {
-			throw new CustomRestfullException("강의 개설 학기를 입력하세요", HttpStatus.BAD_REQUEST);
-		}				
 		
 		if (dto.getGrades() == null || dto.getGrades() < 0) {
 			throw new CustomRestfullException("강의 이수 학점을 입력하세요", HttpStatus.BAD_REQUEST);
@@ -459,9 +456,13 @@ public class ProfessorController {
 	  */
 	@GetMapping("/syllabus/{subjectId}")
 	public String syllabusPage(Model model, @PathVariable("subjectId") Integer subjectId) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
 		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
-	
-		 
 		model.addAttribute("syllabus", readSyllabusDto);
 		return "professor/syllabus";
 	}
@@ -475,6 +476,11 @@ public class ProfessorController {
 	  */
 	@GetMapping("/syllabus/update/{subjectId}")
 	public String updateSyllabusPage(Model model, @PathVariable("subjectId") Integer subjectId) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
 		
 		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
 		System.out.println("readSyll"); 
@@ -491,6 +497,12 @@ public class ProfessorController {
 	  */
 	@PutMapping("/syllabus/update/{subjectId}")
 	public String createSyllabusProc(SyllaBusFormDto dto, @PathVariable("subjectId") Integer subjectId) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
 		professorService.updateSyllabus(dto);
 		
 		return "redirect:/professor/syllabus/" + subjectId;
@@ -505,6 +517,11 @@ public class ProfessorController {
 	  */
 	@GetMapping("/update-list")
 	public String myApplySubListpage(Model model) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
 		
 		List<UpdateApplySubListDto> subList = professorService.selectMyApplySubList();
 		model.addAttribute("subList", subList);
@@ -521,10 +538,14 @@ public class ProfessorController {
 	  */
 	@GetMapping("/update-list/{id}")
 	public String updateApplySubPage(Model model, @PathVariable("id") Integer id) {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
 		
 		ApplySubjectDto subjectInfo = professorService.selectUpdateSubInfo(id);
 		model.addAttribute("subjectInfo", subjectInfo);
-		System.out.println("subjectInfo : " + subjectInfo);
 		
 		FindDeptIdDto deptDto = professorService.selectDeptId();
 		Integer colId = deptDto.getColId();
@@ -538,8 +559,50 @@ public class ProfessorController {
 		return "professor/updateApplySubject";
 	}
 	
-	@PostMapping("/update-list/{id}")
-	public String updateApplySubProc(@PathVariable("id") Integer id) {
+	@PutMapping("/update-list/{id}")
+	public String updateApplySubProc(ApplySubjectDto dto, 
+									@PathVariable("id") Integer id, 
+									@RequestParam("type") String type, 
+									@RequestParam("subDay") String subDay,
+									@RequestParam("roomId") String roomId,
+									@RequestParam("deptId") Integer deptId,
+									@RequestParam("semester") Integer semester) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (principal == null) {
+			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
+		}
+		
+		if (dto.getName() == null || dto.getName().isEmpty()) {
+			throw new CustomRestfullException("강의 명을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+				
+		if (dto.getStartTime() == null || dto.getStartTime() < 0) {
+			throw new CustomRestfullException("강의 시작 시간을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getEndTime() == null || dto.getEndTime() < 0) {
+			throw new CustomRestfullException("강의 끝나는 시간을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getStartTime() == dto.getEndTime()) {
+			throw new CustomRestfullException("시작 시간과 끝나는 시간을 잘못 입력하였습니다", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getSubYear() == null || dto.getSubYear() < 0) {
+			throw new CustomRestfullException("강의 개설 년도를 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getGrades() == null || dto.getGrades() < 0) {
+			throw new CustomRestfullException("강의 이수 학점을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		if (dto.getCapacity() == null || dto.getCapacity() < 0) {
+			throw new CustomRestfullException("강의 총 정원을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		professorService.updateMyApplySubInfo(dto);
 		
 		return "redirect:/professor/update-list";
 	}

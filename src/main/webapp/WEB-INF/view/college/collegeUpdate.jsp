@@ -37,7 +37,7 @@
 
 								<div class="col-lg-4 col-md-6">
 									<div class="box" style="margin-top: 13%;">
-										<h3 style="text-align: center;">단과대학 등록</h3>
+										<h3 style="text-align: center;">단과대학 수정</h3>
 										<ul>
 											<div class="col-md-6 form-group mt-3 mt-md-0">
 												<input type="text" class="form-control" name="name"

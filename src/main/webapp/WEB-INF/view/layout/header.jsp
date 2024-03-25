@@ -97,7 +97,6 @@ body {
 						<li class="dropdown"><a href="#"><span>수강신청</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="/sugang/timeTable">강의시간표 조회</a></li>
 								<li><a href="/sugang/pre/1">예비 수강 신청</a></li>
 								<li><a href="/sugang/preAppList?type=1">수강 신청</a></li>
 								<li><a href="/sugang/list">수강 신청 내역 조회</a></li>

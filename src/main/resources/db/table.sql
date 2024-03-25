@@ -24,21 +24,24 @@ CREATE TABLE cu_user
 );
 
 -- 학생
-CREATE TABLE cu_student
-(
-   id INT PRIMARY KEY AUTO_INCREMENT COMMENT '학번',
-   name VARCHAR (30) NOT NULL,
-   birth_date DATE NOT NULL,
-   gender CHAR (2) NOT NULL COMMENT '남성, 여성',
-   address VARCHAR (100) NOT NULL,
-   tel VARCHAR (13) NOT NULL,
-   email VARCHAR (30) NOT NULL,
-   dept_id INT NOT NULL COMMENT '학과',
-   grade INT NOT NULL DEFAULT 1 COMMENT '학년',
-   semester INT NOT NULL DEFAULT 1 COMMENT '학기',
-   entrance_date DATE NOT NULL,
-   graduation_date DATE,
-   FOREIGN KEY (dept_id) REFERENCES cu_department (id) ON DELETE CASCADE
+CREATE TABLE `cu_student` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '학번',
+  `name` varchar(30) NOT NULL,
+  `birth_date` date NOT NULL,
+  `gender` char(2) NOT NULL COMMENT '남성, 여성',
+  `address` varchar(100) NOT NULL,
+  `tel` varchar(13) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `dept_id` int NOT NULL COMMENT '학과',
+  `grade` int NOT NULL DEFAULT '1' COMMENT '학년',
+  `semester` int NOT NULL DEFAULT '1' COMMENT '학기',
+  `entrance_date` date NOT NULL,
+  `graduation_date` date DEFAULT NULL,
+  `origin_file_name` varchar(255) DEFAULT NULL,
+  `upload_file_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dept_id` (`dept_id`),
+  CONSTRAINT `cu_student_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `cu_department` (`id`) ON DELETE CASCADE
 );
 ALTER TABLE cu_student AUTO_INCREMENT = 2024000001;
 
@@ -312,17 +315,23 @@ FOREIGN KEY (staff_id) REFERENCES cu_staff(id)
 );
 
 
-CREATE TABLE cu_apply_sub (
-    id int NOT NULL auto_increment primary key, 
-    pro_id int NOT NULL, 
-    sub_name varchar(30) NOT NULL, 
-    pro_name varchar(20) NOT NULL, 
-    sub_time int NOT NULL, 
-    type char(2) NOT NULL, 
-    sub_grade int NOT NULL, 
-    capacity int NOT NULL, 
-    approval char(1) NOT NULL DEFAULT 'N', 
-    reason varchar(1000) DEFAULT NULL
+CREATE TABLE `cu_apply_sub` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `professor_id` int NOT NULL,
+  `name` varchar(30) NOT NULL COMMENT '강의 명',
+  `room_id` varchar(5) NOT NULL COMMENT '강의실 명',
+  `dept_id` int NOT NULL COMMENT '학과 명',
+  `type` char(2) NOT NULL COMMENT '전공/교양',
+  `start_time` int NOT NULL COMMENT '강의 시작 시간',
+  `end_time` int NOT NULL COMMENT '강의 끝나는 시간',
+  `sub_year` int NOT NULL COMMENT '강의 개설 년도',
+  `semester` int NOT NULL COMMENT '강의 개설 학기',
+  `sub_day` varchar(1) NOT NULL COMMENT '강의 요일',
+  `grades` int NOT NULL COMMENT '이수 학점',
+  `capacity` int NOT NULL COMMENT '강의 정원 수',
+  `approval` char(10) NOT NULL DEFAULT '미승인',
+  `reason` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 );
 CREATE TABLE cu_community (
   id int NOT NULL AUTO_INCREMENT,

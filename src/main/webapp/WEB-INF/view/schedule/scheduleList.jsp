@@ -50,6 +50,7 @@ main {
 		<div class="row">
 		
 		<!-- 학사일정 목록 -->
+		<c:if test="${crud.equals(\"select\") }">
 		<div class="container">
 			<table class="table">	
 				<thead>
@@ -69,9 +70,35 @@ main {
 				</c:forEach>
 				</tbody>
 			</table>
-			<button type="button" onclick="location.href='/schedule/write'" 
+			<button type="button" onclick="location.href='/schedule/list?crud=insert'" 
 				class="btn btn-dark update--button">등록</button>
 		</div>
+		</c:if>
+		<c:if test="${crud.equals(\"insert\") }">
+		<form action="/schedule/write" method="post">
+		    <table class="table">
+				<thead>
+					<tr class="first--tr">
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>시작날짜</td>
+						<td><input type="date" name ="startDay"></td>
+					</tr>
+					<tr>
+						<td>종료날짜</td>
+						<td><input type="date" name = "endDay"></td>
+					</tr>
+					<tr>
+						<td class="td">내용</td>
+						<td class="info"><input type="text" name = "information" class="textbox"></td>
+					</tr>
+				</tbody>
+			</table>
+		   <input type="submit" class="button" value="등록">
+	    </form>
+	    </c:if>
 		</div>
 		</div>
 	</div>

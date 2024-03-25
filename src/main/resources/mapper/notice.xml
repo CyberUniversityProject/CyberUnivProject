@@ -2,71 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.university.repository.interfaces.NoticeRepository">
-
-
+	
 	<!-- 메인 공지사항 조회 최신순으로 5개까지만 -->
 	<select id="selectMainNotice" resultType="com.cyber.university.dto.response.NoticeResDto">
 		select id, category, title, created_time, views from cu_notice
 		order by id desc limit 5
 	</select>
 	
+	<!-- 공지사항 등록 -->
 	<insert id="insert">
 		insert into cu_notice (title, category, content, created_time)
 		values(#{title}, #{category}, #{content}, now())
 	</insert>
+	
 	<insert id="insertFile">
 		insert into cu_notice_file (notice_id, origin_filename, uuid_filename)
 		values(#{noticeId}, #{originFilename}, #{uuidFilename})
 	</insert>
+	
 	<select id="selectLimit" resultType="Integer">
-		select id
-		from cu_notice
+		select id from cu_notice
 		where title = #{title} and content = #{content}
 		order by id limit 1
 	</select>
+	
+	<!-- 공지사항 최신순 조회 -->
 	<select id="selectByNoticeDto" resultType="com.cyber.university.dto.NoticeFormDto">
-		select * from cu_notice order by id DESC limit #{page}, 10
+		select * from cu_notice order by id DESC
+		limit #{page}, 10
 	</select>
 	
 	<select id="selectLimit5" resultType="com.cyber.university.dto.NoticeFormDto">
 		SELECT * FROM cu_notice ORDER BY id DESC LIMIT 5
 	</select>
 	
+	<!-- 공지사항 상세보기 -->
 	<select id="selectById" resultType="com.cyber.university.repository.model.Notice">
-		SELECT n.*, f.uuid_filename, f.origin_filename
-		FROM cu_notice AS n
-		LEFT JOIN cu_notice_file AS f
-		ON n.id = f.notice_id
-		WHERE n.id = #{id}
+		select n.*, f.uuid_filename, f.origin_filename
+		from cu_notice as n
+		left join cu_notice_file as f
+		on n.id = f.notice_id
+		where n.id = #{id}
 	</select>
-	<update id="updateByNoticeDto">
-		UPDATE cu_notice
-		SET title = #{title}, content = #{content}
-		WHERE id = #{id}
+	
+	<!-- 공지사항 조회수 -->
+	<update id="updateViews">
+		update cu_notice set views = views + 1 where id = #{id}
 	</update>
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateByNoticeDto">
+		update cu_notice 
+		set title = #{title}, content = #{content}
+		where id= #{id}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
 	<delete id="deleteById">
 		delete from cu_notice where id = #{id}
 	</delete>
+
+	<!-- 공지사항 검색(제목) -->
+	<select id="selectNoticeByTitle" resultType="com.cyber.university.dto.NoticeFormDto">
+		select * from cu_notice 
+		where title like concat('%', #{keyword}, '%')
+		order by id desc
+		limit #{page}, 10
+	</select>
+	
+	<!-- 공지사항 검색 (제목+내용)-->
+	<select id="selectNoticeByKeyword" resultType="com.cyber.university.dto.NoticeFormDto">
+		select * from cu_notice 
+		where title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
+		order by id desc
+		limit #{page}, 10
+	</select>
+	
+<!-- 페이징 -->
+	<!-- 공지사항 개수 -->
 	<select id="selectNoticeCount" resultType="Integer">
 		select count(id) from cu_notice
 	</select>
-	<select id="selectNoticeCountByKeyword" resultType="Integer">
-		select count(id) from cu_notice WHERE title LIKE CONCAT('%',#{keyword},'%') OR content LIKE CONCAT('%',#{keyword},'%')
-	</select>
+	
+	<!-- 공지사항 검색 개수(제목) -->
 	<select id="selectNoticeCountByTitle" resultType="Integer">
-		select count(id) from cu_notice WHERE title LIKE CONCAT('%',#{keyword},'%')
+		select count(id) from cu_notice 
+		where title like concat('%', #{keyword},'%')
+	</select> 
+	
+	<!-- 공지사항 검색 개수(제목+내용) -->
+	<select id="selectNoticeCountByKeyword" resultType="Integer">
+		select count(id) from cu_notice 
+		where title like concat('%', #{keyword}, '%') or content like concat('%', #{keyword}, '%')
 	</select>
-	<select id="selectNoticeByTitle" resultType="com.cyber.university.dto.NoticeFormDto">
-		SELECT * FROM cu_notice WHERE title LIKE CONCAT('%',#{keyword},'%')
-		ORDER BY id DESC 
-		LIMIT #{page}, 10
-	</select>
-	<select id="selectNoticeByKeyword" resultType="com.cyber.university.dto.NoticeFormDto">
-		SELECT * FROM cu_notice WHERE title LIKE CONCAT('%',#{keyword},'%') OR content LIKE CONCAT('%',#{keyword},'%')
-		ORDER BY id DESC 
-		LIMIT #{page}, 10
-	</select>
-	<update id="updateViews">
-		UPDATE cu_notice SET views = views + 1 WHERE id = #{id}
-	</update>
 </mapper>

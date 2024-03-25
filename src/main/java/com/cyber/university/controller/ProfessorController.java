@@ -20,6 +20,7 @@ import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.SubjectPeriodForProfessorDto;
+import com.cyber.university.dto.professor.UpdateApplySubListDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.PrincipalDto;
@@ -492,4 +493,51 @@ public class ProfessorController {
 		return "redirect:/professor/syllabus/" + subjectId;
 	}
 	
+	/**
+	  * @Method Name : myApplySubListpage
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 페이지 조회
+	  */
+	@GetMapping("/update-list")
+	public String myApplySubListpage(Model model) {
+		
+		List<UpdateApplySubListDto> subList = professorService.selectMyApplySubList();
+		model.addAttribute("subList", subList);
+		
+		return "professor/myApplySubList";
+	}	
+	
+	/**
+	  * @Method Name : updateApplySubPage
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  */
+	@GetMapping("/update-list/{id}")
+	public String updateApplySubPage(Model model, @PathVariable("id") Integer id) {
+		
+		ApplySubjectDto subjectInfo = professorService.selectUpdateSubInfo(id);
+		model.addAttribute("subjectInfo", subjectInfo);
+		System.out.println("subjectInfo : " + subjectInfo);
+		
+		FindDeptIdDto deptDto = professorService.selectDeptId();
+		Integer colId = deptDto.getColId();
+		
+		List<Room> room = professorService.selectRoom(colId);
+		model.addAttribute("room", room);
+		
+		List<Department> departments = professorService.selectDepartment(colId);
+		model.addAttribute("departments", departments);
+		
+		return "professor/updateApplySubject";
+	}
+	
+	@PostMapping("/update-list/{id}")
+	public String updateApplySubProc(@PathVariable("id") Integer id) {
+		
+		return "redirect:/professor/update-list";
+	}
 }

@@ -274,24 +274,11 @@ public class ProfessorController {
 											@RequestParam("grade") String grade,
 											UpdateStudentSubDetailDto dto) {
 		
+		 Integer sumScore = dto.getMidExam() + dto.getFinalExam();
+		    System.out.println("sumScore : " + sumScore);
 		
-		if (dto.getFinalExam() == null || dto.getFinalExam() < 0) {
-			throw new CustomRestfullException("강의 명을 입력하세요.", HttpStatus.BAD_REQUEST);
-		}
-		if (dto.getLateness() == null || dto.getLateness() > 5) {
-			throw new CustomRestfullException("성적이 F학점입니다.", HttpStatus.BAD_REQUEST);
-		}
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-
-	    if (!(principal instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
-	    
-	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
-	    System.out.println("sumScore : " + sumScore);
-	    
-	    if (dto.getAbsent() == null || dto.getAbsent() < 0) {
+		
+		if (dto.getAbsent() == null || dto.getAbsent() < 0) {
 	    	throw new CustomRestfullException("결석 횟수를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 	    
@@ -322,6 +309,18 @@ public class ProfessorController {
 	    if (dto.getLateness() >= 5) {
 	        grade = "F";
 	    }
+	    
+		
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+
+	    if (!(principal instanceof PrincipalDto)) {
+	    	
+	        return "redirect:/login";
+	    }
+	    
+	   
+	    
 	    
 	    professorService.updateStudentSubDetail(studentId, subjectId, dto);
 		

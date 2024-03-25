@@ -127,9 +127,5 @@ public class RoomController {
 		roomService.updateById(room);
 		return "redirect:/room/roomList";
 	}
-	@GetMapping("/side")
-	public String sideRegister() {
-		return null;
-	}
-
+	
 }

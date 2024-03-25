@@ -29,28 +29,42 @@ function validateForm() {
     }
 
 	if (subYear === "") {
-		errorMessage += "개설 년도를 입력하세요.\n";
-	} else {
-		// 개설 년도가 패턴에 맞는지 확인
-		if (!isValidYearFormat(subYear)) {
-			errorMessage += "올바른 년도 형식(2024)으로 입력하세요.\n";
-		}
-	}
+        errorMessage += "개설 년도를 입력하세요.\n";
+    } else {
+        // 개설 년도가 패턴에 맞는지 확인
+        if (!isValidYearFormat(subYear)) {
+            errorMessage += "올바른 년도 형식(2024)으로 입력하세요.\n";
+        } else {
+            // 현재 년도와 비교하여 현재 년도 이전인지 확인
+            var currentYear = new Date().getFullYear();
+            if (parseInt(subYear) < currentYear) {
+                errorMessage += "개강 년도는 현재 년도 이후로 입력하세요.\n";
+            }
+        }
+    }
 
 
 	if (grades === "") {
 		errorMessage += "이수 학점을 입력하세요.\n";
-	}
+	} 
+	
+	if (isNaN(grades) || grades < 0 || grades > 5) {
+        errorMessage += "학점은 0부터 5까지 입력 가능합니다.\n";
+    }
 
 	if (capacity === "") {
 		errorMessage += "강의 총 정원을 입력하세요.\n";
-	}
+	} 
+	
+	if (isNaN(capacity) || capacity < 0 || capacity > 100) {
+        errorMessage += "강의 총 정원은 0부터 100까지 입력 가능합니다.\n";
+    }
 
 	// 에러 메시지가 있는 경우 경고창 표시 및 폼 제출 방지
 	if (errorMessage !== "") {
 		alert(errorMessage);
 		return false;
-	}
+	} 
 
 	return true;
 }

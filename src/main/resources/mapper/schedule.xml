@@ -10,14 +10,20 @@
 		(#{staffId}, #{startDay}, #{endDay}, #{information})
 	</insert>
 	
-	<select id="selectSchedule">
-		select * from cu_schedule
+	<select id="selectSchedule" resultType="com.cyber.university.repository.model.Schedule">
+	    SELECT id, staff_id, DATE_FORMAT(start_day, '%m-%d') AS start_day, DATE_FORMAT(end_day, '%m-%d') AS end_day,
+   	 	information, YEAR(start_day) AS years, MONTH(start_day) AS month
+   		FROM cu_schedule
+   		ORDER BY start_day
 	</select>
 	
 	<!-- 일정 상세페이지 -->
-	<select id="selectScheduleById">
-		select * from cu_schedule 
-		where id = #{id}
+	<select id="selectScheduleById" resultType="com.cyber.university.dto.ScheduleDto">
+		SELECT id, staff_id, DATE_FORMAT(start_day,'%m-%d') AS start_mday, 
+		DATE_FORMAT(end_day,'%m-%d') AS  end_mday, staff_id,
+		start_day, end_day, information, YEAR(start_day) as years
+		FROM cu_schedule
+		WHERE id = #{id}
 	</select>
 	
 	<!-- 월마다 일정이 몇 개인지 조회 -->

@@ -52,7 +52,7 @@ main {
 		
 		<!-- 학사일정 상세페이지 -->
 		<div class="container">
-		<form action="/schedule/update?id=${schedule.id}" method="post">
+		<c:if test="${crud.equals(\"read\") }">
 		<table class="table">
 			<thead>
 				<tr class="first--tr">
@@ -74,14 +74,46 @@ main {
 				</tr>
 			</tbody>
 		</table>
-		<div class="checkbox">
-			<button type="submit" class="button">수정</button>
-		</div>
-		</form>
 		
+		<c:if test="${principal.userRole.equals(\"staff\") }">
 		<div class="checkbox">
-	    	<a href="/schedule/delete?id=${schedule.id}" class="button">삭제</a>
+			<a href="/schedule/detail?crud=update&id=${schedule.id}" class="button">수정</a>
+			<a href="/schedule/delete?id=${schedule.id}" class="button">삭제</a>
 		</div>
+		</c:if>
+		</c:if>
+		
+		<c:if test="${crud.equals(\"update\") }">
+		<form action="/schedule/update?id=${schedule.id}" method="post">
+		<table class="table">
+		<thead>
+			<tr class="first--tr">
+				<th colspan="2">${schedule.years}년 학교 학사일정</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>시작날짜</td>
+				<td>${schedule.startMday}</td>
+			</tr>
+			<tr>
+				<td>종료날짜</td>
+				<td>${schedule.endMday}</td>
+			</tr>
+			<tr>
+				<td class="td">내용</td>
+				<td class="info">${schedule.information}</td>
+			</tr>
+		</tbody>
+		</table>
+		<div class="checkbox">
+			<button class="button">수정</button>
+		</div>
+		
+		</form>
+		</c:if>
+		
+	
 		</div>
 		</div>
 		</div>

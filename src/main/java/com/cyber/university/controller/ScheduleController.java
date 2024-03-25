@@ -3,6 +3,7 @@ package com.cyber.university.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,11 +43,7 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 /**
-  * @Method Name : schedule
-  * @작성일 : 2024. 3. 13.
-  * @작성자 : 조유빈
-  * @변경이력 : 3.13 생성
-  * @Method 설명 : 학사일정 페이지
+  * 학사일정 페이지
   * @param model
   * @return
   */
@@ -55,20 +52,28 @@ public class ScheduleController {
 	public String schedule(Model model) {
 		List<Schedule> schedule = scheduleService.readSchedule();
 		model.addAttribute("schedule", schedule); 
+		
 		return "/schedule/schedule";
 	}
 	
 	@GetMapping("/list")
-	public String scheduleList(Model model) {
+	public String scheduleList(Model model, @RequestParam(name="crud", defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		List<Schedule> schedule = scheduleService.readSchedule(); 
 		model.addAttribute("schedule", schedule);
+		
 		return "/schedule/scheduleList";
 	}
 	
+	/*
+	 * 학사일정 상세 페이지
+	 */
 	@GetMapping("/detail")
-	public String detailSchedule(Model model, @RequestParam("id") Integer id) {
+	public String detailSchedule(Model model, Integer id, @RequestParam(name="crud", defaultValue = "read") String crud) {
 		ScheduleDto schedule = scheduleService.readScheduleById(id);
+		model.addAttribute("crud", crud);
 		model.addAttribute("schedule", schedule);
+		
 		return "/schedule/scheduleDetail";
 		
 	}
@@ -82,17 +87,10 @@ public class ScheduleController {
   * @Method 설명 : 학사일정 등록
   * @return
   */
-	@GetMapping("/write")
-	public String insertSchedule() {
-		return "/schedule/scheduleWrite";
-	}
-	
-	
+
 	@PostMapping("/write")
-	// ScheduleProc -> insertNotice
 	public String insertSchedule(Model model, ScheduleFormDto scheduleFormDto) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-		log.info("scheduleFormDto : " + scheduleFormDto);
 		scheduleService.createSchedule(principal.getId(), scheduleFormDto);
 		
 		return "redirect:/schedule/list";

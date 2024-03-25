@@ -39,23 +39,22 @@ public class ScheduleService {
 	// 학사 일정 조회
 	public List<Schedule> readSchedule() {
 		List<Schedule> schedule = scheduleRepository.selectSchedule();
-		log.info("schedule1 : " + schedule); // year=null, month=null
 		return schedule;
 	}
 	
 /**
-  * @Method Name : createSchedule
-  * @작성일 : 2024. 3. 14.
-  * @작성자 : 조유빈
-  * @변경이력 : 3.14 생성
-  * @Method 설명 : 학사일정 생성
+  * 학사일정 생성
   * @param staffId
   * @param scheduleFormDto
   */
 	public void createSchedule(Integer staffId, ScheduleFormDto scheduleFormDto) {
-		// 생성자 + set~  안하고도 일단 등록은 잘됨
+		Schedule schedule = new Schedule();
+		schedule.setStaffId(staffId);
+		schedule.setStartDay(scheduleFormDto.getStartDay());
+		schedule.setEndDay(scheduleFormDto.getEndDay());
+		schedule.setInformation(scheduleFormDto.getInformation());
 		
-		int resultRowCount = scheduleRepository.insertScheduleForm(scheduleFormDto);
+		int resultRowCount = scheduleRepository.insertScheduleForm(schedule);
 		if(resultRowCount != 1) {
 			System.out.println("요청을 처리하지 못했습니다.");
 		}	

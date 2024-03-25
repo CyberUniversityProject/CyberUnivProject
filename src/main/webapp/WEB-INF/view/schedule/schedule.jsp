@@ -1,8 +1,24 @@
 <%@page import="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$(".month").each(function() {
+			var tempString = $(this).text();
+			var month_rows = $(".month").filter(function() {
+				return $(this).text() == tempString;
+			});
+			if (month_rows.length > 1) {
+				month_rows.eq(0).attr("rowspan", month_rows.length);
+				month_rows.not(":eq(0)").remove();
+			}
+		});
+	});
+</script>
+
 <style>
 body > div{
 	padding-top: 100px;
@@ -10,6 +26,31 @@ body > div{
 main {
 	height: 1000px;
 }
+
+#scheduleTable {
+	text-align: center;
+	margin-top: 20px;
+	margin: 10px;
+}
+
+#scheduleTable td {
+	padding: 10px;
+	width: 300px;
+}
+
+.month {
+  background-color: #f5f5f5;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+
+.line{
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;	
+}
+
+
+
 
 </style>
 </head>
@@ -51,7 +92,7 @@ main {
 		
 		<!-- 학사일정 목록 -->
 		<div class="container">
-		<table  class="room--table">
+		<table id="scheduleTable">
 			<tbody>
 			<c:forEach var ="schedule" items ="${schedule}">
 				<tr>

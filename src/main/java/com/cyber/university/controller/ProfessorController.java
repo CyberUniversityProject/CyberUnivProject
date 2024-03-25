@@ -325,13 +325,6 @@ public class ProfessorController {
 											@RequestParam("grade") String grade,
 											UpdateStudentSubDetailDto dto) {
 		
-<<<<<<< HEAD
-		 Integer sumScore = dto.getMidExam() + dto.getFinalExam();
-		    System.out.println("sumScore : " + sumScore);
-		
-		
-		if (dto.getAbsent() == null || dto.getAbsent() < 0) {
-=======
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
@@ -344,7 +337,6 @@ public class ProfessorController {
 	    
 		if (dto.getAbsent() == null || dto.getAbsent() < 0) {
 
->>>>>>> bec7879503e0e8fb0c7659c1685944aba51d4fb0
 	    	throw new CustomRestfullException("결석 횟수를 입력해주세요", HttpStatus.BAD_REQUEST);
 		}
 	    
@@ -375,18 +367,6 @@ public class ProfessorController {
 	    if (dto.getLateness() >= 5) {
 	        grade = "F";
 	    }
-	    
-		
-		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-
-	    if (!(principal instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
-	    
-	   
-	    
 	    
 	    professorService.updateStudentSubDetail(studentId, subjectId, dto);
 		

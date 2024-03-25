@@ -9,15 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.ProfessorService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/professor")
+@RequiredArgsConstructor
 public class ProfessorRestFulController {
 	
 	
 	@Autowired
-	private ProfessorService professorService;
+	private final ProfessorService professorService;
 	
 	
 	@GetMapping("/findAll")

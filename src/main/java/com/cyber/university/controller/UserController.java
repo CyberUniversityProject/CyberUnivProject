@@ -8,12 +8,14 @@ import com.cyber.university.dto.StudentListForm;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Professor;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.UserService;
 
 import com.cyber.university.utils.Define;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,16 +48,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private final UserService userService;
     
     @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
     
     @Autowired
-    private ProfessorService professorService;
+    private final ProfessorService professorService;
 
     /**
      * @return staff 입력 페이지

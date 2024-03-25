@@ -21,9 +21,11 @@ import com.cyber.university.dto.NoticeFormDto;
 import com.cyber.university.dto.NoticePageFormDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Notice;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.NoticeService;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,10 +40,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/notice")
+@RequiredArgsConstructor
 public class NoticeController {
 	
 	@Autowired 
-	NoticeService noticeService;
+	private final NoticeService noticeService;
 	/**
 	 * 
 	 * @return 공지사항 페이지

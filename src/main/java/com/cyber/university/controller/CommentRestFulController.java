@@ -13,17 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.repository.model.Comment;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.CommentService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/comment")
 @Slf4j
+@RequiredArgsConstructor
 public class CommentRestFulController {
 
 	@Autowired
-	private CommentService commentService;
+	private final CommentService commentService;
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createComment(@RequestParam(name = "commentContent") String commentContent,

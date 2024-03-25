@@ -38,6 +38,7 @@ import com.cyber.university.repository.model.Student;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @FileName : ProfessorService.java
@@ -49,19 +50,20 @@ import jakarta.servlet.http.HttpSession;
  */
 
 @Service
+@RequiredArgsConstructor
 public class ProfessorService {
 
 	@Autowired
-	private ProfessorRepository professorRepository;
+	private final ProfessorRepository professorRepository;
 	
 	@Autowired
-	private StudentRepository studentRepository;
+	private final StudentRepository studentRepository;
 	
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private final SubjectRepository subjectRepository;
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment

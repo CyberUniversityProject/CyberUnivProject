@@ -25,6 +25,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,18 +57,20 @@ import static com.cyber.university.controller.StuSubController.SUGANG_PERIOD;
  */
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
 public class PersonalController {
 
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	@Autowired
-	private ApplySubjectService applySubjectService;
+	private final ApplySubjectService applySubjectService;
 	@Autowired
-	private BreakService breakService;
+	private final BreakService breakService;
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
 	/**
 	 * 메인 홈페이지

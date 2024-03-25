@@ -32,11 +32,13 @@ import com.cyber.university.repository.model.PageReq;
 import com.cyber.university.repository.model.PageRes;
 import com.cyber.university.repository.model.Room;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 
 /**
@@ -52,13 +54,14 @@ import jakarta.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/professor")
+@RequiredArgsConstructor
 public class ProfessorController {
 	
 	@Autowired
-	private ProfessorService professorService;
+	private final ProfessorService professorService;
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	
 	
 	/**

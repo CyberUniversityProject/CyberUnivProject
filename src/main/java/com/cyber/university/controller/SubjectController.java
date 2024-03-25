@@ -15,22 +15,26 @@ import com.cyber.university.dto.AllSubjectSearchFormDto;
 import com.cyber.university.dto.response.ReadSyllabusDto;
 import com.cyber.university.dto.response.SubjectDto;
 import com.cyber.university.repository.model.Department;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.service.SubjectService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/subject")
+@RequiredArgsConstructor
 public class SubjectController {
 
 	@Autowired
-	private SubjectService subjectService;
+	private final SubjectService subjectService;
 
 	@Autowired
-	private CollegeService collegeService;
+	private final CollegeService collegeService;
 
 	@Autowired
-	private ProfessorService professorService;
+	private final ProfessorService professorService;
 
 	// 모든 강의 조회 (모든 연도-학기에 대해서)
 	@GetMapping("/list/{page}")

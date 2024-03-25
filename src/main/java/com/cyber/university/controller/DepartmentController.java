@@ -15,11 +15,13 @@ import com.cyber.university.dto.DepartmentDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.Department;
 import com.cyber.university.repository.model.Staff;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.DepartmentService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -34,16 +36,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/department")
+@RequiredArgsConstructor
 public class DepartmentController {
 	
 	@Autowired
-	private DepartmentService departmentService;
+	private final DepartmentService departmentService;
 	
 	@Autowired
-	private HttpSession httpSession;
+	private final HttpSession httpSession;
 	
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	// 화면 띄우기
 	@GetMapping("/departmentRegister")

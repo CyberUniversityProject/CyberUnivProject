@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.dto.RoomWithCollegeDto;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.RoomService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/room")
+@RequiredArgsConstructor
 public class RoomRestFulCountroller {
 	
 	@Autowired
-	private RoomService roomService;
+	private final RoomService roomService;
 	
 	
 	@GetMapping("/findAll")

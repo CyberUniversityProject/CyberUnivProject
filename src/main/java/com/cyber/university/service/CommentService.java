@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import com.cyber.university.repository.interfaces.CommentRepository;
 import com.cyber.university.repository.model.Comment;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 	
 	
 	@Autowired
-	private CommentRepository commentRepository;
+	private final CommentRepository commentRepository;
 	
 	
 	 public void insertComment(Comment comment) {

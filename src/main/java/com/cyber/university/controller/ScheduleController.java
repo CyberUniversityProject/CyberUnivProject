@@ -14,10 +14,12 @@ import com.cyber.university.dto.ScheduleDto;
 import com.cyber.university.dto.ScheduleFormDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.Schedule;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.ScheduleService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,13 +35,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/schedule")
+@RequiredArgsConstructor
 public class ScheduleController {
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	
 	@Autowired
-	private ScheduleService scheduleService;
+	private final ScheduleService scheduleService;
 	
 /**
   * @Method Name : schedule

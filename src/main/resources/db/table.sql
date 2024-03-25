@@ -129,15 +129,20 @@ CREATE TABLE cu_pre_stu_sub
 );
 
 -- 수강 내역
-CREATE TABLE cu_stu_sub(
-	id INT PRIMARY KEY  AUTO_INCREMENT,
-   student_id INT,
-   subject_id INT,
-   grade VARCHAR (2) COMMENT '신청 학점 (평점)',
-   complete_grade INT COMMENT '이수 학점',
-   FOREIGN KEY (student_id) REFERENCES cu_student (id) ON DELETE CASCADE,
-   FOREIGN KEY (subject_id) REFERENCES cu_subject (id) ON DELETE CASCADE,
-   FOREIGN KEY (grade) REFERENCES cu_grade (grade)
+CREATE TABLE `cu_stu_sub` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int DEFAULT NULL,
+  `subject_id` int DEFAULT NULL,
+  `grade` varchar(2) DEFAULT NULL COMMENT '신청 학점 (평점)',
+  `complete_grade` int DEFAULT NULL COMMENT '이수 학점',
+  `evaluation_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `student_id` (`student_id`),
+  KEY `subject_id` (`subject_id`),
+  KEY `grade` (`grade`),
+  CONSTRAINT `cu_stu_sub_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `cu_student` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `cu_stu_sub_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `cu_subject` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `cu_stu_sub_ibfk_3` FOREIGN KEY (`grade`) REFERENCES `cu_grade` (`grade`)
 );
 
 -- 단과대별 등록금

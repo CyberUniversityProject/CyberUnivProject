@@ -6,8 +6,7 @@ function validateForm() {
     let midExam = parseInt(document.getElementById("midExam").value);
     let finalExam = parseInt(document.getElementById("finalExam").value);
     let convertedMark = parseInt(document.getElementById("convertedMark").value);
-    let grade = document.getElementById("grade").value;
-    let sumScore = midExam + finalExam;
+    let sumScore = midExam + finalExam + homework;
     let errorMessage = "";
 
     if (absent < 0 || absent > 72 || isNaN(absent)) {

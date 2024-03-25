@@ -359,7 +359,7 @@ public class ProfessorController {
 	    	throw new CustomRestfullException("환산 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
 	    }
 
-	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
+	    Integer sumScore = dto.getMidExam() + dto.getFinalExam() + dto.getHomework();
 	    if (dto.getConvertedMark() != sumScore) {
 			throw new CustomRestfullException("잘못된 환산 점수 입니다", HttpStatus.BAD_REQUEST);
 	    }	    

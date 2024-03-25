@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cyber.university.dto.ProfessorListForm;
 import com.cyber.university.dto.SyllaBusFormDto;
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.FindDeptIdDto;
 import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
@@ -19,6 +20,7 @@ import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.SubjectPeriodForProfessorDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
+import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.ReadSyllabusDto;
 import com.cyber.university.dto.response.SubjectForProfessorDto;
@@ -27,10 +29,13 @@ import com.cyber.university.repository.interfaces.ProfessorRepository;
 import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.interfaces.SubjectRepository;
 import com.cyber.university.repository.model.ApplySubject;
+import com.cyber.university.repository.model.Department;
 import com.cyber.university.repository.model.PageReq;
 import com.cyber.university.repository.model.PageRes;
 import com.cyber.university.repository.model.Professor;
+import com.cyber.university.repository.model.Room;
 import com.cyber.university.repository.model.Student;
+import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -54,6 +59,9 @@ public class ProfessorService {
 	
 	@Autowired
 	private SubjectRepository subjectRepository;
+	
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * @Method Name : selectProfessorInfoWithCollegeAndDepartment
@@ -131,17 +139,22 @@ public class ProfessorService {
 	@Transactional
 	public void insertApplySubject(ApplySubjectDto dto, Integer proId) {
 		
-		if (selectSubName(dto.getSubName()) != null) {
+		if (selectSubName(dto.getName()) != null) {
 			throw new CustomRestfullException("이미 존재하는 강의 입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		ApplySubject subject = new ApplySubject();
-		subject.setProId(dto.getProId());
-		subject.setSubName(dto.getSubName());
-		subject.setProName(dto.getProName());
-		subject.setSubTime(dto.getSubTime());
+		subject.setProfessorId(dto.getProfessorId());
+		subject.setName(dto.getName());
+		subject.setRoomId(dto.getRoomId());
+		subject.setDeptId(dto.getDeptId());
 		subject.setType(dto.getType());
-		subject.setSubGrade(dto.getSubGrade());
+		subject.setStartTime(dto.getStartTime());
+		subject.setEndTime(dto.getEndTime());
+		subject.setSubYear(dto.getSubYear());
+		subject.setSemester(dto.getSemester());
+		subject.setSubDay(dto.getSubDay());
+		subject.setGrades(dto.getGrades());
 		subject.setCapacity(dto.getCapacity());
 		
 		int resultRowCount = professorRepository.insertApplySubject(subject);
@@ -219,6 +232,7 @@ public class ProfessorService {
 	  * @변경이력 : 
 	  * @Method 설명 : 학생 성적 업데이트
 	  */
+	@Transactional
 	public int updateStudentSubDetail(Integer studentId, Integer subjectId, UpdateStudentSubDetailDto dto) {
 		UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
 		
@@ -228,6 +242,9 @@ public class ProfessorService {
 		map.put("subjectId", dto.getSubjectId());
 		map.put("absent", dto.getAbsent());
 		map.put("lateness", dto.getLateness());
+		if (dto.getLateness() >= 5) {
+			map.put("grade", "F");
+		}
 		map.put("homework", dto.getHomework());
 		map.put("midExam", dto.getMidExam());
 		map.put("finalExam", dto.getFinalExam());
@@ -346,6 +363,7 @@ public class ProfessorService {
 	  * @변경이력 : 
 	  * @Method 설명 : 강의 계획서 수정
 	  */
+	@Transactional
 	public void updateSyllabus(SyllaBusFormDto dto) {
 		
 		int resultRowCount = professorRepository.updateSyllabus(dto);
@@ -353,8 +371,7 @@ public class ProfessorService {
 			throw new CustomRestfullException("제출 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+		
 	// 강의계획서 불러오기
 	@Transactional
 	public ReadSyllabusDto readSyllabus(Integer subjectId) {
@@ -362,5 +379,41 @@ public class ProfessorService {
 		ReadSyllabusDto readSyllabusDto = subjectRepository.selectSyllabusBySubjectId(subjectId);
 		System.out.println(readSyllabusDto.toString());
 		return readSyllabusDto;
+	}
+	
+	/**
+	  * @Method Name : selectRoom
+	  * @작성일 : 2024. 3. 23.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학과 강의실 조회
+	  */
+	public List<Room> selectRoom(Integer collegeId) {
+		return professorRepository.selectRoom(collegeId);
+	}
+	
+	/**
+	  * @Method Name : selectDepartment
+	  * @작성일 : 2024. 3. 23.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 학과 이름 조회
+	  */
+	public List<Department> selectDepartment(Integer collegeId) {
+		return professorRepository.selectDepartment(collegeId);
+	}
+	
+	/**
+	  * @Method Name : selectDeptId
+	  * @작성일 : 2024. 3. 23.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 단과대 아이디 조회
+	  */
+	public FindDeptIdDto selectDeptId() {
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		Integer professorId = principal.getId();
+		
+		return professorRepository.selectDeptId(professorId);
 	}
 }

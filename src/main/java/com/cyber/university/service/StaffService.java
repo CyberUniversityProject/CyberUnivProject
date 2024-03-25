@@ -2,6 +2,7 @@ package com.cyber.university.service;
 
 import java.util.List;
 
+import com.cyber.university.dto.response.SubjectListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -81,6 +82,21 @@ public class StaffService {
 		List<Subject> subjectList = subjectRepository.selectAll();
 		return subjectList;
 	}
+	
+	public List<SubjectListDto> findAllPost(int page, int size) {
+        // 페이징 처리를 위해 offset 계산
+        int offset = (page - 1) * size;
+        // 페이징된 강의실 목록 조회
+        return subjectRepository.findAllwithPaging(offset, size);
+    }
+	
+	 public int getTotalPages(int size) {
+	        // 전체 데이터 개수 가져오기
+	        int totalRecords = subjectRepository.getAllCount();
+	        // 전체 페이지 수 계산
+	        int totalPages = (int) Math.ceil((double) totalRecords / size);
+	        return totalPages;
+	    }
 
 	/**
 	 * 강의 삭제 서비스

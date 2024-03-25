@@ -16,9 +16,7 @@
 	overflow: hidden; /* 넘치는 내용 숨김 */
 	text-overflow: ellipsis; /* 넘치는 내용을 줄임표로 표시 */
 }
-#studentInfo {
-	width: 50%;
-}
+
 </style>
 </head>
 <body>
@@ -34,7 +32,8 @@
 			<%@ include file="/WEB-INF/view/layout/professorAsidebar.jsp"%>
 			<div class="col-md-10 pt-5">
 				<div class="split--div"></div>
-				<div class="card mb-3" id="studentInfo">
+				<div class="container-table">
+				<div class="card mb-3 table-row">
 					<div class="card-header">학생 정보</div>
 					<div class="card-body">
 						<table class="table">
@@ -54,7 +53,7 @@
 					</div>
 				</div>
 
-				<div class="card" id="studentInfo">
+				<div class="card table-row">
 					<div class="card-header">성적 입력</div>
 					<div class="card-body">
 						<form action="/professor/subject/${subjectId}/${studentInfo.id}" method="post" onsubmit="return validateForm()">
@@ -63,7 +62,7 @@
 									<tr>
 										<td><label>결석</label></td>
 										<td><input type="number" name="absent" id="absent">
-										<span style="color: #888">※ 결석 5회 이상시 F학점입니다.</span></td>
+										<span style="color: #888"><br>※ 결석 5회 이상시 F학점입니다.</span></td>
 									</tr>
 									<tr>
 										<td><label>지각</label></td>
@@ -104,17 +103,18 @@
 										<td colspan="2">
 											<button type="submit" class="btn btn-dark">제출하기</button>
 										</td>
-									</tr>
-								</tbody>
-							</table>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script

@@ -1,8 +1,11 @@
 package com.cyber.university.controller;
 
 import java.io.Console;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,6 +58,7 @@ import com.cyber.university.utils.Define;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @FileName : StudentController.java
@@ -124,21 +128,36 @@ public class StudentController {
 	 * @Method 설명 : 내 정보 업데이트
 	 */
 	@PostMapping("/updateInfo")
-	public String updateInfo(@RequestBody StudentInfoDto studentInfoDto) {
-
+	public String updateInfo(@RequestParam("profilImage") MultipartFile profilImage, @ModelAttribute("studentInfoDto") StudentInfoDto studentInfoDto) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
 		log.info("controller in!");
 
 		if (userId == null) {
-
 			log.info("controller userId null!");
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+		// 이미지가 수정되었을 때만 이미지 업데이트 수행
+		if (profilImage != null && !profilImage.isEmpty()) {
+			String saveDirectory = Define.UPLOAD_DIRECTORY;
+			String fileName = UUID.randomUUID() + "_" + profilImage.getOriginalFilename();
+			File destination = new File(saveDirectory, fileName);
+			try {
+				profilImage.transferTo(destination);
+				studentInfoDto.setOriginFileName(profilImage.getOriginalFilename());
+				studentInfoDto.setUploadFileName(fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			// 이미지가 수정되지 않은 경우, 기존 이미지 정보를 유지
+			studentInfoDto.setOriginFileName(studentInfoDto.getOriginFileName());
+			studentInfoDto.setUploadFileName(studentInfoDto.getUploadFileName());
+		}
+
 		log.info("controller service before!");
 		studentService.updateStudentInfo(userId, studentInfoDto);
-
 		log.info("controller service after!");
 		return "redirect:/student/studentInfo";
 	}

@@ -237,36 +237,33 @@ public class ProfessorService {
 	  */
 	@Transactional
 	public int updateStudentSubDetail(Integer studentId, Integer subjectId, UpdateStudentSubDetailDto dto) {
-		UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("studentId", dto.getStudentId());
-		map.put("subjectId", dto.getSubjectId());
-		map.put("absent", dto.getAbsent());
-		map.put("lateness", dto.getLateness());
-		if (dto.getLateness() >= 5) {
-			map.put("grade", "F");
-		}
-		map.put("homework", dto.getHomework());
-		map.put("midExam", dto.getMidExam());
-		map.put("finalExam", dto.getFinalExam());
-		map.put("grade", dto.getGrade());
-		if(dto.getGrade().equals("F")) {
-			map.put("completeGrade", 0);
-		} else {
-			map.put("completeGrade", grades.getGrades());
-		}
-		map.put("convertedMark", dto.getConvertedMark());
-		
-		
-		
-		int result = professorRepository.updateStudentSubDetail(map);
-		int result2 = professorRepository.updateStudentGrade(map);
-		
-		
-		
-		return result + result2;
+	    UpdateStudentSubDetailDto grades = professorRepository.selectGradesInfo(subjectId);
+	    
+	    Map<String, Object> map = new HashMap<>();
+	    
+	    map.put("studentId", dto.getStudentId());
+	    map.put("subjectId", dto.getSubjectId());
+	    map.put("absent", dto.getAbsent());
+	    map.put("lateness", dto.getLateness());
+	    if (dto.getLateness() >= 5) {
+	        map.put("grade", "F");
+	    } else {
+	        map.put("grade", dto.getGrade()); // 중복된 부분 수정
+	    }
+	    map.put("homework", dto.getHomework());
+	    map.put("midExam", dto.getMidExam());
+	    map.put("finalExam", dto.getFinalExam());
+	    if(dto.getGrade().equals("F")) {
+	        map.put("completeGrade", 0);
+	    } else {
+	        map.put("completeGrade", grades.getGrades());
+	    }
+	    map.put("convertedMark", dto.getConvertedMark());
+	    
+	    int result = professorRepository.updateStudentSubDetail(map);
+	    int result2 = professorRepository.updateStudentGrade(map);
+	    
+	    return result + result2;
 	}
 	
 	

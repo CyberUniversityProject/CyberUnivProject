@@ -381,7 +381,7 @@ VALUES
 ('김서진', '2003-04-14', '여성', '부산시 사하구', '010-0215-0062', 'ksj12@green.com', 105, 1, 1, '2023-03-02'),
 ('김다빈', '2003-09-24', '여성', '부산시 영도구', '010-0042-4015', 'kdb@green.com', 105, 1, 1, '2023-03-02');
 
-INSERT INTO cu_student
+INSERT INTO cu_student(id, name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date, graduation_date)
 VALUES
 (2024000051, '김민지', '2004-01-01', '여성', '부산시 기장군', '010-3424-0355', 'alswl@naver.com', 106, 1, 1, '2024-03-02', NULL),
 (2024000052, '임소연', '2004-04-01', '여성', '부산시 기장군', '010-2444-0452', 'thdus@naver.com', 106, 1, 1, '2024-03-02', NULL),
@@ -487,7 +487,7 @@ VALUES
 (2024000149, '이재용', '2003-02-12', '남성', '부산시 중구 중앙동', '010-4549-1312', 'aoao49@nate.com', 115, 1, 1, '2024-03-02', NULL),
 (2024000150, '신승훈', '2003-07-02', '남성', '부산시 중구 중앙동', '010-4550-1312', 'aoao50@nate.com', 115, 1, 1, '2024-03-02', NULL);
 
-INSERT INTO cu_student VALUES
+INSERT INTO cu_student(id, name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date, graduation_date)  VALUES
 (2024000151, '김진기', '2003-09-12', '남성', '서울시 강남구 방배동', '010-2424-2424', 'aaa@green.ac.kr', 116, 1, 1, '2024-03-02', NULL),
 (2024000152, '김진태', '2003-09-12', '남성', '서울시 동작구 방배동', '010-2424-2424', 'aab@green.ac.kr', 116, 1, 1, '2024-03-02', NULL),
 (2024000153, '이민성', '2003-09-12', '남성', '서울시 중랑구 방배동', '010-2424-2425', 'aac@green.ac.kr', 116, 1, 1, '2024-03-02', NULL),

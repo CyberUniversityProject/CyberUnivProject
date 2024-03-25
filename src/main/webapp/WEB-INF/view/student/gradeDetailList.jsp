@@ -315,105 +315,98 @@ link:focus, .nav-link:hover {
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 
-		<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		<script>
-			document
-					.addEventListener(
-							"DOMContentLoaded",
-							function() {
-								// HTML에서 클래스 이름이 "average"인 요소의 텍스트 내용을 가져오기
-								var averageElement = document
-										.querySelector('.average');
+	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							// HTML에서 클래스 이름이 "average"인 요소의 텍스트 내용을 가져오기
+							var averageElement = document
+									.querySelector('.average');
 
-								// 가져온 텍스트 내용을 숫자로 변환하여 소수점 세 자리에서 반올림
-								var averageGrade = parseFloat(averageElement.textContent);
-								var roundedAverageGrade = Math
-										.round(averageGrade * 100) / 100;
+							// 가져온 텍스트 내용을 숫자로 변환하여 소수점 세 자리에서 반올림
+							var averageGrade = parseFloat(averageElement.textContent);
+							var roundedAverageGrade = Math
+									.round(averageGrade * 100) / 100;
 
-								// 반올림된 평균 등급을 HTML 요소에 할당하여 표시
-								averageElement.textContent = roundedAverageGrade;
+							// 반올림된 평균 등급을 HTML 요소에 할당하여 표시
+							averageElement.textContent = roundedAverageGrade;
 
-								// 검색 폼이 제출될 때 AJAX 요청을 보냄
-								$('form')
-										.submit(
-												function(event) {
-													event.preventDefault(); // 기본 제출 동작을 막음
-													var formData = $(this)
-															.serialize(); // 폼 데이터를 가져와서 시리얼라이즈
-													$
-															.ajax({
-																type : 'GET',
-																url : '/student/list/search',
-																data : formData,
-																success : function(
-																		response) {
+							// 검색 폼이 제출될 때 AJAX 요청을 보냄
+							$('form').submit(
+											function(event) {
+										console.log("폼서브밋 펑션이실행됐다고");
+												event.preventDefault(); // 기본 제출 동작을 막음
+												var formData = $(this).serialize(); // 폼 데이터를 가져와서 시리얼라이즈
+												$.ajax({
+															type : 'GET',
+															url : '/student/list/search',
+															data : formData,
+															success : function(
+																	response) {
 
-																	console
-																			.log(response[0].subYear);
-
-																	var html = '';
-																	if (response
-																			&& response.length > 0) {
-																		$
-																				.each(
-																						response,
-																						function(
-																								index,
-																								allGrade) {
-																							if (allGrade.grade !== null) {
-																								html += '<tr>';
-																								html += '<td>'
-																										+ allGrade.subYear
-																										+ '-'
-																										+ allGrade.semester
-																										+ '학기</td>';
-																								html += '<td>'
-																										+ allGrade.subjectId
-																										+ '</td>';
-																								html += '<td class="sub--list--name">'
-																										+ allGrade.subjectName
-																										+ '</td>';
-																								html += '<td>'
-																										+ allGrade.type
-																										+ '</td>';
-																								html += '<td>'
-																										+ allGrade.grades
-																										+ '</td>';
-																								html += '<td>'
-																										+ allGrade.grade
-																										+ '</td>';
-																								html += '</tr>';
-																							}
-																						});
-																	} else {
-																		// 검색 결과가 없는 경우 메시지를 생성
-																		html += '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
-																	}
-
-																	// 생성된 HTML 코드를 해당 테이블의 tbody에 추가 또는 업데이트
-																	$(
-																			'div#id2 table.table-bordered tbody')
-																			.html(
-																					html);
-																},
-																error : function(
-																		xhr,
-																		status,
-																		error) {
-																	console
-																			.error(xhr.responseText);
-																	// 오류 처리 로직 추가
+																var html = '';
+																if (response && response.length > 0) {
+																	$.each(
+																					response,
+																					function(
+																							index,
+																							allGrade) {
+																						if (allGrade.grade !== null) {
+																							html += '<tr>';
+																							html += '<td>'
+																									+ allGrade.subYear
+																									+ '-'
+																									+ allGrade.semester
+																									+ '학기</td>';
+																							html += '<td>'
+																									+ allGrade.subjectId
+																									+ '</td>';
+																							html += '<td class="sub--list--name">'
+																									+ allGrade.subjectName
+																									+ '</td>';
+																							html += '<td>'
+																									+ allGrade.type
+																									+ '</td>';
+																							html += '<td>'
+																									+ allGrade.grades
+																									+ '</td>';
+																							html += '<td>'
+																									+ allGrade.grade
+																									+ '</td>';
+																							html += '</tr>';
+																						}
+																					});
+																} else {
+																	// 검색 결과가 없는 경우 메시지를 생성
+																	html += '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
 																}
-															});
-												});
-							});
-		</script>
+
+																// 생성된 HTML 코드를 해당 테이블의 tbody에 추가 또는 업데이트
+																$(
+																		'div#id2 table.table-bordered tbody')
+																		.html(
+																				html);
+															},
+															error : function(
+																	xhr,
+																	status,
+																	error) {
+																console
+																		.error(xhr.responseText);
+																// 오류 처리 로직 추가
+															}
+														});
+											});
+						});
+	</script>
 </body>
 </html>

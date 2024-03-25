@@ -62,7 +62,9 @@ public class Define {
     		"/student/**", "/sugang/**", "/professor/**", "/user/**", "/tuition/**", "/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**"};
     public final static String[] PROFESSOR_PATHS = { "/professor/**" };
     public final static String[] STUDENT_PATHS = {"/grade/**"};
-    public final static String[] STAFF_PATHS = { "/user/**", "/tuition/**","/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**", "/sugang/**" };
+
+    public final static String[] STAFF_PATHS = { "/user/**", "/tuition/**","/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**"};
+    
 
 
     // 수강 가능한 최대 학점

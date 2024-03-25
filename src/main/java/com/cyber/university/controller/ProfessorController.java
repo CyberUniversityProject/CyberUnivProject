@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.dto.SyllaBusFormDto;
 import com.cyber.university.dto.professor.ApplySubjectDto;
+import com.cyber.university.dto.professor.FindDeptIdDto;
 import com.cyber.university.dto.professor.MyEvaluationDto;
 import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
@@ -26,8 +27,10 @@ import com.cyber.university.dto.response.ProfessorInfoDto;
 import com.cyber.university.dto.response.ReadSyllabusDto;
 import com.cyber.university.dto.response.SubjectForProfessorDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
+import com.cyber.university.repository.model.Department;
 import com.cyber.university.repository.model.PageReq;
 import com.cyber.university.repository.model.PageRes;
+import com.cyber.university.repository.model.Room;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
@@ -111,13 +114,22 @@ public class ProfessorController {
 	  * @Method 설명 : 강의 등록 페이지 요청
 	  */
 	@GetMapping("/apply")
-	public String applySubjectPage() {
+	public String applySubjectPage(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
 		if (principal == null) {
 			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
 		}
+		
+		FindDeptIdDto deptDto = professorService.selectDeptId();
+		Integer colId = deptDto.getColId();
+		
+		List<Room> room = professorService.selectRoom(colId);
+		model.addAttribute("room", room);
+		
+		List<Department> departments = professorService.selectDepartment(colId);
+		model.addAttribute("departments", departments);
 		
 		return "/professor/applysubject";
 	}
@@ -130,7 +142,11 @@ public class ProfessorController {
 	  * @Method 설명 : 강의 신청
 	  */
 	@PostMapping("/apply")
-	public String applySubjectProc(ApplySubjectDto dto, @RequestParam("type") String type) {
+	public String applySubjectProc(ApplySubjectDto dto, 
+			@RequestParam("type") String type, 
+			@RequestParam("subDay") String subDay,
+			@RequestParam("roomId") String roomId,
+			@RequestParam("deptId") Integer deptId) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
@@ -140,27 +156,38 @@ public class ProfessorController {
 
 	    int userId = principal.getId();
 		
-		dto.setProId(userId);
+		dto.setProfessorId(userId);
 
-		if (dto.getSubName() == null || dto.getSubName().isEmpty()) {
-			throw new CustomRestfullException("강의 명을 입력하세요.", HttpStatus.BAD_REQUEST);
+		if (dto.getName() == null || dto.getName().isEmpty()) {
+			throw new CustomRestfullException("강의 명을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+				
+		if (dto.getStartTime() == null || dto.getStartTime() < 0) {
+			throw new CustomRestfullException("강의 시작 시간을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		
-		if (dto.getProName() == null || dto.getProName().isEmpty()) {
-			throw new CustomRestfullException("교수 명을 입력하세요.", HttpStatus.BAD_REQUEST);
+		if (dto.getEndTime() == null || dto.getEndTime() < 0) {
+			throw new CustomRestfullException("강의 끝나는 시간을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		
-		if (dto.getSubTime() == null || dto.getSubTime() < 0) {
-			throw new CustomRestfullException("올바른 강의 시간입니다.", HttpStatus.BAD_REQUEST);
+		if (dto.getStartTime() == dto.getEndTime()) {
+			throw new CustomRestfullException("시작 시간과 끝나는 시간을 잘못 입력하였습니다", HttpStatus.BAD_REQUEST);
 		}
 		
+		if (dto.getSubYear() == null || dto.getSubYear() < 0) {
+			throw new CustomRestfullException("강의 개설 년도를 입력하세요", HttpStatus.BAD_REQUEST);
+		}
 		
-		if (dto.getSubGrade() == null || dto.getSubGrade() < 0) {
-			throw new CustomRestfullException("올바른 이수 학점입니다.", HttpStatus.BAD_REQUEST);
+		if (dto.getSemester() == null || dto.getSemester() < 0) {
+			throw new CustomRestfullException("강의 개설 학기를 입력하세요", HttpStatus.BAD_REQUEST);
+		}				
+		
+		if (dto.getGrades() == null || dto.getGrades() < 0) {
+			throw new CustomRestfullException("강의 이수 학점을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		
 		if (dto.getCapacity() == null || dto.getCapacity() < 0) {
-			throw new CustomRestfullException("올바른 인원 수 입니다.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("강의 총 정원을 입력하세요", HttpStatus.BAD_REQUEST);
 		}
 		
 		professorService.insertApplySubject(dto, userId);
@@ -332,19 +359,7 @@ public class ProfessorController {
 	    if (dto.getConvertedMark() == null || dto.getConvertedMark() < 0) {
 	    	throw new CustomRestfullException("환산 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
 	    }
-		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
-	    if (!(principal instanceof PrincipalDto)) {
-	    	
-	        return "redirect:/login";
-	    }
-	    
-	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
-	    System.out.println("sumScore : " + sumScore);
-	    
-	    
-	    
 	    if (dto.getConvertedMark() != sumScore) {
 			throw new CustomRestfullException("잘못된 환산 점수 입니다", HttpStatus.BAD_REQUEST);
 	    }	    

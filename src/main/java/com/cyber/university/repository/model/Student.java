@@ -27,5 +27,11 @@ public class Student {
 	private Integer semester;		// 학기
 	private Date entranceDate;		// 입학일
 	private Date graduationDate;	// 졸업예정일
+	private String originFileName;
+	private String uploadFileName;
+
+	public String setupProfilImage(){
+		return uploadFileName == null ? "/img/profil.png" : "/images/uploads/" + uploadFileName;
+	}
 
 }

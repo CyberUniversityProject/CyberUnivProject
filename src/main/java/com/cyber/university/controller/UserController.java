@@ -12,9 +12,13 @@ import com.cyber.university.service.ProfessorService;
 import com.cyber.university.service.StudentService;
 import com.cyber.university.service.UserService;
 
+import com.cyber.university.utils.Define;
 import jakarta.validation.Valid;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * packageName    : com.cyber.university.controller
@@ -267,6 +272,37 @@ public class UserController {
 				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+
+		// 파일업로드 처리
+		MultipartFile file = createStudentDto.getProfilImage();
+		if (file.isEmpty() == false) {
+			if (file.getSize() > Define.MAX_FILE_SIZE) {
+				throw new CustomRestfullException("파일 크기는 20MB 이상 클 수 없습니다.", HttpStatus.BAD_REQUEST);
+			}
+
+			String saveDirectory = Define.UPLOAD_DIRECTORY;
+			File dir = new File(saveDirectory);
+			if (dir.exists()) {
+				dir.mkdir();
+			}
+
+			// 파일이름
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid + "_" + file.getOriginalFilename();
+			System.out.println("filename : " + fileName);
+
+			String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
+			File destination = new File(uploadPath);
+
+			try {
+				file.transferTo(destination);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+
+			createStudentDto.setOriginFileName(file.getOriginalFilename());
+			createStudentDto.setUploadFileName(fileName);
 		}
 
 		userService.createStudentToStudentAndUser(createStudentDto);

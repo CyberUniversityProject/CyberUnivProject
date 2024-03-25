@@ -63,9 +63,10 @@
 									<tbody>
 										<c:forEach var="subject" items="${subjectList}">
 											<tr>
+
 												<td>${subject.id}</td>
 												<td>${subject.name}</td>
-												<td>${subject.professorId}</td>
+												<td>${subject.professorId}(${subject.professorName} 교수)</td>
 												<td>${subject.roomId}</td>
 												<td>${subject.deptId}</td>
 												<td>${subject.type}</td>

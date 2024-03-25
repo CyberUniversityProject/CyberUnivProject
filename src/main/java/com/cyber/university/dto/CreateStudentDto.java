@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
   * @FileName : CreateStudentDto.java
@@ -35,6 +36,9 @@ public class CreateStudentDto {
 	private Date entranceDate;
 	@Email
 	private String email;
+	private String originFileName;
+	private String uploadFileName;
+	private MultipartFile profilImage;
 	
 
 }

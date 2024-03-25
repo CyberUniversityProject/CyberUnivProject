@@ -142,14 +142,14 @@
 
 	<!-- 24.03.13 강의 등록 -->
 	<insert id="insertApplySubject">
-		insert into cu_apply_sub(pro_id, sub_name, pro_name, sub_time, type, sub_grade, capacity)
-		values(#{proId}, #{subName}, #{proName}, #{subTime}, #{type}, #{subGrade} , #{capacity})
+		insert into cu_apply_sub(professor_id, name, room_id, dept_id, type, start_time, end_time, sub_year, semester, sub_day, grades, capacity)
+		values(#{professorId}, #{name}, #{roomId}, #{deptId}, #{type}, #{startTime}, #{endTime}, #{subYear}, #{semester}, #{subDay}, #{grades}, #{capacity})
 	</insert>
 
 	<!-- 24.03.13 강의 이름 찾기 -->
 	<select id="selectSubName"
 		resultType="com.cyber.university.dto.professor.ApplySubjectDto">
-		select * from cu_apply_sub where sub_name = #{subName}
+		select * from cu_apply_sub where name = #{name}
 	</select>
 	
 	<!-- 24.03.13 교수 본인 강의 조회 -->
@@ -270,5 +270,24 @@
 		program = #{program}
 		WHERE subject_id = #{subjectId}
 	</update>
-		
+	
+	
+	<!-- 24.03.23 강의실 조회 -->
+	<select id="selectRoom" resultType="com.cyber.university.repository.model.Room">
+		select * from cu_room where college_id = #{collegeId}
+	</select>
+	
+	<!-- 24.03.23 학과 이름 조회 -->
+	<select id="selectDepartment" resultType="com.cyber.university.repository.model.Department">
+		select * from cu_department where college_id = #{collegeId}
+	</select>
+	
+	<!-- 24.03.23 단과대 아이디 조회 -->
+	<select id="selectDeptId" resultType="com.cyber.university.dto.professor.FindDeptIdDto">
+		select a.id as professorId, b.id as deptId, b.name as deptName, c.id as colId, c.name as colName
+		from cu_professor a
+		join cu_department b on b.id = a.dept_id
+		join cu_college c on c.id = b.college_id
+		where a.id = #{professorId}
+	</select>
 </mapper>        

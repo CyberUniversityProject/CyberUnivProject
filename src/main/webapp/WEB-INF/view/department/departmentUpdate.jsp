@@ -42,12 +42,12 @@
               <ul>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="collegeId" id="collegeId"
-                    style="width: 226%" value="${department.collegeId}">
+                    style="width: 226%" value="${department.collegeId}" autocomplete="off">
                 </div>
                 <br></br>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="name" id="name"
-                     style="width: 226%" value="${department.name}">
+                     style="width: 226%" value="${department.name}" autocomplete="off">
                 </div>
               </ul>
               <div class="btn-wrap">

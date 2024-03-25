@@ -33,12 +33,12 @@ import com.cyber.university.repository.model.PageReq;
 import com.cyber.university.repository.model.PageRes;
 import com.cyber.university.repository.model.Room;
 import com.cyber.university.repository.model.Student;
-import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.ProfessorService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
@@ -324,7 +324,7 @@ public class ProfessorController {
 	public String updateStudentSubjdectProc(@PathVariable("subjectId") Integer subjectId, 
 											@PathVariable("studentId") Integer studentId,
 											@RequestParam("grade") String grade,
-											UpdateStudentSubDetailDto dto) {
+											@Valid UpdateStudentSubDetailDto dto) {
 		
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -333,8 +333,6 @@ public class ProfessorController {
 			throw new CustomRestfullException("로그인을 해주세요", HttpStatus.UNAUTHORIZED);
 		}
 	    
-	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
-	    System.out.println("sumScore : " + sumScore);
 	    
 		if (dto.getAbsent() == null || dto.getAbsent() < 0) {
 
@@ -361,13 +359,10 @@ public class ProfessorController {
 	    	throw new CustomRestfullException("환산 점수를 입력해주세요", HttpStatus.BAD_REQUEST);
 	    }
 
+	    Integer sumScore = dto.getMidExam() + dto.getFinalExam();
 	    if (dto.getConvertedMark() != sumScore) {
 			throw new CustomRestfullException("잘못된 환산 점수 입니다", HttpStatus.BAD_REQUEST);
 	    }	    
-	    
-	    if (dto.getLateness() >= 5) {
-	        grade = "F";
-	    }
 	    
 	    professorService.updateStudentSubDetail(studentId, subjectId, dto);
 		

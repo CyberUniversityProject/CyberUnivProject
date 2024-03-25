@@ -195,7 +195,6 @@ body {
 			<c:choose>
 				<c:when test="${tuitionBill.status eq '0'}">
 					<!-- 고지서 설명 -->
-					<p class="">납입기간 : 2022~ 2022~</p>
 					<p class="">납입방법 : 신용카드 결제</p>
 
 					<p class="mt-2">

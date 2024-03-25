@@ -144,8 +144,8 @@ body {
 			<div class="table-responsive">
 				<form action="/student/evaluationPorc/${subjectId}"
 					id="evaluationForm">
-					<input type="text" name="studentId"
-						value="${evaluationInfo.studentId}" /> <input type="text"
+					<input type="hidden" name="studentId"
+						value="${evaluationInfo.studentId}" /> <input type="hidden"
 						name="subjectId" value="${evaluationInfo.subjectId}" />
 					<table class="table table-bordered">
 						<tr class="radio--container">

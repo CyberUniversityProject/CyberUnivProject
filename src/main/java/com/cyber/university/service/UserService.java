@@ -28,6 +28,7 @@ import com.cyber.university.repository.model.User;
 import com.cyber.university.utils.Define;
 import com.cyber.university.utils.TempPassword;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,27 +59,28 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	@Autowired
-	private StaffRepository staffRepository;
+	private final StaffRepository staffRepository;
 
 	@Autowired
-	private ProfessorRepository professorRepository;
+	private final ProfessorRepository professorRepository;
 
 	@Autowired
-	private StudentRepository studentRepository;
+	private final StudentRepository studentRepository;
 
 	@Autowired
-	private StuStatService stuStatService;
+	private final StuStatService stuStatService;
 	@Autowired
-	private StuStatRepository stuStatRepository;
+	private final StuStatRepository stuStatRepository;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public PrincipalDto login(LoginDto loginDto) {

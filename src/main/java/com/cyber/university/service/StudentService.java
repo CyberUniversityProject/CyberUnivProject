@@ -22,6 +22,7 @@ import com.cyber.university.repository.interfaces.StudentRepository;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -34,13 +35,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-
+@RequiredArgsConstructor
 public class StudentService {
 
 	@Autowired
-	private StudentRepository studentRepository;
+	private final StudentRepository studentRepository;
 	@Autowired
-	private BreakRepository breakRepository;
+	private final BreakRepository breakRepository;
 
 	/**
 	 * 

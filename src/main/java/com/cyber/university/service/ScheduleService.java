@@ -10,6 +10,7 @@ import com.cyber.university.dto.ScheduleFormDto;
 import com.cyber.university.repository.interfaces.ScheduleRepository;
 import com.cyber.university.repository.model.Schedule;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,10 +24,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ScheduleService {
 	
 	@Autowired
-	private ScheduleRepository scheduleRepository;
+	private final ScheduleRepository scheduleRepository;
 	
 /**
   * @Method Name : readSchedule

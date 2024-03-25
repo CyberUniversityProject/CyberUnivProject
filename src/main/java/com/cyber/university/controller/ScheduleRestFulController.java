@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.repository.model.Schedule;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.ScheduleService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/schedule")
+@RequiredArgsConstructor
 public class ScheduleRestFulController {
 	
 	@Autowired
-	private ScheduleService scheduleService;
+	private final ScheduleService scheduleService;
 	
 	@GetMapping("/selectAll")
 	public List<Schedule> selectAllSchedule(){

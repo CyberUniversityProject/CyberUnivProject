@@ -61,8 +61,9 @@ public class Define {
     public final static String[] PATHS = { "/update", "/password", "/info/**", "/guide", "/myInfo/**", "/community", "/community/**", "/subject/**", 
     		"/student/**", "/sugang/**", "/professor/**", "/user/**", "/tuition/**", "/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**"};
     public final static String[] PROFESSOR_PATHS = { "/professor/**" };
-    public final static String[] STUDENT_PATHS = {"/grade/**", "/sugang/**"};
-    public final static String[] STAFF_PATHS = { "/user/**", "/tuition/**","/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**" };
+    public final static String[] STUDENT_PATHS = {"/grade/**"};
+    public final static String[] STAFF_PATHS = { "/user/**", "/tuition/**","/applySubject/**", "/break/**", "/college/**", "/department/**", "/room/**", "/staff/**", "/sugang/**" };
+
 
     // 수강 가능한 최대 학점
     public final static int MAX_GRADES = 18;

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cyber.university.repository.interfaces.ApplySubjectRepository;
 import com.cyber.university.repository.model.ApplySubject;
 
+import lombok.RequiredArgsConstructor;
+
 
 /**
  * 
@@ -20,10 +22,11 @@ import com.cyber.university.repository.model.ApplySubject;
   * @프로그램 설명 : 교수 강의 신청 서비스
  */
 @Service
+@RequiredArgsConstructor
 public class ApplySubjectService {
 	
 	@Autowired
-	private ApplySubjectRepository applySubjectRepository;
+	private final ApplySubjectRepository applySubjectRepository;
 	
 	
 	// 전체조회

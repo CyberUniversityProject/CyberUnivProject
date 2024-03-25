@@ -19,6 +19,7 @@ import com.cyber.university.dto.professor.MysubjectDetailDto;
 import com.cyber.university.dto.professor.ProfessorAndSubjectFormDto;
 import com.cyber.university.dto.professor.SubjectNameDto;
 import com.cyber.university.dto.professor.SubjectPeriodForProfessorDto;
+import com.cyber.university.dto.professor.UpdateApplySubListDto;
 import com.cyber.university.dto.professor.UpdateProfessorInfoDto;
 import com.cyber.university.dto.professor.UpdateStudentSubDetailDto;
 import com.cyber.university.dto.response.ProfessorInfoDto;
@@ -349,4 +350,32 @@ public interface ProfessorRepository {
 	  * @Method 설명 : 단과대 아이디 조회
 	  */
 	public FindDeptIdDto selectDeptId(Integer professorId);
+	
+	/**
+	  * @Method Name : selectUpdateSubInfo
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 수정 정보 조회
+	  */
+	public ApplySubjectDto selectUpdateSubInfo(@Param("professorId") Integer professorId, @Param("id") Integer id);
+	
+	
+	/**
+	  * @Method Name : selectMyApplySubList
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 내 신청 강의 목록 조회
+	  */
+	public List<UpdateApplySubListDto> selectMyApplySubList(Integer professorId);
+	
+	/**
+	  * @Method Name : updateMyApplySubInfo
+	  * @작성일 : 2024. 3. 25.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 수정
+	  */
+	public int updateMyApplySubInfo(ApplySubjectDto dto);
 }

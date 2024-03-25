@@ -13,6 +13,8 @@ import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.interfaces.RoomRepository;
 import com.cyber.university.repository.model.Room;
 
+import lombok.RequiredArgsConstructor;
+
 /**
   * @FileName : RoomService.java
   * @Project : CyberUniversity
@@ -22,10 +24,11 @@ import com.cyber.university.repository.model.Room;
   * @프로그램 설명 : 강의실 service
   */
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
 	@Autowired
-	private RoomRepository roomRepository;
+	private final RoomRepository roomRepository;
 
 	@Transactional
 	public void insert(RoomDto roomDto) {

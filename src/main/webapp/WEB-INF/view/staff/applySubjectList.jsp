@@ -17,6 +17,7 @@
 	overflow: hidden; /* 넘치는 내용 숨김 */
 	text-overflow: ellipsis; /* 넘치는 내용을 줄임표로 표시 */
 }
+
 .table th {
 	text-align: center;
 }
@@ -63,28 +64,41 @@
 											<th>순번</th>
 											<th>교수 아이디</th>
 											<th>강의명</th>
-											<th>교수이름</th>
-											<th>총 강의시간</th>
+											<th>학과명</th>
 											<th>전공/교양</th>
+											<th>강의시작시간</th>
+											<th>강의종료시간</th>
+											<th>강의개설연도</th>
+											<th>강의개설학기</th>
+											<th>강의요일</th>
 											<th>이수학점</th>
-											<th>강의인원</th>
-											<th>자세히보기</th>
+											<th>총인원</th>
+											<th>승인여부</th>
+											<th>바로가기</th>
 
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="applysubject" items="${list}">
 										
+										
 											<tr>
 												<td>${applysubject.id}</td>
-												<td>${applysubject.proId}</td>
-												<td>${applysubject.subName}</td>
-												<td>${applysubject.proName}</td>
-												<td>${applysubject.subTime}</td>
+												<td>${applysubject.professorId}</td>
+												<td>${applysubject.name}</td>
+												<td>${applysubject.deptId}</td>
 												<td>${applysubject.type}</td>
-												<td>${applysubject.subGrade}</td>
+												<td>${applysubject.startTime}</td>
+												<td>${applysubject.endTime}</td>
+												<td>${applysubject.subYear}</td>
+												<td>${applysubject.semester}</td>
+												<td>${applysubject.subDay}</td>
+												<td>${applysubject.grades}</td>
 												<td>${applysubject.capacity}</td>
-												<td style="text-align: center;"><a href="/applySubject/detail/${applysubject.id}"
+												<td>${applysubject.approval}</td>
+
+												<td style="text-align: center;"><a
+													href="/applySubject/detail/${applysubject.id}"
 													class="btn btn-primary">바로가기</a></td>
 
 											</tr>

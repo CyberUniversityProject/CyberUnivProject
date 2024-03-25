@@ -17,6 +17,7 @@ import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 /**
   * @FileName : PaymentService.java
@@ -27,13 +28,14 @@ import jakarta.servlet.http.HttpSession;
   * @프로그램 설명 : 결제 서비스
   */
 @Service
+@RequiredArgsConstructor
 public class PaymentService {
 	
 	@Autowired
-	private PaymentRepository paymentRepository;
+	private final PaymentRepository paymentRepository;
 	
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	
 	/**
 	  * @Method Name : selectPaymentInfo

@@ -16,6 +16,7 @@ import com.cyber.university.repository.interfaces.BreakRepository;
 import com.cyber.university.repository.model.Break;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -30,13 +31,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class BreakService {
 
 	@Autowired
-	private BreakRepository breakAppRepository;
+	private final BreakRepository breakAppRepository;
 
 	@Autowired
-	private StuStatService stuStatService;
+	private final StuStatService stuStatService;
 
 	
 

@@ -290,4 +290,38 @@
 		join cu_college c on c.id = b.college_id
 		where a.id = #{professorId}
 	</select>
+	
+	<!-- 24.03.25 신청 강의 수정 정보 조회 -->
+	<select id="selectUpdateSubInfo" resultType="com.cyber.university.dto.professor.ApplySubjectDto">
+		select * from cu_apply_sub 
+		where professor_id = #{professorId}
+		and id = #{id}
+	</select>
+	
+	<!-- 24.03.25 신청 강의 목록 조회 -->
+	<select id="selectMyApplySubList" resultType="com.cyber.university.dto.professor.UpdateApplySubListDto">
+		select * from cu_apply_sub 
+		where professor_id = #{professorId} 
+		and approval = "반려"
+	</select>
+	
+	<!-- 24.03.25 신청 강의 수정 -->
+	<update id="updateMyApplySubInfo">
+		update cu_apply_sub
+		set 
+		name = #{name},
+		room_id = #{roomId},
+		dept_id = #{deptId},
+		type = #{type},
+		start_time = #{startTime},
+		end_time = #{endTime},
+		sub_year = #{subYear},
+		semester = #{semester},
+		sub_day = #{subDay},
+		grades = #{grades},
+		capacity = #{capacity},
+		approval = "미승인",
+		reason = ""
+		where id = #{id}
+	</update>
 </mapper>        

@@ -14,17 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cyber.university.repository.model.Comment;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.CommentService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/comment")
+@RequiredArgsConstructor
 public class CommentController {
 	
 	@Autowired
-	private CommentService commentService;
+	private final CommentService commentService;
 	
 	// 댓글 생성
 	@PostMapping("/create")

@@ -119,7 +119,7 @@ link:focus, .nav-link:hover {
 																			<a
 																				href="/student/evaluation/${thisSemesterGrade.subjectId}"
 																				onclick="window.open(this.href, '_blank', 'width=1000, height=800'); return false;">
-																				<button>강의평가</button>
+																				<button class="btn btn-primary">강의평가</button>
 																			</a>
 																		</c:otherwise>
 																	</c:choose></td>

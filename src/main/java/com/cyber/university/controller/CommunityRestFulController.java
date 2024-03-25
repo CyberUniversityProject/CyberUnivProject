@@ -11,17 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.university.repository.model.Community;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.CommunityService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/Community")
 @Slf4j
+@RequiredArgsConstructor
 public class CommunityRestFulController {
 	
 	@Autowired
-	private CommunityService communityService;
+	private final CommunityService communityService;
 	
 	  // 게시글 삭제
 	 @DeleteMapping("/delete/{id}")

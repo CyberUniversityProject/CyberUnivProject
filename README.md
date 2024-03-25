@@ -30,7 +30,7 @@
 
 ## 🔧 개발환경
 - 개발 툴 : Spring Tools 4 (4.21.1)
-- Backend : JAVA 17, SpringBoot 3.1.8, MyBatis, JSP, MySQL 8.0.26, lombok, BCrypt HASH, Apache Tomcat : 10.1.19
+- Backend : JAVA 17, SpringBoot 3.1.8, MyBatis, JSP, MySQL 8.0.26, lombok, Apache Tomcat : 10.1.19
 - Frontend : bootstrap : 4.6.2, HTML5, CSS3, JavaScript : 1.16.1, JQuery : 3.6.4
 - 버전/이슈관리 : GitHub, GitBash
 - 협업 툴 : Discord, Notion, Slack

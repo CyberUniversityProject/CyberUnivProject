@@ -20,6 +20,8 @@ import com.cyber.university.repository.model.Student;
 import com.cyber.university.repository.model.Tuition;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
+
 /**
   * @FileName : TuitionService.java
   * @Project : CyberUniversity
@@ -29,25 +31,26 @@ import com.cyber.university.utils.Define;
   * @프로그램 설명 : 등록금, 장학 관련 서비스
  */
 @Service
+@RequiredArgsConstructor
 public class TuitionService {
 	
 	@Autowired
-	private TuitionRepository tuitionRepository;
+	private final TuitionRepository tuitionRepository;
 
 	@Autowired
-	private ScholarshipRepository scholarshipRepository;
+	private final ScholarshipRepository scholarshipRepository;
 
 	@Autowired
-	private StuStatService stuStatService;
+	private final StuStatService stuStatService;
 
 	@Autowired
-	private BreakService breakService;
+	private final BreakService breakService;
 
 	@Autowired
-	private UserService userService;
+	private final UserService userService;
 
 	@Autowired
-	private GradeService gradeService;
+	private final GradeService gradeService;
 	
 	/**
 	 * @param studentId (principal의 id와 동일)

@@ -1,6 +1,10 @@
 package com.cyber.university.controller;
 
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.NoticeService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/notice")
+@RequiredArgsConstructor
 public class NoticeRestFulController {
 
     @Autowired
-    private NoticeService noticeService;
+    private final NoticeService noticeService;
 
 
     // 공지사항 조회

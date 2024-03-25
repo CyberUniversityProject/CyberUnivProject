@@ -7,7 +7,7 @@
 
 	<select id="findAll"
 		resultType="com.cyber.university.repository.model.ApplySubject">
-		select * from cu_apply_sub where approval = 'N'
+		select * from cu_apply_sub where approval = '미승인'
 	</select>
 
 
@@ -31,7 +31,8 @@
 		parameterType="com.cyber.university.repository.model.ApplySubject">
 		update cu_apply_sub
 		set
-		reason = #{reason}
+		reason = #{reason},
+		approval = '반려'
 		where id = #{id}
 
 	</update>

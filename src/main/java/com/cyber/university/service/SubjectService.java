@@ -16,14 +16,16 @@ import com.cyber.university.repository.interfaces.SubjectRepository;
 import com.cyber.university.repository.model.Subject;
 import com.cyber.university.utils.Define;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class SubjectService {
 	
 	@Autowired
-	private SubjectRepository subjectRepository;
+	private final SubjectRepository subjectRepository;
 
 	/**
 	 * @return 전체 강의 조회에 사용할 강의 정보 (학생용) 전체 연도-학기에 해당하는 강의가 출력됨

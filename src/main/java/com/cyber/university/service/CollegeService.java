@@ -11,18 +11,20 @@ import com.cyber.university.repository.interfaces.DepartmentRepository;
 import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Department;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class CollegeService {
 	
 	
 	@Autowired
-	private CollegeRepository collegeRepository;
+	private final CollegeRepository collegeRepository;
 
 	@Autowired
-	private DepartmentRepository departmentRepository;
+	private final DepartmentRepository departmentRepository;
 
 	/**
 	 * @param college_id

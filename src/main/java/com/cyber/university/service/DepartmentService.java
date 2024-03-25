@@ -14,6 +14,7 @@ import com.cyber.university.repository.interfaces.DepartmentRepository;
 import com.cyber.university.repository.model.College;
 import com.cyber.university.repository.model.Department;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,10 +27,11 @@ import lombok.extern.slf4j.Slf4j;
   */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class DepartmentService {
 
 	@Autowired
-	private DepartmentRepository departmentRepository;
+	private final DepartmentRepository departmentRepository;
 	
 	@Transactional
 	public void insert(DepartmentDto departmentDto) {

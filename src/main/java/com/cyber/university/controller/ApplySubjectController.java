@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cyber.university.repository.model.ApplySubject;
 import com.cyber.university.service.ApplySubjectService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping("/applySubject")
+@RequiredArgsConstructor
 public class ApplySubjectController {
 	
 	
 	@Autowired
-	private ApplySubjectService applySubjectService;
+	private final ApplySubjectService applySubjectService;
 	
 	
 	@GetMapping("/list")

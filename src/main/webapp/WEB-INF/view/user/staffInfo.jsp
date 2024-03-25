@@ -84,7 +84,7 @@ body {
 					<h1>내 정보 조회</h1>
 					<hr />
 					<div class="row">
-						<div class="col-md-7">
+						<div class="col-md-10">
 							<table class="table table-bordered profile-table">
 								<tr>
 									<th>ID</th>

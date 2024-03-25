@@ -51,11 +51,6 @@
                         등록금 내역 조회
                     </a>
                 </li>
-                <li class="list-group-item p-3">
-                    <a href="/tuition/payment" class="text-dark d-flex align-items-center">
-                         등록금 납부 고지서
-                    </a>
-                </li>
             </c:if>
         </ul>
     </div>

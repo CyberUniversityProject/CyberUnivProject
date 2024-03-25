@@ -97,7 +97,6 @@ body {
 						<li class="dropdown"><a href="#"><span>수강신청</span> <i
 								class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="/sugang/timeTable">강의시간표 조회</a></li>
 								<li><a href="/sugang/pre/1">예비 수강 신청</a></li>
 								<li><a href="/sugang/preAppList?type=1">수강 신청</a></li>
 								<li><a href="/sugang/list">수강 신청 내역 조회</a></li>
@@ -190,6 +189,7 @@ body {
 								<li><a href="/professor/mysub">내 강의 조회</a></li>
 								<li><a href="/professor/readevaluation">내 강의 평가</a></li>
 								<li><a href="/professor/apply">강의 신청</a></li>
+								<li><a href="/professor/update-list">강의 신청 목록</a></li>
 							</ul></li>
 
 

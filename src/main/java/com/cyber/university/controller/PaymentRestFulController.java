@@ -14,22 +14,25 @@ import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.handler.exception.CustomRestfullException;
 import com.cyber.university.repository.model.Student;
 import com.cyber.university.repository.model.Tuition;
+import com.cyber.university.service.ApplySubjectService;
 import com.cyber.university.service.PaymentService;
 import com.cyber.university.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
 
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class PaymentRestFulController {
 	
 	@Autowired
-	private PaymentService paymentService;
+	private final PaymentService paymentService;
 	@Autowired
-	private HttpSession session;
+	private final HttpSession session;
 	
 	@GetMapping("/buy/{tuiYear}/{semester}")
 	public PaymentInfoDto paymentPage() {

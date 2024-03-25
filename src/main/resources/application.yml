@@ -24,6 +24,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+     
   datasource:
     url: jdbc:mysql://database-1.chyqscqk4zrv.ap-northeast-2.rds.amazonaws.com:3306/cyberuniv?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver

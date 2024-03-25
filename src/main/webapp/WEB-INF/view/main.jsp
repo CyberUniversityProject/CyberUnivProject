@@ -110,11 +110,40 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 								<p>
 									<i class="bx bx-user"></i> ${userInfo.name}(${userInfo.id})님,
 									환영합니다.
+
+									<!-- 마이페이지 버튼을 님 환영합니다 글자 옆에 배치 -->
+									<div class="text-end">
+                                                        <c:choose>
+                                                            <c:when test="${principal.userRole eq 'staff'}">
+                                                                <a href="/info/staff" class="btn--confirm ">마이페이지</a>
+                                                            </c:when>
+                                                            <c:when test="${principal.userRole eq 'student'}">
+                                                                <a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
+                                                            </c:when>
+                                                            <c:when test="${principal.userRole eq 'professor'}">
+                                                                <a href="/professor/info" class="btn--confirm ">마이페이지</a>
+                                                            </c:when>
+                                                        </c:choose>
+</div>
 								</p>
 							</div>
+
 							<div class="row">
+							  <!-- 프로필 이미지 -->
+							  <c:choose>
+							  <c:when test="${principal.userRole eq 'student'}">
+                                            <div class="col-lg-3">
+                                                <div class="info-box">
+                                                    <img src="${userInfo.setupProfilImage()}" width="200" height="200" alt="프로필 이미지" class="rounded-2">
+                                                </div>
+                                            </div>
+                                            </c:when>
+                                            </c:choose>
+
 								<div class="col-lg-3">
+
 									<div class="info-box">
+
 										<h3>
 											<i class="bx bx-map"></i> 소속
 										</h3>
@@ -125,6 +154,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 												<c:when test="${principal.userRole eq 'professor'}">교수</c:when>
 											</c:choose>
 										</p>
+
 									</div>
 								</div>
 								<div class="col-lg-3">
@@ -178,32 +208,7 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 										</div>
 									</c:when>
 								</c:choose>
-								<!-- My Page Button -->
-								<c:choose>
-									<c:when test="${principal.userRole eq 'staff'}">
-										<div class="col-lg-3">
-											<div class="info-box">
-												<a href="/info/staff" class="btn--confirm ">마이페이지</a>
-											</div>
-										</div>
-									</c:when>
-									<c:when test="${principal.userRole eq 'student'}">
-										<div class="col-lg-3">
-											<div class="info-box">
-												<a href="/student/myInfo" class="btn--confirm ">마이페이지</a>
-											</div>
-										</div>
-									</c:when>
-									<c:when test="${principal.userRole eq 'professor'}">
-										<div class="col-lg-3">
-											<div class="info-box">
-												<a href="/professor/info" class="btn--confirm ">마이페이지</a>
-											</div>
-										</div>
-									</c:when>
 
-								</c:choose>
-								<!-- End My Page Button -->
 							</div>
 						</div>
 					</section>
@@ -694,26 +699,13 @@ if (principal != null && new BCryptPasswordEncoder().matches(principal.getId().t
 					<p>오늘의 학식</p>
 				</div>
 				<div class="row" id="dietList">
-					<div class="col">
-						<div class="card">
-							<div class="card-header">Quote</div>
-							<div class="card-body">
-								<blockquote class="blockquote mb-0">
-									<p>여기에 menuList[0]~[6]이 들어올 자리</p>
-									<footer class="blockquote-footer">
-										Someone famous in <cite title="Source Title">Source
-											Title</cite>
-									</footer>
-								</blockquote>
-							</div>
-						</div>
-					</div>
+
 				</div>
 
 
 			</div>
 		</section>
-		<!-- End 학사일정 -->
+		<!-- End 학식 -->
 
 
 

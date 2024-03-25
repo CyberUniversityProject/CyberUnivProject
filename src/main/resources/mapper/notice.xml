@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.university.repository.interfaces.NoticeRepository">
+	
+	<!-- 메인 공지사항 조회 최신순으로 5개까지만 -->
+	<select id="selectMainNotice" resultType="com.cyber.university.dto.response.NoticeResDto">
+		select id, category, title, created_time, views from cu_notice
+		order by id desc limit 5
+	</select>
+	
 	<!-- 공지사항 등록 -->
 	<insert id="insert">
 		insert into cu_notice (title, category, content, created_time)
@@ -23,6 +30,10 @@
 	<select id="selectByNoticeDto" resultType="com.cyber.university.dto.NoticeFormDto">
 		select * from cu_notice order by id DESC
 		limit #{page}, 10
+	</select>
+	
+	<select id="selectLimit5" resultType="com.cyber.university.dto.NoticeFormDto">
+		SELECT * FROM cu_notice ORDER BY id DESC LIMIT 5
 	</select>
 	
 	<!-- 공지사항 상세보기 -->
@@ -51,12 +62,6 @@
 		delete from cu_notice where id = #{id}
 	</delete>
 
-	<!-- 메인 공지사항 조회 최신순으로 5개까지만 -->
-	<select id="selectMainNotice" resultType="com.cyber.university.dto.response.NoticeResDto">
-		select id, category, title, created_time, views from cu_notice
-		order by id desc limit 5
-	</select>
-	
 	<!-- 공지사항 검색(제목) -->
 	<select id="selectNoticeByTitle" resultType="com.cyber.university.dto.NoticeFormDto">
 		select * from cu_notice 

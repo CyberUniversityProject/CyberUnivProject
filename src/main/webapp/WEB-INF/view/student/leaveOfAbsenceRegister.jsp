@@ -167,41 +167,42 @@
 											<div class="my-3 row">
 												<label for="lastName" class="form-label">휴학기간</label>
 
-												<div class="col-md-6">
-													<label for="state" class="form-label">휴학시작 년도</label> <select
+												<div class="col-md-4">
+													<select
 														id="startYearBox" class="form-select">
 														<option value="" selected>년도 선택</option>
 													</select><label class="form-label" for="paypal"></label>
 												</div>
 
-												<div class="col-md-6">
-													<label for="state" class="form-label">학기</label> <select
+												<div class="col-md-4">
+													<select
 														id="fromSemester" class="form-select">
 														<option value="" selected>학기 선택</option>
 													</select>
 
+												</div>
 
-													<div class="invalid-feedback">Please provide a valid
-														state.</div>
+												<div class="col-md-4">
+													<label for="state" class="form-label">부터</label> 
 												</div>
 
 
-
-												<div class="col-md-6">
-													<label for="state" class="form-label">휴학 종료 년도</label> <select
+												<div class="col-md-4"><select
 														id="endYearBox" class="form-select">
 
 														<option value="" selected>년도 선택</option>
 													</select> <label class="form-label" for="paypal"></label>
 												</div>
 
-												<div class="col-md-6">
-													<label for="state" class="form-label">학기</label> <select
+												<div class="col-md-4">
+													<select
 														class="form-select" id="toSemester">
 														<option value="" selected>학기 선택</option>
 													</select>
-													<div class="invalid-feedback">Please provide a valid
-														state.</div>
+												</div>
+												
+												<div class="col-md-4">
+													<label for="state" class="form-label">까지</label> 
 												</div>
 
 											</div>

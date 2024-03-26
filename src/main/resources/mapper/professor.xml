@@ -302,6 +302,7 @@
 	<select id="selectMyApplySubList" resultType="com.cyber.university.dto.professor.UpdateApplySubListDto">
 		select * from cu_apply_sub 
 		where professor_id = #{professorId} 
+		and approval = "미승인"
 	</select>
 	
 	<!-- 24.03.25 신청 강의 수정 -->

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cyber.university.dto.CollegeDto;
 import com.cyber.university.repository.interfaces.CollegeRepository;
 import com.cyber.university.repository.interfaces.DepartmentRepository;
 import com.cyber.university.repository.model.College;
@@ -95,7 +96,5 @@ public class CollegeService {
 		int result = collegeRepository.updateById(college);
 	}
 	
-	
-		
 	}
 

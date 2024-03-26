@@ -187,8 +187,7 @@
 										<c:forEach var="collTuit" items="${collTuitList}">
 											<tr>
 												<td>${collTuit.collegeId}</td>
-												<td><a
-													href="/staff/tuitionDelete?collegeId=${collTuit.collegeId}">${collTuit.name}</a></td>
+												<td><a href="#" onclick="confirmDelete('${collTuit.collegeId}', '${collTuit.name}')">${collTuit.name}</a></td>
 												<td>${collTuit.amountFormat()}</td>
 											</tr>
 										</c:forEach>
@@ -244,7 +243,19 @@
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+function confirmDelete(collegeId, name) {
+    // 얼럿창을 띄워 사용자에게 확인 여부를 물어봅니다.
+    var confirmation = confirm("'" + name + "' 항목을 삭제하시겠습니까?");
 
+    // 만약 사용자가 확인을 선택했을 경우
+    if (confirmation) {
+        // 삭제를 진행하기 위해 해당 URL로 리다이렉트합니다.
+        window.location.href = "/staff/tuitionDelete?collegeId=" + collegeId;
+    }
+    // 사용자가 취소를 선택했을 경우, 아무 작업도 수행되지 않습니다.
+}
+</script>
 	
 
 

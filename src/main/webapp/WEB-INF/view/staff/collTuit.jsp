@@ -39,17 +39,16 @@
 				<ul class="nav nav-tabs mt-5">
 					<li class="nav-item"><a
 						class="nav-link <%=(request.getParameter("crud") != null && request.getParameter("crud").equals("insert")) ? "active" : ""%>"
-						href="/staff/tuition?crud=insert"> <i
-							class="fas fa-plus-circle"></i> 단대별 등록금 등록
+						href="/staff/tuition?crud=insert"> 단대별 등록금 등록
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link <%=(request.getParameter("crud") != null && request.getParameter("crud").equals("update")) ? "active" : ""%>"
-						href="/staff/tuition?crud=update"> <i class="fas fa-edit"></i>
+						href="/staff/tuition?crud=update"> 
 							등록금 수정
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link <%=(request.getParameter("crud") != null && request.getParameter("crud").equals("delete")) ? "active" : ""%>"
-						href="/staff/tuition?crud=delete"> <i class="fas fa-trash-alt"></i>
+						href="/staff/tuition?crud=delete"> 
 							등록금 삭제
 					</a></li>
 				</ul>

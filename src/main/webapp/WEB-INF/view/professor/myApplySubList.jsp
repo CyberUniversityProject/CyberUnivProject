@@ -62,6 +62,7 @@
 									<th>개강년도</th>
 									<th>개강학기</th>
 									<th>요일</th>
+									<th>승인상태</th>
 									<th>반려이유</th>
 									<th></th>
 
@@ -78,6 +79,7 @@
 										<td>${subList.subYear}</td>
 										<td>${subList.semester}</td>
 										<td>${subList.subDay}</td>
+										<td>${subList.approval}</td>
 										<td>${subList.reason}</td>
 										<td><a
 											href="/professor/update-list/${subList.id}"

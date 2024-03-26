@@ -529,7 +529,7 @@ public class ProfessorController {
 	  * @작성일 : 2024. 3. 25.
 	  * @작성자 : 장명근
 	  * @변경이력 : 
-	  * @Method 설명 :
+	  * @Method 설명 : 신청 수정 페이지 조회
 	  */
 	@GetMapping("/update-list/{id}")
 	public String updateApplySubPage(Model model, @PathVariable("id") Integer id) {
@@ -554,6 +554,13 @@ public class ProfessorController {
 		return "professor/updateApplySubject";
 	}
 	
+	/**
+	  * @Method Name : updateApplySubProc
+	  * @작성일 : 2024. 3. 26.
+	  * @작성자 : 장명근
+	  * @변경이력 : 
+	  * @Method 설명 : 신청 강의 수정 기능
+	  */
 	@PutMapping("/update-list/{id}")
 	public String updateApplySubProc(ApplySubjectDto dto, 
 									@PathVariable("id") Integer id, 

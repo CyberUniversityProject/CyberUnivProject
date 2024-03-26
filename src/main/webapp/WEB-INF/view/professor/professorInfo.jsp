@@ -16,7 +16,7 @@
   <%@ include file="/WEB-INF/view/layout/mypageAsidebar.jsp"%>
     
     <!-- 메인 컨텐츠 -->
-    <main class="col-lg-9" style="padding-top: 0;"> <!-- 여기에 스타일 추가 -->
+    <main class="col-lg-9" style="margin-bottom: 400px;"> <!-- 여기에 스타일 추가 -->
       <div class="card">
         <div class="card-body">
           <h1 class="card-title">내 정보 조회</h1>

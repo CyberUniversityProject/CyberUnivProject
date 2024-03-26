@@ -74,7 +74,7 @@ ul	{
 							<h4>
 								<span style="font-weight: 600;">강의 목록</span>
 							</h4>
-							<div class="table-responsive">
+							<div class="table-responsive " style="height: 500px;">
 								<table class="table table-bordered">
 									<thead class="thead-light">
 										<tr>

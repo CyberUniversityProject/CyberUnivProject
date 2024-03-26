@@ -49,8 +49,8 @@
 								<th>${department.collegeId}</th> 
 								<th>${department.id}</th> 
 								<th>${department.name}</th>
-								<th><a href="/department/departmentUpdate/${department.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
-								<a href="/department/delete/${department.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								<th><a href="/department/departmentUpdate/${department.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;font-size:15px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/department/delete/${department.id}"><button type="button" style="border-color:#A0307F;border-width:1px;font-size:15px;" class="btn btn-outline-delete">삭제</button></a></th>
 								
 							</tr>
 						</c:forEach>
@@ -109,6 +109,7 @@
 					
 					<!--pagination end -->
 
+			</div>
 			</div>
 		</div>
 	</div>

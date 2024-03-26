@@ -47,8 +47,8 @@
 							<tr>
 								<th>${college.id}</th> 
 								<th>${college.name}</th>
-								<th><a href="/college/collegeUpdate/${college.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
-								<a href="/college/delete/${college.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								<th><a href="/college/collegeUpdate/${college.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;font-size:15px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/college/delete/${college.id}"><button type="button" style="border-color:#A0307F;border-width:1px;font-size:15px;" class="btn btn-outline-delete">삭제</button></a></th>
 								
 							</tr>
 						</c:forEach>
@@ -57,8 +57,9 @@
 					
 				</div>
 				<!-- main 끝 -->
-
+			
 			</div>
+			
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

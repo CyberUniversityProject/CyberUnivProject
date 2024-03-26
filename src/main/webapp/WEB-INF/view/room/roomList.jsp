@@ -45,8 +45,8 @@
 							<tr>
 								<th>${room.id}</th>
 								<th>${room.collegeId}</th>
-								<th><a href="/room/roomUpdate/${room.id}" class="me-3"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
-								<a href="/room/delete/${room.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								<th><a href="/room/roomUpdate/${room.id}" class="me-3"><button type="button" style="border-color:#5FCF80;border-width:1px;font-size:15px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/room/delete/${room.id}"><button type="button" style="border-color:#A0307F;border-width:1px;font-size:15px;" class="btn btn-outline-delete">삭제</button></a></th>
 								
 							</tr>	
 							</c:forEach>
@@ -104,6 +104,7 @@
 </c:if>
 					
 					<!--pagination end -->
+				</div>
 				</div>
 			</div>
 		</div>

@@ -42,7 +42,7 @@
               <ul>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="collegeId" id="collegeId"
-                    style="width: 226%" placeholder="단과대학 id" autocomplete="off">
+                    style="width: 226%" placeholder="단과대학번호" autocomplete="off">
                 </div>
                 <br></br>
                 <div class="col-md-6 form-group mt-3 mt-md-0">

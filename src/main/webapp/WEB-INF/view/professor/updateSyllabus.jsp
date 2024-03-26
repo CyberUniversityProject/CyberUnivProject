@@ -5,68 +5,68 @@
 <head>
 <meta charset="UTF-8">
 <title>강의계획서</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
-* {
-	margin: 0 auto;
-	padding: 0 auto;
-	font-family: 'Noto Sans KR', sans-serif;
+body {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .header--top {
-	width: 100%;
-	height: 40px;
-	background-color: #031734;
+    width: 100%;
+    height: 40px;
+    background-color: #031734;
 }
 
-section {
-	padding: 10px 100px;
+.section {
+    padding: 20px;
 }
 
-input[type="text"]{
-	font-size: 16px;
-	padding: 5px;
-}
-
-textarea {
-	font-size: 16px;
-	padding: 5px;
-	resize: none;
+.form-control {
+    font-size: 16px;
+    resize: none;
 }
 
 .submit--button {
-	margin-top: 20px;
-	margin-left: 200px;
-	padding: 10px 15px;
-	border: none;
-	border-radius: 10px;
-	color: white;
-	background-color: #142845;
-	cursor: pointer;
+    margin-top: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #142845;
+    cursor: pointer;
 }
 </style>
 </head>
 <body>
-	<header>
-		<div class="header--top"></div>
-	</header>
-	<section>
-		<h2>강의 계획서 수정</h2>
-		<br> 
-		<form action="/professor/syllabus/update/${syllabus.subjectId}" method="post">
-			<input type="hidden" name="_method" value="put"/>
-			<label>강의 개요</label> <br> 
-			<textarea rows="5" cols="50" name="overview">${syllabus.overview}</textarea>
-			<br> <label>수업 목표</label> <br> 
-			<textarea rows="5" cols="50" name="objective">${syllabus.objective}</textarea>
-			<br> <label>교재</label> <br> <input type="text" name="textbook" value="${syllabus.textbook}"> <br>  
-			<label>주별 계획</label> <br> 
-			<textarea rows="10" cols="50" name="program">${syllabus.program}</textarea>
-			<br>
-			<button type="submit" class="submit--button">제출</button>
-		</form>
-	</section>
-
+    <header>
+        <div class="header--top"></div>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>강의 계획서 수정</h2>
+            <form action="/professor/syllabus/update/${syllabus.subjectId}" method="post">
+                <input type="hidden" name="_method" value="put"/>
+                <div class="form-group">
+                    <label>강의 개요</label>
+                    <textarea class="form-control" rows="5" name="overview" maxlength="255">${syllabus.overview}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>수업 목표</label>
+                    <textarea class="form-control" rows="5" name="objective" maxlength="255">${syllabus.objective}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>교재</label>
+                    <input type="text" class="form-control" name="textbook" maxlength="30" value="${syllabus.textbook}">
+                </div>
+                <div class="form-group">
+                    <label>주별 계획</label>
+                    <textarea class="form-control" rows="10" name="program">${syllabus.program}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary submit--button">제출</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<script src="/js/studentDetail.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>학사관리시스템</title>
@@ -18,10 +19,7 @@
 	text-overflow: ellipsis; /* 넘치는 내용을 줄임표로 표시 */
 }
 </style>
-
 </head>
-
-
 <body>
 	<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 	<!-- ======= 상단 제목부분 ======= -->
@@ -89,5 +87,6 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>	
+	<script src="/js/studentDetail.js"></script>
 </body>
 </html>

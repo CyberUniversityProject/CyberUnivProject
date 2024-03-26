@@ -261,7 +261,7 @@ main {
 						<textarea name="content" class="form-control" cols="100" rows="20" placeholder="내용을 입력하세요"></textarea>
 					</div>
 					<div class="custom-file">
-						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile">Choose file</label>
+						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile"></label>
 					</div>
 					<div class="text-start mt-3">
 					<a href="/notice" class="btn btn-warning">공지사항 목록</a> 

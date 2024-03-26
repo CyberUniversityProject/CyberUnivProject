@@ -250,8 +250,8 @@
 	
 	<!-- 24.03.19 강의계획서 조회 -->
 	<select id="selectSyllabusBySubjectId" resultType="com.cyber.university.dto.response.ReadSyllabusDto">
-		SELECT sy.subject_id, s.name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time, s.room_id, 
-		c.name college_name, p.name as professor_name, d.name as dept_name, p.tel, p.email, sy.overview, sy.objective, sy.textbook, sy.program
+		SELECT sy.subject_id, s.professor_id as professorId, s.name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time, s.room_id, 
+		c.name college_name, p.name as professor_name, d.name as dept_name, p.id as professorId, p.tel, p.email, sy.overview, sy.objective, sy.textbook, sy.program
 		FROM cu_subject AS s
 		LEFT JOIN cu_professor AS p ON s.professor_id = p.id
 		LEFT JOIN cu_department AS d ON p.dept_id = d.id

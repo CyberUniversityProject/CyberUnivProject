@@ -11,12 +11,12 @@
   </div>
 </div>
 <!-- 상단 제목부분 끝 -->
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style="height:583px;">
   <div class="row">
     <%@ include file="/WEB-INF/view/layout/professorMypageAsidebar.jsp"%>
     
     <!-- 메인 div -->
-    <main class="col-lg-9">
+    <main class="col-lg-9 mt-5">
       <div class="card">
         <div class="card-body">
           <h1 class="card-title">개인 정보 수정</h1>

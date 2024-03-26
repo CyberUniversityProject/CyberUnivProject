@@ -60,8 +60,6 @@
 
 			<div class="col-md-10">
 				<div class="container mt-5">
-					<h1>비밀번호 변경</h1>
-					<hr />
 					<div class="split--div"></div>
 					<form action="/password" method="post" class="form--container">
 						<input type="hidden" name="_method" value="put" />

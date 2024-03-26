@@ -83,7 +83,6 @@ public class PersonalController {
 
 		Integer period = SUGANG_PERIOD;
 		model.addAttribute("periodNumber", period);
-		System.out.println("period : " + period);
 
 		// Principal 객체가 null이 아닌지 확인
 		if (principal != null) {

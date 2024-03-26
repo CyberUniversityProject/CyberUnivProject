@@ -193,7 +193,7 @@ public class ProfessorController {
 		
 		professorService.insertApplySubject(dto, userId);
 		
-		return "redirect:/";
+		return "redirect:/professor/update-list";
 	}
 	
 	
@@ -459,6 +459,7 @@ public class ProfessorController {
 		
 		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
 		model.addAttribute("syllabus", readSyllabusDto);
+		
 		return "professor/syllabus";
 	}
 	
@@ -478,7 +479,6 @@ public class ProfessorController {
 		}
 		
 		ReadSyllabusDto readSyllabusDto = professorService.selectSyllabusBySubjectId(subjectId);
-		System.out.println("readSyll"); 
 		model.addAttribute("syllabus", readSyllabusDto);
 		return "professor/updateSyllabus";
 	}

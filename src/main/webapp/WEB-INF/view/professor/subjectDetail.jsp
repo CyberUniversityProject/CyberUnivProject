@@ -42,7 +42,7 @@
 					<h4>
 						<span style="font-weight: 600;">[${subjectName.subjectName}] 학생리스트</span>
 					</h4>
-					<div class="table-responsive">
+					<div class="table-responsive" style="height: 546px;">
 						<table class="table table-bordered">
 							<thead class="thead-light">
 								<tr>
@@ -87,6 +87,5 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>	
-	<script src="/js/studentDetail.js"></script>
 </body>
 </html>

@@ -57,7 +57,6 @@
 	<div class="container mb-5">
 		<div class="row">
 			<%@ include file="/WEB-INF/view/layout/professorMypageAsidebar.jsp"%>
-
 			<div class="col-md-10">
 				<div class="container mt-5">
 					<div class="split--div"></div>
@@ -96,9 +95,6 @@
 			</div>
 
 		</div>
-	</div>
-	</div>
-	</div>
 	</div>
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>

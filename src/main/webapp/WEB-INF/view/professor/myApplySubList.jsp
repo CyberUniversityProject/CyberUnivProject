@@ -45,11 +45,10 @@
 			<div class="col-md-10">
 
 				<!-- 메인 div -->
-				<div class="container mt-5">
+				<div class="container mt-5" style="height: 582px;">
 					<div class="row">
 						<div class="col-md-12"></div>
 					</div>
-
 					<div class="table-responsive">
 						<table class="table table-bordered">
 							<thead class="thead-light">
@@ -81,8 +80,7 @@
 										<td>${subList.subDay}</td>
 										<td>${subList.approval}</td>
 										<td>${subList.reason}</td>
-										<td><a
-											href="/professor/update-list/${subList.id}"
+										<td><a href="/professor/update-list/${subList.id}"
 											class="btn btn-primary">수정</a></td>
 									</tr>
 								</c:forEach>

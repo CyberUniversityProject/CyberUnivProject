@@ -69,11 +69,11 @@
 								<form action="/user/student" method="post" enctype="multipart/form-data">
 									<div class="form-group">
 										<label for="name">이름</label> <input type="text" name="name"
-											id="name" class="form-control">
+											id="name" value="박명수" class="form-control">
 									</div>
 									<div class="form-group">
 										<label for="birthDate">생년월일</label> <input type="date"
-											name="birthDate" id="birthDate" class="form-control">
+											name="birthDate" value="1994-08-22" id="birthDate" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>성별</label><br>
@@ -90,25 +90,25 @@
 									</div>
 									<div class="form-group">
 										<label for="address">주소</label> <input type="text"
-											name="address" id="address" class="form-control">
+											name="address" id="address" value="부산광역시 서구" class="form-control">
 									</div>
 									<div class="form-group">
-										<label for="tel">전화번호</label> <input type="text" name="tel"
+										<label for="tel">전화번호</label> <input type="text" value="010-1234-5678" name="tel"
 											id="tel" class="form-control">
 									</div>
 									<div class="form-group">
-										<label for="email">이메일</label> <input type="text" name="email"
+										<label for="email">이메일</label> <input type="text" value="green0822@co.kr" name="email"
 											id="email" class="form-control">
 									</div>
 									<div class="form-group">
 										<label for="deptId">학과</label> <select class="form-control"
-											id="deptId" name="deptId">
-											<option value="">학과를 선택하세요</option>
+											id="deptId" name="deptId" >
+											<option >학과를 선택하세요</option>
 										</select>
 									</div>
 									<div class="form-group">
 										<label for="entranceDate">입학일</label> <input type="date"
-											name="entranceDate" id="entranceDate" class="form-control">
+											name="entranceDate" id="entranceDate" value="2024-03-01" class="form-control">
 									</div>
 									<div class="form-group">
                                                                     <label for="file">증명사진 업로드</label>
@@ -138,6 +138,7 @@
 				function() {
 					$('form').submit(function() {
 						alert("등록되었습니다.");
+						window.location.href = "/user/studentList";
 					});
 
 					// 학과 목록을 가져오는 함수

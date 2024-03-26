@@ -310,7 +310,7 @@ public class UserController {
 
 		userService.createStudentToStudentAndUser(createStudentDto);
 
-		return "redirect:/user/student";
+		return "redirect:/user/studentList";
 	}
 	
 	

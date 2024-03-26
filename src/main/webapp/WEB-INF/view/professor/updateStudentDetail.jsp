@@ -119,54 +119,6 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
-<script>
-function validateForm() {
-    let absent = document.getElementById("absent").value;
-    let lateness = document.getElementById("lateness").value;
-    let homework = document.getElementById("homework").value;
-    let midExam = document.getElementById("midExam").value;
-    let finalExam = document.getElementById("finalExam").value;
-    let convertedMark = document.getElementById("convertedMark").value;
-    let grade = document.getElementById("grade").value;
-    let sumScore = midExam + finalExam;
-    let errorMessage = "";
-    
-    if (absent < 0 || absent > 72) {
-        errorMessage += "결석 횟수를 0부터 72까지 입력하세요.\n";
-    }
-
-    if (lateness < 0 || lateness > 72) {
-        errorMessage += "지각 횟수를 0부터 72까지 입력하세요.\n";
-    }
-
-    if (homework < 0 || homework > 100) {
-        errorMessage += "과제 점수를 0부터 100까지 입력하세요.\n";
-    }
-
-    if (midExam < 0 || midExam > 100) {
-        errorMessage += "중간 고사 점수를 0부터 100까지 입력하세요.\n";
-    }
-
-    if (finalExam < 0 || finalExam > 100) {
-        errorMessage += "기말 고사 점수를 0부터 100까지 입력하세요.\n";
-    }
-
-    if (convertedMark < 0 || convertedMark > 100) {
-        errorMessage += "환산 점수를 0부터 100까지 입력하세요.\n";
-    }
-
-    if (convertedMark !== sumScore) {
-        errorMessage += "잘못된 환산 점수입니다. 중간 고사 점수와 기말 고사 점수의 합과 동일해야 합니다.\n";
-    }
-
-    if (errorMessage !== "") {
-        alert(errorMessage);
-        return false;
-    }
-
-    return true;
-}
-</script>		
+	<script src="js/studentDetail.js"></script>
 </body>
 </html>

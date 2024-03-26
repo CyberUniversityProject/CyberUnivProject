@@ -30,7 +30,7 @@
 			<div class="col-md-10">
 				<!-- main 넣는 시작 부분 -->
 		<!-- register form start-->			
-	 <section id="pricing" class="pricing">
+	 <section id="pricing" class="pricing" style="height:632px;">
 	 <form action="/room/roomRegister" method="post">
       <div class="container" data-aos="fade-up">
 

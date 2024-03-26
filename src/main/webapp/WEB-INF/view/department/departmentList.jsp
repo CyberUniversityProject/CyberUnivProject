@@ -29,7 +29,7 @@
 			<!-- 사이드바 메뉴 -->
 			<%@ include file="/WEB-INF/view/layout/sidebarCdrList.jsp"%>
 
-			<div class="col-md-10" style="text-align: center;">
+			<div class="col-md-10" style="text-align: center;height:740px;">
 				<h1 class="mt-5 mb-4">학과 리스트</h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">

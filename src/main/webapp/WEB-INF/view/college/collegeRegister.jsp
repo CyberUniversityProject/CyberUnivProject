@@ -30,7 +30,7 @@
 
 
 			<div class="col-md-10">
-				<section id="pricing" class="pricing">
+				<section id="pricing" class="pricing" style="height:632px;">
 					<form action="/college/collegeRegister" method="post">
 						<div class="container" data-aos="fade-up">
 

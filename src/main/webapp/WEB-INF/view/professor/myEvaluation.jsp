@@ -60,7 +60,7 @@
 	<!-- 상단 제목부분 끝 -->
 	<div class="container mb-5">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
-		<div class="row">
+		<div class="row" style="height: 632px;">
 			<%@ include file="/WEB-INF/view/layout/professorAsidebar.jsp"%>
 
 			<div class="col-md-10">

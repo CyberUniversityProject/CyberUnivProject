@@ -33,7 +33,7 @@
 							<div class="mb-3">
 								<label for="name" class="form-label">강의명</label> <input
 									type="text" class="form-control" id="name" name="name"
-									placeholder="강의명을 입력하세요" autocomplete="off">
+									placeholder="강의명을 입력하세요" autocomplete="off" value="자바의 정석">
 							</div>
 
 							<div class="mb-3">
@@ -73,19 +73,19 @@
 							<div class="mb-3">
 								<label for="startTime" class="form-label">시작 시간</label> <input
 									type="number" class="form-control" id="startTime"
-									name="startTime" placeholder="강의 시작 시간을 입력하세요" autocomplete="off">
+									name="startTime" placeholder="강의 시작 시간을 입력하세요" autocomplete="off" value="9">
 							</div>
 
 							<div class="mb-3">
 								<label for="endTime" class="form-label">종료 시간</label> <input
 									type="number" class="form-control" id="endTime" name="endTime"
-									placeholder="강의 종료 시간을 입력하세요" autocomplete="off">
+									placeholder="강의 종료 시간을 입력하세요" autocomplete="off" value="11">
 							</div>
 
 							<div class="mb-3">
 								<label for="subYear" class="form-label">년도</label> <input
 									type="number" class="form-control" id="subYear" name="subYear"
-									placeholder="강의 개설 년도를 입력하세요" autocomplete="off">
+									placeholder="강의 개설 년도를 입력하세요" autocomplete="off" value="2024">
 							</div>
 
 							<div class="mb-3">
@@ -138,13 +138,13 @@
 							<div class="mb-3">
 								<label for="grades" class="form-label">학점</label> <input
 									type="number" class="form-control" id="grades" name="grades"
-									placeholder="이수 학점을 입력하세요" autocomplete="off">
+									placeholder="이수 학점을 입력하세요" autocomplete="off" value="2">
 							</div>
 
 							<div class="mb-3">
 								<label for="capacity" class="form-label">정원</label> <input
 									type="number" class="form-control" id="capacity"
-									name="capacity" placeholder="강의 총 정원을 입력하세요" autocomplete="off">
+									name="capacity" placeholder="강의 총 정원을 입력하세요" autocomplete="off" value="20">
 							</div>
 
 							<button type="submit" class="btn btn-primary">입력</button>

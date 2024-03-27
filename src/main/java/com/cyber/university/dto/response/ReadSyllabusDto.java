@@ -15,6 +15,7 @@ public class ReadSyllabusDto {
 	
 	
 	private Integer subjectId;
+	private Integer professorId;
 	private String name;
 	private String subYear;
 	private String semester;

@@ -90,7 +90,6 @@ ul	{
 											<tr>
 												<td>${subject.id}</td>
 												<td>${subject.name}</td>
-
 												<td>
 													<c:choose>
 														<c:when test="${subject.startTime < 10}">

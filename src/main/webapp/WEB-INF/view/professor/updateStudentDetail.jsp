@@ -57,33 +57,33 @@
 										<tr>
 											<td><label>결석</label></td>
 											<td><input type="number" name="absent" id="absent"
-												autocomplete="off"> <span style="color: #888"><br>※
+												autocomplete="off" value="0"> <span style="color: #888"><br>※
 													결석 5회 이상시 F학점입니다.</span></td>
 										</tr>
 										<tr>
 											<td><label>지각</label></td>
 											<td><input type="number" name="lateness" id="lateness"
-												autocomplete="off"></td>
+												autocomplete="off" value="0"></td>
 										</tr>
 										<tr>
 											<td><label>과제점수</label></td>
 											<td><input type="number" name="homework" id="homework"
-												autocomplete="off"></td>
+												autocomplete="off" value="25"></td>
 										</tr>
 										<tr>
 											<td><label>중간시험</label></td>
 											<td><input type="number" name="midExam" id="midExam"
-												autocomplete="off"></td>
+												autocomplete="off" value="35"></td>
 										</tr>
 										<tr>
 											<td><label>기말시험</label></td>
 											<td><input type="number" name="finalExam" id="finalExam"
-												autocomplete="off"></td>
+												autocomplete="off" value="40"></td>
 										</tr>
 										<tr>
 											<td><label>환산점수</label></td>
 											<td><input type="number" name="convertedMark"
-												id="convertedMark" autocomplete="off"></td>
+												id="convertedMark" autocomplete="off" value="100"></td>
 										</tr>
 										<tr>
 											<td><label>등급</label></td>

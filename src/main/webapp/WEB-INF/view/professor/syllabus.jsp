@@ -160,7 +160,7 @@ a:hover {
 			</tr>
 		</table>
 		<c:choose>
-			<c:when test="${principal.userRole == \"professor\"}">
+			<c:when test="${principal.userRole == \"professor\" && principal.id == syllabus.professorId}">
 		<table>
 			<tr>
 				<td><a href="/professor/syllabus/update/${syllabus.subjectId}">수정하기</a></td>

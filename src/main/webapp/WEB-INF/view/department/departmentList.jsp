@@ -29,7 +29,7 @@
 			<!-- 사이드바 메뉴 -->
 			<%@ include file="/WEB-INF/view/layout/sidebarCdrList.jsp"%>
 
-			<div class="col-md-10" style="text-align: center;">
+			<div class="col-md-10" style="text-align: center;height:740px;">
 				<h1 class="mt-5 mb-4">학과 리스트</h1>
 				<!-- main 넣는 시작 부분 -->
 				<div class="container">
@@ -49,8 +49,8 @@
 								<th>${department.collegeId}</th> 
 								<th>${department.id}</th> 
 								<th>${department.name}</th>
-								<th><a href="/department/departmentUpdate/${department.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;"class="btn btn-outline-update">수정</button></a>
-								<a href="/department/delete/${department.id}"><button type="button" style="border-color:#A0307F;border-width:1px;" class="btn btn-outline-delete">삭제</button></a></th>
+								<th><a href="/department/departmentUpdate/${department.id}"><button type="button" style="border-color:#5FCF80;border-width:1px;font-size:15px;"class="btn btn-outline-update">수정</button></a>
+								<a href="/department/delete/${department.id}"><button type="button" style="border-color:#A0307F;border-width:1px;font-size:15px;" class="btn btn-outline-delete">삭제</button></a></th>
 								
 							</tr>
 						</c:forEach>
@@ -109,6 +109,7 @@
 					
 					<!--pagination end -->
 
+			</div>
 			</div>
 		</div>
 	</div>

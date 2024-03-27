@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cyber.university.dto.CollegeDto;
 import com.cyber.university.dto.CollegeFormDto;
 import com.cyber.university.repository.model.College;
 
@@ -33,7 +34,7 @@ public interface CollegeRepository {
 
 	// 단과대학 등록 리스트
 	public List<College> findAll();
-
+	
 	// 단과대학 삭제
 	public int deleteById(Integer id);
 

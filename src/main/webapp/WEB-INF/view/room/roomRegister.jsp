@@ -30,7 +30,7 @@
 			<div class="col-md-10">
 				<!-- main 넣는 시작 부분 -->
 		<!-- register form start-->			
-	 <section id="pricing" class="pricing">
+	 <section id="pricing" class="pricing" style="height:632px;">
 	 <form action="/room/roomRegister" method="post">
       <div class="container" data-aos="fade-up">
 
@@ -42,12 +42,12 @@
               <ul>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="id" id="id"
-                    style="width: 226%" placeholder="강의실 id">
+                    style="width: 226%" value="C306" autocomplete="off">
                 </div>
                 <br></br>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="collegeId" id="collegeId"
-                     style="width: 226%" placeholder="단과대학 번호">
+                     style="width: 226%" value="4" autocomplete="off">
                 </div>
               </ul>
               <div class="btn-wrap">

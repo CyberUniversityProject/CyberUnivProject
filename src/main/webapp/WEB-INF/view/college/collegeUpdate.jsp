@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<!-- 상단 제목부분 끝 -->
-	<div class="container mb-5">
+	<div class="container mb-5" style="height:740px;">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
@@ -37,11 +37,11 @@
 
 								<div class="col-lg-4 col-md-6">
 									<div class="box" style="margin-top: 13%;">
-										<h3 style="text-align: center;">단과대학 등록</h3>
+										<h3 style="text-align: center;">단과대학 수정</h3>
 										<ul>
 											<div class="col-md-6 form-group mt-3 mt-md-0">
 												<input type="text" class="form-control" name="name"
-													id="name" style="width: 226%;top:26px;position:relative;" value="${college.name}">
+													id="name" style="width: 226%;top:26px;position:relative;" autocomplete="off" value="${college.name}">
 											</div>
 											<br></br>
 											

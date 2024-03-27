@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<!-- 상단 제목부분 끝 -->
-	<div class="container mb-5">
+	<div class="container mb-5" style="height:740px;">
 		<!-- 왼쪽 사이드바 너비 만큼 메인 컨텐츠를 이동시킴 -->
 		<div class="row">
 			<!-- 사이드바 메뉴 -->
@@ -44,12 +44,12 @@
               <ul>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="id" id="id"
-                    style="width: 226%" value="${room.id}">
+                    style="width: 226%" value="${room.id}" autocomplete="off">
                 </div>
                 <br></br>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="text" class="form-control" name="collegeId" id="collegeId"
-                     style="width: 226%" value="${room.collegeId}">
+                     style="width: 226%" value="${room.collegeId}" autocomplete="off">
                 </div>
               </ul>
               <div class="btn-wrap">

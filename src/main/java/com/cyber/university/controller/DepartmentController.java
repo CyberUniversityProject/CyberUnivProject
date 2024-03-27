@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cyber.university.dto.CollegeDto;
 import com.cyber.university.dto.DepartmentDto;
 import com.cyber.university.dto.response.PrincipalDto;
 import com.cyber.university.repository.model.Department;
 import com.cyber.university.repository.model.Staff;
 import com.cyber.university.service.ApplySubjectService;
+import com.cyber.university.service.CollegeService;
 import com.cyber.university.service.DepartmentService;
 import com.cyber.university.service.UserService;
 import com.cyber.university.utils.Define;
@@ -43,6 +45,9 @@ public class DepartmentController {
 	private final DepartmentService departmentService;
 	
 	@Autowired
+	private final CollegeService collegeService;
+	
+	@Autowired
 	private final HttpSession httpSession;
 	
 	@Autowired
@@ -55,12 +60,13 @@ public class DepartmentController {
 		PrincipalDto principal = (PrincipalDto) httpSession.getAttribute(Define.PRINCIPAL);
 		Staff staff = userService.readStaff(principal.getId());
 		model.addAttribute("staff",staff);
+		
 		return "/department/departmentRegister";
 	}
 	
 	// 화면에서 자바로 데이터값 받아오기
 	@PostMapping("/departmentRegister")
-	public String inputData(DepartmentDto inputData) {		
+	public String inputData(DepartmentDto inputData) {	
 		departmentService.insert(inputData);
 		return "redirect:/department/departmentList";
 	}

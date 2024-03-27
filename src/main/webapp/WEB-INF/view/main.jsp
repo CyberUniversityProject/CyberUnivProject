@@ -836,7 +836,7 @@ $(document).ready(function() {
     console.log("i'm here!!!!"+date);
     console.log(todayDate);
     
-    let url = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=bab543c0c3c6493dad08d3fba3cf73bd&Type=json&pIndex=1&pSize=7&ATPT_OFCDC_SC_CODE=C10&SD_SCHUL_CODE=7150089&MLSV_FROM_YMD=' + todayDate;
+    let url = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=bab543c0c3c6493dad08d3fba3cf73bd&Type=json&pIndex=1&pSize=7&ATPT_OFCDC_SC_CODE=C10&SD_SCHUL_CODE=7150089&MLSV_FROM_YMD=' + "20240326";
     let param = '';
     ajaxCallApi(url, param, ApiCallBack);
 });

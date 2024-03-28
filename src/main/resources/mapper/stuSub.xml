@@ -90,21 +90,25 @@
 	</update>
 	
 	<select id="selectThisSemesterGradeByStudentId" resultType="com.cyber.university.dto.SemesterGradeDto">
-		<![CDATA[SELECT 
-			a.subject_id,
-		    a.grade,
-		    a.evaluation_id,
-    		b.grades,
-		    b.sub_year AS subYear,
-		    b.semester,
-		    b.name AS subjectName,
-		    b.type
-		FROM cu_stu_sub AS a
-		LEFT JOIN cu_subject AS b 
-		ON a.subject_id = b.id
-		WHERE student_id = #{studentId}
-		AND sub_year = YEAR(CURDATE())
-		AND IF(MONTH(CURDATE()) BETWEEN 3 AND 8, 1, 2) = semester]]>
+	SELECT 
+    a.subject_id,
+    a.grade,
+    a.evaluation_id,
+    b.grades,
+    b.sub_year AS subYear,
+    b.semester,
+    b.name AS subjectName,
+    b.type
+FROM cu_stu_sub AS a
+LEFT JOIN cu_subject AS b 
+ON a.subject_id = b.id
+WHERE student_id = #{studentId}
+AND sub_year = YEAR(CURDATE())
+AND CASE 
+    WHEN MONTH(CURDATE()) BETWEEN 3 AND 8 THEN 1
+    ELSE 2
+END = semester
+
 	</select>
 	
 	<select id="selectTotalScoreByYearAndSemesterAndStudentId" resultType="com.cyber.university.dto.TotalScoreDto">
@@ -121,7 +125,8 @@
 		ON ss.grade = g.grade
 		WHERE ss.student_id = #{studentId}
 		AND s.sub_year = #{subYear}
-		AND semester = #{semester}]]>
+		AND semester = #{semester}
+		GROUP BY s.sub_year, s.semester]]>
 	</select>
 	
 	<select id="selectAllSemesterTotalScoreByStudyId" resultType="com.cyber.university.dto.TotalScoreDto">

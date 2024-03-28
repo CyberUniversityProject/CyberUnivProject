@@ -110,12 +110,6 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	 <script>
-//   $(document).ready(function() {
-//     $('form').submit(function() {
-//       alert("비밀번호가 변경되었습니다");
-//     });
-//   });
-</script>
+	
 </body>
 </html>

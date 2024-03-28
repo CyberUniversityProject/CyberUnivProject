@@ -149,7 +149,7 @@
 							dataType : 'json',
 							success : function(data) {
 								var select = $('#deptId');
-								console.log(data);
+							
 
 								$.each(data, function(index, dept) {
 									select.append($('<option>', {

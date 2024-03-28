@@ -343,7 +343,7 @@ link:focus, .nav-link:hover {
 							// 검색 폼이 제출될 때 AJAX 요청을 보냄
 							$('form').submit(
 											function(event) {
-										console.log("폼서브밋 펑션이실행됐다고");
+										
 												event.preventDefault(); // 기본 제출 동작을 막음
 												var formData = $(this).serialize(); // 폼 데이터를 가져와서 시리얼라이즈
 												$.ajax({

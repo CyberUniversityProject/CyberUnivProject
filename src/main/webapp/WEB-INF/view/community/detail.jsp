@@ -317,15 +317,11 @@
 										'.comment-edit-form').find('textarea')
 										.val();
 
-								// 데이터 확인
-								console.log("Comment ID:", commentId);
-								console.log("Edited Content:", editedContent);
-
+							
 								var data = JSON.stringify({
 									content : editedContent
 								});
-								console.log("Data:", data);
-
+								
 								// AJAX를 사용하여 서버에 수정된 내용을 전송
 								$.ajax({
 									type : "PUT",
@@ -336,7 +332,7 @@
 										content : editedContent
 									}), // 수정된 내용을 JSON 형식으로 전송
 									success : function(response) {
-										console.log(response); // 서버 응답 확인
+										
 										window.location.reload();
 									},
 									error : function(xhr, status, error) {

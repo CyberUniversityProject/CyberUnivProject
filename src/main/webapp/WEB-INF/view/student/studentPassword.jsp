@@ -123,9 +123,7 @@
 	        let passwordCheck = document.getElementById("passwordCheck").value;
 	        
 
-	        console.log("beforePassword" + beforePassword);
-	        console.log("afterPassword" + afterPassword);
-	        console.log("passwordCheck" + passwordCheck);
+	      
 	        
 	        let formData = {
 	            "beforePassword": beforePassword,

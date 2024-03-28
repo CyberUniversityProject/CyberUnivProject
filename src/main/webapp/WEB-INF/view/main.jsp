@@ -818,7 +818,7 @@ function ApiCallBack(json) {
         }
         // 학식 정보를 HTML에 표시
         displayMenu(menuArray);
-        console.log(menuArray);
+       
     } else {
         console.log("json.schoolInfo == null")
     }
@@ -830,11 +830,7 @@ $(document).ready(function() {
     
     let todayDate = year + month + date;
 
-    console.log("i'm here!!!!"+today);
-    console.log("i'm here!!!!"+year);
-    console.log("i'm here!!!!"+month);
-    console.log("i'm here!!!!"+date);
-    console.log(todayDate);
+   
     
     let url = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=bab543c0c3c6493dad08d3fba3cf73bd&Type=json&pIndex=1&pSize=7&ATPT_OFCDC_SC_CODE=C10&SD_SCHUL_CODE=7150089&MLSV_FROM_YMD=' + "20240326";
     let param = '';
@@ -843,7 +839,7 @@ $(document).ready(function() {
 
 /* AJAX 호출 함수 */
 function ajaxCallApi(url, param, callback) {
-    console.log("ajaxCallApi in");
+   
 
     $.ajax({
         url: url,

@@ -208,7 +208,7 @@
       // 각 게시글의 댓글 개수를 비동기적으로 가져와서 표시합니다.
       $('.community-list-table tbody tr').each(function() {
         var communityId = $(this).find('td:first-child').text(); // 게시글의 ID를 가져옵니다.
-        console.log(communityId);
+      
         var commentCountSpan = $('#commentCount_' + communityId); // 댓글 수를 표시할 위치를 가져옵니다.
 
         // AJAX를 사용하여 댓글 개수를 가져옵니다.

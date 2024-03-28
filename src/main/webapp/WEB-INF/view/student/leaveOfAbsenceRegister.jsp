@@ -394,8 +394,7 @@
 		        if (this.checked) {
 		            let selectedType = this.nextElementSibling.textContent.trim(); // 선택된 타입을 전역 변수에 할당
 		            type = selectedType; // value 값을 선택된 라디오 버튼의 라벨로 변경
-		            console.log("선택된 타입:", selectedType);
-		            console.log('원래 type은 변경이 됐을까?', type); // 변경된 value 값 출력
+		          
 		        }
 		    });
 		});
@@ -455,7 +454,7 @@
 		    
 		    yearBox.addEventListener('change', function() {
 		    	startYearValue = this.value;
-		        console.log(startYearValue);
+		       
 		    	// 휴학 종료일 시작을 휴학시작년도 이후로 불러오는 함수
 		    	startSemester();
 		    });
@@ -484,7 +483,7 @@
 			    
 			    yearBox.addEventListener('change', function() {
 			    	endYearValue = this.value;
-			        console.log(endYearValue);
+			     
 			        
 			    	// 휴학 종료일 시작을 휴학시작년도 이후로 불러오는 함수
 			    	endSemester();
@@ -561,7 +560,7 @@
 		    toSemesterBox.addEventListener('change', function(){
 		    	
 		        toSemesterValue = this.value;
-		        console.log(toSemesterValue);
+		       
 		    });
 		}
 		

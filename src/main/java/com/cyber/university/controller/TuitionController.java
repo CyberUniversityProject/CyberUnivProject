@@ -149,6 +149,7 @@ public class TuitionController {
 	@GetMapping("/create")
 	public String createTuiProc(Model model) {
 
+		// 전체 학생 목록
 		List<Integer> studentIdList = stuStatService.readIdList();
 
 		// 고지서 생성 개수 반환
@@ -160,6 +161,7 @@ public class TuitionController {
 			insertCount += tuitionService.createTuition(studentId);
 		}
 
+		
 		// jsp로 생성 개수 보내기
 		model.addAttribute("insertCount", insertCount);
 		System.out.println(insertCount);

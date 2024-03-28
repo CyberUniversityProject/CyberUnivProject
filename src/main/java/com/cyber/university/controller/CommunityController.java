@@ -58,7 +58,6 @@ public class CommunityController {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
 		model.addAttribute("principal", principal);
-		System.out.println("--------------" + principal);
 		return "/community/write";
 	}
 

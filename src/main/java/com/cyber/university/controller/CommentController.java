@@ -1,4 +1,4 @@
-package com.cyber.university.controller;
+fpackage com.cyber.university.controller;
 
 import java.util.List;
 
@@ -40,8 +40,6 @@ public class CommentController {
 	    comment.setUserId(userId); // 작성자의 ID 설정
 	    comment.setCommunityId(communityId); // 게시글의 ID 설정
 	    comment.setRole(role);
-	    System.out.println("role?? " + role);
-	    System.out.println("commentContent?? " + commentContent);
 	    commentService.insertComment(comment);
 	}
 

@@ -293,7 +293,7 @@ public class UserController {
 			// 파일이름
 			UUID uuid = UUID.randomUUID();
 			String fileName = uuid + "_" + file.getOriginalFilename();
-			System.out.println("filename : " + fileName);
+		
 
 			String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
 			File destination = new File(uploadPath);

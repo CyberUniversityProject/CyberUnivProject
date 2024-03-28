@@ -73,13 +73,12 @@ public class BreakService {
 	@Transactional
 	public void updateById(Integer id, String status) {
 		
-		System.out.println("id값 : " + id);
-		System.out.println("status값 : " + status);
+		
 
 		int resultRowCount = breakAppRepository.updateById(id, status);
 		
 		
-		System.out.println("resultRowCount ?" + resultRowCount);
+		
 
 		// 승인 시 학적 상태를 휴학으로 변경하기
 		if (status.equals("승인")) {
@@ -110,12 +109,12 @@ public class BreakService {
 	  */
 	@Transactional
 	public List<Break> findBreakByStudentId(Integer studentId) {
-		log.info("break service in, studentId : " + studentId);
+		
 		
 		List<Break> breakList = breakAppRepository.selectByStudentId(studentId);
 		
 		
-		log.info("break : ", breakList);
+	
 		return breakList;
 	}
 

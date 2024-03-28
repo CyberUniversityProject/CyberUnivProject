@@ -37,7 +37,7 @@ public class NoticeService {
 	public void readNotice(@Validated NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if (resultRowCount != 1) {
-			System.out.println("공지 입력 서비스 오류");
+			
 		}
 		int noticeId = noticeRepository.selectLimit(noticeFormDto);
 		noticeFormDto.setNoticeId(noticeId);

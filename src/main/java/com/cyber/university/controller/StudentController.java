@@ -109,15 +109,13 @@ public class StudentController {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
 
-		log.info(userId + "userId");
-
+	
 		if (userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		StudentInfoDto studentInfoDto = studentService.findByStudentId(userId);
 
-		log.info("controller studentInfo : " + studentInfoDto);
 		model.addAttribute("studentInfo", studentInfoDto);
 
 		return "/student/studentInfo";
@@ -134,11 +132,9 @@ public class StudentController {
 	public String updateInfo(@RequestParam("profilImage") MultipartFile profilImage, @ModelAttribute("studentInfoDto") StudentInfoDto studentInfoDto) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info("controller in!");
-
+	
 		if (userId == null) {
-			log.info("controller userId null!");
-			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
+					throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		// 이미지가 수정되었을 때만 이미지 업데이트 수행
@@ -159,9 +155,7 @@ public class StudentController {
 			studentInfoDto.setUploadFileName(studentInfoDto.getUploadFileName());
 		}
 
-		log.info("controller service before!");
 		studentService.updateStudentInfo(userId, studentInfoDto);
-		log.info("controller service after!");
 		return "redirect:/student/studentInfo";
 	}
 
@@ -177,16 +171,14 @@ public class StudentController {
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
-
+		
 		if (userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		UserInfoDto userInfoDto = userService.findById(userId);
 
-		log.info("student controller password : " + userInfoDto);
-
+		
 		model.addAttribute("userInfo", userInfoDto);
 
 		return "/student/studentPassword";
@@ -251,8 +243,7 @@ public class StudentController {
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Integer userId = principal.getId();
-		log.info(userId + "userId");
-
+		
 		if (userId == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -329,8 +320,7 @@ public class StudentController {
 
 		// 휴학 정보
 		List<Break> breakList = breakService.findBreakByStudentId(userId);
-		log.info("controller user id로 조회한 break :", breakList.toString());
-
+		
 		model.addAttribute("leaveOfAbsenceList", breakList);
 
 		return "/student/leaveOfAbsenceList";

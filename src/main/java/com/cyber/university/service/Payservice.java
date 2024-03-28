@@ -36,8 +36,7 @@ public class Payservice {
         // 요청 보내기
         ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
 
-        // 토큰 값을 로그로 출력
-        log.info("토큰 값: {}", responseEntity.getBody());
+      
         
         return responseEntity;
 	}

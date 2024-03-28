@@ -58,13 +58,13 @@ public class CollegeService {
 
 	@Transactional
 	public String insert(College college) {
-		System.out.println(college.toString());
+	
 		collegeRepository.insertById(college);
 		return college.getName();
 	}
 	// 단과대학 목록 전체 불러오기
 	public List<College> collegeList() {
-		System.out.println("collegeList" + toString());
+		
 		return collegeRepository.findAll();
 	}
 /**
@@ -82,17 +82,17 @@ public class CollegeService {
 	
 	// 단과대학 조회 수정 시에 쓰임 수정 누르면 기존 내용을 가지로 페이지 이동
 	public College findById(Integer id) {
-		log.info("id");
+		
 		College college = collegeRepository.findById(id);
-		log.info("where");
+	
 		return college;
 	}
 	//단과대학 수정
 	@Transactional
 	public void updateById(College college) {
-		log.info("update");
+		
 		System.out.println("update" + college);
-		log.info("complete");
+		
 		int result = collegeRepository.updateById(college);
 	}
 	

@@ -183,9 +183,9 @@ public class StuSubService {
 	  * @Method 설명 : 금학기 성적 리스트
 	  */
 	public List<SemesterGradeDto> findThisSemesterGradeByStudentId(Integer studentId) {
-		log.info("stuSubServce in111");
+		
 		List<SemesterGradeDto> thisSemesterGradeList = stuSubRepository.selectThisSemesterGradeByStudentId(studentId);
-		log.info("stuSubServce select after thisSemesterGradeList : "+thisSemesterGradeList);
+		
 		return thisSemesterGradeList;
 	}
 
@@ -207,22 +207,18 @@ public class StuSubService {
 	        semester = 2;
 	    }
 
-	    log.info("service if에서 나온 semester 값은?"+semester);
-
-	    log.info("studentId"+ studentId);
-	    log.info("subYear"+ currentYear);
-	    log.info("semester"+ semester);
+	   
 	    
 	    Map<String, Object> map = new HashMap<>() ;
 	    map.put("studentId", studentId);
 	    map.put("subYear", currentYear);
 	    map.put("semester", semester);
 	    
-	    log.info("map" + map);
+	   
 		
 		TotalScoreDto totalScoreDto = stuSubRepository.selectTotalScoreByYearAndSemesterAndStudentId(map);
 		
-		log.info("dto:"+totalScoreDto);
+		
 		return totalScoreDto;
 	}
 
@@ -234,11 +230,11 @@ public class StuSubService {
 	  * @Method 설명 : studyId로 조회한 모든 학기별 총점 조회
 	  */
 	public List<TotalScoreDto> findAllSemesterTotalScoreByStudyId(Integer studentId) {
-		log.info("allsemesterservice로 들어오기는했음" + studentId);
+		
 		
 		List<TotalScoreDto> allSemesterTotalScoreDto = stuSubRepository.selectAllSemesterTotalScoreByStudyId(studentId);
 
-		log.info("service totalScoreDto:"+allSemesterTotalScoreDto);
+	
 		return allSemesterTotalScoreDto;
 	}
 

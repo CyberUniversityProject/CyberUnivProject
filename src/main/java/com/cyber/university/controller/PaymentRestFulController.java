@@ -40,10 +40,8 @@ public class PaymentRestFulController {
 		
 		PaymentInfoDto dto = paymentService.selectTuiYearAndSemester();
 		Student student = paymentService.selectStudentName(principal.getId());
-		log.info("student : " + student);
 		PaymentInfoDto paymentdto = paymentService.selectPaymentInfo(principal.getId() ,dto.getTuiYear(), dto.getSemester());
 		paymentdto.setBuyerName(student.getName());
-		log.info("paymentdto : " + paymentdto);
 		return paymentdto;
 	}
 	

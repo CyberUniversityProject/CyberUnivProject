@@ -99,7 +99,7 @@ public class StudentService {
 
 		StudentInfoDto studentInfo = studentRepository.findStudentById(userId);
 
-		log.info("student service student info:" + studentInfo);
+	
 
 		return studentInfo;
 	}
@@ -142,7 +142,7 @@ public class StudentService {
 		LeaveStudentInfoDto leaveStudentInfoDto = studentRepository.findLeaveStudentById(userId);
 
 		
-		log.info("student service student info:" + leaveStudentInfoDto);
+		
 
 		return leaveStudentInfoDto;
 	}

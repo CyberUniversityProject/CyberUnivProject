@@ -49,7 +49,7 @@ public class EvaluationService {
 	  */
 	public EvaluationInfoDto findEvaluationInfoByStudentId(Integer subjectId,Integer studentId) {
 		
-		log.info("evaluation service in");
+	
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("subjectId", subjectId);
@@ -57,7 +57,7 @@ public class EvaluationService {
 		
 		EvaluationInfoDto evaluationInfoDto = evaluationRepository.selectEvaluationInfoByStudentId(map);
 
-		log.info("evaluation service evaluation info dto : " + evaluationInfoDto);
+	
 		return evaluationInfoDto;
 	}
 
@@ -95,14 +95,12 @@ public class EvaluationService {
 			throw new CustomRestfullException(Define.ALREADY_EVALUATION, HttpStatus.BAD_REQUEST);
 		}
 		
-		log.info("evaluation service dto는 들어왓나요?"+dto);
+	
 		int result = evaluationRepository.insertEvaluation(dto);
-		log.info("evaluation service 레포지토리는 다녀왔나요?");
+		
 		if(result == 1) {
 			Evaluation evaluation = evaluationRepository.selectEvaluationIdByStudentIdAndSubjectId(map);
 			Integer evaluationId = evaluation.getEvaluationId();
-			log.info("evaluation"+evaluation);
-			log.info("evaluationId"+evaluationId);
 			map.put("evaluationId", evaluationId);
 			stuSubRepository.updateEvaluationId(map);
 		}

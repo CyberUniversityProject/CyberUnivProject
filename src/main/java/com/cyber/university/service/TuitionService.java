@@ -139,7 +139,7 @@ public class TuitionService {
 	@Transactional
 	public int createTuition(Integer studentId) {
 
-		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면 생성하지 않음
+		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면 생성하지 않음 
 		StuStat stuStatEntity = stuStatService.readCurrentStatus(studentId);
 		if (stuStatEntity.getStatus().equals("졸업") || stuStatEntity.getStatus().equals("자퇴")) {
 			return 0;

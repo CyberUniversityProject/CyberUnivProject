@@ -1,4 +1,4 @@
-fpackage com.cyber.university.controller;
+package com.cyber.university.controller;
 
 import java.util.List;
 

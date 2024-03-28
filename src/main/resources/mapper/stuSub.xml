@@ -5,7 +5,7 @@
 
 <mapper namespace="com.cyber.university.repository.interfaces.StuSubRepository">
 	<select id="selectBySubjectId" resultType="com.cyber.university.dto.response.StudentInfoForProfessorDto">
-		SELECT ss.id, ss.student_id, s.name AS student_name, d.name AS dept_name, ssd.homework, ssd.absent, ssd.lateness, ssd.mid_exam, ssd.final_exam, ssd.converted_mark
+		<![CDATA[SELECT ss.id, ss.student_id, s.name AS student_name, d.name AS dept_name, ssd.homework, ssd.absent, ssd.lateness, ssd.mid_exam, ssd.final_exam, ssd.converted_mark
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_student AS s
 		ON ss.student_id = s.id
@@ -13,64 +13,64 @@
 		ON s.dept_id = d.id
 		LEFT JOIN cu_stu_sub_detail AS ssd
 		ON ss.id = ssd.id
-		WHERE ss.subject_id = #{subjectId};
+		WHERE ss.subject_id = #{subjectId}]]>
 	</select>
 
 	<update id="updateGradeByStudentIdAndSubjectId">
-		UPDATE cu_stu_sub
+		<![CDATA[UPDATE cu_stu_sub
 		SET grade = #{grade}
 		WHERE student_id = #{studentId}
-		AND subject_id = #{subjectId}
+		AND subject_id = #{subjectId}]]>
 	</update>
 
 <!-- 수강신청 관련 -->
 	<select id="selectByStudentIdAndSubjectId" resultType="com.cyber.university.repository.model.StuSub">
-		SELECT ss.* 
+		<![CDATA[SELECT ss.* 
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_subject AS su
 		ON ss.subject_id = su.id
-		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId}]]>
 	</select>
 	
 	<select id="selectListByStudentIdAndSemester" resultType="com.cyber.university.dto.response.StuSubAppDto">
-		SELECT student_id, subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
+		<![CDATA[SELECT student_id, subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_subject AS su
 		ON ss.subject_id = su.id
         LEFT JOIN cu_professor AS p
         ON su.professor_id = p.id
-		WHERE student_id = #{studentId} AND sub_year = #{subYear} AND semester = #{semester}
+		WHERE student_id = #{studentId} AND sub_year = #{subYear} AND semester = #{semester}]]>
 	</select>
 	
 	<select id="selectSumGrades" resultType="com.cyber.university.dto.response.StuSubSumGradesDto">
-		SELECT student_id, SUM(grades) AS sum_grades
+		<![CDATA[SELECT student_id, SUM(grades) AS sum_grades
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_subject AS su
 		ON ss.subject_id = su.id
 		WHERE sub_year = #{subYear} AND semester = #{semester} AND student_id = #{studentId}
-		GROUP BY student_id;
+		GROUP BY student_id]]>
 	</select>
 	
 	<select id="selectDayTime" resultType="com.cyber.university.dto.response.StuSubDayTimeDto">
-		SELECT su.id AS subject_id, su.name AS subject_name, sub_day, start_time, end_time
+		<![CDATA[SELECT su.id AS subject_id, su.name AS subject_name, sub_day, start_time, end_time
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_subject AS su
 		ON ss.subject_id = su.id
-		WHERE sub_year = #{subYear} AND semester = #{semester} AND student_id = #{studentId}
+		WHERE sub_year = #{subYear} AND semester = #{semester} AND student_id = #{studentId}]]>
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO cu_stu_sub (student_id, subject_id)
-		VALUES (#{studentId}, #{subjectId})
+		<![CDATA[INSERT INTO cu_stu_sub (student_id, subject_id)
+		VALUES (#{studentId}, #{subjectId})]]>
 	</insert>
 	
 	<delete id="delete">
-		DELETE FROM cu_stu_sub
-		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
+		<![CDATA[DELETE FROM cu_stu_sub
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId}]]>
 	</delete>
 
 	<select id="selectJoinListByStudentId" resultType="com.cyber.university.dto.response.StuSubAppDto">
-		SELECT pss.student_id, pss.subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
+		<![CDATA[SELECT pss.student_id, pss.subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
 		FROM cu_pre_stu_sub AS pss
 		LEFT JOIN cu_stu_sub AS ss
 		ON pss.subject_id = ss.subject_id AND pss.student_id = ss.student_id
@@ -79,18 +79,18 @@
         LEFT JOIN cu_professor AS p
         ON su.professor_id = p.id
 		WHERE pss.student_id = #{studentId}
-			AND ss.subject_id IS NULL;
+			AND ss.subject_id IS NULL]]>
 	</select>
 
 	<update id="updateCompleteGradeByStudentIdAndSubjectId">
-		UPDATE cu_stu_sub
+		<![CDATA[UPDATE cu_stu_sub
 		SET complete_grade = #{completeGrade}
 		WHERE student_id = #{studentId}
-		AND subject_id = #{subjectId}
+		AND subject_id = #{subjectId}]]>
 	</update>
 	
 	<select id="selectThisSemesterGradeByStudentId" resultType="com.cyber.university.dto.SemesterGradeDto">
-		SELECT 
+		<![CDATA[SELECT 
 			a.subject_id,
 		    a.grade,
 		    a.evaluation_id,
@@ -104,11 +104,11 @@
 		ON a.subject_id = b.id
 		WHERE student_id = #{studentId}
 		AND sub_year = YEAR(CURDATE())
-		AND IF(MONTH(CURDATE()) BETWEEN 3 AND 8, 1, 2) = semester
+		AND IF(MONTH(CURDATE()) BETWEEN 3 AND 8, 1, 2) = semester]]>
 	</select>
 	
 	<select id="selectTotalScoreByYearAndSemesterAndStudentId" resultType="com.cyber.university.dto.TotalScoreDto">
-		SELECT 
+		<![CDATA[SELECT 
 		     s.sub_year AS subYear,
 		     s.semester AS semester,
 		    SUM(s.grades) AS totalGrades,
@@ -121,11 +121,11 @@
 		ON ss.grade = g.grade
 		WHERE ss.student_id = #{studentId}
 		AND s.sub_year = #{subYear}
-		AND semester = #{semester}
+		AND semester = #{semester}]]>
 	</select>
 	
 	<select id="selectAllSemesterTotalScoreByStudyId" resultType="com.cyber.university.dto.TotalScoreDto">
-		SELECT 
+		<![CDATA[SELECT 
 		    s.sub_year AS subYear,
 		    s.semester AS semester,
 		    SUM(s.grades) AS totalGrades,
@@ -137,23 +137,23 @@
 		LEFT JOIN cu_grade AS g 
 		ON ss.grade = g.grade
 		WHERE ss.student_id = #{studentId}
-		GROUP BY s.sub_year, s.semester
+		GROUP BY s.sub_year, s.semester]]>
 	</select>
 
 	<select id="selectTotalScoreByStudentId" resultType="com.cyber.university.dto.TotalScoreDto">
-		SELECT 
+		<![CDATA[SELECT 
 		    SUM(s.grades) AS totalGrades,
 		    SUM(ss.complete_grade) AS totalCompleteGrade,
 		    AVG(g.grade_value) AS averageGrade
 		FROM cu_stu_sub AS ss
 		LEFT JOIN cu_subject AS s ON ss.subject_id = s.id
 		LEFT JOIN cu_grade AS g ON ss.grade = g.grade
-		WHERE ss.student_id = #{studentId}
+		WHERE ss.student_id = #{studentId}]]>
 	</select>
 	
 	
 	<select id="selectAllSemesterGradeByStudentId" resultType="com.cyber.university.dto.SemesterGradeDto">
-		SELECT 
+		<![CDATA[SELECT 
 		    a.subject_id,
 		    a.grade,
 		    b.grades,
@@ -164,14 +164,14 @@
 		FROM cu_stu_sub AS a
 		LEFT JOIN cu_subject AS b ON a.subject_id = b.id
 		WHERE student_id = #{studentId}
-		ORDER BY subYear DESC, semester DESC;
+		ORDER BY subYear DESC, semester DESC]]>
 	</select>
 	
 	<select id="selectGradeByYearAndSemesterAndType" resultType="com.cyber.university.dto.SemesterGradeDto">
 			
 		<!-- type이 전공 or 교양 일 땐 type 값을 받아옴 -->
 		<if test="type != '전체'">
-		SELECT 
+		<![CDATA[SELECT 
 			a.subject_id,
 			a.grade,
 			b.grades,
@@ -184,12 +184,12 @@
 		WHERE student_id = 2024000001
 		AND b.sub_year = #{subYear}
 		AND b.semester = #{semester}
-		AND b.type = #{type};
+		AND b.type = #{type}]]>
 		</if>
 		
 		<!-- type이 전체 일 땐 type값을 받아오지 않음 -->
 		<if test="type == '전체'">
-		SELECT 
+		<![CDATA[SELECT 
 			a.subject_id,
 			a.grade,
 			b.grades,
@@ -201,14 +201,14 @@
 		LEFT JOIN cu_subject AS b ON a.subject_id = b.id
 		WHERE student_id = 2024000001
 		AND b.sub_year = #{subYear}
-		AND b.semester = #{semester};
+		AND b.semester = #{semester}]]>
 		</if>
 	</select>
 	<update id="updateEvaluationId">
-		UPDATE cu_stu_sub SET
+		<![CDATA[UPDATE cu_stu_sub SET
 		evaluation_id = #{evaluationId}
 		WHERE student_id = #{studentId}
-		AND subject_id = #{subjectId}
+		AND subject_id = #{subjectId}]]>
 	</update>
 
 </mapper>

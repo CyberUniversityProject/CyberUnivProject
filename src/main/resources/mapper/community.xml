@@ -6,35 +6,41 @@
 
     <!-- 게시글 삽입 -->
     <insert id="insertCommunity">
-          INSERT INTO cu_community (title, content, userName, createDate)
-    VALUES (#{title}, #{content}, #{userName}, now())
+         <![CDATA[
+INSERT INTO cu_community (title, content, userName, createDate)
+    VALUES (#{title}, #{content}, #{userName}, now())]]>
     </insert>
 
     <!-- 모든 게시글 조회 -->
     <select id="selectAllCommunities" resultType="com.cyber.university.repository.model.Community">
-        SELECT * FROM cu_community
+       <![CDATA[
+        SELECT * FROM cu_community]]>
     </select>
 
     <!-- 특정 ID의 게시글 조회 -->
     <select id="selectCommunityById" parameterType="Integer" resultType="com.cyber.university.repository.model.Community">
-        SELECT * FROM cu_community WHERE id = #{id}
+        <![CDATA[
+        SELECT * FROM cu_community WHERE id = #{id}]]>
     </select>
 
     <!-- 게시글 업데이트 -->
     <update id="updateCommunity">
+       <![CDATA[
         UPDATE cu_community
     SET title = #{title}, content = #{content}, updateDate = now()
-    WHERE id = #{id}
+    WHERE id = #{id}]]>
     </update>
 
     <!-- 게시글 삭제 -->
     <delete id="deleteCommunity" parameterType="Integer">
-        DELETE FROM cu_community WHERE id = #{id}
+       <![CDATA[
+        DELETE FROM cu_community WHERE id = #{id}]]>
     </delete>
     
     
       <select id="getCommunityById" parameterType="int" resultType="com.cyber.university.repository.model.Community">
-        SELECT * FROM cu_community WHERE id = #{id}
+       <![CDATA[
+        SELECT * FROM cu_community WHERE id = #{id}]]>
     </select>
     
     
@@ -43,15 +49,16 @@
     <!--페이징 처리 -->
 	<select id="findAllwithPaging"
 		resultType="com.cyber.university.repository.model.Community">
+		<![CDATA[
 		SELECT * FROM cu_community
 		ORDER BY id desc
-		LIMIT #{offset}, #{limit}
+		LIMIT #{offset}, #{limit}]]>
 	</select>
 
 
 	<!--전체 데이터 개수 -->
 	<select id="getAllCount" resultType="int">
-		SELECT COUNT(*) FROM cu_community
+		<![CDATA[SELECT COUNT(*) FROM cu_community]]>
 	</select>
 
 </mapper>

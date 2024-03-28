@@ -5,41 +5,41 @@
 <mapper namespace="com.cyber.university.repository.interfaces.CollegeRepository">
 
 	<insert id="insert">
-		insert into cu_college (name)
-		values(#{name})
+		<![CDATA[insert into cu_college (name)
+		values(#{name})]]>
 	</insert>
 
 	<select id="selectCollegeDto" resultType="com.cyber.university.repository.model.College">
-		select * from cu_college order by id
+		<![CDATA[select * from cu_college order by id]]>
 	</select>
 
 
 	<select id="selectCollegeDtoById" resultType="com.cyber.university.repository.model.College">
-		SELECT * FROM cu_college WHERE id = #{id}
+		<![CDATA[SELECT * FROM cu_college WHERE id = #{id}]]>
 	</select>
 
    <!--  단과대학 등록 -->
     <insert id="insertById">
-        INSERT INTO cu_college (name)
-        VALUES (#{name})
+       <![CDATA[ INSERT INTO cu_college (name)
+        VALUES (#{name})]]>
     </insert>
 	<!-- 단과대한 리스트 불러오기 -->
 	<select id="findAll" resultType="com.cyber.university.repository.model.College">
-		select * from cu_college order by id desc
+		<![CDATA[select * from cu_college order by id desc]]>
 	</select>
 	<!-- 단과대학 삭제 -->
 	<delete id="deleteById">
-		delete from cu_college where id = #{id}
+		<![CDATA[delete from cu_college where id = #{id}]]>
 	</delete>
 	<!--단과대학수정 -->
 	<update id="updateById">
-		update cu_college set name = #{name}
-		where id =#{id}
+		<![CDATA[update cu_college set name = #{name}
+		where id =#{id}]]>
 	</update>
 	<!-- 글 상세조회 -->
 	<select id="findById"
 		resultType="com.cyber.university.repository.model.College" parameterType="int">
-		select * from cu_college where id=#{id}
+		<![CDATA[select * from cu_college where id=#{id}]]>
 	</select>
 	
 </mapper>

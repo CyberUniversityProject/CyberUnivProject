@@ -4,25 +4,25 @@
 <mapper namespace="com.cyber.university.repository.interfaces.SyllaBusRepository">
 
 	<insert id="saveSubjectId">
-		insert into cu_syllabus (subject_id)
-		values (#{subjectId})
+		<![CDATA[insert into cu_syllabus (subject_id)
+		values (#{subjectId})]]>
 	</insert>
 
 	<select id="select" resultType="com.cyber.university.repository.model.SyllaBus">
-		select * from cu_syllabus order by subject_id
+		<![CDATA[select * from cu_syllabus order by subject_id]]>
 	</select>
 
 	<delete id="delete">
-		delete from cu_syllabus where subject_id = #{subjectId}
+		<![CDATA[delete from cu_syllabus where subject_id = #{subjectId}]]>
 	</delete>
 
 	<update id="updateSyllabus">
-		UPDATE cu_syllabus SET
+		<![CDATA[UPDATE cu_syllabus SET
 		overview = #{overview},
 		objective = #{objective},
 		textbook = #{textbook},
 		program = #{program}
-		WHERE subject_id = #{subjectId}
+		WHERE subject_id = #{subjectId}]]>
 	</update>
 
 </mapper>

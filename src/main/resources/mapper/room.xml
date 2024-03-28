@@ -6,56 +6,57 @@
 	namespace="com.cyber.university.repository.interfaces.RoomRepository">
 	<!-- 강의실 등록 -->
 	<insert id="insertById">
-		INSERT INTO cu_room (id,college_id)
+		<![CDATA[INSERT INTO cu_room (id,college_id)
 		VALUES
-		(#{id},#{collegeId})
+		(#{id},#{collegeId})]]>
 	</insert>
 
 	<!-- 강의실 리스트 불러오기 -->
 	<select id="findAll"
 		resultType="com.cyber.university.repository.model.Room">
-		select * from cu_room order by id desc
+		<![CDATA[select * from cu_room order by id desc]]>
 	</select>
 	<!-- 강의실 삭제 -->
 	<select id="deleteById"
 		resultType="com.cyber.university.repository.model.Room">
-		delete from cu_room where id = #{id}
+		<![CDATA[delete from cu_room where id = #{id}]]>
 	</select>
 	<!-- 강의실 상세 조회 -->
 	<select id="findById"
 		resultType="com.cyber.university.repository.model.Room"
 		parameterType="String">
-		select * from cu_room where id = #{id}
+		<![CDATA[select * from cu_room where id = #{id}]]>
 	</select>
 	<!-- 강의실 수정하기 -->
 	<update id="updateById">
-		UPDATE cu_room
+		<![CDATA[UPDATE cu_room
 		SET college_id = #{collegeId}
 		WHERE id =
-		#{id}
+		#{id}]]>
 	</update>
 
 	<select id="findAllCol"
 		resultType="com.cyber.university.dto.RoomWithCollegeDto">
 
-		select r.id, c.name from cu_room as r
+		<![CDATA[select r.id, c.name from cu_room as r
 		join cu_college as c
-		on c.id = r.college_id;
+		on c.id = r.college_id]]>
 
 	</select>
 
 	<!--페이징 처리 -->
 	<select id="findAllwithPaging"
 		resultType="com.cyber.university.repository.model.Room">
-		SELECT * FROM cu_room
+		<![CDATA[SELECT * FROM cu_room
 		ORDER BY id
-		LIMIT #{offset}, #{limit}
+		LIMIT #{offset}, #{limit}]]>
 	</select>
 
 
 	<!--전체 데이터 개수 -->
 	<select id="getAllPgCount" resultType="int">
-		SELECT COUNT(*) FROM cu_room
+		<![CDATA[
+		SELECT COUNT(*) FROM cu_room]]>
 	</select>
 
 

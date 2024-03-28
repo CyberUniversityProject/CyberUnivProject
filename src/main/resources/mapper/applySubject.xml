@@ -7,33 +7,33 @@
 
 	<select id="findAll"
 		resultType="com.cyber.university.repository.model.ApplySubject">
-		select * from cu_apply_sub where approval = '미승인'
+		<![CDATA[select * from cu_apply_sub where approval = '미승인']]>
 	</select>
 
 
 	<select id="findById" parameterType="int"
 		resultType="com.cyber.university.repository.model.ApplySubject">
-		SELECT * FROM cu_apply_sub WHERE id = #{id}
+		<![CDATA[SELECT * FROM cu_apply_sub WHERE id = #{id}]]>
 	</select>
 
 	<update id="updateApproval"
 		parameterType="com.cyber.university.repository.model.ApplySubject">
-		UPDATE cu_apply_sub
+		<![CDATA[UPDATE cu_apply_sub
 		SET
 		approval = #{approval}
 		WHERE
 		id =
-		#{id}
+		#{id}]]>
 	</update>
 
 
 	<update id="updateReason"
 		parameterType="com.cyber.university.repository.model.ApplySubject">
-		update cu_apply_sub
+		<![CDATA[update cu_apply_sub
 		set
 		reason = #{reason},
 		approval = '반려'
-		where id = #{id}
+		where id = #{id}]]>
 
 	</update>
 

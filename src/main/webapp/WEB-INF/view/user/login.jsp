@@ -55,7 +55,15 @@
         <li><a href="/find/password" onclick="window.open(this.href, '_blank', 'width=500, height=450'); return false;"> 비밀번호 찾기 </a></li>
       </ul>
     </form>
-   
+    <div class="test-credentials">
+      <h4>테스트용 아이디</h4>
+      <p>학생: 2024000001</p>
+      <p>교수: 24000001</p>
+      <p>관리자: 240001</p>
+      <br/>
+      <h4>테스트용 비밀번호</h4>
+      <p>123123</p>
+    </div>
   </div>
 
 </body>

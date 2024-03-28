@@ -4,21 +4,25 @@
 <mapper
 	namespace="com.cyber.university.repository.interfaces.CollTuitRepository">
 	<insert id="insert">
+		<![CDATA[
 		insert into cu_coll_tuit (college_id, amount)
-		values(#{collegeId}, #{amount})
+		values(#{collegeId}, #{amount})]]>
 	</insert>
 	<select id="selectByCollTuitDto" resultType="com.cyber.university.dto.CollTuitFormDto">
+		<![CDATA[
 		SELECT ct.college_id, c.name, ct.amount
 		FROM cu_coll_tuit AS ct
 		LEFT JOIN cu_college AS c
-		ON ct.college_id = c.id
+		ON ct.college_id = c.id]]>
 	</select>
 	<delete id="deleteById">
-		delete from cu_coll_tuit where college_id = #{collegeId}
+		<![CDATA[
+		delete from cu_coll_tuit where college_id = #{collegeId}]]>
 	</delete>
 	<update id="updateByCollTuitDto">
+		<![CDATA[
 		UPDATE cu_coll_tuit
 		SET amount = #{amount}
-		WHERE college_id = #{collegeId};
+		WHERE college_id = #{collegeId}]]>
 	</update>
 </mapper>

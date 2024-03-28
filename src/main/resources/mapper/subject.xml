@@ -5,89 +5,89 @@
 	namespace="com.cyber.university.repository.interfaces.SubjectRepository">
 
 	<insert id="insert">
-		insert into cu_subject (name, professor_id, room_id,
+		<![CDATA[insert into cu_subject (name, professor_id, room_id,
 		dept_id, type, sub_year, semester, sub_day, start_time, end_time,
 		grades, capacity)
 		values(#{name}, #{professorId}, #{roomId}, #{deptId},
 		#{type}, #{subYear}, #{semester},
-		#{subDay}, #{startTime}, #{endTime}, #{grades}, #{capacity})
+		#{subDay}, #{startTime}, #{endTime}, #{grades}, #{capacity})]]>
 	</insert>
 
 
 	<delete id="deleteById">
-		delete from cu_subject where id = #{id}
+		<![CDATA[delete from cu_subject where id = #{id}]]>
 	</delete>
 
 
 	<update id="updateBySubjectDto">
-		UPDATE cu_subject
+		<![CDATA[UPDATE cu_subject
 		SET name = #{name}, room_id =
 		#{roomId}, sub_day = #{subDay}, start_time = #{startTime}, end_time =
 		#{endTime}, capacity = #{capacity}
-		WHERE id = #{id}
+		WHERE id = #{id}]]>
 	</update>
 
 
 
 	<select id="findSubjectsByRoomIdAndDayAndYearAndSemester"
 		resultType="com.cyber.university.repository.model.Subject">
-		select * from cu_subject
+		<![CDATA[select * from cu_subject
 		where room_id = #{roomId} and
 		sub_day = #{subDay} and sub_year = #{subYear} and semester =
-		#{semester}
+		#{semester}]]>
 	</select>
 
 
 	<select id="findIdByOrderById" resultType="integer">
-		SELECT id FROM
+		<![CDATA[SELECT id FROM
 		cu_subject
 		where name=#{name} and room_id=#{roomId} and sub_year=#{subYear} and
 		semester=#{semester} and
-		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}
+		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}]]>
 	</select>
 
 
 	<select id="selectAll"
 			resultType="com.cyber.university.repository.model.Subject">
-		select * from cu_subject
+		<![CDATA[select * from cu_subject]]>
 	</select>
 	
 	<select id="findAllwithPaging"
 		resultType="com.cyber.university.dto.response.SubjectListDto">
-		select s.id, s.name, p.name as 'professor_name', s.professor_id, s.room_id, s.dept_id, s.type, s.sub_year, s.semester, s.sub_day, s.start_time, s.end_time, s.grades, s.capacity, s.num_of_student from cu_subject as s
+		<![CDATA[select s.id, s.name, p.name as 'professor_name', s.professor_id, s.room_id, s.dept_id, s.type, s.sub_year, s.semester, s.sub_day, s.start_time, s.end_time, s.grades, s.capacity, s.num_of_student from cu_subject as s
 		join cu_professor as p
 		on p.id = s.professor_id
-		LIMIT #{offset}, #{limit}
+		LIMIT #{offset}, #{limit}]]>
 </select>
 
 
 <!--전체 데이터 개수 -->
 	<select id="getAllCount" resultType="int">
-		SELECT COUNT(*) FROM cu_subject
+		<![CDATA[SELECT COUNT(*) FROM cu_subject]]>
 	</select>
 
 
 
 	<select id="selectSubjectById"
 		resultType="com.cyber.university.repository.model.Subject">
-		SELECT * FROM cu_subject
-		WHERE id = #{id};
+		<![CDATA[SELECT * FROM cu_subject
+		WHERE id = #{id}]]>
 	</select>
 
 
 <select id="selectDtoAll" resultType="com.cyber.university.dto.response.SubjectDto">
-		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+		<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 		FROM cu_subject AS sub
 		JOIN cu_department AS dept
 		ON sub.dept_id = dept.id
 		JOIN cu_college AS coll
 		ON dept.college_id = coll.id
 		JOIN cu_professor AS prof
-		ON sub.professor_id = prof.id
+		ON sub.professor_id = prof.id]]>
 	</select>
 	
 	<select id="selectDtoAllLimit" resultType="com.cyber.university.dto.response.SubjectDto">
-		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+		<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 		FROM cu_subject AS sub
 		JOIN cu_department AS dept
 		ON sub.dept_id = dept.id
@@ -95,12 +95,12 @@
 		ON dept.college_id = coll.id
 		JOIN cu_professor AS prof
 		ON sub.professor_id = prof.id
-		LIMIT #{page}, 20
+		LIMIT #{page}, 20]]>
 	</select>
 	
 	
 	<select id="selectDtoBySemester" resultType="com.cyber.university.dto.response.SubjectDto">
-		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+		<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 		FROM cu_subject AS sub
 		JOIN cu_department AS dept
 		ON sub.dept_id = dept.id
@@ -108,11 +108,11 @@
 		ON dept.college_id = coll.id
 		JOIN cu_professor AS prof
 		ON sub.professor_id = prof.id
-		WHERE sub_year = #{subYear} AND semester = #{semester}
+		WHERE sub_year = #{subYear} AND semester = #{semester}]]>
 	</select>
 	
 	<select id="selectDtoBySemesterLimit" resultType="com.cyber.university.dto.response.SubjectDto">
-		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+		<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 		FROM cu_subject AS sub
 		JOIN cu_department AS dept
 		ON sub.dept_id = dept.id
@@ -121,7 +121,7 @@
 		JOIN cu_professor AS prof
 		ON sub.professor_id = prof.id
 		WHERE sub_year = #{subYear} AND semester = #{semester}
-		LIMIT #{page}, 20
+		LIMIT #{page}, 20]]>
 	</select>
 	
 	
@@ -130,7 +130,7 @@
 
 		<!-- 개설학과 : 전체 -->
 		<if test="deptId == -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -140,12 +140,12 @@
 			ON sub.professor_id = prof.id
 			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
-			AND sub.name LIKE CONCAT('%', #{name}, '%')
+			AND sub.name LIKE CONCAT('%', #{name}, '%')]]>
 		</if>
 
 		<!-- 특정 개설학과 -->
 		<if test="deptId != -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -156,7 +156,7 @@
 			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.dept_id = #{deptId}
-			AND sub.name LIKE CONCAT('%', #{name}, '%')
+			AND sub.name LIKE CONCAT('%', #{name}, '%')]]>
 		</if>
 	</select>
 	
@@ -164,7 +164,7 @@
 
 		<!-- 개설학과 : 전체 -->
 		<if test="deptId == -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -175,12 +175,12 @@
 			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.name LIKE CONCAT('%', #{name}, '%')
-			LIMIT #{page}, 20
+			LIMIT #{page}, 20]]>
 		</if>
 
 		<!-- 특정 개설학과 -->
 		<if test="deptId != -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -192,7 +192,7 @@
 			AND sub.semester = #{semester}
 			AND sub.dept_id = #{deptId}
 			AND sub.name LIKE CONCAT('%', #{name}, '%')
-			LIMIT #{page}, 20
+			LIMIT #{page}, 20]]>
 		</if>
 	</select>
 
@@ -200,7 +200,7 @@
 
 		<!-- 강의구분 : 전체 & 개설학과 : 전체 -->
 		<if test="type == '전체' and deptId == -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -210,12 +210,12 @@
 			ON sub.professor_id = prof.id
 			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
-			AND sub.name LIKE CONCAT('%', #{name}, '%')
+			AND sub.name LIKE CONCAT('%', #{name}, '%')]]>
 		</if>
 
 		<!-- 강의구분 : 전체 & 개설학과 : 특정 -->
 		<if test="type == '전체' and deptId != -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -226,12 +226,12 @@
 			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.dept_id = #{deptId}
-			AND sub.name LIKE CONCAT('%', #{name}, '%')
+			AND sub.name LIKE CONCAT('%', #{name}, '%')]]>
 		</if>
 
 		<!-- 강의구분 : 특정 & 개설학과 : 전체 -->
 		<if test="type != '전체' and deptId == -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -243,12 +243,12 @@
 			#{subYear}
 			AND sub.semester = #{semester}
 			AND sub.type = #{type}
-			AND sub.name LIKE CONCAT('%', #{name}, '%')
+			AND sub.name LIKE CONCAT('%', #{name}, '%')]]>
 		</if>
 
 		<!-- 강의구분 : 특정 & 개설학과 : 특정 -->
 		<if test="type != '전체' and deptId != -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -260,7 +260,7 @@
 			AND sub.semester = #{semester}
 			AND sub.type = #{type}
 			AND sub.dept_id = #{deptId}
-			AND sub.name LIKE CONCAT('%', #{name}, '%')
+			AND sub.name LIKE CONCAT('%', #{name}, '%')]]>
 		</if>
 	</select>
 	
@@ -268,7 +268,7 @@
 
 		<!-- 강의구분 : 전체 & 개설학과 : 전체 -->
 		<if test="type == '전체' and deptId == -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -279,12 +279,12 @@
 			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.name LIKE CONCAT('%', #{name}, '%')
-			LIMIT #{page}, 20
+			LIMIT #{page}, 20]]>
 		</if>
 
 		<!-- 강의구분 : 전체 & 개설학과 : 특정 -->
 		<if test="type == '전체' and deptId != -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -296,12 +296,12 @@
 			AND sub.semester = #{semester}
 			AND sub.dept_id = #{deptId}
 			AND sub.name LIKE CONCAT('%', #{name}, '%')
-			LIMIT #{page}, 20
+			LIMIT #{page}, 20]]>
 		</if>
 
 		<!-- 강의구분 : 특정 & 개설학과 : 전체 -->
 		<if test="type != '전체' and deptId == -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -314,12 +314,12 @@
 			AND sub.semester = #{semester}
 			AND sub.type = #{type}
 			AND sub.name LIKE CONCAT('%', #{name}, '%')
-			LIMIT #{page}, 20
+			LIMIT #{page}, 20]]>
 		</if>
 
 		<!-- 강의구분 : 특정 & 개설학과 : 특정 -->
 		<if test="type != '전체' and deptId != -1">
-			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
+			<![CDATA[SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 			FROM cu_subject AS sub
 			JOIN cu_department AS dept
 			ON sub.dept_id = dept.id
@@ -332,12 +332,12 @@
 			AND sub.type = #{type}
 			AND sub.dept_id = #{deptId}
 			AND sub.name LIKE CONCAT('%', #{name}, '%')
-			LIMIT #{page}, 20
+			LIMIT #{page}, 20]]>
 		</if>
 	</select>
 
 	<select id="selectSyllabusBySubjectId" resultType="com.cyber.university.dto.response.ReadSyllabusDto">
-		SELECT sy.subject_id, s.name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time, s.room_id, 
+		<![CDATA[SELECT sy.subject_id, s.name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time, s.room_id, 
 		c.name college_name, p.name as professor_name, d.name as dept_name, p.tel, p.email, sy.overview, sy.objective, sy.textbook, sy.program
 		FROM cu_subject AS s
 		LEFT JOIN cu_professor AS p
@@ -350,41 +350,41 @@
 		ON s.room_id = r.id
 		LEFT JOIN cu_college AS c
 		ON r.college_id = c.id
-		WHERE subject_id = #{subjectId};
+		WHERE subject_id = #{subjectId}]]>
 	</select>
 	
 	<!-- 성희 / insert한 제일 최근 강의 ID 조회 -->
 	<select id="selectIdOrderById" resultType="integer">
-		SELECT id FROM cu_subject 
+		<![CDATA[SELECT id FROM cu_subject 
 		where name=#{name} and room_id=#{roomId} and sub_year=#{subYear} and semester=#{semester} and 
-		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}
+		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}]]>
 	</select>
 	
 	<update id="updateNumOfStudent">
 		<if test="type == '추가'">
-			UPDATE cu_subject SET num_of_student = num_of_student + 1
-			WHERE id = #{id}
+			<![CDATA[UPDATE cu_subject SET num_of_student = num_of_student + 1
+			WHERE id = #{id}]]>
 		</if>
 		
 		<if test="type == '삭제'">
-			UPDATE cu_subject SET num_of_student = num_of_student - 1
-			WHERE id = #{id}
+			<![CDATA[UPDATE cu_subject SET num_of_student = num_of_student - 1
+			WHERE id = #{id}]]>
 		</if>
 		
 		<if test="type == '초기화'">
-			UPDATE cu_subject SET num_of_student = 0
-			WHERE id = #{id}
+			<![CDATA[UPDATE cu_subject SET num_of_student = 0
+			WHERE id = #{id}]]>
 		</if>
 	</update>
 	
 	<select id="selectIdByLessNumOfStudent" resultType="Integer">
-		SELECT id FROM cu_subject
-		WHERE capacity >= num_of_student
+		<![CDATA[SELECT id FROM cu_subject
+		WHERE capacity >= num_of_student]]>
 	</select>
 	
 	<select id="selectIdByMoreNumOfStudent" resultType="Integer">
-		SELECT id FROM cu_subject
-		WHERE num_of_student > capacity
+		<![CDATA[SELECT id FROM cu_subject
+		WHERE num_of_student > capacity]]>
 	</select>
 
 

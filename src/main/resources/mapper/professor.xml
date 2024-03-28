@@ -6,70 +6,75 @@
 	<!-- 24.03.11 교수 내 정보 조회 -->
 	<select id="selectProfessorInfoWithCollegeAndDepartment"
 		resultType="com.cyber.university.dto.response.ProfessorInfoDto">
-		select p.*, c.name as collegeName, d.name as deptName
+		<![CDATA[select p.*, c.name as collegeName, d.name as deptName
 		from
 		cu_professor p
 		join cu_department d on p.dept_id = d.id
 		join cu_college
 		c on d.college_id = c.id
-		where p.id = #{id}
+		where p.id = #{id}]]>
 	</select>
 
 	<!-- 24.03.11 교수 개인 정보 조회 -->
 	<select id="selectProfessorInfo"
 		resultType="com.cyber.university.dto.professor.UpdateProfessorInfoDto">
-		select p.id, p.address, p.tel, p.email, u.password
+		<![CDATA[select p.id, p.address, p.tel, p.email, u.password
 		from
 		cu_professor p
 		join cu_user u on p.id = u.id
-		where p.id = #{id}
+		where p.id = #{id}]]>
 	</select>
 
 
 	<select id="selectByProfessorId"
 		resultType="com.cyber.university.repository.model.Professor">
-		SELECT * FROM cu_professor WHERE id = #{professorId}
+		<![CDATA[SELECT * FROM cu_professor WHERE id = #{professorId}]]>
 	</select>
 
 
 
 	<select id="selectByDepartmentId"
 		resultType="com.cyber.university.repository.model.Professor">
-		SELECT * FROM cu_professor
+		<![CDATA[SELECT * FROM cu_professor
 		WHERE dept_id = #{deptId}
 		LIMIT
-		#{page}, 20
+		#{page}, 20]]>
 	</select>
 
 
 	<select id="selectProfessorList"
 		resultType="com.cyber.university.repository.model.Professor">
+		<![CDATA[
 		SELECT * FROM cu_professor
-		LIMIT #{page}, 20
+		LIMIT #{page}, 20]]>
 	</select>
 
 
 	<select id="selectProfessorAmountByDeptId" resultType="integer">
+		<![CDATA[
 		SELECT
 		count(id) FROM cu_professor
-		WHERE dept_id = #{deptId}
+		WHERE dept_id = #{deptId}]]>
 	</select>
 
 	<select id="selectProfessorAmount" resultType="integer">
+		<![CDATA[
 		SELECT count(id)
-		FROM cu_professor
+		FROM cu_professor]]>
 	</select>
 
 
 	<insert id="insertToProfessor">
+		<![CDATA[
 		INSERT INTO cu_professor (name, birth_date, gender,
 		address, tel, dept_id, email)
 		VALUES (#{name}, #{birthDate}, #{gender},
-		#{address}, #{tel}, #{deptId}, #{email})
+		#{address}, #{tel}, #{deptId}, #{email})]]>
 	</insert>
 
 
 	<select id="selectIdByCreateProfessorDto" resultType="integer">
+		<![CDATA[
 		SELECT id
 		FROM cu_professor
 		WHERE name = #{name}
@@ -80,34 +85,37 @@
 		AND tel = #{tel}
 		AND dept_id =
 		#{deptId}
-		AND email = #{email}
+		AND email = #{email}]]>
 
 	</select>
 
 
 	<select id="selectIdByNameAndEmail" resultType="integer">
+		<![CDATA[
 		SELECT id
 		FROM
 		cu_professor
 		WHERE name = #{name}
-		AND email = #{email}
+		AND email = #{email}]]>
 	</select>
 
 
 	<select id="selectProfessorByIdAndNameAndEmail"
 		resultType="integer">
+		<![CDATA[
 		SELECT id
 		FROM cu_professor
 		WHERE id = #{id}
 		AND name =
 		#{name}
-		AND email = #{email}
+		AND email = #{email}]]>
 	</select>
 
 
 
 	<select id="selectProfessorInfoById"
 		resultType="com.cyber.university.dto.response.ProfessorInfoDto">
+		<![CDATA[
 		SELECT p.id, p.name, p.birth_date, p.gender, p.address,
 		p.tel, p.email, d.name AS dept_name, c.name AS college_name
 		FROM
@@ -118,138 +126,155 @@
 		LEFT
 		JOIN cu_college AS c
 		ON d.college_id = c.id
-		WHERE p.id = #{id};
+		WHERE p.id = #{id}]]>
 	</select>
 
 
 
 	<select id="selectByUserId"
 		resultType="com.cyber.university.dto.response.UserInfoForUpdateDto">
+		<![CDATA[
 		SELECT address, tel, email
 		FROM cu_professor
 		WHERE id =
-		#{userId}
+		#{userId}]]>
 	</select>
 
 
 
 	<update id="updateProfessor">
+		<![CDATA[
 		UPDATE cu_professor SET
 		address = #{address}, tel =
 		#{tel}, email = #{email}
-		WHERE id = #{userId}
+		WHERE id = #{userId}]]>
 	</update>
 
 	<!-- 24.03.13 강의 등록 -->
 	<insert id="insertApplySubject">
+		<![CDATA[
 		insert into cu_apply_sub(professor_id, name, room_id, dept_id, type, start_time, end_time, sub_year, semester, sub_day, grades, capacity)
-		values(#{professorId}, #{name}, #{roomId}, #{deptId}, #{type}, #{startTime}, #{endTime}, #{subYear}, #{semester}, #{subDay}, #{grades}, #{capacity})
+		values(#{professorId}, #{name}, #{roomId}, #{deptId}, #{type}, #{startTime}, #{endTime}, #{subYear}, #{semester}, #{subDay}, #{grades}, #{capacity})]]>
 	</insert>
 
 	<!-- 24.03.13 강의 이름 찾기 -->
 	<select id="selectSubName"
 		resultType="com.cyber.university.dto.professor.ApplySubjectDto">
-		select * from cu_apply_sub where name = #{name}
+		<![CDATA[
+		select * from cu_apply_sub where name = #{name}]]>
 	</select>
 	
 	<!-- 24.03.13 교수 본인 강의 조회 -->
 	<select id="selectSemester" resultType="com.cyber.university.dto.professor.SubjectPeriodForProfessorDto">
+	   <![CDATA[
 	    SELECT sub_year, semester FROM cu_subject
 		WHERE professor_id = #{id}
 		GROUP BY sub_year, semester 
-		ORDER BY sub_year
+		ORDER BY sub_year]]>
 	</select>
 	
 		
 	<!-- 24.03.19 교수 본인 강의 개강 년도와 학기 조회 -->
 	<select id="selectSubjectBySemester" resultType="com.cyber.university.dto.response.SubjectForProfessorDto">
+		<![CDATA[
 		SELECT * FROM cu_subject
 		WHERE professor_id = #{id}
 		AND sub_year = #{subYear}
-		AND semester = #{semester}
+		AND semester = #{semester}]]>
 	</select>
 	
 
 	<select id="findProfessorAndDept"
 		resultType="com.cyber.university.dto.professor.ProfessorAndSubjectFormDto">
-		select p.id, p.name, c.name as 'dept_name' from cu_professor as p
+		<![CDATA[
+		select p.id, p.name, c.name as dept_name from cu_professor as p
 		join cu_department as c
-		on c.id = p.dept_id
+		on c.id = p.dept_id]]>
 	</select>
 
 	<!-- 24.03.15 강의 신청한 학생 리스트 조회 -->
 	<select id="selectMySubDetailList" resultType="com.cyber.university.dto.professor.MysubjectDetailDto">
+		<![CDATA[
 		select a.*, b.name as studentName, c.name as departmentName, d.name as subjectName 
 		from cu_stu_sub_detail a
 		join cu_student b on b.id = a.student_id
 		join cu_department c on c.id = b.dept_id
 		join cu_subject d on d.id = a.subject_id
-		where a.subject_id = #{subjectId}
+		where a.subject_id = #{subjectId}]]>
 	</select>
 	
 	<!-- 24.03.15 강의 이름 찾기 -->
 	<select id="selectSubjectName" resultType="com.cyber.university.dto.professor.SubjectNameDto">
-		select name as subjectName from cu_subject where id = #{subjectId}
+		<![CDATA[
+		select name as subjectName from cu_subject where id = #{subjectId}]]>
 	</select>
 	
 	<!-- 24.03.16 학생 성적 입력 -->
 	<update id="updateStudentSubDetail">
+		<![CDATA[
 		update cu_stu_sub_detail 
 		set
 		absent = #{absent}, lateness = #{lateness}, homework = #{homework}, mid_exam = #{midExam}, final_exam = #{finalExam}, converted_mark = #{convertedMark}
-		where student_id = #{studentId} and subject_id = #{subjectId}
+		where student_id = #{studentId} and subject_id = #{subjectId}]]>
 	</update>
 	
 	<!-- 24.03.16 학생 성적 입력 -->
 	<update id="updateStudentGrade">
+		<![CDATA[
 		UPDATE cu_stu_sub
 		SET grade = #{grade}, complete_grade = #{completeGrade}
 		WHERE student_id = #{studentId}
-		AND subject_id = #{subjectId}
+		AND subject_id = #{subjectId}]]>
 	</update>
 	
 	<!-- 24.03.16 이수 학점 찾기 -->
 	<select id="selectGradesInfo" resultType="com.cyber.university.dto.professor.UpdateStudentSubDetailDto">
-		select grades from cu_subject where id = #{subjectId}
+		<![CDATA[
+		select grades from cu_subject where id = #{subjectId}]]>
 	</select>
 	
 	<!-- 24.03.18 강의평가 과목 조회 -->
 	<select id="selectEvaluationDto" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
+		<![CDATA[
 		SELECT DISTINCT s.name  
 		FROM cu_evaluation AS e
 		INNER JOIN cu_subject AS s
 		ON e.subject_id = s.id
-		WHERE s.professor_id = #{professorId}
+		WHERE s.professor_id = #{professorId}]]>
 	</select>
 	
 	<!-- 24.03.18 과목별 강의 평가 조회 -->
 	<select id="selectEvaluationDtoByprofessorIdAndName" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
+		<![CDATA[
 		SELECT s.name, s.professor_id, e.*  
 		FROM cu_evaluation AS e
 		INNER JOIN cu_subject AS s
 		ON e.subject_id = s.id
 		WHERE s.professor_id = #{professorId} AND s.name= #{name}
-		LIMIT #{limit} OFFSET #{offset}
+		LIMIT #{limit} OFFSET #{offset}]]>
 	</select>
 	
 	<!-- 24.03.18 강의평가 조회 -->
 	<select id="selectMyEvaluationDtoByProfessorId" resultType="com.cyber.university.dto.professor.MyEvaluationDto">
+		<![CDATA[
 		SELECT s.name, s.professor_id, e.*  
 		FROM cu_evaluation AS e
 		INNER JOIN cu_subject AS s
 		ON e.subject_id = s.id
 		WHERE s.professor_id = #{professorId}
-		LIMIT #{limit} OFFSET #{offset}
+		LIMIT #{limit} OFFSET #{offset}]]>
 	</select>
 	
 	<!-- 24.03.19 강의 평가 총 개수 -->
 	<select id="getMyEvaluationTotalCount" resultType="int">
-		select count(*) from cu_evaluation
+		<![CDATA[
+		select count(*) from cu_evaluation]]>
 	</select>
 	
 	
 	<!-- 24.03.19 강의계획서 조회 -->
 	<select id="selectSyllabusBySubjectId" resultType="com.cyber.university.dto.response.ReadSyllabusDto">
+		<![CDATA[
 		SELECT sy.subject_id, s.professor_id as professorId, s.name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time, s.room_id, 
 		c.name college_name, p.name as professor_name, d.name as dept_name, p.id as professorId, p.tel, p.email, sy.overview, sy.objective, sy.textbook, sy.program
 		FROM cu_subject AS s
@@ -258,55 +283,62 @@
 		LEFT JOIN cu_syllabus AS sy ON s.id = sy.subject_id
 		LEFT JOIN cu_room AS r ON s.room_id = r.id
 		LEFT JOIN cu_college AS c ON r.college_id = c.id
-		WHERE subject_id = #{subjectId}
+		WHERE subject_id = #{subjectId}]]>
 	</select>
 	
 	<!-- 24.03.19 강의계획서 수정 -->
 	<update id="updateSyllabus">
+		<![CDATA[
 		UPDATE cu_syllabus SET
 		overview = #{overview},
 		objective = #{objective},
 		textbook = #{textbook},
 		program = #{program}
-		WHERE subject_id = #{subjectId}
+		WHERE subject_id = #{subjectId}]]>
 	</update>
 	
 	
 	<!-- 24.03.23 강의실 조회 -->
 	<select id="selectRoom" resultType="com.cyber.university.repository.model.Room">
-		select * from cu_room where college_id = #{collegeId}
+		<![CDATA[
+		select * from cu_room where college_id = #{collegeId}]]>
 	</select>
 	
 	<!-- 24.03.23 학과 이름 조회 -->
 	<select id="selectDepartment" resultType="com.cyber.university.repository.model.Department">
-		select * from cu_department where college_id = #{collegeId}
+		<![CDATA[
+		select * from cu_department where college_id = #{collegeId}]]>
 	</select>
 	
 	<!-- 24.03.23 단과대 아이디 조회 -->
 	<select id="selectDeptId" resultType="com.cyber.university.dto.professor.FindDeptIdDto">
+		<![CDATA[
 		select a.id as professorId, b.id as deptId, b.name as deptName, c.id as colId, c.name as colName
 		from cu_professor a
 		join cu_department b on b.id = a.dept_id
 		join cu_college c on c.id = b.college_id
-		where a.id = #{professorId}
+		where a.id = #{professorId}]]>
 	</select>
 	
 	<!-- 24.03.25 신청 강의 수정 정보 조회 -->
 	<select id="selectUpdateSubInfo" resultType="com.cyber.university.dto.professor.ApplySubjectDto">
+		<![CDATA[
 		select * from cu_apply_sub 
 		where professor_id = #{professorId}
-		and id = #{id}
+		and id = #{id}]]>
 	</select>
 	
 	<!-- 24.03.25 신청 강의 목록 조회 -->
 	<select id="selectMyApplySubList" resultType="com.cyber.university.dto.professor.UpdateApplySubListDto">
+		<![CDATA[
 		select * from cu_apply_sub 
 		where professor_id = #{professorId} 
-		and approval = "미승인" or approval = "반려"
+		and approval = "미승인" or approval = "반려"]]>
 	</select>
 	
 	<!-- 24.03.25 신청 강의 수정 -->
 	<update id="updateMyApplySubInfo">
+		<![CDATA[
 		update cu_apply_sub
 		set 
 		name = #{name},
@@ -322,6 +354,6 @@
 		capacity = #{capacity},
 		approval = "미승인",
 		reason = ""
-		where id = #{id}
+		where id = #{id}]]>
 	</update>
 </mapper>        

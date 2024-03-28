@@ -4,32 +4,32 @@
 <mapper namespace="com.cyber.university.repository.interfaces.BreakRepository">
 
 <insert id="insert">
-	INSERT INTO cu_break (student_id, student_grade, from_year, from_semester, to_year, to_semester, type)
-	VALUES (#{studentId}, #{studentGrade}, #{fromYear}, #{fromSemester}, #{toYear}, #{toSemester}, #{type})
+	<![CDATA[INSERT INTO cu_break (student_id, student_grade, from_year, from_semester, to_year, to_semester, type)
+	VALUES (#{studentId}, #{studentGrade}, #{fromYear}, #{fromSemester}, #{toYear}, #{toSemester}, #{type})]]>
 </insert>
 
 <select id="selectByStudentId" resultType="com.cyber.university.repository.model.Break">
-	SELECT * FROM cu_break WHERE student_id = #{studentId} ORDER BY id DESC
+	<![CDATA[SELECT * FROM cu_break WHERE student_id = #{studentId} ORDER BY id DESC]]>
 </select>
 
 <select id="selectByStatus" resultType="com.cyber.university.repository.model.Break">
-	SELECT * FROM cu_break WHERE status = #{status}
+	<![CDATA[SELECT * FROM cu_break WHERE status = #{status}]]>
 </select>
 
 <select id="selectById" resultType="com.cyber.university.repository.model.Break">
-	SELECT * FROM cu_break WHERE id = #{id}
+	<![CDATA[SELECT * FROM cu_break WHERE id = #{id}]]>
 </select>
 
 <delete id="deleteById">
-	DELETE FROM cu_break WHERE id = #{id}
+	<![CDATA[DELETE FROM cu_break WHERE id = #{id}]]>
 </delete>
 
 <update id="updateById">
-	UPDATE cu_break SET status = #{status} WHERE id = #{id}
+	<![CDATA[UPDATE cu_break SET status = #{status} WHERE id = #{id}]]>
 </update>
 
 <select id="countByStatusAndUserId">
-	select count(*) from cu_break where student_id =#{userId} and status = '처리중'
+	<![CDATA[select count(*) from cu_break where student_id =#{userId} and status = '처리중']]>
 </select>
 
 </mapper>

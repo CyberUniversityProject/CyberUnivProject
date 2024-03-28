@@ -6,50 +6,50 @@
 
 	<!-- 댓글 삽입 -->
 	<insert id="insertComment">
-		INSERT INTO cu_comment (content, createDate, community_id, user_id, role)
-		VALUES (#{content}, now(), #{communityId}, #{userId}, #{role})
+		<![CDATA[INSERT INTO cu_comment (content, createDate, community_id, user_id, role)
+		VALUES (#{content}, now(), #{communityId}, #{userId}, #{role})]]>
 	</insert>
 
 	<!-- 특정 게시글에 대한 모든 댓글 조회 -->
 	<select id="selectCommentsByCommunityId" parameterType="Integer"
 		resultType="com.cyber.university.repository.model.Comment">
-		SELECT * FROM cu_comment WHERE community_id = #{communityId}
+		<![CDATA[SELECT * FROM cu_comment WHERE community_id = #{communityId}]]>
 	</select>
 
 	<!-- 특정 댓글 조회 -->
 	<select id="selectCommentById" parameterType="Integer"
 		resultType="com.cyber.university.repository.model.Comment">
-		SELECT * FROM cu_comment WHERE id = #{id}
+		<![CDATA[SELECT * FROM cu_comment WHERE id = #{id}]]>
 	</select>
 
 	<!-- 댓글 업데이트 -->
 	<update id="updateComment">
-		UPDATE cu_comment
+		<![CDATA[UPDATE cu_comment
 		SET content = #{content}, updateDate = now()
-		WHERE id = #{id}
+		WHERE id = #{id}]]>
 	</update>
 
 	<!-- 댓글 삭제 -->
 	<delete id="deleteComment" parameterType="Integer">
-		DELETE FROM cu_comment WHERE id = #{id}
+		<![CDATA[DELETE FROM cu_comment WHERE id = #{id}]]>
 	</delete>
 
 
 	<select id="getCommentsByCommunityId" parameterType="int"
 		resultType="com.cyber.university.repository.model.Comment">
-		SELECT * FROM cu_comment WHERE community_id = #{communityId}
+		<![CDATA[SELECT * FROM cu_comment WHERE community_id = #{communityId}]]>
 	</select>
 
 
 	<select id="selectCommentCount"  parameterType="int" resultType="int">
-		select count(*) from cu_comment
-		where community_id = #{communityId}
+		<![CDATA[select count(*) from cu_comment
+		where community_id = #{communityId}]]>
 	</select>
 	
 	
 	 <!-- 연관된 댓글 삭제 -->
 <delete id="deleteCommentsByCommunityId" parameterType="Integer">
-    DELETE FROM cu_comment WHERE community_id = #{id};
+    <![CDATA[DELETE FROM cu_comment WHERE community_id = #{id}]]>
 </delete>
 
 </mapper>

@@ -6,72 +6,72 @@
 <mapper
 	namespace="com.cyber.university.repository.interfaces.DepartmentRepository">
 	<insert id="insert">
-		insert into cu_department (name, college_id)
-		values(#{name}, #{collegeId})
+		<![CDATA[insert into cu_department (name, college_id)
+		values(#{name}, #{collegeId})]]>
 	</insert>
 
 	<select id="selectById"
 		resultType="com.cyber.university.repository.model.Department">
-		SELECT * FROM cu_department WHERE id = #{id}
+		<![CDATA[SELECT * FROM cu_department WHERE id = #{id}]]>
 	</select>
 
 	<select id="selectByDepartmentDto"
 		resultType="com.cyber.university.repository.model.Department">
-		SELECT * FROM cu_department
+		<![CDATA[SELECT * FROM cu_department]]>
 	</select>
 
 	<update id="updateByDepartmentDto">
-		UPDATE cu_department
+		<![CDATA[UPDATE cu_department
 		SET name = #{name}
 		WHERE id =
-		#{id};
+		#{id}]]>
 	</update>
 
 	<insert id="insertById">
-		INSERT INTO cu_department (name,college_id)
-		VALUES (#{name},#{collegeId})
+		<![CDATA[INSERT INTO cu_department (name,college_id)
+		VALUES (#{name},#{collegeId})]]>
 	</insert>
 
 	<select id="findAll"
 		resultType="com.cyber.university.repository.model.Department">
-		SELECT * FROM cu_department order by id desc
+		<![CDATA[SELECT * FROM cu_department order by id desc]]>
 	</select>
 
 	<delete id="deleteById">
-		delete from cu_department where id = #{id}
+		<![CDATA[delete from cu_department where id = #{id}]]>
 	</delete>
 	<!--학과 수정 -->
 	<update id="updateById">
-		update cu_department set name = #{name}, college_id =
+		<![CDATA[update cu_department set name = #{name}, college_id =
 		#{collegeId}
-		where id =#{id}
+		where id =#{id}]]>
 	</update>
 	<!-- 학과 상세조회 -->
 	<select id="findById"
 		resultType="com.cyber.university.repository.model.Department"
 		parameterType="int">
-		select * from cu_department where id=#{id}
+		<![CDATA[select * from cu_department where id=#{id}]]>
 	</select>
 
 
 	<select id="findAlldeptWithCol"
 		resultType="com.cyber.university.dto.DepartmentWithCollegeDto">
-		select d.id, d.name, c.name as 'college_name' from
+		<![CDATA[select d.id, d.name, c.name as college_name from
 		cu_department as d
 		join cu_college as c
-		on c.id = d.college_id;
+		on c.id = d.college_id]]>
 	</select>
 
 	<!--페이징 처리 -->
 	<select id="findAllwithPasing"
 			resultType="com.cyber.university.repository.model.Department">
-	SELECT * FROM cu_department
+	<![CDATA[SELECT * FROM cu_department
 	ORDER BY id
-	LIMIT #{offset}, #{limit}
+	LIMIT #{offset}, #{limit}]]>
 	</select>
 	
 	<!--  전체 데이터 개수 -->
 	<select id="getAllPgCount" resultType="int">
-		SELECT COUNT(*) FROM cu_department
+		<![CDATA[SELECT COUNT(*) FROM cu_department]]>
 	</select>
 </mapper>
